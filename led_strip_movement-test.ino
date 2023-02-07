@@ -1,4 +1,4 @@
-
+/* Use this file to test led strip actions and bahaviors*/
 #include <FastLED.h>
 #define LED_PIN     11
 #define NUM_LEDS    30
