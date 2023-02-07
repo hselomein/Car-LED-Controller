@@ -6,48 +6,22 @@
 #define LED_TYPE    WS2811
 #define COLOR_ORDER BRG
 #define MIDDLE_LED  15
-
-CRGB leds[NUM_LEDS];
 #define UPDATES_PER_SECOND 100
 
+CRGB leds[NUM_LEDS];
 CRGBPalette16 currentPalette;
 TBlendType currentBlending;
 extern CRGBPalette16 myRedWhiteBluePalette;
 extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
-void setup() {
-    Serial.begin(9600);  
-	  // Set RelayPin as an output pin
-    int RelayPin = 2; 
-	  pinMode(RelayPin, OUTPUT);
-    
-    //Start LEDs
-		delay( 500 ); // power-up safety delay
-    digitalWrite(RelayPin, LOW);
-		FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
-		FastLED.setBrightness(  BRIGHTNESS );
-		currentPalette = RainbowColors_p;
-		currentBlending = LINEARBLEND;
+const int DELAY = 25;
+const int COLOR = CRGB::Blue;
+const int NUM_LOOPS = 2;
 
-	}
-void startup() {
 
-for (int i = 0; i < NUM_LOOPS; i++){
-    toCenter(COLOR, DELAY, NUM_LEDS);
-    fromCenter(COLOR, DELAY, NUM_LEDS);
-}
-
-//Solid Color:
-for (int i = 0; i < NUM_LEDS; i++){
-    leds[i] = COLOR;
-}
-FastLED.show();
-
-}
-
+//functions
 
 // Yves contribution
-
 void flashLED (int left, int right, int color, int delay) {
     leds[left] = color;
     leds[right] = color;
@@ -56,7 +30,7 @@ void flashLED (int left, int right, int color, int delay) {
     leds[left] = CRGB::Black;              // Set to black for next loop iteration
     leds[right] = CRGB::Black; 
 }    
-
+// Yves contribution
 void toCenter(int color, int delay, int numLED) {
     const int HALFWAY = numLED / 2;
     
@@ -72,7 +46,7 @@ void toCenter(int color, int delay, int numLED) {
         flashLED (i, numLED - i, color, delay);
     }
 }
-
+// Yves contribution
 void fromCenter(int color, int delay, int numLED) {
     const int HALFWAY = numLED / 2;
 
@@ -89,32 +63,41 @@ void fromCenter(int color, int delay, int numLED) {
     if (numLED % 2) flashLED (HALFWAY, HALFWAY + 1, color, delay);
 }
 
+//main program
 
-const int DELAY = 25;
-const int COLOR = CRGB::Blue;
-const int NUM_LOOPS = 2;
+void setup() {
+    Serial.begin(9600);  
+	  // Set RelayPin as an output pin
+    int RelayPin = 2; 
+	  pinMode(RelayPin, OUTPUT);
+    
+    //Start LEDs
+		delay( 10 ); // power-up safety delay
+    digitalWrite(RelayPin, LOW);
+		FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
+		FastLED.setBrightness(  BRIGHTNESS );
+		currentPalette = RainbowColors_p;
+		currentBlending = LINEARBLEND;
+
+    // Yves contribution
+    for (int i = 0; i < NUM_LOOPS; i++){
+    toCenter(COLOR, DELAY, NUM_LEDS);
+    fromCenter(COLOR, DELAY, NUM_LEDS);
+    }
+
+    //Solid Color:
+    for (int i = 0; i < NUM_LEDS; i++){
+        leds[i] = COLOR;
+    }
+    FastLED.show();
+
+  }
+
+
+
 void loop() {
   
 
 
 }
 
-// original loop from outside someone else
-//void loop() {
-//  startup();
-//} 
-/*
-for (int i = 0; i < NUM_LEDS; i++) {
-  leds[i] = CRGB::Red;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to next let 
-  }
-  for (int i = (NUM_LEDS)-1; i >= 0; i--)
-       {
-  leds[i] = CRGB::Blue;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to previous let 
-    }
-} */
