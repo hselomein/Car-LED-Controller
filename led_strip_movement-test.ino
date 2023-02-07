@@ -51,68 +51,66 @@ for (int i = (NUM_LEDS)-1; i >= 0; i--)
 }
 
 
+// Yves contribution
 
-void loop() {
-  int y;
-  int x;
-  x = NUM_LEDS / 2;
-  y = (NUM_LEDS / 2) + 1;
-/*
-  for (int i = 0; x <= NUM_LEDS; i++) {
-
-   // Serial.print(F("i= "));
-   // Serial.print(i);
-   // Serial.print(F("    x= "));
-   // Serial.print(x++);
-   // Serial.print(F("    y= "));
-   // Serial.println(y--);
-    x++;
-    y--;
-    leds[x] = CRGB::Blue;
-    leds[y] = CRGB::Blue;
+void flashLED (left, right, color, delay) {
+    leds[left] = color;
+    leds[right] = color;
     FastLED.show();
-    FastLED.delay(25);
-    leds[x] = CRGB::Black;              // Set to black for next loop iteration
-    leds[y] = CRGB::Black;
-  }
-  */
-for (int i = 30 -1; i >= 0; i--) {
+    FastLED.delay(delay);
+    leds[left] = CRGB::Black;              // Set to black for next loop iteration
+    leds[right] = CRGB::Black; 
+}    
 
-    //Serial.print(F("i= "));
-    //Serial.print(i);
-    //Serial.print(F("    x= "));
-    //Serial.print(x++);
-    //Serial.print(F("    y= "));
-    //Serial.println(y--);
-    x--;
-    y++;
-    leds[x] = CRGB::Blue;
-    leds[y] = CRGB::Blue;
-    FastLED.show();
-    FastLED.delay(25);
-    leds[x] = CRGB::Black;              // Set to black for next loop iteration
-    leds[y] = CRGB::Black;
+void toCenter(color, delay, numLED) {
+    const int HALFWAY = numLED / 2;
+    
+    // get the center LED if number is odd
+    if (numLED % 2) flashLED (HALFWAY, HALFWAY + 1, color, delay);
+
+    for (int i = HALFWAY; i => 0; i--) {
+        Serial.print(F("left: "));
+        Serial.print(i);
+        Serial.print(F("right: "));
+        Serial.print(HALFWAY - i);
+
+        flashLED (i, HALFWAY - i, color, delay);
+    }
 }
-  }
-/*
-  for (int i = (NUM_LEDS)-1; y >= 0; i--) {
-    Serial.print(F("i= "));
-    Serial.print(i);
-    Serial.print(F("    x= "));
-    Serial.print(x++);
-    Serial.print(F("    y= "));
-    Serial.println(y--);
 
-    leds[x] = CRGB::Blue;
-    leds[y] = CRGB::Blue;
-    FastLED.show();
-    delay(25);
-    leds[x] = CRGB::Black;              // Set to black for next loop iteration
-    leds[y] = CRGB::Black;    
-  }
+void fromCenter(color, delay, numLED) {
+    const int HALFWAY = numLED / 2;
+
+    for (int i = 0; i < HALFWAY; i++) {
+        Serial.print(F("left: "));
+        Serial.print(i);
+        Serial.print(F("right: "));
+        Serial.print(HALFWAY - i);
+
+        flashLED (i, HALFWAY - i, color, delay);
+    }
+
+    // get the center LED if number is odd
+    if (numLED % 2) flashLED (HALFWAY, HALFWAY + 1, color, delay);
 }
-*/
 
+
+const int DELAY = 25;
+const int COLOR = CRGB::Blue;
+const int NUM_LOOPS = 2;
+
+for (int i = 0; i < NUM_LOOPS; i++){
+    toCenter(COLOR, DELAY, NUM_LEDS);
+    fromCenter(COLOR, DELAY, NUM_LEDS);
+}
+
+//Solid Color:
+for (int i = 0; i < NUM_LEDS; i++){
+    leds[i] = COLOR;
+}
+FastLED.show();
+
+// original loop from outside someone else
 //void loop() {
 //  startup();
 //} 
