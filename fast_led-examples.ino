@@ -6,7 +6,7 @@
 #define LED_TYPE    WS2811
 #define COLOR_ORDER BRG
 #define MIDDLE_LED  15
-#define UPDATES_PER_SECOND 100
+#define UPDATES_PER_SECOND 1000
 
 CRGB leds[NUM_LEDS];
 CRGBPalette16 currentPalette;
@@ -39,9 +39,9 @@ void toCenter(int color, int delay, int numLED) {
 
     for (int i = HALFWAY; i >= 0; i--) {
         Serial.print(F("left: "));
-        Serial.print(i);
+        Serial.println(i);
         Serial.print(F("right: "));
-        Serial.print(HALFWAY - i);
+        Serial.println(HALFWAY - i);
 
         flashLED (i, numLED - i, color, delay);
     }
@@ -52,9 +52,9 @@ void fromCenter(int color, int delay, int numLED) {
 
     for (int i = 0; i < HALFWAY; i++) {
         Serial.print(F("left: "));
-        Serial.print(i);
+        Serial.println(i);
         Serial.print(F("right: "));
-        Serial.print(HALFWAY - i);
+        Serial.println(HALFWAY - i);
 
         flashLED (i, numLED - i, color, delay);
     }
@@ -72,7 +72,7 @@ void setup() {
 	  pinMode(RelayPin, OUTPUT);
     
     //Start LEDs
-		delay( 10 ); // power-up safety delay
+		delay( 1 ); // power-up safety delay
     digitalWrite(RelayPin, LOW);
 		FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
 		FastLED.setBrightness(  BRIGHTNESS );
@@ -90,14 +90,8 @@ void setup() {
         leds[i] = COLOR;
     }
     FastLED.show();
-
   }
 
-
-
 void loop() {
-  
-
 
 }
-
