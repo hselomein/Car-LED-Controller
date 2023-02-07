@@ -31,23 +31,18 @@ void setup() {
 
 	}
 void startup() {
-for (int i = 0; i < NUM_LEDS; i++) {
-  leds[i] = CRGB::Red;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to next let 
-  }
-for (int i = (NUM_LEDS)-1; i >= 0; i--)
-       {
-  leds[i] = CRGB::Blue;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to previous let 
-    }
-  fill_solid(leds, NUM_LEDS, CRGB::Green); 
-  delay(1000);
-  fill_solid(leds, NUM_LEDS, CRGB::Black); 
-  delay(1000);
+
+for (int i = 0; i < NUM_LOOPS; i++){
+    toCenter(COLOR, DELAY, NUM_LEDS);
+    fromCenter(COLOR, DELAY, NUM_LEDS);
+}
+
+//Solid Color:
+for (int i = 0; i < NUM_LEDS; i++){
+    leds[i] = COLOR;
+}
+FastLED.show();
+
 }
 
 
@@ -74,7 +69,7 @@ void toCenter(int color, int delay, int numLED) {
         Serial.print(F("right: "));
         Serial.print(HALFWAY - i);
 
-        flashLED (i, HALFWAY - i, color, delay);
+        flashLED (i, numLED - i, color, delay);
     }
 }
 
@@ -87,7 +82,7 @@ void fromCenter(int color, int delay, int numLED) {
         Serial.print(F("right: "));
         Serial.print(HALFWAY - i);
 
-        flashLED (i, HALFWAY - i, color, delay);
+        flashLED (i, numLED - i, color, delay);
     }
 
     // get the center LED if number is odd
@@ -100,16 +95,7 @@ const int COLOR = CRGB::Blue;
 const int NUM_LOOPS = 2;
 void loop() {
   
-for (int i = 0; i < NUM_LOOPS; i++){
-    toCenter(COLOR, DELAY, NUM_LEDS);
-    fromCenter(COLOR, DELAY, NUM_LEDS);
-}
 
-//Solid Color:
-for (int i = 0; i < NUM_LEDS; i++){
-    leds[i] = COLOR;
-}
-FastLED.show();
 
 }
 
