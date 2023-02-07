@@ -85,8 +85,6 @@ void setup()
     pinMode(PK_L, INPUT);
     pinMode(NH, INPUT);
     pinMode(HIBM, INPUT);
-    	  // Set RelayPin as an output pin
-    int RelayPin = 2; 
 	  //pinMode(RelayPin, OUTPUT);
     //digitalWrite(RelayPin, LOW);
     //Start LEDs
@@ -149,7 +147,7 @@ void loop()
 	  sum_A5 = 0;
     //digitalWrite(RelayPin1, RELAY_ON);
 
-    if ( voltage_A5 * 22.410 >= 1.00 &&  voltage_A5 * 22.410 <= 10.00) {
+    if ( voltage_A5 * 22.410 >= 1.00 &&  voltage_A5 * 22.410 <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
       //turn on relay1
       Serial.print("Turning on relay1 because A5 is ");
 	    Serial.print(voltage_A5 * 22.410);
