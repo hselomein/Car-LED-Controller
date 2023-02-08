@@ -62,10 +62,10 @@ void loop() {
 
 void startup() {
   // Configuration (Constants)
-  const int msDELAY = 15;
-  const int brightCOLOR = 0xFFFFFF;
-  const int dimCOLOR = 0xC0C0C0;
-  const int offCOLOR = 0x000000;
+  const int msDELAY = 25;
+  const CRGB brightCOLOR = 0xFFFFFF;
+  const CRGB dimCOLOR = 0xC0C0C0;
+  const CRGB offCOLOR = 0x000000;
   const int numLOOPS = 4;
 
   // Loop 4 times
@@ -73,7 +73,7 @@ void startup() {
   //  2 - Away from center clear trail
   //  3 - Towards center remain partial brightness
   //  4 - Away from center remain full brightness 
-  int curDimColor = offCOLOR;
+  CRGB curDimColor = offCOLOR;
   for (int i = 0; i < numLOOPS; i++){
     switch(i) {
       case 2:
@@ -95,13 +95,13 @@ void startup() {
   delay(1000);                              //<--- May not be needed
 }
 
-void flashLED (int ledLeft, int ledRight, int curColor, int msDelay) {
+void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
   leds[ledLeft] = curColor;   leds[ledRight] = curColor;
   FastLED.show();
   FastLED.delay(msDelay);
 }    
 
-void ledWave(int maxColor, int minColor, int msDelay, bool boolDirection) {
+void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
   // Debug Info:  
     Serial.print(F("Max Color: "));     Serial.print(maxColor);
     Serial.print(F("Min Color: "));     Serial.print(minColor);
@@ -115,11 +115,11 @@ void ledWave(int maxColor, int minColor, int msDelay, bool boolDirection) {
   // Flash the center LED if number is ODD and direction is OUT
   if (boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
 
   int ledLeft = 0; int ledRight = 0;
-  for (int i = NUM_LEDS_HALF; i => 0; i--) {
+  for (int i = 0; i < NUM_LEDS_HALF; i++) {
     // Set current left and right LEDs based on the direction
     if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
     else { ledLeft = i; }                                //In
@@ -130,13 +130,13 @@ void ledWave(int maxColor, int minColor, int msDelay, bool boolDirection) {
       Serial.print(F("cur. right: "));    Serial.print(ledRight);
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
-    flashLED (ledLeft, ledRight, minColor, msDelay);
+    flashLED (ledLeft, ledRight, minColor, msDelay / 5);
   }
 
   // Flash the center LED if number is ODD and direction is IN
   if (!boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
 }
 
