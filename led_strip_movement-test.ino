@@ -1,5 +1,7 @@
 // Please provide more info here!
-/* Use this file to test led strip actions and bahaviors*/
+/* Use this file to test led strip actions and bahaviors
+// This file is just the startup sequence for the car_led_controller
+*/
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -62,7 +64,7 @@ void loop() {
 
 void startup() {
   // Configuration (Constants)
-  const int msDELAY = 25;
+  const int msDELAY = 50;
   const CRGB brightCOLOR = 0xFFFFFF;
   const CRGB dimCOLOR = 0xC0C0C0;
   const CRGB offCOLOR = 0x000000;
@@ -103,9 +105,9 @@ void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
 
 void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
   // Debug Info:  
-    Serial.print(F("Max Color: "));     Serial.print(maxColor);
-    Serial.print(F("Min Color: "));     Serial.print(minColor);
-    Serial.print(F("Delay: "));         Serial.print(msDelay);
+    Serial.print(F("Max Color: "));     Serial.println(maxColor);
+    Serial.print(F("Min Color: "));     Serial.println(minColor);
+    Serial.print(F("Delay: "));         Serial.println(msDelay);
     if (boolDirection) {
       Serial.print(F("Direction: Out"));
     } else {
@@ -126,8 +128,8 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     ledRight = NUM_LEDS - ledLeft;
 
     // Debug Info
-      Serial.print(F("cur. left: "));     Serial.print(ledLeft);
-      Serial.print(F("cur. right: "));    Serial.print(ledRight);
+      Serial.print(F("cur. left: "));     Serial.println(ledLeft);
+      Serial.print(F("cur. right: "));    Serial.println(ledRight);
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
     flashLED (ledLeft, ledRight, minColor, msDelay / 5);
@@ -148,7 +150,7 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
 // original loop from outside someone else
 /*
 for (int i = 0; i < NUM_LEDS; i++) {
-  leds[i] = CRGB::Red;  //set the led to Pink
+  leds[i] = CRGB::Reds;  //set the led to Pink
   FastLED.show();       //start the leds
   leds[i] = CRGB::Black;  //clear the led
   delay(50);          //Wait before moving to next let 
