@@ -26,10 +26,10 @@
 
 CRGBArray<NUM_LEDS> leds;
 
-
 // Code to run once on boot
 void setup() {
-  delay( 2000 ); // power-up safety delay
+  Serial.begin(9600);   // serial monitor for debugging
+  delay( 2000 );        // power-up safety delay
   
   // Start LEDs
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
@@ -37,7 +37,7 @@ void setup() {
   FastLED.setTemperature(COLOR_TEMP);
   
   // Initiate startup lighting sequence
-  startup();
+  startupSequence();
 }
 
 // Code to repeat
@@ -45,10 +45,7 @@ void loop() {
   // Loop code goes here
 } 
 
-
-// Yves contribution <--- Please remove this comment
-
-void startup() {
+void startupSequence() {
   // Configuration (Constants)
   const int msDELAY = 20;   //Number of ms LED stays on for.
   const int numLOOPS = 4;   //Humber of passes over entire LED strip
@@ -127,3 +124,4 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
 }
+
