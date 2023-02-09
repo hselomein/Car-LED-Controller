@@ -29,12 +29,7 @@ CRGBArray<NUM_LEDS> leds;
 
 // Code to run once on boot
 void setup() {
-  //Serial.begin(9600);  
-  // Set RelayPin as an output pin
-  //int RelayPin = 2; 
-  //pinMode(RelayPin, OUTPUT);
   delay( 2000 ); // power-up safety delay
-  //digitalWrite(RelayPin, LOW);
   
   // Start LEDs
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
@@ -55,10 +50,10 @@ void loop() {
 
 void startup() {
   // Configuration (Constants)
-  const int msDELAY = 50;   //Number of ms LED stays on for.
+  const int msDELAY = 20;   //Number of ms LED stays on for.
   const int numLOOPS = 4;   //Humber of passes over entire LED strip
   const CRGB brightCOLOR =  CRGB( 255, 255, 255);
-  const CRGB dimCOLOR =     CRGB( 196, 196, 196);
+  const CRGB dimCOLOR =     CRGB( 96, 96, 96);
   const CRGB offCOLOR =     CRGB( 0, 0, 0);
 
   // Loop 4 times
@@ -132,47 +127,3 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
 }
-
-
-
-
-
-
-// original loop from outside someone else
-/*
-for (int i = 0; i < NUM_LEDS; i++) {
-  leds[i] = CRGB::Reds;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to next let 
-  }
-  for (int i = (NUM_LEDS)-1; i >= 0; i--)
-       {
-  leds[i] = CRGB::Blue;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to previous let 
-    }
-} */
-
-/*
-void startup() {
-for (int i = 0; i < NUM_LEDS; i++) {
-  leds[i] = CRGB::Red;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to next let 
-  }
-for (int i = (NUM_LEDS)-1; i >= 0; i--)
-       {
-  leds[i] = CRGB::Blue;  //set the led to Pink
-  FastLED.show();       //start the leds
-  leds[i] = CRGB::Black;  //clear the led
-  delay(50);          //Wait before moving to previous let 
-    }
-  fill_solid(leds, NUM_LEDS, CRGB::Green); 
-  delay(1000);
-  fill_solid(leds, NUM_LEDS, CRGB::Black); 
-  delay(1000);
-}
-*/
