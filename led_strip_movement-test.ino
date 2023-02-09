@@ -7,13 +7,13 @@
 
 #include <FastLED.h>
 
-#define LED_PIN     11
-#define LED_TYPE    WS2811
-#define COLOR_ORDER BRG
+#define LED_PIN         11
+#define LED_TYPE        WS2811
+#define COLOR_ORDER     BRG
 
-#define NUM_LEDS    30
-#define NUM_LEDS_HALF  NUM_LEDS / 2
-#define NUM_LEDS_ODD  NUM_LEDS % 2
+#define NUM_LEDS        30
+#define NUM_LEDS_HALF   NUM_LEDS / 2
+#define NUM_LEDS_ODD    NUM_LEDS % 2
 
 // NOTE: Brightness should not be altered.
 //  Always set this to max brightness.
@@ -22,34 +22,25 @@
 #define MIN_BRIGHTNESS  128
 #define MED_BRIGHTNESS  196
 
-CRGB leds[NUM_LEDS];
-#define UPDATES_PER_SECOND 100 //<---Check if this can be increased for better visuals and how do we use it (it is not being used now)
+#define COLOR_TEMP UncorrectedTemperature
 
-// Not sure if all this is needed
-CRGBPalette16 currentPalette;
-TBlendType currentBlending;
-extern CRGBPalette16 myRedWhiteBluePalette;
-extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CRGBArray<NUM_LEDS> leds;
+
 
 // Code to run once on boot
 void setup() {
-  Serial.begin(9600);  
+  //Serial.begin(9600);  
   // Set RelayPin as an output pin
-  int RelayPin = 2; 
-  pinMode(RelayPin, OUTPUT);
+  //int RelayPin = 2; 
+  //pinMode(RelayPin, OUTPUT);
+  delay( 2000 ); // power-up safety delay
+  //digitalWrite(RelayPin, LOW);
   
   // Start LEDs
-  delay( 500 ); // power-up safety delay
-  digitalWrite(RelayPin, LOW);
-  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
+  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
   FastLED.setBrightness(MAX_BRIGHTNESS);
+  FastLED.setTemperature(COLOR_TEMP);
   
-  // Need to explore the lines below
-  currentPalette = RainbowColors_p;
-  currentBlending = LINEARBLEND;
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
   // Initiate startup lighting sequence
   startup();
 }
@@ -64,11 +55,11 @@ void loop() {
 
 void startup() {
   // Configuration (Constants)
-  const int msDELAY = 50;
-  const CRGB brightCOLOR = 0xFFFFFF;
-  const CRGB dimCOLOR = 0xC0C0C0;
-  const CRGB offCOLOR = 0x000000;
-  const int numLOOPS = 4;
+  const int msDELAY = 50;   //Number of ms LED stays on for.
+  const int numLOOPS = 4;   //Humber of passes over entire LED strip
+  const CRGB brightCOLOR =  CRGB( 255, 255, 255);
+  const CRGB dimCOLOR =     CRGB( 196, 196, 196);
+  const CRGB offCOLOR =     CRGB( 0, 0, 0);
 
   // Loop 4 times
   //  1 - Towards center clear trail
@@ -94,7 +85,7 @@ void startup() {
   // Turn Solid Color:                      //<--- May not be needed
   fill_solid(leds, NUM_LEDS, brightCOLOR);  //<--- May not be needed
   FastLED.show();                           //<--- May not be needed
-  delay(1000);                              //<--- May not be needed
+  FastLED.delay(1000);                              //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
@@ -109,9 +100,9 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     Serial.print(F("Min Color: "));     Serial.println(minColor);
     Serial.print(F("Delay: "));         Serial.println(msDelay);
     if (boolDirection) {
-      Serial.print(F("Direction: Out"));
+      Serial.println(F("Direction: Out"));
     } else {
-      Serial.print(F("Direction: In"));
+      Serial.println(F("Direction: In"));
     }
 
   // Flash the center LED if number is ODD and direction is OUT
