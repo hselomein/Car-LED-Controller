@@ -65,6 +65,9 @@ CRGBArray<NUM_LEDS> leds;
 //CRGB leds[NUM_LEDS];
 #define UPDATES_PER_SECOND 100
 #define VOLT_DIV_FACTOR 22.410  //voltage divider factor
+// voltage multiplied by 22 when using voltage divider that
+// divides by 22. 22.410 is the calibrated voltage divider
+// value
 
 // CRGBPalette16 currentPalette;
 // TBlendType currentBlending;
@@ -106,22 +109,19 @@ void setup()
   
     // Initiate startup lighting sequence
     startupSequence();
-		
-		
-
 }
 
 void loop()
 {
     // take a number of analog samples and add them up
     while (sample_count < NUM_SAMPLES) {
-        sum_A5 += analogRead(A5);
+        sum_A5 += analogRead(DRL);
         //sample_count_A5++;
-		    sum_A4 += analogRead(A4);
+		    sum_A4 += analogRead(PK_L);
         //sample_count_A4++;
-		    sum_A3 += analogRead(A3);
+		    sum_A3 += analogRead(NH);
         //sample_count_A3++;
-		    sum_A2 += analogRead(A2);
+		    sum_A2 += analogRead(HIBM);
         //sample_count_A2++;
         sample_count++;
         delay(100);
@@ -134,22 +134,19 @@ void loop()
 	  voltage_A4 = ((float)sum_A4 / (float)NUM_SAMPLES * 5.09) / 1024.0;
 	  voltage_A3 = ((float)sum_A3 / (float)NUM_SAMPLES * 5.09) / 1024.0;
 	  voltage_A2 = ((float)sum_A2 / (float)NUM_SAMPLES * 5.09) / 1024.0;
+
     // send voltage for display on Serial Monitor
-    // voltage multiplied by 22 when using voltage divider that
-    // divides by 22. 22.410 is the calibrated voltage divide
-    // value
-    
 	  Serial.print("Voltage of A2 = ");
 	  Serial.print(voltage_A2 * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A3 = ");
-	  Serial.print(voltage_A3 * 22.410);
+	  Serial.print(voltage_A3 * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A4 = ");
-	  Serial.print(voltage_A4 * 22.410);
+	  Serial.print(voltage_A4 * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A5 = ");
-	  Serial.print(voltage_A5 * 22.410);
+	  Serial.print(voltage_A5 * VOLT_DIV_FACTOR);
     Serial.println (" V");
     sample_count = 0;
     sample_count_A2 = 0;
@@ -160,7 +157,6 @@ void loop()
 	  sum_A3 = 0;
 	  sum_A4 = 0;
 	  sum_A5 = 0;
-    //digitalWrite(RelayPin1, RELAY_ON);
 
     if ( voltage_A5 * 22.410 >= 1.00 &&  voltage_A5 * 22.410 <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
       //turn on relay1
@@ -185,14 +181,6 @@ void loop()
         Serial.println("DRL Brightness level FULL");
         delay(500);
       } 
-//      else {
-//          //trun off relay1
-//          Serial.print("Dimming LED off relay1 because A5 is ");
-//          digitalWrite(RelayPin1, RELAY_OFF);
-//         Serial.print(voltage_A5 * 22.410);
-//          Serial.println (" V");   
-//	        delay(500);
-//    }
     if (voltage_A5 * 22.410 == 0)
       {
           //trun off relay1
