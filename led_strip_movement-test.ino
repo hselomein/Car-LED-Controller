@@ -29,7 +29,7 @@ CRGBArray<NUM_LEDS> leds;
 // Code to run once on boot
 void setup() {
   Serial.begin(9600);   // serial monitor for debugging
-  delay( 2000 );        // power-up safety delay
+  delay( 125 );        // power-up safety delay
   
   // Start LEDs
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);

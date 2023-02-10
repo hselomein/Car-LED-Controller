@@ -28,37 +28,48 @@
 // A5 => HiBm Sense (HIBM)
 
 // Pins
-int RelayPin1 = 2;
-int RelayPin2 = 3;
-int LED_Signal = 11;
-int DRL = A5;
-int PK_L = A4;
-int NH = A3;
-int HIBM = A2;
+const int RelayPin1 = 2;
+const int RelayPin2 = 3;
+const int LED_Signal = 11;
+const int DRL = A5;
+const int PK_L = A4;
+const int NH = A3;
+const int HIBM = A2;
+
 // Setup relay powerstates
 // reverse if relay is wired differently
-#define RELAY_ON  LOW
-#define RELAY_OFF HIGH
+#define RELAY_ON      LOW
+#define RELAY_OFF     HIGH
 
 // number of analog samples to take per reading
-#define NUM_SAMPLES 10
+#define NUM_SAMPLES     10
 
 //LED Controller Section
-#define LED_PIN     11
-#define NUM_LEDS    90
-#define BRIGHTNESS  250
-#define BRIGHTNESS_H 255
-#define BRIGHTNESS_L 127
-#define LED_TYPE    WS2811
-#define COLOR_ORDER BRG
+#define LED_PIN         11
+#define LED_TYPE        WS2811
+#define NUM_LEDS        30
+#define NUM_LEDS_HALF   NUM_LEDS / 2
+#define NUM_LEDS_ODD    NUM_LEDS % 2
 
-CRGB leds[NUM_LEDS];
+#define BRIGHTNESS      250
+#define BRIGHTNESS_H    255
+#define BRIGHTNESS_L    127
+#define MAX_BRIGHTNESS  255
+#define MIN_BRIGHTNESS  128
+#define MED_BRIGHTNESS  196
+
+#define COLOR_ORDER     BRG
+#define COLOR_TEMP      UncorrectedTemperature
+
+CRGBArray<NUM_LEDS> leds;
+//CRGB leds[NUM_LEDS];
 #define UPDATES_PER_SECOND 100
+#define VOLT_DIV_FACTOR 22.410  //voltage divider factor
 
-CRGBPalette16 currentPalette;
-TBlendType currentBlending;
-extern CRGBPalette16 myRedWhiteBluePalette;
-extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
+// CRGBPalette16 currentPalette;
+// TBlendType currentBlending;
+// extern CRGBPalette16 myRedWhiteBluePalette;
+// extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
 int sum_A2 = 0;
 int sum_A3 = 0;
@@ -76,7 +87,9 @@ float voltage_A5 = 0.0;            // calculated voltage
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(9600);   // serial monitor for debugging
+    delay( 125 );        // power-up safety delay
+
     // Set pins as an input or output pin
 	  pinMode(RelayPin1, OUTPUT);
     pinMode(RelayPin2, OUTPUT);
@@ -85,14 +98,16 @@ void setup()
     pinMode(PK_L, INPUT);
     pinMode(NH, INPUT);
     pinMode(HIBM, INPUT);
-	  //pinMode(RelayPin, OUTPUT);
-    //digitalWrite(RelayPin, LOW);
-    //Start LEDs
-		delay(3000 ); // power-up safety delay
-		FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
-		FastLED.setBrightness(  BRIGHTNESS );
-		//currentPalette = RainbowColors_p;
-		//currentBlending = LINEARBLEND;
+
+    // Start LEDs
+    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
+    FastLED.setBrightness(MAX_BRIGHTNESS);
+    FastLED.setTemperature(COLOR_TEMP);
+  
+    // Initiate startup lighting sequence
+    startupSequence();
+		
+		
 
 }
 
@@ -109,7 +124,7 @@ void loop()
 		    sum_A2 += analogRead(A2);
         //sample_count_A2++;
         sample_count++;
-        //delay(100);
+        delay(100);
     
     }
     // calculate the voltage
@@ -125,7 +140,7 @@ void loop()
     // value
     
 	  Serial.print("Voltage of A2 = ");
-	  Serial.print(voltage_A2 * 22.410);
+	  Serial.print(voltage_A2 * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A3 = ");
 	  Serial.print(voltage_A3 * 22.410);
@@ -188,3 +203,84 @@ void loop()
 	        delay(500);
     }
 }
+
+void startupSequence() {
+  // Configuration (Constants)
+  const int msDELAY = 20;   //Number of ms LED stays on for.
+  const int numLOOPS = 4;   //Humber of passes over entire LED strip
+  const CRGB brightCOLOR =  CRGB( 255, 255, 255);
+  const CRGB dimCOLOR =     CRGB( 96, 96, 96);
+  const CRGB offCOLOR =     CRGB( 0, 0, 0);
+
+  // Loop 4 times
+  //  1 - Towards center clear trail
+  //  2 - Away from center clear trail
+  //  3 - Towards center remain partial brightness
+  //  4 - Away from center remain full brightness 
+  CRGB curDimColor = offCOLOR;
+  for (int i = 0; i < numLOOPS; i++){
+    switch(i) {
+      case 2:
+        curDimColor = dimCOLOR;
+        break;
+      case 3:
+        curDimColor = brightCOLOR;
+        break;
+      default:
+        curDimColor = offCOLOR;
+    }
+    // Perform the LED wave effect
+    ledWave(brightCOLOR, curDimColor, msDELAY, i % 2);
+  }
+
+  // Turn Solid Color:                      //<--- May not be needed
+  fill_solid(leds, NUM_LEDS, brightCOLOR);  //<--- May not be needed
+  FastLED.show();                           //<--- May not be needed
+  FastLED.delay(1000);                              //<--- May not be needed
+}
+
+void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
+  leds[ledLeft] = curColor;   leds[ledRight] = curColor;
+  FastLED.show();
+  FastLED.delay(msDelay);
+}    
+
+void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
+  // Debug Info:  
+    Serial.print(F("Max Color: "));     Serial.println(maxColor);
+    Serial.print(F("Min Color: "));     Serial.println(minColor);
+    Serial.print(F("Delay: "));         Serial.println(msDelay);
+    if (boolDirection) {
+      Serial.println(F("Direction: Out"));
+    } else {
+      Serial.println(F("Direction: In"));
+    }
+
+  // Flash the center LED if number is ODD and direction is OUT
+  if (boolDirection && NUM_LEDS_ODD) {
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
+  }
+
+  int ledLeft = 0; int ledRight = 0;
+  for (int i = 0; i < NUM_LEDS_HALF; i++) {
+    // Set current left and right LEDs based on the direction
+    if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
+    else { ledLeft = i; }                                //In
+    ledRight = NUM_LEDS - ledLeft;
+
+    // Debug Info
+      Serial.print(F("cur. left: "));     Serial.println(ledLeft);
+      Serial.print(F("cur. right: "));    Serial.println(ledRight);
+
+    flashLED (ledLeft, ledRight, maxColor, msDelay);
+    flashLED (ledLeft, ledRight, minColor, msDelay / 5);
+  }
+
+  // Flash the center LED if number is ODD and direction is IN
+  if (!boolDirection && NUM_LEDS_ODD) {
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
+  }
+}
+
