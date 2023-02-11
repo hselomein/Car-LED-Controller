@@ -23,9 +23,9 @@
 // D3 => In2 Relay (RelayPin2)
 // D12 => LED Controller Signal (LED_Signal) 
 // A2 => DRL Sense (DRL)
-// A3 => PK_L Sense (PK_L)
-// A4 => Hn Sense (HN)
-// A5 => HiBm Sense (HIBM)
+// A3 => Parking Lights Sense (PK_L)
+// A4 => Horn Sense (HN)
+// A5 => HiBeam Sense (HIBM)
 
 // Pins
 const int RelayPin1 = 2;
@@ -74,19 +74,28 @@ CRGBArray<NUM_LEDS> leds;
 // extern CRGBPalette16 myRedWhiteBluePalette;
 // extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
-int sum_A2 = 0;
-int sum_A3 = 0;
-int sum_A4 = 0;
-int sum_A5 = 0;
+int sum_HIBM = 0;
+int sum_NH = 0;
+int sum_PK_L = 0;
+int sum_DRL = 0;
+/*
 unsigned char sample_count = 0;                    // sum of samples taken
-unsigned char sample_count_A2 = 0;
-unsigned char sample_count_A3 = 0;
-unsigned char sample_count_A4 = 0;
-unsigned char sample_count_A5 = 0; // current sample number
-float voltage_A2 = 0.0;
-float voltage_A3 = 0.0;
-float voltage_A4 = 0.0;
-float voltage_A5 = 0.0;            // calculated voltage
+unsigned char sample_count_HIBM = 0;
+unsigned char sample_count_HN = 0;
+unsigned char sample_count_PK_L = 0;
+unsigned char sample_count_DRL = 0; // current sample number
+
+//Yves not sure why we have float and unsigned char variables with the same name here. 
+//I think removing the char declarations, will all you to remove the explicit declararions from the formulas below
+*/
+
+float sample_count = 0; 
+float sample_count_HIBM = 0.0;
+float sample_count_HN = 0.0;
+float sample_count_PK_L = 0.0;
+float sample_count_DRL = 0.0;            // calculated voltage
+
+
 
 void setup()
 {
@@ -115,14 +124,14 @@ void loop()
 {
     // take a number of analog samples and add them up
     while (sample_count < NUM_SAMPLES) {
-        sum_A5 += analogRead(DRL);
-        //sample_count_A5++;
-		    sum_A4 += analogRead(PK_L);
-        //sample_count_A4++;
-		    sum_A3 += analogRead(NH);
-        //sample_count_A3++;
-		    sum_A2 += analogRead(HIBM);
-        //sample_count_A2++;
+        sum_DRL += analogRead(DRL);
+        //sample_count_DRL++;
+		    sum_PK_L += analogRead(PK_L);
+        //sample_count_PK_L++;
+		    sum_NH += analogRead(NH);
+        //sample_count_HN++;
+		    sum_HIBM += analogRead(HIBM);
+        //sample_count_HIBM++;
         sample_count++;
         delay(100);
     
@@ -130,38 +139,38 @@ void loop()
     // calculate the voltage
     // use 5.0 for a 5.0V ADC reference voltage
     // 5.09V is the calibrated reference voltage
-    voltage_A5 = ((float)sum_A5 / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_A4 = ((float)sum_A4 / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_A3 = ((float)sum_A3 / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_A2 = ((float)sum_A2 / (float)NUM_SAMPLES * 5.09) / 1024.0;
+    sample_count_DRL = ((float)sum_DRL / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  sample_count_PK_L = ((float)sum_PK_L / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  sample_count_HN = ((float)sum_NH / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  sample_count_HIBM = ((float)sum_HIBM / (float)NUM_SAMPLES * 5.09) / 1024.0;
 
     // send voltage for display on Serial Monitor
 	  Serial.print("Voltage of A2 = ");
-	  Serial.print(voltage_A2 * VOLT_DIV_FACTOR);
+	  Serial.print(sample_count_HIBM * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A3 = ");
-	  Serial.print(voltage_A3 * VOLT_DIV_FACTOR);
+	  Serial.print(sample_count_HN * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A4 = ");
-	  Serial.print(voltage_A4 * VOLT_DIV_FACTOR);
+	  Serial.print(sample_count_PK_L * VOLT_DIV_FACTOR);
     Serial.println (" V");
 	  Serial.print("Voltage of A5 = ");
-	  Serial.print(voltage_A5 * VOLT_DIV_FACTOR);
+	  Serial.print(sample_count_DRL * VOLT_DIV_FACTOR);
     Serial.println (" V");
     sample_count = 0;
-    sample_count_A2 = 0;
-	  sample_count_A3 = 0;
-	  sample_count_A4 = 0;
-	  sample_count_A5 = 0;
-    sum_A2 = 0;
-	  sum_A3 = 0;
-	  sum_A4 = 0;
-	  sum_A5 = 0;
+    sample_count_HIBM = 0;
+	  sample_count_HN = 0;
+	  sample_count_PK_L = 0;
+	  sample_count_DRL = 0;
+    sum_HIBM = 0;
+	  sum_NH = 0;
+	  sum_PK_L = 0;
+	  sum_DRL = 0;
 
-    if ( voltage_A5 * 22.410 >= 1.00 &&  voltage_A5 * 22.410 <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
+    if ( sample_count_DRL * 22.410 >= 1.00 &&  sample_count_DRL * 22.410 <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
       //turn on relay1
       Serial.print("Turning on relay1 because A5 is ");
-	    Serial.print(voltage_A5 * 22.410);
+	    Serial.print(sample_count_DRL * 22.410);
       Serial.println (" V");      
       digitalWrite(RelayPin1, RELAY_ON);
       leds[NUM_LEDS] = CRGB(255,255,255); 
@@ -170,9 +179,9 @@ void loop()
       Serial.println("DRL Brightness level HALF");
       delay(500);
       }
-	  if (voltage_A5 * 22.410 >= 11.01){
+	  if (sample_count_DRL * 22.410 >= 11.01){
         Serial.print("Brightening LED on relay1 because A5 is ");
-	      Serial.print(voltage_A5 * 22.410);
+	      Serial.print(sample_count_DRL * 22.410);
         Serial.println (" V");
         digitalWrite(RelayPin1, RELAY_ON);
         leds[NUM_LEDS] = CRGB(255,255,255); 
@@ -181,12 +190,12 @@ void loop()
         Serial.println("DRL Brightness level FULL");
         delay(500);
       } 
-    if (voltage_A5 * 22.410 == 0)
+    if (sample_count_DRL * 22.410 == 0)
       {
           //trun off relay1
           Serial.print("Dimming LED off relay1 because A5 is ");
           digitalWrite(RelayPin1, RELAY_OFF);
-          Serial.print(voltage_A5 * 22.410);
+          Serial.print(sample_count_DRL * 22.410);
           Serial.println (" V");   
 	        delay(500);
     }
