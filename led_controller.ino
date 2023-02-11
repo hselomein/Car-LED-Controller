@@ -1,4 +1,3 @@
-
 /*-----------------------------------------------------------------
     Program:        car_led_controller
 
@@ -68,11 +67,6 @@ CRGBArray<NUM_LEDS> leds;
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.410 is the calibrated voltage divider
 // value
-
-// CRGBPalette16 currentPalette;
-// TBlendType currentBlending;
-// extern CRGBPalette16 myRedWhiteBluePalette;
-// extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
 int sum_HIBM = 0;
 int sum_NH = 0;
