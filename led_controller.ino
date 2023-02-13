@@ -6,7 +6,7 @@
 
     Date:           Added when finalized to production (2/6/2023)
 
-    Author:         Corey Davis, Yves Avady
+    Authors:         Corey Davis, Yves Avady, Jim Edmonds
 
     Credits:        volt_measure by W.A Smith 
                     http://startingelectronics.org
@@ -59,20 +59,25 @@ const int HIBM = A2;
 
 #define COLOR_ORDER     BRG
 #define COLOR_TEMP      UncorrectedTemperature
+#define ORANGE_color CRGB(255,69,0)
+#define WHITE_color CRGB(255,255,255)
+#define MAGENTA_color CRGB(255,0,255)
+#define CYAN_color CRGB(255,165,0)
+
 
 CRGBArray<NUM_LEDS> leds;
 //CRGB leds[NUM_LEDS];
 #define UPDATES_PER_SECOND 100
-#define VOLT_DIV_FACTOR 22.410  //voltage divider factor
+#define VOLT_DIV_FACTOR 22.368  //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
-// divides by 22. 22.410 is the calibrated voltage divider
+// divides by 22. 22.368 is the calibrated voltage divider
 // value
 
 int sum_HIBM = 0;
 int sum_NH = 0;
 int sum_PK_L = 0;
 int sum_DRL = 0;
-/*
+
 unsigned char sample_count = 0;                    // sum of samples taken
 unsigned char sample_count_HIBM = 0;
 unsigned char sample_count_HN = 0;
@@ -81,15 +86,11 @@ unsigned char sample_count_DRL = 0; // current sample number
 
 //Yves not sure why we have float and unsigned char variables with the same name here. 
 //I think removing the char declarations, will all you to remove the explicit declararions from the formulas below
-*/
 
-float sample_count = 0; 
-float sample_count_HIBM = 0.0;
-float sample_count_HN = 0.0;
-float sample_count_PK_L = 0.0;
-float sample_count_DRL = 0.0;            // calculated voltage
-
-
+float voltage_HIBM = 0.0;
+float voltage_HN = 0.0;
+float voltage_PK_L = 0.0;
+float voltage_DRL = 0.0;            // calculated voltage
 
 void setup()
 {
@@ -133,23 +134,23 @@ void loop()
     // calculate the voltage
     // use 5.0 for a 5.0V ADC reference voltage
     // 5.09V is the calibrated reference voltage
-    sample_count_DRL = ((float)sum_DRL / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  sample_count_PK_L = ((float)sum_PK_L / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  sample_count_HN = ((float)sum_NH / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  sample_count_HIBM = ((float)sum_HIBM / (float)NUM_SAMPLES * 5.09) / 1024.0;
+    voltage_DRL = ((float)sum_DRL / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  voltage_PK_L = ((float)sum_PK_L / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  voltage_HN = ((float)sum_NH / (float)NUM_SAMPLES * 5.09) / 1024.0;
+	  voltage_HIBM = ((float)sum_HIBM / (float)NUM_SAMPLES * 5.09) / 1024.0;
 
     // send voltage for display on Serial Monitor
-	  Serial.print("Voltage of A2 = ");
-	  Serial.print(sample_count_HIBM * VOLT_DIV_FACTOR);
+	  Serial.print("Voltage of HIBM = ");
+	  Serial.print(voltage_HIBM * VOLT_DIV_FACTOR);
     Serial.println (" V");
-	  Serial.print("Voltage of A3 = ");
-	  Serial.print(sample_count_HN * VOLT_DIV_FACTOR);
+	  Serial.print("Voltage of NH = ");
+	  Serial.print(voltage_HN * VOLT_DIV_FACTOR);
     Serial.println (" V");
-	  Serial.print("Voltage of A4 = ");
-	  Serial.print(sample_count_PK_L * VOLT_DIV_FACTOR);
+	  Serial.print("Voltage of PK_L = ");
+	  Serial.print(voltage_PK_L * VOLT_DIV_FACTOR);
     Serial.println (" V");
-	  Serial.print("Voltage of A5 = ");
-	  Serial.print(sample_count_DRL * VOLT_DIV_FACTOR);
+	  Serial.print("Voltage of DRL = ");
+	  Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
     Serial.println (" V");
     sample_count = 0;
     sample_count_HIBM = 0;
@@ -161,10 +162,10 @@ void loop()
 	  sum_PK_L = 0;
 	  sum_DRL = 0;
 
-    if ( sample_count_DRL * 22.410 >= 1.00 &&  sample_count_DRL * 22.410 <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
+    if ( voltage_DRL * VOLT_DIV_FACTOR >= 1.00 &&  voltage_DRL * VOLT_DIV_FACTOR <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
       //turn on relay1
       Serial.print("Turning on relay1 because A5 is ");
-	    Serial.print(sample_count_DRL * 22.410);
+	    Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
       Serial.println (" V");      
       digitalWrite(RelayPin1, RELAY_ON);
       leds[NUM_LEDS] = CRGB(255,255,255); 
@@ -173,9 +174,9 @@ void loop()
       Serial.println("DRL Brightness level HALF");
       delay(500);
       }
-	  if (sample_count_DRL * 22.410 >= 11.01){
+	  if (voltage_DRL * VOLT_DIV_FACTOR >= 11.01){
         Serial.print("Brightening LED on relay1 because A5 is ");
-	      Serial.print(sample_count_DRL * 22.410);
+	      Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
         Serial.println (" V");
         digitalWrite(RelayPin1, RELAY_ON);
         leds[NUM_LEDS] = CRGB(255,255,255); 
@@ -184,15 +185,32 @@ void loop()
         Serial.println("DRL Brightness level FULL");
         delay(500);
       } 
-    if (sample_count_DRL * 22.410 == 0)
+    if (voltage_DRL * VOLT_DIV_FACTOR == 0)
       {
-          //trun off relay1
+          //turn off relay1
           Serial.print("Dimming LED off relay1 because A5 is ");
           digitalWrite(RelayPin1, RELAY_OFF);
-          Serial.print(sample_count_DRL * 22.410);
+          Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
           Serial.println (" V");   
 	        delay(500);
     }
+    if (voltage_HN * VOLT_DIV_FACTOR >= 11.01){  //turn led stip orange if horn is pressed
+        Serial.print("Turning LED on relay1 ORANGE because A3 is ");
+	      Serial.print(voltage_HN * VOLT_DIV_FACTOR);
+        Serial.println (" V");
+        digitalWrite(RelayPin1, RELAY_ON);
+        leds[NUM_LEDS] = CRGB(0,0,0); //Off
+        fill_solid(leds, NUM_LEDS, ORANGE_color);  //<--- May not be needed  
+        //leds[NUM_LEDS] = CRGB(255,165,0); //Orange
+        FastLED.setBrightness( BRIGHTNESS_H ); //set full brightness
+        FastLED.show();
+        Serial.println("DRL Brightness level FULL");
+        delay(500);
+      } else {
+        fill_solid(leds, NUM_LEDS, CRGB(255,255,255));
+        //leds[NUM_LEDS] = CRGB(255,255,255);
+        FastLED.show();
+      }
 }
 
 void startupSequence() {
@@ -274,4 +292,3 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
 }
-
