@@ -19,6 +19,12 @@ If Button is pressed increment CurrMode
 
 How it works:
 Normal Mode: (state 1)
+read CurrMode
+Set LED color based on Currmode
+if CurrMode is null set leds to default (White)
+if Currmode == 1, set CurrLED to White
+if CurrMode == 2, Set CurrLED to Cyan
+if CurrMode == 3, Set CurrLED to Magenta
 Startup seqence sets currentled value
 button pressed (State 2)
 CurrMode get incremented to 2
