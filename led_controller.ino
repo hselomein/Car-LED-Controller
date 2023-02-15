@@ -18,93 +18,59 @@
 #include <FastLED.h>
 
 // Pins to device mapping
-// D2 => In1 Relay (RelayPin1)
-// D3 => In2 Relay (RelayPin2)
-// D12 => LED Controller Signal (LED_Signal) 
-// A2 => DRL Sense (DRL)
-// A3 => Parking Lights Sense (PK_L)
-// A4 => Horn Sense (HN)
-// A5 => HiBeam Sense (HIBM)
-
-// Pins
-const int RelayPin1 = 2;
-const int RelayPin2 = 3;
-const int LED_Signal = 11;
-const int DRL = A5;
-const int PK_L = A4;
-const int NH = A3;
-const int HIBM = A2;
-
-// Setup relay powerstates
-// reverse if relay is wired differently
-#define RELAY_ON      LOW
-#define RELAY_OFF     HIGH
-
-// number of analog samples to take per reading
-#define NUM_SAMPLES     10
+#define RELAY_PIN_1     2         // D2 => In1 Relay
+#define RELAY_PIN_2     3         // D3 => In2 Relay
+#define LED_PIN         11        // D12 => LED Controller Signal
+#define DRL_PIN         A5        // A2 => DRL Sense
+#define PK_L_PIN        A4        // A3 => Parking Lights Sense 
+#define HORN_PIN        A3        // A4 => Horn Sense
+#define HIBM_PIN        A2        // A5 => HiBeam Sense
 
 //LED Controller Section
-#define LED_PIN         11
 #define LED_TYPE        WS2811
 #define NUM_LEDS        30
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
-
-#define BRIGHTNESS      250
-#define BRIGHTNESS_H    255
-#define BRIGHTNESS_L    127
-#define MAX_BRIGHTNESS  255
-#define MIN_BRIGHTNESS  128
-#define MED_BRIGHTNESS  196
-
 #define COLOR_ORDER     BRG
 #define COLOR_TEMP      UncorrectedTemperature
-#define ORANGE_color CRGB(255,69,0)
-#define WHITE_color CRGB(255,255,255)
-#define MAGENTA_color CRGB(255,0,255)
-#define CYAN_color CRGB(255,165,0)
-
-
 CRGBArray<NUM_LEDS> leds;
-//CRGB leds[NUM_LEDS];
-#define UPDATES_PER_SECOND 100
-#define VOLT_DIV_FACTOR 22.368  //voltage divider factor
+
+#define MAX_BRIGHTNESS  255
+#define MIN_BRIGHTNESS  95
+#define MED_BRIGHTNESS  191
+
+#define ANGRY_COLOR     CRGB(255,69,0)      //Orange
+#define DEFAULT_COLOR   CRGB(255,255,255)   //White
+#define LYFT_COLOR      CRGB(255,0,255)     //Magenta
+#define UBER_COLOR      CRGB(255,165,0)     //Cyan
+
+#define RELAY_ON LOW
+#define RELAY_OFF HIGH
+
+#define NUM_SAMPLES     3         // number of analog samples to take per reading
+#define REF_VOLTAGE     5.09      // Reference Voltage
+#define VOLT_DIV_FACTOR 22.368    //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
-// value
+const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES
 
-int sum_HIBM = 0;
-int sum_NH = 0;
-int sum_PK_L = 0;
-int sum_DRL = 0;
-
-unsigned char sample_count = 0;                    // sum of samples taken
-unsigned char sample_count_HIBM = 0;
-unsigned char sample_count_HN = 0;
-unsigned char sample_count_PK_L = 0;
-unsigned char sample_count_DRL = 0; // current sample number
-
-//Yves not sure why we have float and unsigned char variables with the same name here. 
-//I think removing the char declarations, will all you to remove the explicit declararions from the formulas below
-
-float voltage_HIBM = 0.0;
-float voltage_HN = 0.0;
-float voltage_PK_L = 0.0;
-float voltage_DRL = 0.0;            // calculated voltage
+#define VOLT_BUF        2
+#define HI_VOLT         12
+#define LO_VOLT         4
 
 void setup()
 {
     Serial.begin(9600);   // serial monitor for debugging
-    delay( 125 );        // power-up safety delay
+    delay(250);           // power-up safety delay
 
     // Set pins as an input or output pin
-	  pinMode(RelayPin1, OUTPUT);
-    pinMode(RelayPin2, OUTPUT);
-    pinMode(LED_Signal, OUTPUT);
-    pinMode(DRL, INPUT);
-    pinMode(PK_L, INPUT);
-    pinMode(NH, INPUT);
-    pinMode(HIBM, INPUT);
+	  pinMode(RELAY_PIN_1, OUTPUT);
+    pinMode(RELAY_PIN_2, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
+    pinMode(DRL_PIN, INPUT);
+    pinMode(PK_L_PIN, INPUT);
+    pinMode(HORN_PIN, INPUT);
+    pinMode(HIBM_PIN, INPUT);
 
     // Start LEDs
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
@@ -117,100 +83,75 @@ void setup()
 
 void loop()
 {
-    // take a number of analog samples and add them up
-    while (sample_count < NUM_SAMPLES) {
-        sum_DRL += analogRead(DRL);
-        //sample_count_DRL++;
-		    sum_PK_L += analogRead(PK_L);
-        //sample_count_PK_L++;
-		    sum_NH += analogRead(NH);
-        //sample_count_HN++;
-		    sum_HIBM += analogRead(HIBM);
-        //sample_count_HIBM++;
-        sample_count++;
-        delay(100);
-    
-    }
-    // calculate the voltage
-    // use 5.0 for a 5.0V ADC reference voltage
-    // 5.09V is the calibrated reference voltage
-    voltage_DRL = ((float)sum_DRL / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_PK_L = ((float)sum_PK_L / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_HN = ((float)sum_NH / (float)NUM_SAMPLES * 5.09) / 1024.0;
-	  voltage_HIBM = ((float)sum_HIBM / (float)NUM_SAMPLES * 5.09) / 1024.0;
+  static int curMode = 1;
+  static int curSample = 1;
+  static float curDRL = 0;
+  static float curPkL = 0;
+  static float curHorn = 0;
+  static float curHiBeam = 0;
+  static bool RelayPin1State = false;
 
-    // send voltage for display on Serial Monitor
-	  Serial.print("Voltage of HIBM = ");
-	  Serial.print(voltage_HIBM * VOLT_DIV_FACTOR);
-    Serial.println (" V");
-	  Serial.print("Voltage of NH = ");
-	  Serial.print(voltage_HN * VOLT_DIV_FACTOR);
-    Serial.println (" V");
-	  Serial.print("Voltage of PK_L = ");
-	  Serial.print(voltage_PK_L * VOLT_DIV_FACTOR);
-    Serial.println (" V");
-	  Serial.print("Voltage of DRL = ");
-	  Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
-    Serial.println (" V");
-    sample_count = 0;
-    sample_count_HIBM = 0;
-	  sample_count_HN = 0;
-	  sample_count_PK_L = 0;
-	  sample_count_DRL = 0;
-    sum_HIBM = 0;
-	  sum_NH = 0;
-	  sum_PK_L = 0;
-	  sum_DRL = 0;
+  curDRL += analogRead(DRL_PIN);
+  curPkL += analogRead(PK_L_PIN);
+  curHorn += analogRead(HORN_PIN);
+  curHiBeam += analogRead(HIBM_PIN);
+  curSample++;
 
-    if ( voltage_DRL * VOLT_DIV_FACTOR >= 1.00 &&  voltage_DRL * VOLT_DIV_FACTOR <= 10.00) {  //set lower voltage to 2v, set to 1v due to limitation of testing hardware
-      //turn on relay1
-      Serial.print("Turning on relay1 because A5 is ");
-	    Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
-      Serial.println (" V");      
-      digitalWrite(RelayPin1, RELAY_ON);
-      leds[NUM_LEDS] = CRGB(255,255,255); 
-      FastLED.setBrightness( BRIGHTNESS_L ); //set half brightness
+  if (curSample > NUM_SAMPLES){
+    curDRL *= VOLT_ADJ;
+    curPkL *= VOLT_ADJ;
+    curHorn *= VOLT_ADJ;
+    curHiBeam *= VOLT_ADJ;
+    curSample = 1;
+
+    Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
+    Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
+    Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
+    Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
+
+    if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
+      if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      }
+      FastLED.setBrightness(MIN_BRIGHTNESS); //set low brightness
       FastLED.show();
-      Serial.println("DRL Brightness level HALF");
-      delay(500);
+      Serial.println("DRL Brightness level LOW");
+    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
+      if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
-	  if (voltage_DRL * VOLT_DIV_FACTOR >= 11.01){
-        Serial.print("Brightening LED on relay1 because A5 is ");
-	      Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
-        Serial.println (" V");
-        digitalWrite(RelayPin1, RELAY_ON);
-        leds[NUM_LEDS] = CRGB(255,255,255); 
-        FastLED.setBrightness( BRIGHTNESS_H ); //set full brightness
-        FastLED.show();
-        Serial.println("DRL Brightness level FULL");
-        delay(500);
-      } 
-    if (voltage_DRL * VOLT_DIV_FACTOR == 0)
-      {
-          //turn off relay1
-          Serial.print("Dimming LED off relay1 because A5 is ");
-          digitalWrite(RelayPin1, RELAY_OFF);
-          Serial.print(voltage_DRL * VOLT_DIV_FACTOR);
-          Serial.println (" V");   
-	        delay(500);
+      FastLED.setBrightness(MAX_BRIGHTNESS); //set max brightness
+      FastLED.show();
+      Serial.println("DRL Brightness level MAX");
+    } else if (curDRL < VOLT_BUF) {
+      if (RelayPin1State) {
+        RelayPin1State = false;
+        //turn off relay1
+        Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        digitalWrite(RELAY_PIN_1, RELAY_OFF);
+      }
+      FastLED.setBrightness(0); //set max brightness
+      FastLED.show();
+      Serial.println("DRL Brightness level OFF");
     }
-    if (voltage_HN * VOLT_DIV_FACTOR >= 11.01){  //turn led stip orange if horn is pressed
-        Serial.print("Turning LED on relay1 ORANGE because A3 is ");
-	      Serial.print(voltage_HN * VOLT_DIV_FACTOR);
-        Serial.println (" V");
-        digitalWrite(RelayPin1, RELAY_ON);
-        leds[NUM_LEDS] = CRGB(0,0,0); //Off
-        fill_solid(leds, NUM_LEDS, ORANGE_color);  //<--- May not be needed  
-        //leds[NUM_LEDS] = CRGB(255,165,0); //Orange
-        FastLED.setBrightness( BRIGHTNESS_H ); //set full brightness
-        FastLED.show();
-        Serial.println("DRL Brightness level FULL");
-        delay(500);
-      } else {
-        fill_solid(leds, NUM_LEDS, CRGB(255,255,255));
-        //leds[NUM_LEDS] = CRGB(255,255,255);
-        FastLED.show();
-      }
+
+    if () {
+      fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  //<--- May not be needed  
+      FastLED.show();
+      Serial.println("LED color set to Horn color (orange)");
+    }
+
+    curDRL = 0;
+    curPkL = 0;
+    curHorn = 0;
+    curHiBeam = 0;
+  }
 }
 
 void startupSequence() {
@@ -291,4 +232,9 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
   }
+}
+
+float Abs(float val) {
+  if (val > 0) { return val; }
+  else { return -val; }
 }
