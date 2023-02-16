@@ -141,7 +141,7 @@ void loop()
       Serial.println("DRL Brightness level OFF");
     }
 
-    if () {
+    if (curHorn > (HI_VOLT - VOLT_BUF)) {
       fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  //<--- May not be needed  
       FastLED.show();
       Serial.println("LED color set to Horn color (orange)");
