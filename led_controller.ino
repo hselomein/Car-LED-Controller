@@ -2,18 +2,12 @@
     Program:        car_led_controller
 
     Description:    Controls LED strip behavior based on various 
-                    Inputs such as, drl, headlights, horn, activity
+                    Inputs such as, drl, headlights, horn, and button
+		    activity
 
     Date:           Added when finalized to production (2/6/2023)
 
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
-
-    Credits:        volt_measure by W.A Smith 
-                    http://startingelectronics.org
-
-                    Add credits for code obtained from elsewhere
-                    
-
 -----------------------------------------------------------------*/
 #include <FastLED.h>
 
@@ -64,7 +58,7 @@ void setup()
     delay(250);           // power-up safety delay
 
     // Set pins as an input or output pin
-	  pinMode(RELAY_PIN_1, OUTPUT);
+    pinMode(RELAY_PIN_1, OUTPUT);
     pinMode(RELAY_PIN_2, OUTPUT);
     pinMode(LED_PIN, OUTPUT);
     pinMode(DRL_PIN, INPUT);
@@ -136,7 +130,7 @@ void loop()
         Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
-      FastLED.setBrightness(0); //set max brightness
+      FastLED.setBrightness(0); //turn off lights
       FastLED.show();
       Serial.println("DRL Brightness level OFF");
     }
