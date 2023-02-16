@@ -20,7 +20,8 @@
 #define PK_L_PIN        A4        // A3 => Parking Lights Sense 
 #define HORN_PIN        A3        // A4 => Horn Sense
 #define HIBM_PIN        A2        // A5 => HiBeam Sense
-// initialize the library with the numbers of the interface pins
+
+// initialize the LCD with the interface pins
 LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
 
 //LED Controller Section
@@ -57,15 +58,19 @@ const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES;
 
 void setup()
 {
+    // set up the LCD:
+    lcd.begin(16, 2); //init lcd col and row
+    lcd.clear();      //clear lcd screen
+    lcd.autoscroll(); //enable scrolling on long lines
+    
+    lcd.home(); //move cursor to 1st line on display
+    lcd.print(F("Loading..."));   
+    lcd.setCursor(1,1); //move cursor to 2nd line on display
+    lcd.print(F("Please Wait!"));   
+
     Serial.begin(9600);   // serial monitor for debugging
     delay(250);           // power-up safety delay
 
-    // set up the LCD's number of columns and rows:
-    lcd.clear()  //clear lcd screen
-    lcd.begin(16, 2); /init lcd col and row
-    lcd.print("LCD Controller");
-    lcd.setCursor(0,1); //move cursor to 2nd line on display
-    lcd.print("Stage Startup");   
 
     // Set pins as an input or output pin
     pinMode(RELAY_PIN_1, OUTPUT);
@@ -83,6 +88,7 @@ void setup()
   
     // Initiate startup lighting sequence
     startupSequence();
+    lcd.clear()  //clear lcd screen
 }
 
 void loop()
@@ -108,20 +114,22 @@ void loop()
     curHiBeam *= VOLT_ADJ;
     curSample = 1;
 
-    Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
-    Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
-    Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
-    Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
+    lcd.clear();    //clear lcd screen
+    lcd.home();     //move cursor to 1st line on display
+    lcd.print("DRL: "); lcd.print(curDRL); lcd.print("V   ");
+    lcd.print("PkL: "); lcd.print(curPkL); lcd.print("V   ");
+    lcd.print("Hrn: "); lcd.print(curHorn); lcd.print("V   ");
+    lcd.print("HiBm: "); lcd.print(curHiBeam); lcd.print("V   ");
+     
+    //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
+    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
+    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
+    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
-        lcd.clear();
-        lcd.begin(16, 2);
-        lcd.print("Relay1 On");
-        lcd.setCursor(0,1); //2nd line on display
-        lcd.print("DRL Volts "); lcd.print(curDRL); 
         Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
@@ -152,14 +160,13 @@ void loop()
 
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
       fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
+      lcd.setCursor(1,1); //move cursor to 2nd line on display
+      lcd.print(F("Color: Orange"));   
       Serial.println("LED color set to Horn color (orange)");
-      lcd.clear();
-      lcd.begin(16, 2);
-      lcd.print("ANGRY MODE");
-      lcd.setCursor(0,1); //2nd line on display
-      lcd.print("LED IS Orange"); 
     } else {
       fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
+      lcd.setCursor(1,1); //move cursor to 2nd line on display
+      lcd.print(F("Color: White"));   
       Serial.println("LED color set to Default color (white)");
     }
 
@@ -167,6 +174,8 @@ void loop()
     curPkL = 0;
     curHorn = 0;
     curHiBeam = 0;
+
+    FastLED.delay(100); //Delay to prevent LCD flashing
   }
 }
 
