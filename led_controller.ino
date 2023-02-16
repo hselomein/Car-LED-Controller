@@ -10,6 +10,7 @@
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
 -----------------------------------------------------------------*/
 #include <FastLED.h>
+#include <LiquidCrystal.h>
 
 // Pins to device mapping
 #define RELAY_PIN_1     2         // D2 => In1 Relay
@@ -19,6 +20,8 @@
 #define PK_L_PIN        A4        // A3 => Parking Lights Sense 
 #define HORN_PIN        A3        // A4 => Horn Sense
 #define HIBM_PIN        A2        // A5 => HiBeam Sense
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
 
 //LED Controller Section
 #define LED_TYPE        WS2811
@@ -41,12 +44,12 @@ CRGBArray<NUM_LEDS> leds;
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     3         // number of analog samples to take per reading
+#define NUM_SAMPLES     10        // number of analog samples to take per reading
 #define REF_VOLTAGE     5.09      // Reference Voltage
-#define VOLT_DIV_FACTOR 22.368    //voltage divider factor
+#define VOLT_DIV_FACTOR 22.368         //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
-const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES
+const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES;
 
 #define VOLT_BUF        2
 #define HI_VOLT         12
@@ -56,6 +59,13 @@ void setup()
 {
     Serial.begin(9600);   // serial monitor for debugging
     delay(250);           // power-up safety delay
+
+    // set up the LCD's number of columns and rows:
+    lcd.clear()  //clear lcd screen
+    lcd.begin(16, 2); /init lcd col and row
+    lcd.print("LCD Controller");
+    lcd.setCursor(0,1); //move cursor to 2nd line on display
+    lcd.print("Stage Startup");   
 
     // Set pins as an input or output pin
     pinMode(RELAY_PIN_1, OUTPUT);
@@ -107,6 +117,11 @@ void loop()
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
+        lcd.clear();
+        lcd.begin(16, 2);
+        lcd.print("Relay1 On");
+        lcd.setCursor(0,1); //2nd line on display
+        lcd.print("DRL Volts "); lcd.print(curDRL); 
         Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
@@ -138,9 +153,14 @@ void loop()
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
       fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
       Serial.println("LED color set to Horn color (orange)");
+      lcd.clear();
+      lcd.begin(16, 2);
+      lcd.print("ANGRY MODE");
+      lcd.setCursor(0,1); //2nd line on display
+      lcd.print("LED IS Orange"); 
     } else {
       fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
-      Serial.println("LED color set to Horn color (orange)");
+      Serial.println("LED color set to Default color (white)");
     }
 
     curDRL = 0;
