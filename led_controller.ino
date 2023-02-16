@@ -136,8 +136,10 @@ void loop()
     }
 
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
-      fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  //<--- May not be needed  
-      FastLED.show();
+      fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
+      Serial.println("LED color set to Horn color (orange)");
+    } else {
+      fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
       Serial.println("LED color set to Horn color (orange)");
     }
 
