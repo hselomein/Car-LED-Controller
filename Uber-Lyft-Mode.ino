@@ -43,3 +43,61 @@ leds turn to White filled
 Exit Function
 
 */
+//-----------------------CODE--------------------------------------------
+
+#define BUTTON_PIN  10 // Button will need to be tied in with a reisitor to pull the leg LOW when the button is pressed
+
+
+
+void setup()
+    {
+    pinMode(BUTTON_PIN, INPUT)
+    Serial.begin(9600);
+    }
+
+
+void loop()
+    {
+        static int CurrMode = 0;
+        buttonState = digitalRead(BUTTON_PIN);
+        bool isPressed = false;
+
+        if (buttonState == LOW && isPressed == false) //button is pressed AND this is the first digitalRead() that the button is pressed
+            {
+                isPressed = true;  //set to true, so this code will not run again until button released
+                CurrMode++;  //not sure if this should be before or after the UberLyftMode function 
+                UberLyftMode(); // a call to a separate function that performs the switch statement and subsequent evoked code
+
+                
+                if (CurrMode > 2) //this number may need to change as well by 1
+                {
+                    CurrMode = 0
+                }
+            } else if (digitalRead(btn) == HIGH)
+            {
+              isPressed = false; //button is released, variable reset
+            }
+        
+    }
+
+UberLyftMode() {
+    switch (CurrMode) 
+    {
+        for (int CurrMode = 0; CurrMode < 3; CurrMode++)
+            case 1:
+                fill_solid(leds, NUM_LEDS, ANGRY_COLOR);
+                Serial.println("LED color set to Uber Mode color (Cyan)");
+                // statements
+                break;
+            case 2:
+                fill_solid(leds, NUM_LEDS, ANGRY_COLOR);
+                Serial.println("LED color set to Lyft Mode color (Magenta)");
+                // statements
+                break;
+            default:
+                fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);
+                Serial.println("LED color set to Default Mode color (White)");
+                // statements
+                break;
+    }       
+}
