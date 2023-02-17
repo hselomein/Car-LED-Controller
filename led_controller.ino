@@ -58,37 +58,37 @@ const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES;
 
 void setup()
 {
-    // set up the LCD:
-    lcd.begin(16, 2); //init lcd col and row
-    lcd.clear();      //clear lcd screen
-    lcd.autoscroll(); //enable scrolling on long lines
-    
-    lcd.home(); //move cursor to 1st line on display
-    lcd.print(F("Loading..."));   
-    lcd.setCursor(1,1); //move cursor to 2nd line on display
-    lcd.print(F("Please Wait!"));   
-
-    Serial.begin(9600);   // serial monitor for debugging
-    delay(250);           // power-up safety delay
-
-
-    // Set pins as an input or output pin
-    pinMode(RELAY_PIN_1, OUTPUT);
-    pinMode(RELAY_PIN_2, OUTPUT);
-    pinMode(LED_PIN, OUTPUT);
-    pinMode(DRL_PIN, INPUT);
-    pinMode(PK_L_PIN, INPUT);
-    pinMode(HORN_PIN, INPUT);
-    pinMode(HIBM_PIN, INPUT);
-
-    // Start LEDs
-    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
-    FastLED.setBrightness(MAX_BRIGHTNESS);
-    FastLED.setTemperature(COLOR_TEMP);
+  // set up the LCD:
+  lcd.begin(16, 2); //init lcd col and row
+  lcd.clear();      //clear lcd screen
+  lcd.autoscroll(); //enable scrolling on long lines
   
-    // Initiate startup lighting sequence
-    startupSequence();
-    lcd.clear()  //clear lcd screen
+  lcd.home(); //move cursor to 1st line on display
+  lcd.print(F("Loading..."));   
+  lcd.setCursor(1,1); //move cursor to 2nd line on display
+  lcd.print(F("Please Wait!"));   
+
+  Serial.begin(9600);   // serial monitor for debugging
+  delay(250);           // power-up safety delay
+
+
+  // Set pins as an input or output pin
+  pinMode(RELAY_PIN_1, OUTPUT);
+  pinMode(RELAY_PIN_2, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(DRL_PIN, INPUT);
+  pinMode(PK_L_PIN, INPUT);
+  pinMode(HORN_PIN, INPUT);
+  pinMode(HIBM_PIN, INPUT);
+
+  // Start LEDs
+  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
+  FastLED.setBrightness(MAX_BRIGHTNESS);
+  FastLED.setTemperature(COLOR_TEMP);
+
+  // Initiate startup lighting sequence
+  startupSequence();
+  lcd.clear()  //clear lcd screen
 }
 
 void loop()
@@ -116,10 +116,10 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    lcd.print("DRL: "); lcd.print(curDRL); lcd.print("V   ");
-    lcd.print("PkL: "); lcd.print(curPkL); lcd.print("V   ");
-    lcd.print("Hrn: "); lcd.print(curHorn); lcd.print("V   ");
-    lcd.print("HiBm: "); lcd.print(curHiBeam); lcd.print("V   ");
+    lcd.print("DRL: ");   lcd.print(curDRL);    lcd.print("V   ");
+    lcd.print("PkL: ");   lcd.print(curPkL);    lcd.print("V   ");
+    lcd.print("Hrn: ");   lcd.print(curHorn);   lcd.print("V   ");
+    lcd.print("HiBm: ");  lcd.print(curHiBeam); lcd.print("V   ");
      
     //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
@@ -211,7 +211,7 @@ void startupSequence() {
   // Turn Solid Color:                      //<--- May not be needed
   fill_solid(leds, NUM_LEDS, brightCOLOR);  //<--- May not be needed
   FastLED.show();                           //<--- May not be needed
-  FastLED.delay(1000);                              //<--- May not be needed
+  //FastLED.delay(1000);                      //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
