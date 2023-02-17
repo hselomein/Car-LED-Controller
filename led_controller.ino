@@ -61,11 +61,10 @@ void setup()
   // set up the LCD:
   lcd.begin(16, 2); //init lcd col and row
   lcd.clear();      //clear lcd screen
-  lcd.autoscroll(); //enable scrolling on long lines
   
   lcd.home(); //move cursor to 1st line on display
   lcd.print(F("Loading..."));   
-  lcd.setCursor(1,1); //move cursor to 2nd line on display
+  lcd.setCursor(0,1); //move cursor to 2nd line on display
   lcd.print(F("Please Wait!"));   
 
   Serial.begin(9600);   // serial monitor for debugging
@@ -88,7 +87,7 @@ void setup()
 
   // Initiate startup lighting sequence
   startupSequence();
-  lcd.clear()  //clear lcd screen
+  lcd.clear();  //clear lcd screen
 }
 
 void loop()
@@ -116,10 +115,11 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    lcd.print("DRL: ");   lcd.print(curDRL);    lcd.print("V   ");
-    lcd.print("PkL: ");   lcd.print(curPkL);    lcd.print("V   ");
-    lcd.print("Hrn: ");   lcd.print(curHorn);   lcd.print("V   ");
-    lcd.print("HiBm: ");  lcd.print(curHiBeam); lcd.print("V   ");
+    lcd.autoscroll(); //enable scrolling on long lines
+    lcd.print(F("DRL: "));   lcd.print(F(curDRL));    lcd.print(F("V   "));
+    lcd.print(F("PkL: "));   lcd.print(F(curPkL));    lcd.print(F("V   "));
+    lcd.print(F("Hrn: "));   lcd.print(F(curHorn));   lcd.print(F("V   "));
+    lcd.print(F("HiBm: "));  lcd.print(F(curHiBeam)); lcd.print(F("V   "));
      
     //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
