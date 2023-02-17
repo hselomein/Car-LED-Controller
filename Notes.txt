@@ -35,3 +35,40 @@ A3 => PK_L Sense
 A4 => Hn Sense
 A5 => HiBm Sense
 # of LEDs in strip 30 effective 90 individual pixels, WS2811 controller 
+
+ESP32 Notes:
+https://www.electronicshub.org/esp32-pinout/
+
+Pins required:
+4 analog pins for input
+1 ditigal pin for input
+8 digital pins for output
+2 power pins
+
+
+Reserved pins:
+2-4 input only pins
+14-17 power and ground
+27,28 uart0 rx/tx 
+6-11 do not use on 36 or 38 pin verson, in use for flash,  - these are not exposed on pu 30pin version
+
+Planned pinout:
+2 DRL Sense GPIO36
+3 PK_L Sense GPIO39
+4 Hn Sense GPIO34
+5 HiBm Sense GPIO35
+
+6 LCD Screen Data
+7 LCD Screen Data
+8 LCD Screen Data
+9 LCD Screen Data
+10 LCD Screen Data
+11 LCD Screen Data
+
+12 Relay1
+13 Relay2
+
+30 LED Strip Data
+29 Mode Selection Button
+26 Reserved for possible 2nd LED Strip
+
