@@ -67,7 +67,7 @@ void setup()
   lcd.setCursor(0,1); //move cursor to 2nd line on display
   lcd.print(F("Please Wait!"));   
 
-  Serial.begin(9600);   // serial monitor for debugging
+  //Serial.begin(9600);   // serial monitor for debugging
   delay(250);           // power-up safety delay
 
 
@@ -116,10 +116,10 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    lcd.print(F("DRL: "));   lcd.print(F(curDRL));    lcd.print(F("V   "));
-    lcd.print(F("PkL: "));   lcd.print(F(curPkL));    lcd.print(F("V   "));
-    lcd.print(F("Hrn: "));   lcd.print(F(curHorn));   lcd.print(F("V   "));
-    lcd.print(F("HiBm: "));  lcd.print(F(curHiBeam)); lcd.print(F("V   "));
+    lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
+    lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
+    lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
+    lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
      
     //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
@@ -130,44 +130,44 @@ void loop()
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
-        Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       FastLED.setBrightness(MIN_BRIGHTNESS); //set low brightness
       FastLED.show();
-      Serial.println("DRL Brightness level LOW");
+      //Serial.println("DRL Brightness level LOW");
     } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
-        Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       FastLED.setBrightness(MAX_BRIGHTNESS); //set max brightness
       FastLED.show();
-      Serial.println("DRL Brightness level MAX");
+      //Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
       if (RelayPin1State) {
         RelayPin1State = false;
         //turn off relay1
-        Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
+        //Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
       FastLED.setBrightness(0); //turn off lights
       FastLED.show();
-      Serial.println("DRL Brightness level OFF");
+      //Serial.println("DRL Brightness level OFF");
     }
 
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
       fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
-      lcd.setCursor(1,1); //move cursor to 2nd line on display
+      lcd.setCursor(0,1); //move cursor to 2nd line on display
       lcd.print(F("Color: Orange"));   
-      Serial.println("LED color set to Horn color (orange)");
+      //Serial.println("LED color set to Horn color (orange)");
     } else {
       fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
-      lcd.setCursor(1,1); //move cursor to 2nd line on display
+      lcd.setCursor(0,1); //move cursor to 2nd line on display
       lcd.print(F("Color: White"));   
-      Serial.println("LED color set to Default color (white)");
+      //Serial.println("LED color set to Default color (white)");
     }
 
     curDRL = 0;
@@ -221,16 +221,6 @@ void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
 }    
 
 void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
-  // Debug Info:  
-    Serial.print(F("Max Color: "));     Serial.println(maxColor);
-    Serial.print(F("Min Color: "));     Serial.println(minColor);
-    Serial.print(F("Delay: "));         Serial.println(msDelay);
-    if (boolDirection) {
-      Serial.println(F("Direction: Out"));
-    } else {
-      Serial.println(F("Direction: In"));
-    }
-
   // Flash the center LED if number is ODD and direction is OUT
   if (boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
@@ -243,10 +233,6 @@ void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
     if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
     else { ledLeft = i; }                                //In
     ledRight = NUM_LEDS - ledLeft;
-
-    // Debug Info
-      Serial.print(F("cur. left: "));     Serial.println(ledLeft);
-      Serial.print(F("cur. right: "));    Serial.println(ledRight);
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
     flashLED (ledLeft, ledRight, minColor, msDelay / 5);
