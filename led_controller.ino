@@ -88,6 +88,7 @@ void setup()
   // Initiate startup lighting sequence
   startupSequence();
   lcd.clear();  //clear lcd screen
+  lcd.autoscroll(); //enable scrolling on long lines
 }
 
 void loop()
@@ -115,7 +116,6 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    lcd.autoscroll(); //enable scrolling on long lines
     lcd.print(F("DRL: "));   lcd.print(F(curDRL));    lcd.print(F("V   "));
     lcd.print(F("PkL: "));   lcd.print(F(curPkL));    lcd.print(F("V   "));
     lcd.print(F("Hrn: "));   lcd.print(F(curHorn));   lcd.print(F("V   "));
