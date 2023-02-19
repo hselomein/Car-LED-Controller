@@ -68,7 +68,7 @@ Planned pinout:
 12 Relay1
 13 Relay2
 
-30 LED Strip Data
-29 Mode Selection Button
-26 Reserved for possible 2nd LED Strip
+30 Mode Selection Button Output GPIO23
+29 Reserved
+26 LED Strip DAta GPIO21
 
