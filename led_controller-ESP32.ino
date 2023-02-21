@@ -61,6 +61,13 @@ CRGBArray<NUM_LEDS> leds;
 #define LOADING         "Loading..."
 #define PLEASE_WAIT     "Please Wait!!!"
 
+// Startup Configuration (Constants)
+#define msDELAY     20   //Number of ms LED stays on for.
+#define numLOOPS    4   //Humber of passes over entire LED strip
+#define brightCOLOR #FFFFFF //CRGB( 255, 255, 255);
+#define dimCOLOR    #A0A0A0 //CRGB( 96, 96, 96);
+#define offCOLOR    #000000 //CRGB( 0, 0, 0);
+
 
 void setup()
 {
@@ -185,13 +192,6 @@ void loop()
     FastLED.delay(1000); //Delay to prevent LCD flashing
   }
 }
-
-// Configuration (Constants)
-#define msDELAY     20;   //Number of ms LED stays on for.
-#define numLOOPS    4;   //Humber of passes over entire LED strip
-#define brightCOLOR CRGB( 255, 255, 255);
-#define dimCOLOR    CRGB( 96, 96, 96);
-#define offCOLOR    CRGB( 0, 0, 0);
 
 void startupSequence() {
   // Loop 4 times
