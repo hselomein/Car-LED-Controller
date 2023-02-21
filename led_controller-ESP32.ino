@@ -10,7 +10,7 @@
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
 -----------------------------------------------------------------*/
 #include <FastLED.h>
-#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
 
 // Pins to device mapping
 #define RELAY_PIN_1     12         // D2 => In1 Relay
@@ -21,8 +21,8 @@
 #define HORN_PIN        4        // A4 => Horn Sense
 #define HIBM_PIN        5        // A5 => HiBeam Sense
 
-// initialize the LCD with the interface pins
-LiquidCrystal lcd(32, 33, 25, 26, 27, 14);
+// set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27,16,2);  
 
 //LED Controller Section
 #define LED_TYPE        WS2811
@@ -59,7 +59,8 @@ const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES;
 void setup()
 {
   // set up the LCD:
-  lcd.begin(16, 2); //init lcd col and row
+  lcd.init();     // Init LCD      
+  lcd.backlight();      // Make sure backlight is on
   lcd.clear();      //clear lcd screen
   
   lcd.home(); //move cursor to 1st line on display
