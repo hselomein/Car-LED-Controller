@@ -13,13 +13,13 @@
 #include <LiquidCrystal_I2C.h>
 
 // Pins to device mapping
-#define RELAY_PIN_1     12       // D12 => In1 Relay
-#define RELAY_PIN_2     13       // D13 => In2 Relay
-#define LED_PIN         21       // D21 => LED Controller Signal
-#define DRL_PIN         2        // A2 => DRL Sense
-#define PK_L_PIN        3        // A3 => Parking Lights Sense 
-#define HORN_PIN        4        // A4 => Horn Sense
-#define HIBM_PIN        5        // A5 => HiBeam Sense
+#define RELAY_PIN_1     14        // D14 => In1 Relay
+#define RELAY_PIN_2     12        // D12 => In2 Relay
+#define LED_PIN         13        // D13 => LED Controller Signal
+#define DRL_PIN         34        // D34 => DRL Sense
+#define PK_L_PIN        35        // D35 => Parking Lights Sense 
+#define HORN_PIN        32        // D32 => Horn Sense
+#define HIBM_PIN        33        // A33 => HiBeam Sense
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 LiquidCrystal_I2C lcd(0x27,16,2);  
@@ -64,9 +64,9 @@ CRGBArray<NUM_LEDS> leds;
 // Startup Configuration (Constants)
 #define msDELAY     20   //Number of ms LED stays on for.
 #define numLOOPS    4   //Humber of passes over entire LED strip
-#define brightCOLOR #FFFFFF //CRGB( 255, 255, 255);
-#define dimCOLOR    #A0A0A0 //CRGB( 96, 96, 96);
-#define offCOLOR    #000000 //CRGB( 0, 0, 0);
+#define brightCOLOR  CRGB( 255, 255, 255)
+#define dimCOLOR     CRGB( 96, 96, 96)
+#define offCOLOR     CRGB( 0, 0, 0)
 
 
 void setup()
