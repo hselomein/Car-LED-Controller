@@ -51,7 +51,7 @@ CRGBArray<NUM_LEDS> leds;
 #define REF_VOLTAGE     5.14          // Reference Voltage
 #define R1              981           // Reference Voltage
 #define R2              46.7          // Reference Voltage
-#define VOLT_DIV_FACTOR R2/(R1+R2)    //voltage divider factor
+#define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
 #define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
