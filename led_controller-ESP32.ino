@@ -9,6 +9,7 @@
 
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
 -----------------------------------------------------------------*/
+#include <stdio.h>
 #include <FastLED.h>
 #include <LiquidCrystal_I2C.h>
 
@@ -81,7 +82,7 @@ void setup()
   lcd.setCursor(0,1); //move cursor to 2nd line on display
   lcd.print(PLEASE_WAIT);   
 
-  //Serial.begin(115200);   // serial monitor for debugging
+  Serial.begin(115200);         // serial monitor for debugging
   FastLED.delay(250);           // power-up safety delay
 
 
@@ -114,6 +115,8 @@ void loop()
   static float curHorn = 0;
   static float curHiBeam = 0;
   static bool RelayPin1State = false;
+  char* tmpMessage = malloc(16);
+
 
   curDRL += analogRead(DRL_PIN);
   curPkL += analogRead(PK_L_PIN);
@@ -130,15 +133,6 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
-    //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
-    //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
-    //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
-     
-    //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
-    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
-    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
-    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -189,12 +183,15 @@ void loop()
     curHorn = 0;
     curHiBeam = 0;
 
-    lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
+    sprintf(myString, "DRL: %.2fV", curDRL);  
+
+    lcd.print(myString);
+    //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
     //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
      
-    //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
+    Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
     //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
     //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
