@@ -8,7 +8,7 @@
 
 //LED Controller Section
 #define LED_PIN         13        // D13 => LED Controller Signal
-#define LED_TYPE        WS2812B
+#define LED_TYPE        WS2812B 
 #define NUM_LEDS        60
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
