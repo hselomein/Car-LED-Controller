@@ -190,6 +190,8 @@ void loop()
     //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
     //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
+    FastLED.delay(1000); //Delay to prevent LCD flashing
+
     lcd.print(tmpMessage);
     //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
     //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
