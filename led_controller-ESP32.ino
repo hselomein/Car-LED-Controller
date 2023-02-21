@@ -183,14 +183,14 @@ void loop()
     curHorn = 0;
     curHiBeam = 0;
 
-    sprintf(myString, "DRL: %.2fV", curDRL);  
+    sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
      
-    Serial.print(myString);
+    Serial.print(tmpMessage);
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
     //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
     //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
-    lcd.print(myString);
+    lcd.print(tmpMessage);
     //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
     //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
