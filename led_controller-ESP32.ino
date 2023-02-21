@@ -184,17 +184,17 @@ void loop()
     curHiBeam = 0;
 
     sprintf(myString, "DRL: %.2fV", curDRL);  
+     
+    Serial.print(myString);
+    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
+    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
+    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
     lcd.print(myString);
     //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
     //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
-     
-    Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
-    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
-    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
-    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
     FastLED.delay(1000); //Delay to prevent LCD flashing
   }
