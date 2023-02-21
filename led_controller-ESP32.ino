@@ -13,9 +13,9 @@
 #include <LiquidCrystal_I2C.h>
 
 // Pins to device mapping
-#define RELAY_PIN_1     12         // D2 => In1 Relay
-#define RELAY_PIN_2     13         // D3 => In2 Relay
-#define LED_PIN         21        // D12 => LED Controller Signal
+#define RELAY_PIN_1     12       // D12 => In1 Relay
+#define RELAY_PIN_2     13       // D13 => In2 Relay
+#define LED_PIN         21       // D21 => LED Controller Signal
 #define DRL_PIN         2        // A2 => DRL Sense
 #define PK_L_PIN        3        // A3 => Parking Lights Sense 
 #define HORN_PIN        4        // A4 => Horn Sense
@@ -45,16 +45,22 @@ CRGBArray<NUM_LEDS> leds;
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     10        // number of analog samples to take per reading
-#define REF_VOLTAGE     5.09      // Reference Voltage
-#define VOLT_DIV_FACTOR 22.368         //voltage divider factor
+#define NUM_SAMPLES     20          // number of analog samples to take per reading
+#define REF_VOLTAGE     5.09        // Reference Voltage
+#define A2D_RESOLUTION  4096        // Reference Voltage
+#define VOLT_DIV_FACTOR 22.368      //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
-const float VOLT_ADJ = REF_VOLTAGE * VOLT_DIV_FACTOR / 1024 / NUM_SAMPLES;
+#define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
 
 #define VOLT_BUF        2
 #define HI_VOLT         12
 #define LO_VOLT         4
+
+// Static test messages
+#define LOADING         "Loading..."
+#define PLEASE_WAIT     "Please Wait!!!"
+
 
 void setup()
 {
@@ -64,12 +70,12 @@ void setup()
   lcd.clear();      //clear lcd screen
   
   lcd.home(); //move cursor to 1st line on display
-  lcd.print(F("Loading..."));   
-  lcd.setCursor(0,1); //move cursor to 2nd line on display
-  lcd.print(F("Please Wait!"));   
+  lcd.print(LOADING);   
+  lcd.setCursor(0,0); //move cursor to 2nd line on display
+  lcd.print(PLEASE_WAIT);   
 
   //Serial.begin(115200);   // serial monitor for debugging
-  delay(250);           // power-up safety delay
+  FastLED.delay(250);           // power-up safety delay
 
 
   // Set pins as an input or output pin
@@ -89,13 +95,13 @@ void setup()
   // Initiate startup lighting sequence
   startupSequence();
   lcd.clear();  //clear lcd screen
-  lcd.autoscroll(); //enable scrolling on long lines
+  //lcd.autoscroll(); //enable scrolling on long lines
 }
 
 void loop()
 {
-  static int curMode = 1;
-  static int curSample = 1;
+  static char curMode = 1;
+  static char curSample = 1;
   static float curDRL = 0;
   static float curPkL = 0;
   static float curHorn = 0;
@@ -117,10 +123,10 @@ void loop()
 
     lcd.clear();    //clear lcd screen
     lcd.home();     //move cursor to 1st line on display
-    lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
-    lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
-    lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
-    lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
+    //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
+    //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
+    //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
+    //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
      
     //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
@@ -161,13 +167,13 @@ void loop()
 
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
       fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
-      lcd.setCursor(0,1); //move cursor to 2nd line on display
-      lcd.print(F("Color: Orange"));   
+      //lcd.setCursor(0,o); //move cursor to 2nd line on display
+      //lcd.print(F("Color: Orange"));   
       //Serial.println("LED color set to Horn color (orange)");
     } else {
       fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
-      lcd.setCursor(0,1); //move cursor to 2nd line on display
-      lcd.print(F("Color: White"));   
+      //lcd.setCursor(0,1); //move cursor to 2nd line on display
+      //lcd.print(F("Color: White"));   
       //Serial.println("LED color set to Default color (white)");
     }
 
@@ -176,18 +182,18 @@ void loop()
     curHorn = 0;
     curHiBeam = 0;
 
-    FastLED.delay(100); //Delay to prevent LCD flashing
+    FastLED.delay(1000); //Delay to prevent LCD flashing
   }
 }
 
-void startupSequence() {
-  // Configuration (Constants)
-  const int msDELAY = 20;   //Number of ms LED stays on for.
-  const int numLOOPS = 4;   //Humber of passes over entire LED strip
-  const CRGB brightCOLOR =  CRGB( 255, 255, 255);
-  const CRGB dimCOLOR =     CRGB( 96, 96, 96);
-  const CRGB offCOLOR =     CRGB( 0, 0, 0);
+// Configuration (Constants)
+#define msDELAY     20;   //Number of ms LED stays on for.
+#define numLOOPS    4;   //Humber of passes over entire LED strip
+#define brightCOLOR CRGB( 255, 255, 255);
+#define dimCOLOR    CRGB( 96, 96, 96);
+#define offCOLOR    CRGB( 0, 0, 0);
 
+void startupSequence() {
   // Loop 4 times
   //  1 - Towards center clear trail
   //  2 - Away from center clear trail
@@ -212,7 +218,7 @@ void startupSequence() {
   // Turn Solid Color:                      //<--- May not be needed
   fill_solid(leds, NUM_LEDS, brightCOLOR);  //<--- May not be needed
   FastLED.show();                           //<--- May not be needed
-  //FastLED.delay(1000);                      //<--- May not be needed
+  FastLED.delay(1000);                      //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
