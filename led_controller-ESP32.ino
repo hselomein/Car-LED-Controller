@@ -26,10 +26,10 @@ LiquidCrystal_I2C lcd(0x27,16,2);
 
 //LED Controller Section
 #define LED_TYPE        WS2811
-#define NUM_LEDS        30
+#define NUM_LEDS        60
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
-#define COLOR_ORDER     BRG
+#define COLOR_ORDER     GRB
 #define COLOR_TEMP      UncorrectedTemperature
 CRGBArray<NUM_LEDS> leds;
 
@@ -62,11 +62,11 @@ CRGBArray<NUM_LEDS> leds;
 #define PLEASE_WAIT     "Please Wait!!!"
 
 // Startup Configuration (Constants)
-#define msDELAY     20   //Number of ms LED stays on for.
-#define numLOOPS    4   //Humber of passes over entire LED strip
-#define brightCOLOR  CRGB( 255, 255, 255)
-#define dimCOLOR     CRGB( 96, 96, 96)
-#define offCOLOR     CRGB( 0, 0, 0)
+#define msDELAY       20   //Number of ms LED stays on for.
+#define numLOOPS      4   //Humber of passes over entire LED strip
+#define brightCOLOR   CRGB( 255, 255, 255)
+#define dimCOLOR      CRGB( 96, 96, 96)
+#define offCOLOR      CRGB( 0, 0, 0)
 
 
 void setup()
@@ -78,7 +78,7 @@ void setup()
   
   lcd.home(); //move cursor to 1st line on display
   lcd.print(LOADING);   
-  lcd.setCursor(0,0); //move cursor to 2nd line on display
+  lcd.setCursor(0,1); //move cursor to 2nd line on display
   lcd.print(PLEASE_WAIT);   
 
   //Serial.begin(115200);   // serial monitor for debugging
@@ -188,6 +188,16 @@ void loop()
     curPkL = 0;
     curHorn = 0;
     curHiBeam = 0;
+
+    lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
+    //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
+    //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
+    //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
+     
+    //Serial.print("Voltage of HIBM = ");   Serial.print(curHiBeam);    Serial.println ("V");
+    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
+    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
+    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
     FastLED.delay(1000); //Delay to prevent LCD flashing
   }
