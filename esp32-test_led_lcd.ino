@@ -7,7 +7,7 @@
 #include <FastLED.h>
 
 //LED Controller Section
-#define LED_PIN         13        // D12 => LED Controller Signal
+#define LED_PIN         13        // D13 => LED Controller Signal
 #define LED_TYPE        WS2812B
 #define NUM_LEDS        60
 #define NUM_LEDS_HALF   NUM_LEDS / 2
