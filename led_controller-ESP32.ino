@@ -161,9 +161,9 @@ void loop()
         //Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
-      FastLED.setBrightness(0); //turn off lights
+      FastLED.setBrightness(1); //turn off lights
       FastLED.show();
-      //Serial.println("DRL Brightness level OFF");
+      Serial.println("DRL Brightness level OFF");
     }
 
     if (curHorn > (HI_VOLT - VOLT_BUF)) {
@@ -185,7 +185,7 @@ void loop()
 
     sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
      
-    Serial.print(tmpMessage);
+    Serial.println(tmpMessage);
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
     //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
     //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
