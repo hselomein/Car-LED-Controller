@@ -180,11 +180,6 @@ void loop()
       //Serial.println("LED color set to Default color (white)");
     }
 
-    curDRL = 0;
-    curPkL = 0;
-    curHorn = 0;
-    curHiBeam = 0;
-
     sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
      
     Serial.println(tmpMessage);
@@ -201,6 +196,11 @@ void loop()
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
 
     FastLED.delay(1000); //Delay to prevent LCD flashing
+
+    curDRL = 0;
+    curPkL = 0;
+    curHorn = 0;
+    curHiBeam = 0;
   }
 }
 
