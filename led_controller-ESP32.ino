@@ -115,7 +115,7 @@ void loop()
   static float curHorn = 0;
   static float curHiBeam = 0;
   static bool RelayPin1State = false;
-  char* tmpMessage = malloc(16);
+  char tmpMessage[16];
 
 
   curDRL += analogRead(DRL_PIN);
