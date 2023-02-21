@@ -161,7 +161,7 @@ void loop()
         //Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
-      FastLED.setBrightness(1); //turn off lights
+      FastLED.setBrightness(0); //turn off lights
       FastLED.show();
       Serial.println("DRL Brightness level OFF");
     }
