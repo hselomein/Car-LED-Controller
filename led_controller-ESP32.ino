@@ -46,10 +46,12 @@ CRGBArray<NUM_LEDS> leds;
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     20          // number of analog samples to take per reading
-#define REF_VOLTAGE     5.09        // Reference Voltage
-#define A2D_RESOLUTION  4096        // Reference Voltage
-#define VOLT_DIV_FACTOR 22.368      //voltage divider factor
+#define NUM_SAMPLES     100           // number of analog samples to take per reading
+#define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
+#define REF_VOLTAGE     5.14          // Reference Voltage
+#define R1              981           // Reference Voltage
+#define R2              46.7          // Reference Voltage
+#define VOLT_DIV_FACTOR R2/(R1+R2)    //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
 #define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
