@@ -59,12 +59,8 @@ Planned pinout:
 4 Hn Sense GPIO34
 5 HiBm Sense GPIO35
 
-6 LCD Screen Data
-7 LCD Screen Data
-8 LCD Screen Data
-9 LCD Screen Data
-10 LCD Screen Data
-11 LCD Screen Data
+21 LCD Data (SDA)
+22 LCD Clock (SCL)
 
 27 Relay1
 14 Relay2
