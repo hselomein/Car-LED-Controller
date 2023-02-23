@@ -48,6 +48,7 @@ Pins required:
 
 Reserved pins:
 2-4 input only pins
+12 bootstrap pin
 14-17 power and ground
 27,28 uart0 rx/tx 
 6-11 do not use on 36 or 38 pin verson, in use for flash,  - these are not exposed on pu 30pin version
@@ -65,8 +66,8 @@ Planned pinout:
 10 LCD Screen Data
 11 LCD Screen Data
 
-12 Relay1
-13 Relay2
+27 Relay1
+14 Relay2
 
 30 Mode Selection Button Output GPIO23
 29 Reserved
