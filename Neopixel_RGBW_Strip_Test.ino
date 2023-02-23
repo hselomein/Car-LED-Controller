@@ -6,12 +6,17 @@
  #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
 #endif
 
+#define RELAY_PIN_1     14        // D14 => In1 Relay
+#define RELAY_PIN_2     12        // D12 => In2 Relay
+#define RELAY_ON LOW              //this relay when the pin is LOW the relay is on
+#define RELAY_OFF HIGH            //change if needed
+
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1:
-#define LED_PIN     13 //change it to 13 from 6 
+#define LED_PIN     13
 
 // How many NeoPixels are attached to the Arduino?
-#define LED_COUNT  60 // it works at any number, i tested from 60 leds to 288, all work, i keep it at 60 to save power, 288 draws 11 amp.
+#define LED_COUNT  288
 
 // NeoPixel brightness, 0 (min) to 255 (max)
 #define BRIGHTNESS 50 // Set BRIGHTNESS to about 1/5 (max = 255)
@@ -28,6 +33,10 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 //   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
 
 void setup() {
+    // Set pins as an input or output pin
+  pinMode(RELAY_PIN_1, OUTPUT);
+  pinMode(RELAY_PIN_2, OUTPUT);
+  digitalWrite(RELAY_PIN_1, RELAY_ON); //trun on relay to LED strip
   // These lines are specifically to support the Adafruit Trinket 5V 16 MHz.
   // Any other board, you can remove this part (but no harm leaving it):
 #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
