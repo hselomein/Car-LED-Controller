@@ -65,10 +65,6 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define HI_VOLT         12
 #define LO_VOLT         3
 
-// Static test messages
-#define LOADING         "Loading..."
-#define PLEASE_WAIT     "Please Wait!!!"
-
 // Startup Configuration (Constants)
 #define msDELAY       1   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
