@@ -58,7 +58,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define NUM_SAMPLES     100           // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
-#define REF_VOLTAGE     2.450         // Reference Voltage
+#define REF_VOLTAGE     5.17          // Reference Voltage
 #define R1              981           // Resistor 1 value of voltage divider
 #define R2              46.7          // Resistor 2 value of voltage divider
 #define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
@@ -68,14 +68,14 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define VOLT_BUF        2
 #define HI_VOLT         12
-#define LO_VOLT         4
+#define LO_VOLT         3
 
 // Static test messages
 #define LOADING         "Loading..."
 #define PLEASE_WAIT     "Please Wait!!!"
 
 // Startup Configuration (Constants)
-#define msDELAY       10   //Number of ms LED stays on for.
+#define msDELAY       3   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 #define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
 #define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
@@ -254,7 +254,7 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
   // Flash the center LED if number is ODD and direction is OUT
   if (boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 1);
   }
 
   int ledLeft = 0; int ledRight = 0;
@@ -265,13 +265,13 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     ledRight = NUM_LEDS - ledLeft;
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
-    flashLED (ledLeft, ledRight, minColor, msDelay / 5);
+    flashLED (ledLeft, ledRight, minColor, 1);
   }
 
   // Flash the center LED if number is ODD and direction is IN
   if (!boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, msDelay / 5);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 1);
   }
 }
 
