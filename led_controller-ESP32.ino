@@ -48,10 +48,10 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define MIN_BRIGHTNESS  95
 #define MED_BRIGHTNESS  127
 
-#define ANGRY_COLOR     leds.Color( 255, 69, 0, 0 )     //Orange
-#define DEFAULT_COLOR   leds.Color( 0, 0, 0, 255  )     //White
-#define LYFT_COLOR      leds.Color( 255, 0, 255, 0)     //Magenta
-#define UBER_COLOR      leds.Color( 0, 165, 255, 0)     //Cyan
+#define ANGRY_COLOR     leds.Color( 255, 69,  0,   0 )     //Orange
+#define DEFAULT_COLOR   leds.Color( 0,    0,  0, 255 )     //White
+#define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
+#define UBER_COLOR      leds.Color( 0,  165, 255,  0 )     //Cyan
 
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
@@ -77,9 +77,9 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 // Startup Configuration (Constants)
 #define msDELAY       10   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
-#define brightCOLOR   leds.Color( 255, 255, 255, 255) 
-#define dimCOLOR      leds.Color( 50, 50, 50, 50) 
-#define offCOLOR      leds.Color( 0, 0, 0, 0)
+#define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
+#define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
+#define offCOLOR      leds.Color(   0,   0,   0,   0 )
 
 
 void setup()
@@ -95,8 +95,8 @@ void setup()
   //lcd.setCursor(0,1); //move cursor to 2nd line on display
   //lcd.print(PLEASE_WAIT);   
 
-  Serial.begin(115200);         // serial monitor for debugging
-  FastLED.delay(250);           // power-up safety delay
+  Serial.begin(115200);   // serial monitor for debugging
+  delay(250);             // power-up safety delay
 
 
   // Set pins as an input or output pin
@@ -244,13 +244,13 @@ void startupSequence() {
   delay(msDELAY);                      //<--- May not be needed
 }
 
-void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
+void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
   leds.setPixelColor(curColor, ledLeft);   leds.setPixelColor(curColor, ledRight);
   leds.show();
   delay(msDelay);
 }    
 
-void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
+void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   // Flash the center LED if number is ODD and direction is OUT
   if (boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
