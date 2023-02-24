@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <Adafruit_NeoPixel.h>
 
-//#include <FastLED.h>
 //#include <LiquidCrystal_I2C.h> //remove for new library
 //#include <Wire.h>
 //#include <hd44780.h>                       // main hd44780 header
@@ -35,13 +34,9 @@
 //hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
-//#define LED_TYPE        SK6812
 #define NUM_LEDS        288
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
-//#define COLOR_ORDER     GRB
-//#define COLOR_TEMP      UncorrectedTemperature
-//CRGBArray<NUM_LEDS> leds;
 Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define MAX_BRIGHTNESS  255
@@ -58,7 +53,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define NUM_SAMPLES     100           // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
-#define REF_VOLTAGE     5.17          // Reference Voltage
+#define REF_VOLTAGE     5.05          // Reference Voltage
 #define R1              981           // Resistor 1 value of voltage divider
 #define R2              46.7          // Resistor 2 value of voltage divider
 #define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
@@ -75,7 +70,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define PLEASE_WAIT     "Please Wait!!!"
 
 // Startup Configuration (Constants)
-#define msDELAY       3   //Number of ms LED stays on for.
+#define msDELAY       1   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 #define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
 #define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
@@ -116,6 +111,7 @@ void setup()
 
   // Initiate startup lighting sequence
   startupSequence();
+
   //lcd.clear();  //clear lcd screen
   //lcd.autoscroll(); //enable scrolling on long lines
 }
@@ -199,7 +195,6 @@ void loop()
     //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
     //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
 
-    //FastLED.delay(1000); //Delay to prevent LCD flashing
 
     //lcd.print(tmpMessage);
     //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
@@ -207,7 +202,7 @@ void loop()
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
 
-    delay(1000); //Delay to prevent LCD flashing
+    delay(100); //Delay to prevent LCD flashing
 
     curDRL = 0;
     curPkL = 0;
@@ -240,8 +235,7 @@ void startupSequence() {
 
   // Turn Solid Color:              //<--- May not be needed
   leds.fill(brightCOLOR);           //<--- May not be needed
-  leds.show();                      //<--- May not be needed
-  delay(msDELAY);                      //<--- May not be needed
+  delay(msDELAY);                   //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
@@ -254,7 +248,7 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
   // Flash the center LED if number is ODD and direction is OUT
   if (boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 1);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
   }
 
   int ledLeft = 0; int ledRight = 0;
@@ -265,13 +259,13 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     ledRight = NUM_LEDS - ledLeft;
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
-    flashLED (ledLeft, ledRight, minColor, 1);
+    flashLED (ledLeft, ledRight, minColor, 0);
   }
 
   // Flash the center LED if number is ODD and direction is IN
   if (!boolDirection && NUM_LEDS_ODD) {
     flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 1);
+    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
   }
 }
 
