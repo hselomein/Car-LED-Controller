@@ -10,16 +10,18 @@
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
 -----------------------------------------------------------------*/
 #include <stdio.h>
-#include <FastLED.h>
+#include <Adafruit_NeoPixel.h>
+
+//#include <FastLED.h>
 //#include <LiquidCrystal_I2C.h> //remove for new library
-#include <Wire.h>
-#include <hd44780.h>                       // main hd44780 header
-#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
+//#include <Wire.h>
+//#include <hd44780.h>                       // main hd44780 header
+//#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
 
 // Pins to device mapping
-#define RELAY_PIN_1     27        // D14 => In1 Relay
-#define RELAY_PIN_2     14        // D12 => In2 Relay
+#define RELAY_PIN_1     14        // D14 => In1 Relay
+#define RELAY_PIN_2     27        // D12 => In2 Relay
 #define LED_PIN         13        // D13 => LED Controller Signal
 #define DRL_PIN         34        // D34 => DRL Sense
 #define PK_L_PIN        35        // D35 => Parking Lights Sense 
@@ -28,18 +30,19 @@
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 //LiquidCrystal_I2C lcd(0x27,16,2); //remove for new library
-#define LCD_COLS  16
-#define LCD_ROWS  2 
-hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
+//#define LCD_COLS  16
+//#define LCD_ROWS  2 
+//hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
-#define LED_TYPE        SK6812
-#define NUM_LEDS        384
+//#define LED_TYPE        SK6812
+#define NUM_LEDS        288
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
-#define COLOR_ORDER     GRB
-#define COLOR_TEMP      UncorrectedTemperature
-CRGBArray<NUM_LEDS> leds;
+//#define COLOR_ORDER     GRB
+//#define COLOR_TEMP      UncorrectedTemperature
+//CRGBArray<NUM_LEDS> leds;
+Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define MAX_BRIGHTNESS  255
 #define MIN_BRIGHTNESS  95
@@ -55,7 +58,7 @@ CRGBArray<NUM_LEDS> leds;
 
 #define NUM_SAMPLES     100           // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
-#define REF_VOLTAGE     2.45          // Reference Voltage
+#define REF_VOLTAGE     2.450         // Reference Voltage
 #define R1              981           // Resistor 1 value of voltage divider
 #define R2              46.7          // Resistor 2 value of voltage divider
 #define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
@@ -74,23 +77,23 @@ CRGBArray<NUM_LEDS> leds;
 // Startup Configuration (Constants)
 #define msDELAY       10   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
-#define brightCOLOR   CRGB( 100, 100, 100) //changed from 255,255, 255 for power consumtion and id like to see afterwards
-#define dimCOLOR      CRGB( 50, 50, 50) //changed from 96,96,96 for power consumption 
-#define offCOLOR      CRGB( 0, 0, 0)
+#define brightCOLOR   leds.Color( 255, 255, 255, 255) 
+#define dimCOLOR      leds.Color( 50, 50, 50, 50) 
+#define offCOLOR      leds.Color( 0, 0, 0, 0)
 
 
 void setup()
 {
   // set up the LCD:
-  lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
+  //lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
   //lcd.init();     // Init LCD      
   //lcd.backlight();      // Make sure backlight is on
-  lcd.clear();      //clear the display and home the cursor
+  //lcd.clear();      //clear the display and home the cursor
   
   //lcd.home(); //move cursor to 1st line on display
-  lcd.print(LOADING);   
-  lcd.setCursor(0,1); //move cursor to 2nd line on display
-  lcd.print(PLEASE_WAIT);   
+  //lcd.print(LOADING);   
+  //lcd.setCursor(0,1); //move cursor to 2nd line on display
+  //lcd.print(PLEASE_WAIT);   
 
   Serial.begin(115200);         // serial monitor for debugging
   FastLED.delay(250);           // power-up safety delay
@@ -106,9 +109,10 @@ void setup()
   pinMode(HIBM_PIN, INPUT);
 
   // Start LEDs
-  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
-  FastLED.setBrightness(MAX_BRIGHTNESS);
-  FastLED.setTemperature(COLOR_TEMP);
+  digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
+  leds.begin();
+  leds.show();
+  leds.setBrightness(MAX_BRIGHTNESS);
 
   // Initiate startup lighting sequence
   startupSequence();
@@ -151,9 +155,8 @@ void loop()
         //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
-      FastLED.setBrightness(MIN_BRIGHTNESS); //set low brightness
-      FastLED.show();
-      //Serial.println("DRL Brightness level LOW");
+      leds.setBrightness(MIN_BRIGHTNESS);
+      Serial.println("DRL Brightness level LOW");
     } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
       if (!RelayPin1State) {
         RelayPin1State = true;
@@ -161,35 +164,34 @@ void loop()
         //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
-      FastLED.setBrightness(MAX_BRIGHTNESS); //set max brightness
-      FastLED.show();
-      //Serial.println("DRL Brightness level MAX");
+      leds.setBrightness(MAX_BRIGHTNESS);
+      Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
+      leds.setBrightness(0);
       if (RelayPin1State) {
         RelayPin1State = false;
         //turn off relay1
         //Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
-      FastLED.setBrightness(0); //turn off lights
-      FastLED.show();
       Serial.println("DRL Brightness level OFF");
     }
 
     if (curHorn > VOLT_BUF) {
-      fill_solid(leds, NUM_LEDS, ANGRY_COLOR);  
+      leds.fill(ANGRY_COLOR);  
       //lcd.setCursor(0,0); //move cursor to 2nd line on display
       //lcd.print("Color: Orange");
       //delay(3);
       //Serial.println("LED color set to Horn color (orange)");
     } else {
-      fill_solid(leds, NUM_LEDS, DEFAULT_COLOR);  
+      leds.fill(DEFAULT_COLOR);  
       //lcd.setCursor(0,1); //move cursor to 2nd line on display
       //lcd.print("Color: White");
       //delay(3);   
       //Serial.println("LED color set to Default color (white)");
     }
 
+    leds.show();                      //<--- May not be needed
     sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
      
     Serial.println(tmpMessage);
@@ -205,7 +207,7 @@ void loop()
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
 
-    FastLED.delay(1000); //Delay to prevent LCD flashing
+    delay(1000); //Delay to prevent LCD flashing
 
     curDRL = 0;
     curPkL = 0;
@@ -220,7 +222,7 @@ void startupSequence() {
   //  2 - Away from center clear trail
   //  3 - Towards center remain partial brightness
   //  4 - Away from center remain full brightness 
-  CRGB curDimColor = offCOLOR;
+  uint32_t curDimColor = offCOLOR;
   for (int i = 0; i < numLOOPS; i++){
     switch(i) {
       case 2:
@@ -236,16 +238,16 @@ void startupSequence() {
     ledWave(brightCOLOR, curDimColor, msDELAY, i % 2);
   }
 
-  // Turn Solid Color:                      //<--- May not be needed
-  fill_solid(leds, NUM_LEDS, brightCOLOR);  //<--- May not be needed
-  FastLED.show();                           //<--- May not be needed
-  FastLED.delay(1000);                      //<--- May not be needed
+  // Turn Solid Color:              //<--- May not be needed
+  leds.fill(brightCOLOR);           //<--- May not be needed
+  leds.show();                      //<--- May not be needed
+  delay(msDELAY);                      //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
-  leds[ledLeft] = curColor;   leds[ledRight] = curColor;
-  FastLED.show();
-  FastLED.delay(msDelay);
+  leds.setPixelColor(curColor, ledLeft);   leds.setPixelColor(curColor, ledRight);
+  leds.show();
+  delay(msDelay);
 }    
 
 void ledWave(CRGB maxColor, CRGB minColor, int msDelay, bool boolDirection) {
