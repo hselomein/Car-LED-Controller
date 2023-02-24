@@ -53,9 +53,9 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define NUM_SAMPLES     100           // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
-#define REF_VOLTAGE     5.05          // Reference Voltage
-#define R1              981           // Resistor 1 value of voltage divider
-#define R2              46.7          // Resistor 2 value of voltage divider
+#define REF_VOLTAGE     5.17          // Reference Voltage
+#define R1              46.8          // Resistor 1 value of voltage divider
+#define R2              9.81          // Resistor 2 value of voltage divider
 #define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
 // voltage multiplied by 22 when using voltage divider that
 // divides by 22. 22.368 is the calibrated voltage divider
