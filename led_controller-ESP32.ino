@@ -245,7 +245,7 @@ void startupSequence() {
 }
 
 void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
-  leds.setPixelColor(curColor, ledLeft);   leds.setPixelColor(curColor, ledRight);
+  leds.setPixelColor(ledLeft, curColor);   leds.setPixelColor(ledRight, curColor);
   leds.show();
   delay(msDelay);
 }    
