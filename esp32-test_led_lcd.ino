@@ -1,14 +1,15 @@
 /*********
-  Rui Santos
-  Complete project details at https://randomnerdtutorials.com  
+Corey Davis _ test lcd libraries 
 *********/
 
-#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+#include <hd44780.h>                       // main hd44780 header
+#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 #include <FastLED.h>
 
 //LED Controller Section
 #define LED_PIN         13        // D13 => LED Controller Signal
-#define LED_TYPE        WS2812B 
+#define LED_TYPE        SK6812
 #define NUM_LEDS        60
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
@@ -26,12 +27,13 @@ CRGBArray<NUM_LEDS> leds;
 #define UBER_COLOR      CRGB(255,165,0)     //Cyan
 
 // set the LCD number of columns and rows
-int lcdColumns = 16;
-int lcdRows = 2;
+const int LCD_COLS = 16;
+const int LCD_ROWS = 2;
+
 
 // set LCD address, number of columns and rows
 // if you don't know your display address, run an I2C scanner sketch
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);  
+hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
 
 String messageStatic = "Static message";
 String messageToScroll = "This is a scrolling message with more than 16 characters";
@@ -55,6 +57,7 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
 }
 
 void setup(){
+  lcd.begin(LCD_COLS, LCD_ROWS)
   pinMode(LED_PIN, OUTPUT);
   // Start LEDs
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
@@ -62,10 +65,11 @@ void setup(){
   FastLED.setTemperature(COLOR_TEMP);
 
   // initialize LCD
-  lcd.init();
+  //lcd.init();
   // turn on LCD backlight                      
-  lcd.backlight();
+  //lcd.backlight();
   // Initiate startup lighting sequence
+  
   startupSequence();
 }
 
@@ -79,6 +83,7 @@ void loop(){
   scrollText(1, messageToScroll, 250, lcdColumns);
   // Initiate startup lighting sequence
   startupSequence();
+  lcd.print("Done")
 } 
 
 void startupSequence() {
@@ -117,6 +122,7 @@ void startupSequence() {
 }
 
 void flashLED (int ledLeft, int ledRight, CRGB curColor, int msDelay) {
+  lcd.print("flashLED")  //see if something changes on the LCD
   leds[ledLeft] = curColor;   leds[ledRight] = curColor;
   FastLED.show();
   FastLED.delay(msDelay);
