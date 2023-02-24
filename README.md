@@ -21,7 +21,7 @@ Reserved
 REserverd
 
 
-The number of LEDs in strip 144 pixels per meter, x4 individual pixelets, SK612 Chip 
+The number of LEDs in strip 144 pixels per meter, x4 individual pixelets, SK6812 Chip 
 
 At powerup LED strip will sweep 3 times each pass leaving the light on brighter untill filled.
 It'll stay filled white unless another mode is selected or an action happens
