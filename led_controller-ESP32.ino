@@ -43,7 +43,11 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define MIN_BRIGHTNESS  95
 #define MED_BRIGHTNESS  127
 
-#define ANGRY_COLOR     leds.Color( 255, 191,  0,   0 )     //Amber
+5.35 -> 0.87 6.74
+10.03 -> 2.65
+
+
+#define ANGRY_COLOR     leds.Color( 255, 160,  0,   0 )    //Amber
 #define DEFAULT_COLOR   leds.Color( 0,    0,  0, 255 )     //White
 #define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
 #define UBER_COLOR      leds.Color( 0,  165, 255,  0 )     //Cyan
