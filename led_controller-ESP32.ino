@@ -51,7 +51,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     1000          // number of analog samples to take per reading
+#define NUM_SAMPLES     200           // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
 #define REF_VOLTAGE     5.17          // Reference Voltage
 #define R1              47            // Resistor 1 value of voltage divider
@@ -66,7 +66,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define LO_VOLT         3
 
 // Startup Configuration (Constants)
-#define msDELAY       1   //Number of ms LED stays on for.
+#define msDELAY       0   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 #define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
 #define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
@@ -231,7 +231,7 @@ void startupSequence() {
 
   // Turn Solid Color:              //<--- May not be needed
   leds.fill(brightCOLOR);           //<--- May not be needed
-  delay(msDELAY);                   //<--- May not be needed
+  delay(100);                       //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
