@@ -1,0 +1,16 @@
+Arduino ESP8266/ESP32 Exception Stack Trace Decoder
+
+Description:
+Arduino plugin which lets you get a more meaningful explanation of the stack traces you get on ESP8266/ESP32.
+
+Installation:
+Make sure you use one of the supported versions of Arduino IDE and have ESP8266/ESP32 core installed.
+Download the tool archive from releases page.
+In your Arduino sketchbook directory, create tools directory if it doesn't exist yet.
+Unpack the tool into tools directory (the path will look like <home_dir>/Arduino/tools/EspExceptionDecoder/tool/EspExceptionDecoder.jar).
+On newer versions of linux (Ubuntu 20.04), you may need to install the libncurses5 and libpython2.7 packages: sudo apt install libncurses5 libpython2.7
+Restart Arduino IDE.
+
+URL:
+https://github.com/me-no-dev/EspExceptionDecoder
+
