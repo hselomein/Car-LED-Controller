@@ -51,7 +51,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     200           // number of analog samples to take per reading
+#define NUM_SAMPLES     1000          // number of analog samples to take per reading
 #define A2D_RESOLUTION  4096          // Resolution of the A2D converter (2 ^ number of bits)
 #define REF_VOLTAGE     5.17          // Reference Voltage
 #define R1              47            // Resistor 1 value of voltage divider
@@ -115,7 +115,7 @@ void setup()
 void loop()
 {
   static char curMode = 1;
-  static char curSample = 1;
+  static int curSample = 1;
   static float curDRL = 0;
   static float curPkL = 0;
   static float curHorn = 0;
