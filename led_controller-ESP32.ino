@@ -12,10 +12,9 @@
 #include <stdio.h>
 #include <Adafruit_NeoPixel.h>
 
-//#include <LiquidCrystal_I2C.h> //remove for new library
-//#include <Wire.h>
-//#include <hd44780.h>                       // main hd44780 header
-//#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
+#include <Wire.h>
+#include <hd44780.h>                       // main hd44780 header
+#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
 
 // Pins to device mapping
@@ -28,10 +27,9 @@
 #define HIBM_PIN        33        // A33 => HiBeam Sense
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
-//LiquidCrystal_I2C lcd(0x27,16,2); //remove for new library
-//#define LCD_COLS  16
-//#define LCD_ROWS  2 
-//hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
+#define LCD_COLS  16
+#define LCD_ROWS  2 
+hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
 #define NUM_LEDS        288
@@ -74,15 +72,13 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 void setup()
 {
   // set up the LCD:
-  //lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
-  //lcd.init();     // Init LCD      
-  //lcd.backlight();      // Make sure backlight is on
+  lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
   //lcd.clear();      //clear the display and home the cursor
   
-  //lcd.home(); //move cursor to 1st line on display
-  //lcd.print(LOADING);   
-  //lcd.setCursor(0,1); //move cursor to 2nd line on display
-  //lcd.print(PLEASE_WAIT);   
+  lcd.home(); //move cursor to 1st line on display
+  lcd.print("LOADING");   
+  lcd.setCursor(0,1); //move cursor to 2nd line on display
+  lcd.print("PLEASE_WAIT");   
 
   Serial.begin(115200);   // serial monitor for debugging
   delay(250);             // power-up safety delay
@@ -106,8 +102,7 @@ void setup()
   // Initiate startup lighting sequence
   startupSequence();
 
-  //lcd.clear();  //clear lcd screen
-  //lcd.autoscroll(); //enable scrolling on long lines
+
 }
 
 void loop()
@@ -134,9 +129,6 @@ void loop()
     curHorn *= VOLT_ADJ;
     curHiBeam *= VOLT_ADJ;
     curSample = 1;
-
-    //lcd.clear();    //clear the display and home the cursor
-    //lcd.home();     //move cursor to 1st line on display
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -169,20 +161,21 @@ void loop()
 
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
-      //lcd.setCursor(0,0); //move cursor to 2nd line on display
-      //lcd.print("Color: Orange");
-      //delay(3);
+      lcd.setCursor(0,0); //move cursor to 1nd line on display
+      lcd.print("Color: Orange");
+      delay(3);
       //Serial.println("LED color set to Horn color (orange)");
     } else {
       leds.fill(DEFAULT_COLOR);  
-      //lcd.setCursor(0,1); //move cursor to 2nd line on display
-      //lcd.print("Color: White");
-      //delay(3);   
+      lcd.setCursor(0,0); //move cursor to 1nd line on display
+      lcd.print("Color: White ");
+      delay(3);   
       //Serial.println("LED color set to Default color (white)");
     }
 
     leds.show();                      //<--- May not be needed
-    sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
+    lcd.setCursor(0,1); //move cursor to 2nd line on display
+    sprintf(tmpMessage, "DRL: %.2fV ", curDRL);  
      
     Serial.println(tmpMessage);
     //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
@@ -191,9 +184,13 @@ void loop()
 
 
     //lcd.print(tmpMessage);
-    //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
+    lcd.setCursor(0,1); 
+    lcd.print("DRL: ");   lcd.print(curDRL);    lcd.print("V   ");
+    delay(500);
     //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
-    //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
+    lcd.setCursor(0,1); 
+    lcd.print("Hrn: ");   lcd.print(curHorn);   lcd.print("V   ");
+  
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
 
     delay(100); //Delay to prevent LCD flashing
