@@ -166,7 +166,7 @@ void loop()
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
       lcd.setCursor(0,0); //move cursor to 1nd line on display
-      lcd.clear();
+      //lcd.clear();
       delay(300);
       lcd.print("Color: Orange");
       delay(300);
@@ -174,9 +174,9 @@ void loop()
     } else {
       leds.fill(DEFAULT_COLOR);  
       lcd.setCursor(0,0); //move cursor to 1nd line on display
-      lcd.clear();
+     //lcd.clear();
       delay(300); 
-      lcd.print("Color: White");
+      lcd.print("Color: White ");
       delay(300);   
       //Serial.println("LED color set to Default color (white)");
     }
