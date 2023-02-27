@@ -10,6 +10,7 @@
     Authors:         Corey Davis, Yves Avady, Jim Edmonds
 -----------------------------------------------------------------*/
 #include <stdio.h>
+
 #include <Adafruit_NeoPixel.h>
 
 #include <Wire.h>
@@ -71,6 +72,10 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
 #define offCOLOR      leds.Color(   0,   0,   0,   0 )
 
+static double curDRL    = 0.0;
+static double curHorn   = 0.0;
+//static double curPkL    = 0.0;
+//static double curHiBeam = 0.0;
 
 void setup()
 {
@@ -112,20 +117,46 @@ void setup()
   // Initiate startup lighting sequence
   startupSequence();
 
-  //lcd.clear();  //clear lcd screen
-  //lcd.autoscroll(); //enable scrolling on long lines
+  // Create task on Core 1 to Update LCD
+  xTaskCreatePinnedToCore(
+                  coreTask,   /* Function to implement the task */
+                  "coreTask", /* Name of the task */
+                  10000,      /* Stack size in words */
+                  NULL,       /* Task input parameter */
+                  0,          /* Priority of the task */
+                  NULL,       /* Task handle. */
+                  1);  /* Core where the task should run */
+
 }
+
+void coreTask( void * pvParameters ){
+  char tmpMessage[16];
+ 
+  while(true){
+    lcd.clear();    //clear the display and home the cursor
+    lcd.setCursor(0,0); //move cursor to 1st line on display
+    if (curHorn > VOLT_BUF) {
+      lcd.print("Color: Orange");
+      //Serial.println("LED color set to Horn color (orange)");
+    } else {
+      lcd.print("Color: White ");
+      //Serial.println("LED color set to Default color (white)");
+    }
+
+    lcd.setCursor(0,1); //move cursor to 2nd line on display
+    sprintf(tmpMessage, "DRL:%.1fV Horn:%.1V", curDRL,curHorn);  
+    lcd.print(tmpMessage);
+
+    delay(1000);
+  }
+}
+
 
 void loop()
 {
-  static char   curMode   = 1;
   static int    curSample = 1;
-  static double curDRL    = 0.0;
-  static double curPkL    = 0.0;
-  static double curHorn   = 0.0;
-  static double curHiBeam = 0.0;
+  static char   curMode   = 1;
   static bool   RelayPin1State = false;
-  char tmpMessage[16];
 
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
@@ -142,14 +173,10 @@ void loop()
     //curHiBeam *= VOLT_ADJ;
     curSample = 1;
 
-    lcd.clear();    //clear the display and home the cursor
-    lcd.home();     //move cursor to 1st line on display
-
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
-        //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
@@ -158,7 +185,6 @@ void loop()
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
-        //Serial.print("Turning on Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MAX_BRIGHTNESS);
@@ -168,7 +194,6 @@ void loop()
       if (RelayPin1State) {
         RelayPin1State = false;
         //turn off relay1
-        //Serial.print("Turning off Relay 1 because DRL is: ");  Serial.print(curDRL);   Serial.println ("V");      
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
       }
       Serial.println("DRL Brightness level OFF");
@@ -176,35 +201,12 @@ void loop()
 
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
-      lcd.setCursor(0,0); //move cursor to 1nd line on display
-      //lcd.clear();
-      lcd.print("Color: Orange");
-      //Serial.println("LED color set to Horn color (orange)");
     } else {
       leds.fill(DEFAULT_COLOR);  
-      lcd.setCursor(0,0); //move cursor to 1nd line on display
-     //lcd.clear();
-      lcd.print("Color: White ");
-      //Serial.println("LED color set to Default color (white)");
     }
 
     leds.show();                      //<--- May not be needed
-    lcd.setCursor(0,1); //move cursor to 2nd line on display
-    sprintf(tmpMessage, "DRL: %.2fV", curDRL);  
      
-    Serial.println(tmpMessage);
-    //Serial.print("Voltage of Horn = ");   Serial.print(curHorn);      Serial.println ("V");
-    //Serial.print("Voltage of PK_L = ");   Serial.print(curPkL);       Serial.println ("V");
-    //Serial.print("Voltage of DRL = ");    Serial.print(curDRL);       Serial.println ("V");
-
-
-    lcd.print(tmpMessage);
-    //lcd.print(F("DRL: "));   lcd.print(curDRL);    lcd.print(F("V   "));
-    //lcd.print(F("PkL: "));   lcd.print(curPkL);    lcd.print(F("V   "));
-    //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
-    //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
-
-    delay(1000); //Delay to prevent LCD flashing
 
     curDRL = 0;
     curPkL = 0;
