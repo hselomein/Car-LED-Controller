@@ -22,8 +22,8 @@ void setup()
 void fReadBattery( void * parameter )
 {
   float adcValue = 0.0f;
-  const float r1 = 50500.0f; // R1 in ohm, 50K
-  const float r2 = 10000.0f; // R2 in ohm, 10k potentiometer
+  const float r1 = 47000.0f; // R1 in ohm, 47K
+  const float r2 = 10000.0f; // R2 in ohm, 10k 
   float Vbatt = 0.0f;
   int printCount = 0;
   float vRefScale = (3.3f / 4096.0f) * ((r1 + r2) / r2);
