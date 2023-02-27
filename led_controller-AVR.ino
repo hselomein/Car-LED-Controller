@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------
-    Program:        car_led_controller
+    Program:        car_led_controller-AVR 
 
     Description:    Controls LED strip behavior based on various 
                     Inputs such as, drl, headlights, horn, and button
-		    activity
+		    activity. This is for the Arduino Uno
 
     Date:           Added when finalized to production (2/6/2023)
 

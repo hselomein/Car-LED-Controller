@@ -1,4 +1,5 @@
 /*led controller uber lyft module
+this will set the mode that the car led controller should run in
 
 Store CurrMode in Flash/EEPROM
 Button States:
