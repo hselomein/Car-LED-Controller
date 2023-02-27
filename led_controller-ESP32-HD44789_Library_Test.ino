@@ -16,15 +16,17 @@
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
+#include "driver/adc.h"
+#include "esp_adc_cal.h"
 
 // Pins to device mapping
 #define RELAY_PIN_1     14        // D14 => In1 Relay
 #define RELAY_PIN_2     27        // D12 => In2 Relay
 #define LED_PIN         13        // D13 => LED Controller Signal
-#define DRL_PIN         34        // D34 => DRL Sense
+#define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
 #define PK_L_PIN        35        // D35 => Parking Lights Sense 
 #define HORN_PIN        32        // D32 => Horn Sense
-#define HIBM_PIN        33        // A33 => HiBeam Sense
+//#define HIBM_PIN        33        // A33 => HiBeam Sense
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
@@ -50,12 +52,13 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define RELAY_OFF HIGH
 
 #define NUM_SAMPLES     1000          // number of analog samples to take per reading
-#define A2D_RESOLUTION  1024          // Resolution of the A2D converter (2 ^ number of bits)
-#define REF_VOLTAGE     5.0             // Reference Voltage
+//#define A2D_RESOLUTION  1024          // Resolution of the A2D converter (2 ^ number of bits)
+//#define REF_VOLTAGE     5.0             // Reference Voltage
 #define R1              47.0           // Resistor 1 value of voltage divider
 #define R2              10.0            // Resistor 2 value of voltage divider
 #define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
-#define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
+//#define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
+static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
 #define VOLT_BUF        2
 #define HI_VOLT         12
@@ -93,6 +96,11 @@ void setup()
   pinMode(HORN_PIN, INPUT);
   pinMode(HIBM_PIN, INPUT);
 
+  // Configure ADC
+  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &ADC1_Characteristics);
+  ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
+
   // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
   leds.begin();
@@ -118,14 +126,14 @@ void loop()
   char tmpMessage[16];
 
 
-  curDRL += analogRead(DRL_PIN);
+  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curPkL += analogRead(PK_L_PIN);
   curHorn += analogRead(HORN_PIN);
   curHiBeam += analogRead(HIBM_PIN);
   curSample++;
 
   if (curSample > NUM_SAMPLES){
-    curDRL *= VOLT_ADJ;
+    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES;
     curPkL *= VOLT_ADJ;
     curHorn *= VOLT_ADJ;
     curHiBeam *= VOLT_ADJ;
