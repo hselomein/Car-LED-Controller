@@ -24,8 +24,8 @@
 #define RELAY_PIN_2     27        // D12 => In2 Relay
 #define LED_PIN         13        // D13 => LED Controller Signal
 #define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
-#define PK_L_PIN        35        // D35 => Parking Lights Sense 
-#define HORN_PIN        32        // D32 => Horn Sense
+#define HORN_PIN        ADC1_CHANNEL_4        // Pin 32 => Horn Sense
+//#define PK_L_PIN        35        // D35 => Parking Lights Sense 
 //#define HIBM_PIN        33        // A33 => HiBeam Sense
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
@@ -91,15 +91,17 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(RELAY_PIN_2, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
+  
   pinMode(DRL_PIN, INPUT);
-  pinMode(PK_L_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
-  pinMode(HIBM_PIN, INPUT);
+  //pinMode(PK_L_PIN, INPUT);
+  //pinMode(HIBM_PIN, INPUT);
 
   // Configure ADC
-  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &ADC1_Characteristics);
-  ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
+  ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
 
   // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
@@ -127,16 +129,16 @@ void loop()
 
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
-  curPkL += analogRead(PK_L_PIN);
-  curHorn += analogRead(HORN_PIN);
-  curHiBeam += analogRead(HIBM_PIN);
+  curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
+  //curPkL += analogRead(PK_L_PIN);
+  //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
 
   if (curSample > NUM_SAMPLES){
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES;
-    curPkL *= VOLT_ADJ;
-    curHorn *= VOLT_ADJ;
-    curHiBeam *= VOLT_ADJ;
+    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES;
+    //curPkL *= VOLT_ADJ;
+    //curHiBeam *= VOLT_ADJ;
     curSample = 1;
 
     //lcd.clear();    //clear the display and home the cursor
@@ -209,8 +211,8 @@ void loop()
 
     curDRL = 0;
     curPkL = 0;
-    curHorn = 0;
-    curHiBeam = 0;
+    //curHorn = 0;
+    //curHiBeam = 0;
   }
 }
 
