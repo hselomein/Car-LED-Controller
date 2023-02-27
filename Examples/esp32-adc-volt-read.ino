@@ -37,11 +37,13 @@ void fReadBattery( void * parameter )
     adcValue = float( adc1_get_raw(ADC1_CHANNEL_5) ); //take a raw ADC reading
     KF_ADC_b.setProcessNoise( (esp_timer_get_time() - TimePastKalman) / 1000000.0f ); //get time, in microsecods, since last readings
     adcValue = KF_ADC_b.updateEstimate( adcValue ); // apply simple Kalman filter
+    //adcValue = KF_ADC_b.updateEstimate( float( adc1_get_raw(ADC1_CHANNEL_5) ); // apply simple Kalman filter
     Vbatt = adcValue * vRefScale;
     printCount++;
     if ( printCount == 3 )
     {
-      log_i( "Vbatt %f", Vbatt );
+      //log_i( "Vbatt %f", Vbatt );
+      Serial.print("Vbatt %f", Vbatt);
       printCount = 0;
     }
 
@@ -55,5 +57,4 @@ void fReadBattery( void * parameter )
 //need help with this part below
 void loop() {
   //How do you call a funtion with a void and a pointer parameter?
-  Serial.print(fReadBattery(&battv));
  }
