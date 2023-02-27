@@ -137,11 +137,9 @@ void taskLCDUpdates( void * pvParameters ){
     sprintf(tmpMessage, "Color DRL  Horn");  
 
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "Orange %2.1fV %2.1V", curDRL,curHorn);  
-      //Serial.println("LED color set to Horn color (orange)");
+      sprintf(tmpMessage, "Orange %03.1fV %03.1V", curDRL,curHorn);  
     } else {
-      sprintf(tmpMessage, "White %2.1fV %2.1V", curDRL,curHorn);  
-      //Serial.println("LED color set to Default color (white)");
+      sprintf(tmpMessage, "White %03.1fV %03.1V", curDRL,curHorn);  
     }
 
     lcd.setCursor(0,1); //move cursor to 2nd line on display
