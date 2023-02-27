@@ -32,7 +32,7 @@
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
 #define LCD_ROWS  2 
-#define LCD_UPDATE_INTERVAL 500   // How fast to update LCD in ms
+#define LCD_UPDATE_INTERVAL 700   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
