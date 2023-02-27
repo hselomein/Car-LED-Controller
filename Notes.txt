@@ -52,6 +52,8 @@ Reserved pins:
 14-17 power and ground
 27,28 uart0 rx/tx 
 6-11 do not use on 36 or 38 pin verson, in use for flash,  - these are not exposed on pu 30pin version
+33, 39 connected to hall sensor
+
 
 Planned pinout:
 2 DRL Sense GPIO36
