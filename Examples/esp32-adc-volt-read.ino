@@ -5,7 +5,7 @@
 #include "freertos/timers.h"
 #include "freertos/event_groups.h"
 #include <driver/adc.h>
-//INSTALL THIS library, https://www.arduino.cc/reference/en/libraries/simplekalmanfilter/
+//INSTALL THIS libaray
 #include <SimpleKalmanFilter.h>
 ////
 void setup()
@@ -14,16 +14,14 @@ void setup()
   adc1_config_channel_atten(ADC1_CHANNEL_5, ADC_ATTEN_DB_11);// using GPIO 33
   //
   xTaskCreatePinnedToCore( fReadBattery, "fReadBattery", 4000, NULL, 3, NULL, 1 );
+  Serial.begin(115200);   // serial monitor for debugging
+  int battv = 0; //Corey added this here
 }
+
 ////
 void fReadBattery( void * parameter )
 {
   float adcValue = 0.0f;
-
- // notice my resistos values difeer from your.
-
- // Use 10K for R@
-
   const float r1 = 50500.0f; // R1 in ohm, 50K
   const float r2 = 10000.0f; // R2 in ohm, 10k potentiometer
   float Vbatt = 0.0f;
@@ -35,14 +33,11 @@ void fReadBattery( void * parameter )
   const TickType_t xFrequency = 1000; //delay for mS
   for (;;)
   {
-    adc1_get_raw(ADC1_CHANNEL_7); //read and discard
-    adcValue = float( adc1_get_raw(ADC1_CHANNEL_7) ); //take a raw ADC reading
+    adc1_get_raw(ADC1_CHANNEL_5); //read and discard
+    adcValue = float( adc1_get_raw(ADC1_CHANNEL_5) ); //take a raw ADC reading
     KF_ADC_b.setProcessNoise( (esp_timer_get_time() - TimePastKalman) / 1000000.0f ); //get time, in microsecods, since last readings
     adcValue = KF_ADC_b.updateEstimate( adcValue ); // apply simple Kalman filter
     Vbatt = adcValue * vRefScale;
-    xSemaphoreTake( sema_CalculatedVoltage, portMAX_DELAY );
-    CalculatedVoltage = Vbatt;
-    xSemaphoreGive( sema_CalculatedVoltage );
     printCount++;
     if ( printCount == 3 )
     {
@@ -57,5 +52,8 @@ void fReadBattery( void * parameter )
   }
   vTaskDelete( NULL );
 }
-////////
-void loop() { }
+//need help with this part below
+void loop() {
+  //How do you call a funtion with a void and a pointer parameter?
+  Serial.print(fReadBattery(&battv));
+ }
