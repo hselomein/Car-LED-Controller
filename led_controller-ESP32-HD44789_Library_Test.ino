@@ -60,7 +60,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 //#define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
 static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
-#define VOLT_BUF        2
+#define VOLT_BUF        1
 #define HI_VOLT         12
 #define LO_VOLT         3
 
@@ -135,14 +135,15 @@ void loop()
   curSample++;
 
   if (curSample > NUM_SAMPLES){
-    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES;
-    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES;
+    // Adjust voltages
+    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     //curPkL *= VOLT_ADJ;
     //curHiBeam *= VOLT_ADJ;
     curSample = 1;
 
-    //lcd.clear();    //clear the display and home the cursor
-    //lcd.home();     //move cursor to 1st line on display
+    lcd.clear();    //clear the display and home the cursor
+    lcd.home();     //move cursor to 1st line on display
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -177,17 +178,13 @@ void loop()
       leds.fill(ANGRY_COLOR);  
       lcd.setCursor(0,0); //move cursor to 1nd line on display
       //lcd.clear();
-      delay(300);
       lcd.print("Color: Orange");
-      delay(300);
       //Serial.println("LED color set to Horn color (orange)");
     } else {
       leds.fill(DEFAULT_COLOR);  
       lcd.setCursor(0,0); //move cursor to 1nd line on display
      //lcd.clear();
-      delay(300); 
       lcd.print("Color: White ");
-      delay(300);   
       //Serial.println("LED color set to Default color (white)");
     }
 
@@ -207,7 +204,7 @@ void loop()
     //lcd.print(F("Hrn: "));   lcd.print(curHorn);   lcd.print(F("V   "));
     //lcd.print(F("HiBm: "));  lcd.print(curHiBeam); lcd.print(F("V   "));
 
-    delay(100); //Delay to prevent LCD flashing
+    delay(1000); //Delay to prevent LCD flashing
 
     curDRL = 0;
     curPkL = 0;
