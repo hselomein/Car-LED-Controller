@@ -32,7 +32,7 @@
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
 #define LCD_ROWS  2 
-#define LCD_UPDATE_INTERVAL 1000  // How fast to update LCD in ms
+#define LCD_UPDATE_INTERVAL 750   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
@@ -128,26 +128,29 @@ void setup()
 }
 
 void taskLCDUpdates( void * pvParameters ){
-  char tmpMessage0[16];
-  char tmpMessage1[16];  
+  char tmpMessage[16];
+  //char tmpMessage0[16];
+  //char tmpMessage1[16];  
  
   while(true){
     lcd.clear();    //clear the display and home the cursor
 
-    //lcd.setCursor(0,0); //move cursor to 1st line on display
-    sprintf(tmpMessage0, "Color DRL  Horn"); 
-    lcd.print(tmpMessage0); 
+    sprintf(tmpMessage, "Color  DRL  Horn"); 
+    lcd.setCursor(0,0); //move cursor to 1st line on display
+    lcd.print(tmpMessage);
+    delay(50); 
+    //sprintf(tmpMessage0, "Color  DRL  Horn"); 
+    //lcd.print(tmpMessage0); 
 
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage1, "Orange %03.1fV %03.1fV", curDRL, curHorn);
+      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
     } else {
-      sprintf(tmpMessage1, "White %03.1fV %03.1fV", curDRL, curHorn);  
+      sprintf(tmpMessage, "WHIT %04.1fV %04.1fV", curDRL, curHorn);  
     }
-
     lcd.setCursor(0,1); //move cursor to 2nd line on display
-    lcd.print(tmpMessage1);
+    lcd.print(tmpMessage);
 
-    delay(500);
+    delay(LCD_UPDATE_INTERVAL);
   }
 }
 
@@ -171,7 +174,6 @@ void loop()
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     //curPkL *= VOLT_ADJ;
     //curHiBeam *= VOLT_ADJ;
-    curSample = 1;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -208,6 +210,7 @@ void loop()
     leds.show();                      //<--- May not be needed
      
 
+    curSample = 1;
     curDRL = 0;
     curHorn = 0;
     //curPkL = 0;
