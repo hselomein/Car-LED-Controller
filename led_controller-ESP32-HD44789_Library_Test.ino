@@ -32,7 +32,7 @@
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
 #define LCD_ROWS  2 
-#define LCD_UPDATE_INTERVAL       // How fast to update LCD in ms
+#define LCD_UPDATE_INTERVAL 1000  // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
@@ -81,9 +81,9 @@ void setup()
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
   //lcd.clear();      //clear the display and home the cursor
   
-  lcd.home(); //move cursor to 1st line on display
+  lcd.home();             //move cursor to 1st line on display
   lcd.print("LOADING");   
-  lcd.setCursor(0,1); //move cursor to 2nd line on display
+  lcd.setCursor(0,1);     //move cursor to 2nd line on display
   lcd.print("PLEASE_WAIT");   
 
   Serial.begin(115200);   // serial monitor for debugging
@@ -211,8 +211,8 @@ void loop()
      
 
     curDRL = 0;
-    curPkL = 0;
-    //curHorn = 0;
+    curHorn = 0;
+    //curPkL = 0;
     //curHiBeam = 0;
   }
 }
