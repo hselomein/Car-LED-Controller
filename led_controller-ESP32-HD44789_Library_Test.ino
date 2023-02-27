@@ -32,7 +32,7 @@
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
 #define LCD_ROWS  2 
-#define LCD_UPDATE_INTERVAL 750   // How fast to update LCD in ms
+#define LCD_UPDATE_INTERVAL 500   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
@@ -61,7 +61,7 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
 #define VOLT_BUF        1
 #define HI_VOLT         12
-#define LO_VOLT         3
+#define LO_VOLT         2
 
 // Startup Configuration (Constants)
 #define msDELAY       0   //Number of ms LED stays on for.
@@ -77,18 +77,16 @@ static float curHorn   = 0.0f;
 
 void setup()
 {
+  Serial.begin(115200);   // serial monitor for debugging
+  delay(250);             // power-up safety delay
+
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
-  //lcd.clear();      //clear the display and home the cursor
-  
+  lcd.clear();            //clear the display  
   lcd.home();             //move cursor to 1st line on display
   lcd.print("LOADING");   
   lcd.setCursor(0,1);     //move cursor to 2nd line on display
   lcd.print("PLEASE_WAIT");   
-
-  Serial.begin(115200);   // serial monitor for debugging
-  delay(250);             // power-up safety delay
-
 
   // Set pins as an input or output pin
   pinMode(RELAY_PIN_1, OUTPUT);
@@ -117,20 +115,18 @@ void setup()
 
   // Create task on Core 1 to Update LCD
   xTaskCreatePinnedToCore(
-                  taskLCDUpdates,   /* Function to implement the task */
-                  "taskLCDUpdates", /* Name of the task */
-                  10000,      /* Stack size in words */
-                  NULL,       /* Task input parameter */
-                  0,          /* Priority of the task */
-                  NULL,       /* Task handle. */
-                  1);  /* Core where the task should run */
+        taskLCDUpdates,   /* Function to implement the task */
+        "taskLCDUpdates", /* Name of the task */
+        10000,            /* Stack size in words */
+        NULL,             /* Task input parameter */
+        0,                /* Priority of the task */
+        NULL,             /* Task handle. */
+        1);               /* Core where the task should run */
 
 }
 
 void taskLCDUpdates( void * pvParameters ){
   char tmpMessage[16];
-  //char tmpMessage0[16];
-  //char tmpMessage1[16];  
  
   while(true){
     lcd.clear();    //clear the display and home the cursor
@@ -139,8 +135,6 @@ void taskLCDUpdates( void * pvParameters ){
     lcd.setCursor(0,0); //move cursor to 1st line on display
     lcd.print(tmpMessage);
     delay(50); 
-    //sprintf(tmpMessage0, "Color  DRL  Horn"); 
-    //lcd.print(tmpMessage0); 
 
     if (curHorn > VOLT_BUF) {
       sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
@@ -208,8 +202,7 @@ void loop()
     }
 
     leds.show();                      //<--- May not be needed
-     
-
+    
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
@@ -242,13 +235,15 @@ void startupSequence() {
 
   // Turn Solid Color:              //<--- May not be needed
   leds.fill(brightCOLOR);           //<--- May not be needed
-  delay(100);                       //<--- May not be needed
+  //delay(100);                       //<--- May not be needed
 }
 
 void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
   leds.setPixelColor(ledLeft, curColor);   leds.setPixelColor(ledRight, curColor);
   leds.show();
-  delay(msDelay);
+  if (msDelay) {
+    delay(msDelay);
+  }
 }    
 
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
