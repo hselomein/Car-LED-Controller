@@ -128,24 +128,26 @@ void setup()
 }
 
 void taskLCDUpdates( void * pvParameters ){
-  char tmpMessage[16];
+  char tmpMessage0[16];
+  char tmpMessage1[16];  
  
   while(true){
     lcd.clear();    //clear the display and home the cursor
 
-    lcd.setCursor(0,0); //move cursor to 1st line on display
-    sprintf(tmpMessage, "Color DRL  Horn");  
+    //lcd.setCursor(0,0); //move cursor to 1st line on display
+    sprintf(tmpMessage0, "Color DRL  Horn"); 
+    lcd.print(tmpMessage0); 
 
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "Orange %03.1fV %03.1V", curDRL,curHorn);  
+      sprintf(tmpMessage1, "Orange %03.1fV %03.1fV", curDRL, curHorn);
     } else {
-      sprintf(tmpMessage, "White %03.1fV %03.1V", curDRL,curHorn);  
+      sprintf(tmpMessage1, "White %03.1fV %03.1fV", curDRL, curHorn);  
     }
 
     lcd.setCursor(0,1); //move cursor to 2nd line on display
-    lcd.print(tmpMessage);
+    lcd.print(tmpMessage1);
 
-    delay(1000);
+    delay(500);
   }
 }
 
