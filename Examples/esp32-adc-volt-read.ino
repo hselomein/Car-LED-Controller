@@ -43,7 +43,7 @@ void fReadBattery( void * parameter )
     if ( printCount == 3 )
     {
       //log_i( "Vbatt %f", Vbatt );
-      Serial.print("Vbatt %f", Vbatt);
+      Serial.print("Vbatt: ");      Serial.println(Vbatt);
       printCount = 0;
     }
 
