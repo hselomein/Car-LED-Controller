@@ -32,7 +32,8 @@
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
 #define LCD_ROWS  2 
-hd44780_I2Cexp lcd; // declare lcd object: auto locate & config exapander chip
+#define LCD_UPDATE_INTERVAL       // How fast to update LCD in ms
+hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
 #define NUM_LEDS        288
@@ -44,7 +45,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define MIN_BRIGHTNESS  95
 #define MED_BRIGHTNESS  127
 
-#define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )    //Amber
+#define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
 #define DEFAULT_COLOR   leds.Color( 0,    0,  0, 255 )     //White
 #define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
 #define UBER_COLOR      leds.Color( 0,  165, 255,  0 )     //Cyan
@@ -52,13 +53,10 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
 
-#define NUM_SAMPLES     1000          // number of analog samples to take per reading
-//#define A2D_RESOLUTION  1024          // Resolution of the A2D converter (2 ^ number of bits)
-//#define REF_VOLTAGE     5.0             // Reference Voltage
-#define R1              47.0           // Resistor 1 value of voltage divider
+#define NUM_SAMPLES     10              // number of analog samples to take per reading
+#define R1              47.0            // Resistor 1 value of voltage divider
 #define R2              10.0            // Resistor 2 value of voltage divider
-#define VOLT_DIV_FACTOR (R1+R2)/R2    //voltage divider factor
-//#define VOLT_ADJ (REF_VOLTAGE * VOLT_DIV_FACTOR / A2D_RESOLUTION / NUM_SAMPLES);
+#define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
 static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
 #define VOLT_BUF        1
@@ -72,8 +70,8 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
 #define offCOLOR      leds.Color(   0,   0,   0,   0 )
 
-static double curDRL    = 0.0;
-static double curHorn   = 0.0;
+static float curDRL    = 0.0f;
+static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
 
@@ -119,8 +117,8 @@ void setup()
 
   // Create task on Core 1 to Update LCD
   xTaskCreatePinnedToCore(
-                  coreTask,   /* Function to implement the task */
-                  "coreTask", /* Name of the task */
+                  taskLCDUpdates,   /* Function to implement the task */
+                  "taskLCDUpdates", /* Name of the task */
                   10000,      /* Stack size in words */
                   NULL,       /* Task input parameter */
                   0,          /* Priority of the task */
@@ -129,22 +127,26 @@ void setup()
 
 }
 
-void coreTask( void * pvParameters ){
+void taskLCDUpdates( void * pvParameters ){
   char tmpMessage[16];
  
   while(true){
     lcd.clear();    //clear the display and home the cursor
+
     lcd.setCursor(0,0); //move cursor to 1st line on display
+    sprintf(tmpMessage, "Color DRL  Horn", curDRL,curHorn);  
+
     if (curHorn > VOLT_BUF) {
       lcd.print("Color: Orange");
+      sprintf(tmpMessage, "Orange %2.1fV %2.1V", curDRL,curHorn);  
       //Serial.println("LED color set to Horn color (orange)");
     } else {
       lcd.print("Color: White ");
+      sprintf(tmpMessage, "White %2.1fV %2.1V", curDRL,curHorn);  
       //Serial.println("LED color set to Default color (white)");
     }
 
     lcd.setCursor(0,1); //move cursor to 2nd line on display
-    sprintf(tmpMessage, "DRL:%.1fV Horn:%.1V", curDRL,curHorn);  
     lcd.print(tmpMessage);
 
     delay(1000);
