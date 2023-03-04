@@ -71,3 +71,21 @@ Planned pinout:
 29 Reserved
 26 LED Strip DAta GPIO21
 
+
+
+
+
+
+HArdware List
+ESP32-WROOM-32
+bidrectional logic level converter
+20A Buck converter
+40in led strip
+
+
+Potential Hardware Links
+https://www.superlightingled.com/sk6812-rgb-dc5v-60ledsm-side-emitting-addressable-led-strip-lights-240-4020smds-p-1160.html
+https://www.zhihoolight.com/digital-led-strip/side-light-rgbw-digital-addressable-4818-pixel-led-strip-tape-lights.html
+https://www.amazon.com/dp/B08CXG9M2S/ref=emc_b_5_t?th=1
+https://www.ebay.com/itm/334761847481
+
