@@ -17,8 +17,8 @@
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
-#include "driver/adc.h"
-#include "esp_adc_cal.h"
+#include <driver/adc.h>
+#include <esp_adc_cal.h>
 
 // Pins to device mapping
 #define RELAY_PIN_1     14        // D14 => In1 Relay
@@ -36,7 +36,7 @@
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
 //LED Controller Section
-#define NUM_LEDS        288
+#define NUM_LEDS        193  //193 leds is the lenght of the hood weather strip + 15 leds on each side to show thru the headlights.
 #define NUM_LEDS_HALF   NUM_LEDS / 2
 #define NUM_LEDS_ODD    NUM_LEDS % 2
 Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
@@ -46,9 +46,12 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define MED_BRIGHTNESS  127
 
 #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
-#define DEFAULT_COLOR   leds.Color( 0,    0,  0, 255 )     //White
+#define DEFAULT_COLOR   leds.Color( 255, 255, 255, 255 )  //( 0,  0,  0,   255 )     //White
 #define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
 #define UBER_COLOR      leds.Color( 0,  165, 255,  0 )     //Cyan
+#define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
+#define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
+#define offCOLOR      leds.Color(   0,   0,   0,   0 )
 
 #define RELAY_ON LOW
 #define RELAY_OFF HIGH
@@ -66,9 +69,7 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 // Startup Configuration (Constants)
 #define msDELAY       0   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
-#define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
-#define dimCOLOR      leds.Color(  50,  50,  50,  50 ) 
-#define offCOLOR      leds.Color(   0,   0,   0,   0 )
+
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;

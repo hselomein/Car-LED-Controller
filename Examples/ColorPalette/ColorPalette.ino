@@ -2,7 +2,7 @@
 
 #define LED_PIN    13
 #define NUM_LEDS    288
-#define BRIGHTNESS  64
+#define BRIGHTNESS  255
 #define LED_TYPE    SK6812
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
