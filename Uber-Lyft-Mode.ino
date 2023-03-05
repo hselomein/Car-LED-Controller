@@ -1,7 +1,8 @@
 /*led controller uber lyft module
 this will set the mode that the car led controller should run in
 
-Store CurrMode in Flash/EEPROM
+ezbutton library refernce https://arduinogetstarted.com/tutorials/arduino-button-library
+
 Button States:
 Enum CurrMode
 1 Normal Mode (Default)
@@ -47,7 +48,7 @@ Exit Function
 //-----------------------CODE--------------------------------------------
 
 #include <Adafruit_NeoPixel.h>
-#include <ezButton.h>
+#include <ezButton.h> 
 
 ezButton button(23);  // create ezButton object that attach to pin 23;
 #define LED_PIN         13        // D13 => LED Controller Signal
