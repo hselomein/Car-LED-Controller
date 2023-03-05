@@ -13,6 +13,8 @@
 
 #include <Adafruit_NeoPixel.h>
 
+#include <ezButton.h> 
+
 #include <Wire.h>
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
@@ -46,7 +48,7 @@ Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 #define MED_BRIGHTNESS  127
 
 #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
-#define DEFAULT_COLOR   leds.Color( 255, 255, 255, 255 )  //( 0,  0,  0,   255 )     //White
+#define DEFAULT_COLOR   leds.Color( 0,  0,  0,   255 )     //White
 #define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
 #define UBER_COLOR      leds.Color( 0,  165, 255,  0 )     //Cyan
 #define brightCOLOR   leds.Color( 255, 255, 255, 255 ) 
@@ -69,6 +71,8 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 // Startup Configuration (Constants)
 #define msDELAY       0   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
+
+#define DEBOUNCE_TIME  50                                  // the debounce time in millisecond, increase this time if it still chatters
 
 
 static float curDRL    = 0.0f;
