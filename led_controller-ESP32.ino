@@ -28,6 +28,7 @@
 #define LED_PIN         13        // D13 => LED Controller Signal
 #define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
 #define HORN_PIN        ADC1_CHANNEL_4        // Pin 32 => Horn Sense
+ezButton button(23);  // create ezButton object that attach to pin 23;
 //#define PK_L_PIN        35        // D35 => Parking Lights Sense 
 //#define HIBM_PIN        33        // A33 => HiBeam Sense
 
@@ -74,6 +75,10 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
 #define DEBOUNCE_TIME  50                                  // the debounce time in millisecond, increase this time if it still chatters
 
+int buttonState = 0;
+int currColor = DEFAULT_COLOR;
+int CurrMode = 0;
+char lcdCOLOR = 'WHIT';
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
@@ -83,7 +88,11 @@ static float curHorn   = 0.0f;
 void setup()
 {
   Serial.begin(115200);   // serial monitor for debugging
-  delay(250);             // power-up safety delay
+  delay(250); // power-up safety delay
+    
+  //setup the button
+  int buttonState;
+  button.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds       
 
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
@@ -91,7 +100,7 @@ void setup()
   lcd.home();             //move cursor to 1st line on display
   lcd.print("LOADING");   
   lcd.setCursor(0,1);     //move cursor to 2nd line on display
-  lcd.print("PLEASE_WAIT");   
+  lcd.print("PLEASE WAIT");   
 
   // Set pins as an input or output pin
   pinMode(RELAY_PIN_1, OUTPUT);
@@ -153,12 +162,22 @@ void taskLCDUpdates( void * pvParameters ){
   }
 }
 
-
 void loop()
 {
   static int    curSample = 1;
   static char   curMode   = 1;
   static bool   RelayPin1State = false;
+
+  button.loop();                                              // MUST call the loop() function first
+  int btnState = button.getState();
+  Serial.println(btnState);
+    if(button.isPressed()){                                 //button is pressed AND this is the first digitalRead() that the button is pressed
+      CurrMode++;  
+      if (CurrMode > 2) {                                   
+          CurrMode = 0;
+      }
+  UberLyftMode(CurrMode);
+  }   
 
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
@@ -203,7 +222,7 @@ void loop()
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
     } else {
-      leds.fill(DEFAULT_COLOR);  
+      leds.fill(currColor);  
     }
 
     leds.show();                      //<--- May not be needed
@@ -214,6 +233,23 @@ void loop()
     //curPkL = 0;
     //curHiBeam = 0;
   }
+}
+
+void UberLyftMode(char CMode) {
+    switch (CMode) {
+      case 1:
+          currColor = UBER_COLOR;
+          Serial.println("LED color set to Uber Mode color (Cyan)");
+          break;
+      case 2:
+          currColor = LYFT_COLOR;
+          Serial.println("LED color set to Lyft Mode color (Magenta)");
+          break;
+      default:
+          currColor = DEFAULT_COLOR;
+          Serial.println("LED color set to Default Mode color (White)");
+          break;
+  }       
 }
 
 void startupSequence() {
