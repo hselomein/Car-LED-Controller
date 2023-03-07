@@ -78,7 +78,7 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 int buttonState = 0;
 int currColor = DEFAULT_COLOR;
 int CurrMode = 0;
-char lcdCOLOR = 'WHIT';
+String (lcdColor) = "WHIT";
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
@@ -141,7 +141,7 @@ void setup()
 
 void taskLCDUpdates( void * pvParameters ){
   char tmpMessage[16];
-
+  
   lcd.clear();    //clear the display and home the cursor
  
   sprintf(tmpMessage, "Color  DRL  Horn"); 
@@ -151,9 +151,9 @@ void taskLCDUpdates( void * pvParameters ){
 
   while(true){
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
+      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", lcdColor, curDRL, curHorn);
     } else {
-      sprintf(tmpMessage, "WHIT %04.1fV %04.1fV", curDRL, curHorn);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", lcdColor, curDRL, curHorn);  
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
@@ -239,14 +239,17 @@ void UberLyftMode(char CMode) {
     switch (CMode) {
       case 1:
           currColor = UBER_COLOR;
+          lcdColor = "CYAN";          
           Serial.println("LED color set to Uber Mode color (Cyan)");
           break;
       case 2:
           currColor = LYFT_COLOR;
+          lcdColor = "MGTA";
           Serial.println("LED color set to Lyft Mode color (Magenta)");
           break;
       default:
           currColor = DEFAULT_COLOR;
+          lcdColor = "WHIT";
           Serial.println("LED color set to Default Mode color (White)");
           break;
   }       
