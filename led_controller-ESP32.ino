@@ -82,15 +82,15 @@ static float curHorn   = 0.0f;
 
 #define NUM_MODES 2
 enum Mode {
-  Default = 0
-  Uber = 1
+  Default = 0,
+  Uber = 1,
   Lyft = 2
-}
+};
 enum txtColor {
-  Default = "WHIT"
-  Uber = "CYAN"
-  Lyft = "MGTA"
-}
+  Default = "WHIT",
+  Uber = "CYAN",
+  Lyft = "MGTA",
+};
 static txtColor lcdColor = Default;
 
 void setup()
