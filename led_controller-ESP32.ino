@@ -80,6 +80,7 @@ static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
 
+#define NUM_MODES 2
 enum Mode {
   Default = 0
   Uber = 1
@@ -185,7 +186,7 @@ void loop()
   Serial.println(button.getState());
 
   if(modeButton.isReleased()){       //button is pressed
-    if (curMode++ > 2) { curMode = 0; }
+    if (curMode++ > NUM_MODES) { curMode = 0; }
     switch (curMode) {
       case Uber:
           curColor = UBER_COLOR;
