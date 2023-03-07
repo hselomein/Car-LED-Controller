@@ -185,7 +185,7 @@ void loop()
   modeButton.loop();      // MUST call the loop() function first
   Serial.println(button.getState());
 
-  if(modeButton.isReleased()){       //button is pressed
+  if(modeButton.isReleased()){       //button is pressed then released.  Prevents potential bug of holding button down if it just pressed.
     if (curMode++ > NUM_MODES) { curMode = 0; }
     switch (curMode) {
       case Uber:
