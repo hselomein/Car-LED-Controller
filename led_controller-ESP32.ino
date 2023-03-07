@@ -28,7 +28,7 @@
 #define LED_PIN         13        // D13 => LED Controller Signal
 #define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
 #define HORN_PIN        ADC1_CHANNEL_4        // Pin 32 => Horn Sense
-ezButton button(23);  // create ezButton object that attach to pin 23;
+ezButton modeButton(23);  // create ezButton object that attach to pin 23;
 //#define PK_L_PIN        35        // D35 => Parking Lights Sense 
 //#define HIBM_PIN        33        // A33 => HiBeam Sense
 
@@ -73,17 +73,24 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define msDELAY       0   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 
-#define DEBOUNCE_TIME  50                                  // the debounce time in millisecond, increase this time if it still chatters
-
-int buttonState = 0;
-int currColor = DEFAULT_COLOR;
-int CurrMode = 0;
-String (lcdColor) = "WHIT";
+#define DEBOUNCE_TIME  100 // the debounce time in millisecond, increase this time if it still chatters
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
+
+enum Mode {
+  Default = 0
+  Uber = 1
+  Lyft = 2
+}
+enum txtColor {
+  Default = "WHIT"
+  Uber = "CYAN"
+  Lyft = "MGTA"
+}
+static txtColor lcdColor = Default;
 
 void setup()
 {
@@ -91,8 +98,7 @@ void setup()
   delay(250); // power-up safety delay
     
   //setup the button
-  int buttonState;
-  button.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds       
+  modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds       
 
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
@@ -151,7 +157,7 @@ void taskLCDUpdates( void * pvParameters ){
 
   while(true){
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", lcdColor, curDRL, curHorn);
+      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
     } else {
       sprintf(tmpMessage, "%s %04.1fV %04.1fV", lcdColor, curDRL, curHorn);  
     }
@@ -165,26 +171,39 @@ void taskLCDUpdates( void * pvParameters ){
 void loop()
 {
   static int    curSample = 1;
-  static char   curMode   = 1;
   static bool   RelayPin1State = false;
-
-  button.loop();                                              // MUST call the loop() function first
-  int btnState = button.getState();
-  Serial.println(btnState);
-    if(button.isPressed()){                                 //button is pressed AND this is the first digitalRead() that the button is pressed
-      CurrMode++;  
-      if (CurrMode > 2) {                                   
-          CurrMode = 0;
-      }
-  UberLyftMode(CurrMode);
-  }   
-
+  static int    curColor = DEFAULT_COLOR;
+  static Mode   curMode = Default;
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
   //curPkL += analogRead(PK_L_PIN);
   //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
+
+  modeButton.loop();      // MUST call the loop() function first
+  Serial.println(button.getState());
+
+  if(modeButton.isReleased()){       //button is pressed
+    if (curMode++ > 2) { curMode = 0; }
+    switch (curMode) {
+      case Uber:
+          curColor = UBER_COLOR;
+          lcdColor = Uber;          
+          Serial.println("LED color set to Uber Mode color (Cyan)");
+          break;
+      case Lyft:
+          curColor = LYFT_COLOR;
+          lcdColor = Lyft;
+          Serial.println("LED color set to Lyft Mode color (Magenta)");
+          break;
+      default:
+          curColor = DEFAULT_COLOR;
+          lcdColor = Default;
+          Serial.println("LED color set to Default Mode color (White)");
+          break;
+    }
+  }
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
@@ -222,7 +241,7 @@ void loop()
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
     } else {
-      leds.fill(currColor);  
+      leds.fill(curColor);  
     }
 
     leds.show();                      //<--- May not be needed
@@ -233,26 +252,6 @@ void loop()
     //curPkL = 0;
     //curHiBeam = 0;
   }
-}
-
-void UberLyftMode(char CMode) {
-    switch (CMode) {
-      case 1:
-          currColor = UBER_COLOR;
-          lcdColor = "CYAN";          
-          Serial.println("LED color set to Uber Mode color (Cyan)");
-          break;
-      case 2:
-          currColor = LYFT_COLOR;
-          lcdColor = "MGTA";
-          Serial.println("LED color set to Lyft Mode color (Magenta)");
-          break;
-      default:
-          currColor = DEFAULT_COLOR;
-          lcdColor = "WHIT";
-          Serial.println("LED color set to Default Mode color (White)");
-          break;
-  }       
 }
 
 void startupSequence() {
