@@ -300,7 +300,7 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     if (boolDirection) {                //Out 
       ledLeft = NUM_LEDS_HALF - i;
       offset = 1 
-    else {                              //In
+    } else {                              //In
       ledLeft = i; 
       offset = -1
     }
