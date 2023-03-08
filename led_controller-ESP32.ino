@@ -299,15 +299,15 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     // Set current left and right LEDs based on the direction
     if (boolDirection) {                //Out 
       ledLeft = NUM_LEDS_HALF - i;
-      offset = 1 
+      offset = 1; 
     } else {                              //In
       ledLeft = i; 
-      offset = -1
+      offset = -1;
     }
     ledRight = NUM_LEDS - ledLeft -1;
 
-    leds.setPixelColor(ledLeft, maxColor);        leds.setPixelColor(ledRight, maxColor);
-    leds.setPixelColor(ledLeft + offset, minColor);    leds.setPixelColor(ledRight + offset, minColor);
+    leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
+    leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight + offset, minColor);
     if (msDelay) {
       delay(msDelay);
     }
