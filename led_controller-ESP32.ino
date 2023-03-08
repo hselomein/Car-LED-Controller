@@ -40,8 +40,7 @@ hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config ex
 
 //LED Controller Section
 #define NUM_LEDS        193  //193 leds is the lenght of the hood weather strip + 15 leds on each side to show thru the headlights.
-#define NUM_LEDS_HALF   NUM_LEDS / 2
-#define NUM_LEDS_ODD    NUM_LEDS % 2
+#define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    // Subtract 1 to calculate indexes
 Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define MAX_BRIGHTNESS  255
@@ -295,7 +294,6 @@ void startupSequence() {
 
 void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
   leds.setPixelColor(ledLeft, curColor);   leds.setPixelColor(ledRight, curColor);
-  leds.show();
   if (msDelay) {
     delay(msDelay);
   }
@@ -303,29 +301,32 @@ void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
 
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   // Flash the center LED if number is ODD and direction is OUT
-  if (boolDirection && NUM_LEDS_ODD) {
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
-  }
+  //if (boolDirection && NUM_LEDS_ODD) {
+  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
+  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
+  //  leds.show();
+  //}
 
   int ledLeft = 0; int ledRight = 0;
-  for (int i = 0; i < NUM_LEDS_HALF; i+=2) {
+  flashLED (0, NUM_LEDS - 1, maxColor, msDelay);
+  for (int i = 1; i <= NUM_LEDS_HALF; i+=2) {
     // Set current left and right LEDs based on the direction
     if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
     else { ledLeft = i; }                                //In
-    ledRight = NUM_LEDS - ledLeft;
+    ledRight = NUM_LEDS - ledLeft -1;
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
-    flashLED (ledLeft, ledRight, minColor, 0);
-    flashLED (ledLeft + 1, ledRight - 1, maxColor, msDelay);
-    flashLED (ledLeft - 1, ledRight - 1, minColor, 0);
+    flashLED (ledLeft - 1, ledRight + 1, minColor, 0);
+    leds.show();
   }
+  flashLED (NUM_LEDS_HALF, NUM_LEDS - NUM_LEDS_HALF - 1, maxColor, msDelay);
 
   // Flash the center LED if number is ODD and direction is IN
-  if (!boolDirection && NUM_LEDS_ODD) {
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-    flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
-  }
+  //if (!boolDirection && NUM_LEDS_ODD) {
+  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
+  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
+  //  leds.show();
+  //}
 }
 
 float Abs(float val) {
