@@ -294,22 +294,25 @@ void startupSequence() {
 
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   int ledLeft = 0; int ledRight = 0;
-  leds.setPixelColor(0, maxColor);                leds.setPixelColor(NUM_LEDS - 1, maxColor);
+  int offset;
   for (int i = 1; i <= NUM_LEDS_HALF; i++) {
     // Set current left and right LEDs based on the direction
-    if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
-    else { ledLeft = i; }                                //In
+    if (boolDirection) {                //Out 
+      ledLeft = NUM_LEDS_HALF - i;
+      offset = 1 
+    else {                              //In
+      ledLeft = i; 
+      offset = -1
+    }
     ledRight = NUM_LEDS - ledLeft -1;
 
     leds.setPixelColor(ledLeft, maxColor);        leds.setPixelColor(ledRight, maxColor);
-    leds.setPixelColor(ledLeft - 1, minColor);    leds.setPixelColor(ledRight - 1, minColor);
+    leds.setPixelColor(ledLeft + offset, minColor);    leds.setPixelColor(ledRight + offset, minColor);
     if (msDelay) {
       delay(msDelay);
     }
     leds.show();
   }
-  leds.setPixelColor(NUM_LEDS_HALF, minColor);    leds.setPixelColor(NUM_LEDS - NUM_LEDS_HALF - 1, minColor);
-  leds.show();
 }
 
 float Abs(float val) {
