@@ -111,7 +111,7 @@ class cModes {
     void Init() {
       curColor = DEFAULT_COLOR;
       txtColor = "WHIT";
-      delay(1000);
+      delay(400);
       modeButton.loop();      // MUST call the loop() function first
       modeButton.getCount();
       modeButton.resetCount();
@@ -317,6 +317,8 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
 
     flashLED (ledLeft, ledRight, maxColor, msDelay);
     flashLED (ledLeft, ledRight, minColor, 0);
+    flashLED (ledLeft + 1, ledRight - 1, maxColor, msDelay);
+    flashLED (ledLeft - 1, ledRight - 1, minColor, 0);
   }
 
   // Flash the center LED if number is ODD and direction is IN
