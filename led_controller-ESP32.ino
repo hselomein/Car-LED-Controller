@@ -287,9 +287,8 @@ void startupSequence() {
     ledWave(brightCOLOR, curDimColor, msDELAY, i % 2);
   }
 
-  // Turn Solid Color:              //<--- May not be needed
-  leds.fill(brightCOLOR);           //<--- May not be needed
-  //delay(100);                       //<--- May not be needed
+  // Turn DefaultSolid Color:
+  leds.fill(DEFAULT_COLOR);
 }
 
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
