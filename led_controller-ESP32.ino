@@ -210,6 +210,7 @@ void loop()
   Serial.println(modeButton.getState());
   if (FirstLoop) {
     curMode.Init();
+    FirstLoop = false;
   } else {
     curMode.Increment();
   }
