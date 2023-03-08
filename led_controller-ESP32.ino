@@ -295,7 +295,7 @@ void startupSequence() {
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   int ledLeft = 0; int ledRight = 0;
   leds.setPixelColor(0, maxColor);                leds.setPixelColor(NUM_LEDS - 1, maxColor);
-  for (int i = 1; i <= NUM_LEDS_HALF; i+=2) {
+  for (int i = 1; i <= NUM_LEDS_HALF; i++) {
     // Set current left and right LEDs based on the direction
     if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
     else { ledLeft = i; }                                //In
