@@ -91,12 +91,12 @@ class cModes {
     void Increment () {
       if (curMode++ > NUM_MODES) { curMode = 0; }
       switch (curMode) {
-        case Uber:
+        case 1:
             curColor = UBER_COLOR;
             txtColor = "CYAN";          
             Serial.println("LED color set to Uber Mode color (Cyan)");
             break;
-        case Lyft:
+        case 2:
             curColor = LYFT_COLOR;
             txtColor = "MGTA";
             Serial.println("LED color set to Lyft Mode color (Magenta)");
