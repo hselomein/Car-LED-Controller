@@ -118,6 +118,7 @@ void setup()
     
   //setup the button
   modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds       
+  modeButton.loop();      // MUST call the loop() function first
 
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
@@ -198,7 +199,6 @@ void loop()
   //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
 
-  modeButton.loop();      // MUST call the loop() function first
   Serial.println(modeButton.getState());
 
   if(modeButton.isReleased()){       //button is pressed then released.  Prevents potential bug of holding button down if it just pressed.
