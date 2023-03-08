@@ -117,7 +117,7 @@ class cModes {
 };
 cModes curMode;
 
-bool FirstLoop = true
+bool FirstLoop = true;
 
 void setup()
 {
