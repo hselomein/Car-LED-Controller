@@ -111,6 +111,8 @@ class cModes {
     void Init() {
       curColor = DEFAULT_COLOR;
       txtColor = "WHIT";
+      delay(1000);
+      modeButton.loop();      // MUST call the loop() function first
       modeButton.getCount();
       modeButton.resetCount();
     }
