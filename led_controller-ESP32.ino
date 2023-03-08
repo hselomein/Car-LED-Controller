@@ -84,8 +84,8 @@ static float curHorn   = 0.0f;
 
 class cModes {
   public:
-    int curColor = DEFAULT_COLOR;
-    String txtColor = "WHIT";
+    int curColor;
+    String txtColor;
 
     void Increment () {
       if (modeButton.getCount() > NUM_MODES) { modeButton.resetCount(); }
@@ -107,8 +107,17 @@ class cModes {
             break;
       }
     }
+
+    void Init() {
+      curColor = DEFAULT_COLOR;
+      txtColor = "WHIT";
+      modeButton.getCount();
+      modeButton.resetCount();
+    }
 };
 cModes curMode;
+
+bool FirstLoop = true
 
 void setup()
 {
@@ -161,10 +170,6 @@ void setup()
         0,                /* Priority of the task */
         NULL,             /* Task handle. */
         1);               /* Core where the task should run */
-
-  modeButton.loop();      // MUST call the loop() function first
-  modeButton.getCount();
-  modeButton.resetCount();
 }
 
 void taskLCDUpdates( void * pvParameters ){
@@ -203,7 +208,11 @@ void loop()
 
   modeButton.loop();      // MUST call the loop() function first
   Serial.println(modeButton.getState());
-  curMode.Increment();
+  if (FirstLoop) {
+    curMode.Init();
+  } else {
+    curMode.Increment();
+  }
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
