@@ -69,7 +69,7 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define LO_VOLT         2
 
 // Startup Configuration (Constants)
-#define msDELAY       0   //Number of ms LED stays on for.
+#define msDELAY       50   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 
 #define DEBOUNCE_TIME  100 // the debounce time in millisecond, increase this time if it still chatters
@@ -303,8 +303,6 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
 
     leds.setPixelColor(ledLeft, maxColor);        leds.setPixelColor(ledRight, maxColor);
     leds.setPixelColor(ledLeft - 1, minColor);    leds.setPixelColor(ledRight - 1, minColor);
-    flashLED (ledLeft, ledRight, maxColor, msDelay);
-    flashLED (ledLeft - 1, ledRight + 1, minColor, 0);
     if (msDelay) {
       delay(msDelay);
     }
