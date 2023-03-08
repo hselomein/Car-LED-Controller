@@ -81,17 +81,35 @@ static float curHorn   = 0.0f;
 //static double curHiBeam = 0.0;
 
 #define NUM_MODES 2
-enum Mode {
-  DefaultM = 0,
-  UberM = 1,
-  LyftM = 2
+
+class cModes {
+  public:
+    char curMode = 0;
+    int curColor = DEFAULT_COLOR;
+    String txtColor = "WHIT";
+
+    void Increment () {
+      if (curMode++ > NUM_MODES) { curMode = 0; }
+      switch (curMode) {
+        case Uber:
+            curColor = UBER_COLOR;
+            txtColor = "CYAN";          
+            Serial.println("LED color set to Uber Mode color (Cyan)");
+            break;
+        case Lyft:
+            curColor = LYFT_COLOR;
+            txtColor = "MGTA";
+            Serial.println("LED color set to Lyft Mode color (Magenta)");
+            break;
+        default:
+            curColor = DEFAULT_COLOR;
+            txtColor = "WHIT";
+            Serial.println("LED color set to Default Mode color (White)");
+            break;
+      }
+    }
 };
-enum txtColor {
-  Default = "WHIT",
-  Uber = "CYAN",
-  Lyft = "MGTA",
-};
-static txtColor lcdColor = Default;
+cModes curMode;
 
 void setup()
 {
@@ -160,7 +178,7 @@ void taskLCDUpdates( void * pvParameters ){
     if (curHorn > VOLT_BUF) {
       sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", lcdColor, curDRL, curHorn);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);  
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
@@ -173,8 +191,6 @@ void loop()
 {
   static int    curSample = 1;
   static bool   RelayPin1State = false;
-  static int    curColor = DEFAULT_COLOR;
-  static Mode   curMode = Default;
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
@@ -186,24 +202,7 @@ void loop()
   Serial.println(button.getState());
 
   if(modeButton.isReleased()){       //button is pressed then released.  Prevents potential bug of holding button down if it just pressed.
-    if (curMode++ > NUM_MODES) { curMode = 0; }
-    switch (curMode) {
-      case Uber:
-          curColor = UBER_COLOR;
-          lcdColor = Uber;          
-          Serial.println("LED color set to Uber Mode color (Cyan)");
-          break;
-      case Lyft:
-          curColor = LYFT_COLOR;
-          lcdColor = Lyft;
-          Serial.println("LED color set to Lyft Mode color (Magenta)");
-          break;
-      default:
-          curColor = DEFAULT_COLOR;
-          lcdColor = Default;
-          Serial.println("LED color set to Default Mode color (White)");
-          break;
-    }
+    curMode.Increment();
   }
 
   if (curSample > NUM_SAMPLES){
@@ -242,7 +241,7 @@ void loop()
     if (curHorn > VOLT_BUF) {
       leds.fill(ANGRY_COLOR);  
     } else {
-      leds.fill(curColor);  
+      leds.fill(curMode.curColor);  
     }
 
     leds.show();                      //<--- May not be needed
