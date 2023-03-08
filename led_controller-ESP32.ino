@@ -292,41 +292,26 @@ void startupSequence() {
   //delay(100);                       //<--- May not be needed
 }
 
-void flashLED (int ledLeft, int ledRight, uint32_t curColor, int msDelay) {
-  leds.setPixelColor(ledLeft, curColor);   leds.setPixelColor(ledRight, curColor);
-  if (msDelay) {
-    delay(msDelay);
-  }
-}    
-
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
-  // Flash the center LED if number is ODD and direction is OUT
-  //if (boolDirection && NUM_LEDS_ODD) {
-  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
-  //  leds.show();
-  //}
-
   int ledLeft = 0; int ledRight = 0;
-  flashLED (0, NUM_LEDS - 1, maxColor, msDelay);
+  leds.setPixelColor(0, maxColor);                leds.setPixelColor(NUM_LEDS - 1, maxColor);
   for (int i = 1; i <= NUM_LEDS_HALF; i+=2) {
     // Set current left and right LEDs based on the direction
     if (boolDirection) { ledLeft = NUM_LEDS_HALF - i; }  //Out
     else { ledLeft = i; }                                //In
     ledRight = NUM_LEDS - ledLeft -1;
 
+    leds.setPixelColor(ledLeft, maxColor);        leds.setPixelColor(ledRight, maxColor);
+    leds.setPixelColor(ledLeft - 1, minColor);    leds.setPixelColor(ledRight - 1, minColor);
     flashLED (ledLeft, ledRight, maxColor, msDelay);
     flashLED (ledLeft - 1, ledRight + 1, minColor, 0);
+    if (msDelay) {
+      delay(msDelay);
+    }
     leds.show();
   }
-  flashLED (NUM_LEDS_HALF, NUM_LEDS - NUM_LEDS_HALF - 1, maxColor, msDelay);
-
-  // Flash the center LED if number is ODD and direction is IN
-  //if (!boolDirection && NUM_LEDS_ODD) {
-  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, maxColor, msDelay);
-  //  flashLED (NUM_LEDS_HALF, NUM_LEDS_HALF + 1, minColor, 0);
-  //  leds.show();
-  //}
+  leds.setPixelColor(NUM_LEDS_HALF, minColor);    leds.setPixelColor(NUM_LEDS - NUM_LEDS_HALF - 1, minColor);
+  leds.show();
 }
 
 float Abs(float val) {
