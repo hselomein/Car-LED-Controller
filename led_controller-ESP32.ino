@@ -163,6 +163,7 @@ void setup()
         1);               /* Core where the task should run */
 
   modeButton.loop();      // MUST call the loop() function first
+  modeButton.getCount();
   modeButton.resetCount();
 }
 
@@ -202,7 +203,6 @@ void loop()
 
   modeButton.loop();      // MUST call the loop() function first
   Serial.println(modeButton.getState());
-
   curMode.Increment();
 
   if (curSample > NUM_SAMPLES){
