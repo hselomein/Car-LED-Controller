@@ -199,7 +199,7 @@ void loop()
   curSample++;
 
   modeButton.loop();      // MUST call the loop() function first
-  Serial.println(button.getState());
+  Serial.println(modeButton.getState());
 
   if(modeButton.isReleased()){       //button is pressed then released.  Prevents potential bug of holding button down if it just pressed.
     curMode.Increment();
