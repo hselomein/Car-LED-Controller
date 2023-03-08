@@ -289,6 +289,7 @@ void startupSequence() {
 
   // Turn DefaultSolid Color:
   leds.fill(DEFAULT_COLOR);
+  leds.show();
 }
 
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
