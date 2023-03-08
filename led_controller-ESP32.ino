@@ -84,13 +84,12 @@ static float curHorn   = 0.0f;
 
 class cModes {
   public:
-    char curMode = 0;
     int curColor = DEFAULT_COLOR;
     String txtColor = "WHIT";
 
     void Increment () {
-      if (curMode++ > NUM_MODES) { curMode = 0; }
-      switch (curMode) {
+      if (modeButton.getCount() > NUM_MODES) { modeButton.resetCount(); }
+      switch (modeButton.getCount()) {
         case 1:
             curColor = UBER_COLOR;
             txtColor = "CYAN";          
@@ -117,8 +116,8 @@ void setup()
   delay(250); // power-up safety delay
     
   //setup the button
-  modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds       
-  modeButton.loop();      // MUST call the loop() function first
+  modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
+  modeButton.setCountMode(COUNT_RISING);      // set a rising count for button
 
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
@@ -163,6 +162,7 @@ void setup()
         NULL,             /* Task handle. */
         1);               /* Core where the task should run */
 
+  modeButton.resetCount();
 }
 
 void taskLCDUpdates( void * pvParameters ){
@@ -199,11 +199,10 @@ void loop()
   //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
 
+  modeButton.loop();      // MUST call the loop() function first
   Serial.println(modeButton.getState());
 
-  if(modeButton.isReleased()){       //button is pressed then released.  Prevents potential bug of holding button down if it just pressed.
-    curMode.Increment();
-  }
+  curMode.Increment();
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
