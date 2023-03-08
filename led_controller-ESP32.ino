@@ -44,7 +44,7 @@ hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config ex
 Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 #define MAX_BRIGHTNESS  255
-#define MIN_BRIGHTNESS  95
+#define MIN_BRIGHTNESS  63
 #define MED_BRIGHTNESS  127
 
 #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
@@ -69,7 +69,7 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define LO_VOLT         2
 
 // Startup Configuration (Constants)
-#define msDELAY       50   //Number of ms LED stays on for.
+#define msDELAY       5   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 
 #define DEBOUNCE_TIME  100 // the debounce time in millisecond, increase this time if it still chatters
