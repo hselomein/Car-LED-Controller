@@ -82,9 +82,9 @@ static float curHorn   = 0.0f;
 
 #define NUM_MODES 2
 enum Mode {
-  Default = 0,
-  Uber = 1,
-  Lyft = 2
+  DefaultM = 0,
+  UberM = 1,
+  LyftM = 2
 };
 enum txtColor {
   Default = "WHIT",
