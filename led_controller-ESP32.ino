@@ -162,6 +162,7 @@ void setup()
         NULL,             /* Task handle. */
         1);               /* Core where the task should run */
 
+  modeButton.loop();      // MUST call the loop() function first
   modeButton.resetCount();
 }
 
