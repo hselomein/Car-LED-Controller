@@ -17,11 +17,8 @@ There will be a physcal switch installed to disable light for law enformcent / v
 There will be 4 voltage reading inputs 2 will be reserved for future uses
 
 DRL Sensing
-
 Horn Sensing
-
 Reserved
-
 Reserved
 
 
