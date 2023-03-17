@@ -15,10 +15,11 @@ LYFT Mode, the ;et strip will be Magenta
 There will be a physcal switch installed to disable light for law enformcent / vehicle inpsection purposes
 
 There will be 4 voltage reading inputs 2 will be reserved for future uses
+
 DRL Sensing
 Horn Sensing
 Reserved
-REserverd
+Reserved
 
 
 The number of LEDs in strip 144 pixels per meter, x4 individual pixelets, SK6812 Chip 
