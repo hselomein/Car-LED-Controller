@@ -5,9 +5,10 @@
                     Inputs such as, drl, headlights, horn, and button
 		    activity. This is for the esp32
 
-    Date:           Added when finalized to production (2/6/2023)
+    Date:           3/1/2023
 
-    Authors:         Corey Davis, Yves Avady, Jim Edmonds
+    Authors:        Yves Avady
+    Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 #include <stdio.h>
 
