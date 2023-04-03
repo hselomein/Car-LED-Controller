@@ -45,5 +45,8 @@ Code Notes:
 - led_controller-AVR.ino    - this is the unfinished program for the AVR architecture
 - Part List - this is the shopping list of parts for this project
 
+Corey Davis created the project and put together the prototypes.
+Yves Avady wrote the code for this project.
+
 
 
