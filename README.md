@@ -1,4 +1,9 @@
 ﻿# Car-LED-Controller
+
+Credits:
+  - Corey Davis created the project and put together the prototypes.
+  - Yves Avady wrote the code for this project.
+
 This project controls an addressible LED Strip using the inputs from a car electical system.
 
 With this project we are taking and esp32 arduino and making a LED controller for the strip. 
