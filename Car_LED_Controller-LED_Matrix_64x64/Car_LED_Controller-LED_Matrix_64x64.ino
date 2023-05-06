@@ -559,72 +559,40 @@ void setup() {
   dma_display->clearScreen();
   dma_display->fillScreen(myWHITE);
 
-
-
   screentest();
+  delay(500);
 }
 
 void loop() {
   // show uber and lyft signs
-  drawUber();
-  delay(1000);
-  //dma_display->fillScreen(myBLACK);
-  //delay(1000);
-  drawLyft();
-  delay(1000);
-  //dma_display->fillScreen(myBLACK);
-  //delay(1000);
   drawLyftLogo();
   delay(2000);
   drawUberLogo();
   delay(2000);
 }
 
-
-void drawUber() {
-  // Print the word UBER
-  dma_display->clearScreen();
-  // dma_display->setBrightness8(255); //0-255 90
-  dma_display->fillScreen(myWHITE);
-  dma_display->setTextSize(2);  // size 1 == 8 pixels high
-  dma_display->setTextColor(myBLACK);
-  dma_display->setCursor(9, 25);  // start at top left, with 8 pixel of spacing
-  dma_display->println("UBER");
-}
-
-void drawLyft() {
-  // Print the word LYFT
-  dma_display->clearScreen();
-  // dma_display->setBrightness8(255); //0-255 90
-  dma_display->fillScreen(myMAGENTA);
-  dma_display->setTextSize(2);    // size 1 == 8 pixels high
-  dma_display->setCursor(9, 25);  // start at top left, with 8 pixel of spacing
-  dma_display->setTextColor(myWHITE);
-  dma_display->println("LYFT");
-}
-
 void screentest() {
 
   // fix the screen with green
   dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
-  delay(50);
+  delay(100);
 
   // draw a box in yellow
   dma_display->drawRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(15, 15, 0));
-  delay(50);
+  delay(100);
 
   // draw an 'X' in red
   dma_display->drawLine(0, 0, dma_display->width() - 1, dma_display->height() - 1, dma_display->color444(15, 0, 0));
   dma_display->drawLine(dma_display->width() - 1, 0, 0, dma_display->height() - 1, dma_display->color444(15, 0, 0));
-  delay(50);
+  delay(100);
 
   // draw a blue circle
   dma_display->drawCircle(10, 10, 10, dma_display->color444(0, 0, 15));
-  delay(50);
+  delay(100);
 
   // fill a violet circle
   dma_display->fillCircle(40, 21, 10, dma_display->color444(15, 0, 15));
-  delay(50);
+  delay(100);
 
   // fill the screen with 'black'
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
@@ -633,8 +601,8 @@ void screentest() {
 
 void drawLyftLogo(){  
 dma_display->fillScreen(myBLACK);
-  for (int xPos = 0; xPos < 63; xPos++ ) {
-    for (int yPos = 0; yPos < 63; yPos++ ) {
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
       //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
@@ -648,8 +616,8 @@ dma_display->fillScreen(myBLACK);
 
 void drawUberLogo(){  
 dma_display->fillScreen(myBLACK);
-  for (int xPos = 0; xPos < 63; xPos++ ) {
-    for (int yPos = 0; yPos < 63; yPos++ ) {
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
       //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = UBER_LOGO[Pos + 2] ? 0 : 255;
