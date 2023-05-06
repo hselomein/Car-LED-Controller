@@ -3,30 +3,30 @@
 #include "Dhole_weather_icons32px.h"
 
 /*--------------------- DEBUG  -------------------------*/
-#define Sprintln(a) (Serial.println(a))
-#define SprintlnDEC(a, x) (Serial.println(a, x))
+//#define Sprintln(a) (Serial.println(a))
+//#define SprintlnDEC(a, x) (Serial.println(a, x))
 
-#define Sprint(a) (Serial.print(a))
-#define SprintDEC(a, x) (Serial.print(a, x))
+//#define Sprint(a) (Serial.print(a))
+//#define SprintDEC(a, x) (Serial.print(a, x))
 
 
 /*--------------------- RGB DISPLAY PINS -------------------------*/
-#define R1_PIN 25
-#define G1_PIN 26
-#define B1_PIN 27
-#define R2_PIN 14
-#define G2_PIN 12
-#define B2_PIN 13
-#define A_PIN 23
+//#define R1_PIN 25
+//#define G1_PIN 26
+//#define B1_PIN 27
+//#define R2_PIN 14
+//#define G2_PIN 12
+//#define B2_PIN 13
+//#define A_PIN 23
 //#define B_PIN 19 // Changed from library default
-#define B_PIN 22 // Changed from library default
-#define C_PIN 5
-#define D_PIN 17
+//#define B_PIN 22 // Changed from library default
+//#define C_PIN 5
+//#define D_PIN 17
 //#define E_PIN -1
-#define E_PIN 32
-#define LAT_PIN 4
-#define OE_PIN 15
-#define CLK_PIN 16
+//#define E_PIN 32
+//#define LAT_PIN 4
+//#define OE_PIN 15
+//#define CLK_PIN 16
 
 
 /*--------------------- MATRIX LILBRARY CONFIG -------------------------*/
@@ -37,11 +37,11 @@
 MatrixPanel_I2S_DMA *dma_display = nullptr;
 
 // Module configuration
-HUB75_I2S_CFG mxconfig(
-	PANEL_RES_X,   // module width
-	PANEL_RES_Y,   // module height
-	PANEL_CHAIN    // Chain length
-);
+//HUB75_I2S_CFG mxconfig(
+//	PANEL_RES_X,   // module width
+//	PANEL_RES_Y,   // module height
+//	PANEL_CHAIN    // Chain length
+//);
 
 /*
 //Another way of creating config structure
@@ -170,13 +170,29 @@ void setup() {
   // put your setup code here, to run once:
   delay(1000); Serial.begin(115200); delay(200);
 
+  // Module configuration
+  HUB75_I2S_CFG mxconfig(
+    PANEL_RES_X,  // module width
+    PANEL_RES_Y,  // module height
+    PANEL_CHAIN   // Chain length
+  );
 
-  /************** DISPLAY **************/
-  Sprintln("...Starting Display");
+  mxconfig.gpio.e = 32;
+  mxconfig.clkphase = false;
+  mxconfig.driver = HUB75_I2S_CFG::FM6124;
+
+  // Display Setup
   dma_display = new MatrixPanel_I2S_DMA(mxconfig);
   dma_display->begin();
-  dma_display->setBrightness8(90); //0-255
+  dma_display->setBrightness8(5) //5-255 led matrix does not display using values lower than 5
   dma_display->clearScreen();
+
+  /************** DISPLAY **************/
+  // Sprintln("...Starting Display");
+  //dma_display = new MatrixPanel_I2S_DMA(mxconfig);
+  //dma_display->begin();
+  //dma_display->setBrightness8(90); //0-255
+  //dma_display->clearScreen();
   
   dma_display->fillScreen(dma_display->color444(0, 1, 0));  
 
