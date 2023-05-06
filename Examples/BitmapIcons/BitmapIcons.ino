@@ -184,9 +184,15 @@ void setup() {
   // Display Setup
   dma_display = new MatrixPanel_I2S_DMA(mxconfig);
   dma_display->begin();
-  dma_display->setBrightness8(127);   //5-255 led matrix does not display using values lower than 5
+  dma_display->setBrightness8(255);   //5-255 led matrix does not display using values lower than 5
   dma_display->clearScreen();
 
+  dma_display->fillScreen(dma_display->color565(255, 0, 191));
+  dma_display->setTextSize(2);    // size 1 == 8 pixels high
+  dma_display->setCursor(9, 25);  // start at top left, with 8 pixel of spacing
+  dma_display->setTextColor(dma_display->color565(255, 255, 255));
+  dma_display->println("LYFT");
+  delay(2000);
   /************** DISPLAY **************/
   // Sprintln("...Starting Display");
   //dma_display = new MatrixPanel_I2S_DMA(mxconfig);
