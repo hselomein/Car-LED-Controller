@@ -29,7 +29,7 @@
 
 /*--------------------- MATRIX LILBRARY CONFIG -------------------------*/
 #define PANEL_RES_X 64      // Number of pixels wide of each INDIVIDUAL panel module. 
-#define PANEL_RES_Y 32     // Number of pixels tall of each INDIVIDUAL panel module.
+#define PANEL_RES_Y 64     // Number of pixels tall of each INDIVIDUAL panel module.
 #define PANEL_CHAIN 1      // Total number of panels chained one to another
  
 MatrixPanel_I2S_DMA *dma_display = nullptr;
@@ -193,12 +193,20 @@ void setup() {
 void loop() {
 
   // Loop through Weather Icons
-  Serial.print("Showing icon ");
-  Serial.println(icon_name[current_icon]);
-  drawXbm565(0,0, 32, 32, icon_bits[current_icon]);
+  //Serial.print("Showing icon ");
+  //Serial.println(icon_name[current_icon]);
+  //drawXbm565(0,0, 32, 32, icon_bits[current_icon]);
 
-  current_icon = (current_icon  +1 ) % num_icons;
-  delay(2000);
+  //current_icon = (current_icon  +1 ) % num_icons;
+  //delay(2000);
+  //dma_display->clearScreen();
+
+  for (int xPos = 0; i < PANEL_RES_X; i++ ) {
+    for (int yPos = 0; i < PANEL_RES_Y; i++ ) {
+      color = xPos % 4 + yPos * 16
+      dma_display->drawPixel(xPos, yPos, color);
+    }
+  }
+  delay(20000);
   dma_display->clearScreen();
-  
 }
