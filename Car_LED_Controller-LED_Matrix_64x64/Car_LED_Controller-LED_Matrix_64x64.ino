@@ -107,7 +107,7 @@ void loop() {
   delay(1000);
   dma_display->fillScreen(myBLACK);
   delay(1000);
-  lyft_logo();
+  drawLyftLogo();
   delay(1000);
 }
 
@@ -161,7 +161,8 @@ void screentest() {
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
 
 }
-void lyft_logo(){  
+
+void drawLyftLogo(){  
   dma_display->fillScreen(myWHITE);
   for (int xPos = 0 + 1; xPos < 63; xPos++ ) {
     for (int yPos = 0; yPos < 43; yPos++ ) {
@@ -170,7 +171,7 @@ void lyft_logo(){
       //uint8_t red = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4);
       //uint8_t green = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4 + 1);
       //uint8_t blue = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4 + 2);
-      dma_display->drawPixel(xPos, yPos + 10, dma_display->color565(LYFT_LOGO[Pos + 2], LYFT_LOGO[Pos + 1], LYFT_LOGO[Pos]));
+      dma_display->drawPixel(xPos + 1, yPos + 11, dma_display->color565(LYFT_LOGO[Pos + 2], LYFT_LOGO[Pos + 1], LYFT_LOGO[Pos]));
     }
   }
   delay(5000);
