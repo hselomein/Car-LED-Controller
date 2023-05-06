@@ -383,7 +383,7 @@ dma_display->fillScreen(myBLACK);
       uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
       uint8_t green = LYFT_LOGO[Pos + 1] ? 0 : 255;
       uint8_t blue = LYFT_LOGO[Pos] ? 191 : 255;
-      dma_display->drawPixel(xPos, yPos + 10, dma_display->color565(red, green, blue));
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(red, green, blue));
     }
   }
   delay(5000);
