@@ -38,7 +38,7 @@ void setup() {
   // Display Setup
   dma_display = new MatrixPanel_I2S_DMA(mxconfig);
   dma_display->begin();
-  dma_display->setBrightness8(5) //5-255 led matrix does not display using values lower than 5
+  dma_display->setBrightness8(5); //5-255 led matrix does not display using values lower than 5
   dma_display->clearScreen();
   dma_display->fillScreen(myWHITE);
 
