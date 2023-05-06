@@ -377,7 +377,7 @@ void screentest() {
 void drawLyftLogo(){  
 dma_display->fillScreen(myBLACK);
   for (int xPos = 0 + 1; xPos < 63; xPos++ ) {
-    for (int yPos = 0; yPos < 43; yPos++ ) {
+    for (int yPos = 0; yPos < 63; yPos++ ) {
       //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
