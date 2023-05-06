@@ -179,7 +179,7 @@ void setup() {
 
   mxconfig.gpio.e = 32;
   mxconfig.clkphase = false;
-  mxconfig.driver = HUB75_I2S_CFG::FM6124;
+  mxconfig.driver = HUB75_I2S_CFG::FM6126A;
 
   // Display Setup
   dma_display = new MatrixPanel_I2S_DMA(mxconfig);
@@ -199,7 +199,7 @@ void setup() {
   // Fade a Red Wifi Logo In
   for (int r=0; r < 255; r++ )
   {
-    drawXbm565(0,0,64,64, wifi_image1bit, dma_display->color565(r,0,0));  
+    drawXbm565(0,0,32,32, wifi_image1bit, dma_display->color565(r,0,0));  
     delay(10);
   }
 
