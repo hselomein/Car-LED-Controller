@@ -219,10 +219,9 @@ void loop() {
   //delay(2000);
   //dma_display->clearScreen();
 
-  for (int xPos = 0; xPos < PANEL_RES_X; xPos++ ) {
-    for (int yPos = 0; yPos < PANEL_RES_Y; yPos++ ) {
-      uint16_t color = xPos / 4 + yPos / 4 * 256;
-      dma_display->drawPixel(xPos, yPos, color);
+  for (int xPos = 0; xPos < PANEL_RES_X - 1; xPos++ ) {
+    for (int yPos = 0; yPos < PANEL_RES_Y - 1; yPos++ ) {
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
     }
   }
   delay(20000);
