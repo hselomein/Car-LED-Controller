@@ -96,7 +96,7 @@ void setup() {
       //uint8_t red = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4);
       //uint8_t green = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4 + 1);
       //uint8_t blue = pgm_read_byte(*LYFT_LOGO + (xPos + yPos * 64) * 4 + 2);
-      dma_display->drawPixel(xPos, yPos, dma_display->color565(LYFT_LOGO[Pos], LYFT_LOGO[Pos + 2], LYFT_LOGO[Pos + 1]));
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(LYFT_LOGO[Pos + 2], LYFT_LOGO[Pos + 1], LYFT_LOGO[Pos]));
     }
   }
   delay(5000);
