@@ -199,7 +199,7 @@ void setup() {
   // Fade a Red Wifi Logo In
   for (int r=0; r < 255; r++ )
   {
-    drawXbm565(0,0,64,32, wifi_image1bit, dma_display->color565(r,0,0));  
+    drawXbm565(0,0,64,64, wifi_image1bit, dma_display->color565(r,0,0));  
     delay(10);
   }
 
@@ -221,7 +221,7 @@ void loop() {
 
   for (int xPos = 0; xPos < PANEL_RES_X; xPos++ ) {
     for (int yPos = 0; yPos < PANEL_RES_Y; yPos++ ) {
-      uint16_t color = xPos / 4;
+      uint16_t color = xPos / 4 + yPos / 4 * 256;
       dma_display->drawPixel(xPos, yPos, color);
     }
   }
