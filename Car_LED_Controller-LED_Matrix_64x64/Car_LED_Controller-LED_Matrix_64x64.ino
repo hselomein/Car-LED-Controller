@@ -87,7 +87,7 @@ void setup() {
   dma_display->begin();
   dma_display->setBrightness8(255); //5-255 led matrix does not display using values lower than 5
   dma_display->clearScreen();
-  dma_display->fillScreen(myBLACK);
+  dma_display->fillScreen(myWHITE);
 
   for (int xPos = 0; xPos < 63; xPos++ ) {
     for (int yPos = 0; yPos < 43; yPos++ ) {
