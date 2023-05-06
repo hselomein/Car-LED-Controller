@@ -18,10 +18,12 @@
 #define G2_PIN 12
 #define B2_PIN 13
 #define A_PIN 23
-#define B_PIN 19 // Changed from library default
+//#define B_PIN 19 // Changed from library default
+#define B_PIN 22 // Changed from library default
 #define C_PIN 5
 #define D_PIN 17
-#define E_PIN -1
+//#define E_PIN -1
+#define E_PIN 32
 #define LAT_PIN 4
 #define OE_PIN 15
 #define CLK_PIN 16
@@ -201,9 +203,9 @@ void loop() {
   //delay(2000);
   //dma_display->clearScreen();
 
-  for (int xPos = 0; i < PANEL_RES_X; i++ ) {
-    for (int yPos = 0; i < PANEL_RES_Y; i++ ) {
-      color = xPos % 4 + yPos * 16
+  for (int xPos = 0; xPos < PANEL_RES_X; xPos++ ) {
+    for (int yPos = 0; yPos < PANEL_RES_Y; yPos++ ) {
+      uint16_t color = xPos % 4 + yPos * 16;
       dma_display->drawPixel(xPos, yPos, color);
     }
   }
