@@ -648,8 +648,8 @@ dma_display->fillScreen(myBLACK);
 
 void drawUberLogo(){  
 dma_display->fillScreen(myBLACK);
-  for (int xPos = 0; xPos < 63; xPos++ ) {
-    for (int yPos = 0; yPos < 63; yPos++ ) {
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
       //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = UBER_LOGO[Pos + 2] ? 0 : 255;
