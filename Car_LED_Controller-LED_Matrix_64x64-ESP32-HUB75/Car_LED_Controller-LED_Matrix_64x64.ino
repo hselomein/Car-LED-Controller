@@ -9,7 +9,7 @@
 
 #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
 #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
-#define PANEL_CHAIN 2   // Total number of panels chained one to another
+#define PANEL_CHAIN 1   // Total number of panels chained one to another
 
 //MatrixPanel_I2S_DMA dma_display;
 MatrixPanel_I2S_DMA *dma_display = nullptr;
@@ -575,24 +575,24 @@ void screentest() {
 
   // fix the screen with green
   dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
-  delay(100);
+  delay(500);
 
   // draw a box in yellow
   dma_display->drawRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(15, 15, 0));
-  delay(100);
+  delay(500);
 
   // draw an 'X' in red
   dma_display->drawLine(0, 0, dma_display->width() - 1, dma_display->height() - 1, dma_display->color444(15, 0, 0));
   dma_display->drawLine(dma_display->width() - 1, 0, 0, dma_display->height() - 1, dma_display->color444(15, 0, 0));
-  delay(100);
+  delay(500);
 
   // draw a blue circle
   dma_display->drawCircle(10, 10, 10, dma_display->color444(0, 0, 15));
-  delay(100);
+  delay(500);
 
   // fill a violet circle
   dma_display->fillCircle(40, 21, 10, dma_display->color444(15, 0, 15));
-  delay(100);
+  delay(500);
 
   // fill the screen with 'black'
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
@@ -603,7 +603,6 @@ void drawLyftLogo(){
 dma_display->fillScreen(myBLACK);
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
-      //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
       uint8_t green = LYFT_LOGO[Pos + 1] ? 0 : 255;
@@ -618,7 +617,6 @@ void drawUberLogo(){
 dma_display->fillScreen(myBLACK);
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
-      //dma_display->drawPixel(xPos, yPos, dma_display->color565(xPos * 4, 0, yPos * 4));
       long Pos = (xPos + yPos * 64) * 4;
       uint8_t red = UBER_LOGO[Pos + 2] ? 0 : 255;
       uint8_t green = UBER_LOGO[Pos + 1] ? 0 : 255;
