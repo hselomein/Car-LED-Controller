@@ -15,7 +15,7 @@ struct COLOR {
 
 const int LYFT_WIDTH = 64;
 const int LYFT_HEIGHT = 64;
-const COLOR LYFT_COLOR_F = {191, 0, 255};
+const COLOR LYFT_COLOR_F = {255, 0, 191};
 //LYFT_COLOR_F.Red = 191;
 //LYFT_COLOR_F.Green = 0;
 //LYFT_COLOR_F.Blue = 255;
