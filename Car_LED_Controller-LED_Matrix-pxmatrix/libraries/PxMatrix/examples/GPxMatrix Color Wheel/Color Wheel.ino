@@ -10,20 +10,21 @@
 
 #include <GPxMatrix.h>
 
-#define P_A    32
-#define P_B    17
-#define P_C    33
-#define P_D    16
-#define P_E    5
+
+#define P_A    19
+#define P_B    23
+#define P_C    18
+#define P_D    5
+#define P_E    15
 #define P_CLK  0 
-#define P_LAT  2 
-#define P_OE   4
+#define P_LAT  22 
+#define P_OE   16
 
 //                        R1, G1, B1, R2, G2, B2  (RGB Pins)
 //uint8_t listrgbpins[6] = {27, 26, 14, 12, 25, 15};
 //GPxMatrix matrix(P_A, P_B, P_C, P_D, P_E, P_CLK, P_LAT, P_OE, false, 128, listrgbpins);
 
-GPxMatrix matrix(P_A, P_B, P_C, P_D, P_E, P_CLK, P_LAT, P_OE, false, 128);
+GPxMatrix matrix(P_A, P_B, P_C, P_D, P_E, P_CLK, P_LAT, P_OE, false, 64);
 
 void setup() {
   int      x, y, hue;
