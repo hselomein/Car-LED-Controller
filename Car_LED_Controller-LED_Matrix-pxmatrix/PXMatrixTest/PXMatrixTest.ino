@@ -5,6 +5,7 @@
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
 #define REFRESH_RATE 70
+#define BRIGHTNESS 255
 
 #ifdef ESP32
 
@@ -40,6 +41,8 @@ void setup() {
 Serial.begin(9600);
   display.begin(32);
   display.setDriverChip(FM6126A);
+  display.setBrightness(BRIGHTNESS);
+  display.flushDisplay();
   display.clearDisplay();
   display.setTextColor(myCYAN);
   display.setCursor(2,0);
