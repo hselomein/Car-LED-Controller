@@ -4,7 +4,7 @@
 #define ESP32
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
-#define REFRESH_RATE 50
+#define REFRESH_RATE 70
 
 #ifdef ESP32
 
