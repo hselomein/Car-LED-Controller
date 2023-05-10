@@ -1,13 +1,14 @@
-#include <PxMatrix.h>
-#include <logos.h>
-
 #define ESP32
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
 #define REFRESH_RATE 70
 #define BRIGHTNESS 255
+#define PxMATRIX_COLOR_DEPTH 8
 
 #ifdef ESP32
+
+//#include <PxMatrix.h>
+#include <logos.h>
 
 #define P_LAT 22
 #define P_A 19
@@ -38,16 +39,14 @@ void IRAM_ATTR display_updater(){
 uint16_t myCYAN = display.color565(0, 255, 255);
 void setup() {
   // put your setup code here, to run once:
-Serial.begin(9600);
   display.begin(32);
   display.setDriverChip(FM6126A);
-  display.setBrightness(BRIGHTNESS);
-  display.flushDisplay();
+  display.setFastUpdate(true);
   display.clearDisplay();
+  display.setBrightness(BRIGHTNESS);
   display.setTextColor(myCYAN);
   display.setCursor(2,0);
   display.print("Pixel");
-  Serial.println("hello");
   delay(1000);
 
   #ifdef ESP32
