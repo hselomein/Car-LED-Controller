@@ -1,7 +1,7 @@
 #define ESP32
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
-#define REFRESH_RATE 70
+#define REFRESH_RATE 80
 #define BRIGHTNESS 255
 #define PxMATRIX_COLOR_DEPTH 8
 
@@ -51,7 +51,7 @@ void setup() {
   #ifdef ESP32
     timer = timerBegin(0, 80, true);
     timerAttachInterrupt(timer, &display_updater, true);
-    timerAlarmWrite(timer, 1000, true);
+    timerAlarmWrite(timer, 500, true);
     timerAlarmEnable(timer);
   #endif
 
