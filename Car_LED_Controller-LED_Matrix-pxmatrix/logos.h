@@ -15,14 +15,14 @@
 
 const int LYFT_WIDTH = 64;
 const int LYFT_HEIGHT = 64;
-COLOR LYFT_COLOR_F;
-LYFT_COLOR_F.Red = 191;
-LYFT_COLOR_F.Green = 0;
-LYFT_COLOR_F.Blue = 255;
-COLOR LYFT_COLOR_B;
-LYFT_COLOR_B.Red = 255;
-LYFT_COLOR_B.Green = 255;
-LYFT_COLOR_B.Blue = 255;
+const COLOR LYFT_COLOR_F = {191, 0, 255};
+//LYFT_COLOR_F.Red = 191;
+//LYFT_COLOR_F.Green = 0;
+//LYFT_COLOR_F.Blue = 255;
+const COLOR LYFT_COLOR_B = {255, 255, 255};
+//LYFT_COLOR_B.Red = 255;
+//LYFT_COLOR_B.Green = 255;
+//LYFT_COLOR_B.Blue = 255;
 const bool LYFT_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -284,14 +284,14 @@ const bool LYFT_LOGO[] PROGMEM   =  {
 
 const int UBER_WIDTH = 64;
 const int UBER_HEIGHT = 64;
-COLOR UBER_COLOR_F;
-UBER_COLOR_F.Red = 0;
-UBER_COLOR_F.Green = 0;
-UBER_COLOR_F.Blue = 0;
-COLOR UBER_COLOR_B;
-UBER_COLOR_B.Red = 255;
-UBER_COLOR_B.Green = 255;
-UBER_COLOR_B.Blue = 255;
+const COLOR UBER_COLOR_F = {0, 0, 0};
+//UBER_COLOR_F.Red = 0;
+//UBER_COLOR_F.Green = 0;
+//UBER_COLOR_F.Blue = 0;
+const COLOR UBER_COLOR_B = {255, 255, 255};
+//UBER_COLOR_B.Red = 255;
+//UBER_COLOR_B.Green = 255;
+//UBER_COLOR_B.Blue = 255;
 const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
