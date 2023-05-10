@@ -101,7 +101,8 @@ void drawImage(const bool *image, int width, int height, int xPos, int yPos, COL
     for (int y = 0; y < height; y++ ) {
       long Pos = (x + y * width) * 4;
       COLOR col = image[Pos] ? colorF : colorB;
-      display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
+      //display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
+      display.drawPixelRGB888(x + xPos, y + yPos, 255, 255, 255);
     }
   }
 }
