@@ -1,4 +1,5 @@
 #include <PxMatrix.h>
+#include <logos.h>
 
 #define ESP32
 #define DISPLAY_WIDTH 64
