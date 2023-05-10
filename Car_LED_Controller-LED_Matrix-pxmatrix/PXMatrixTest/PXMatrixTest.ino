@@ -96,9 +96,9 @@ void loop() {
   delay(2000);
 }
 
-void drawImage(bool *image, int width, int height, int xPos, int yPos, COLOR colorF, COLOR colorB) {
-  for (int xPos = 0; x < width; x++ ) {
-    for (int yPos = 0; y < height; y++ ) {
+void drawImage(const bool *image, int width, int height, int xPos, int yPos, COLOR colorF, COLOR colorB) {
+  for (int x = 0; x < width; x++ ) {
+    for (int y = 0; y < height; y++ ) {
       long Pos = (x + y * width) * 4;
       COLOR col = image[Pos] ? colorF : colorB;
       display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);

@@ -1,3 +1,6 @@
+#ifndef _LOGOS_H_
+#define _LOGOS_H_
+
 #ifndef _PxMATRIX_H
     #include <PxMatrix.h>
 #endif
@@ -7,11 +10,11 @@
         uint8_t Red;
         uint8_t Green;
         uint8_t Blue;
-    }
+    };
 #endif
 
-const int LYFT_WIDTH = 64
-const int LYFT_HEIGHT = 64
+const int LYFT_WIDTH = 64;
+const int LYFT_HEIGHT = 64;
 COLOR LYFT_COLOR_F;
 LYFT_COLOR_F.Red = 191;
 LYFT_COLOR_F.Green = 0;
@@ -279,8 +282,8 @@ const bool LYFT_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-const int UBER_WIDTH = 64
-const int UBER_HEIGHT = 64
+const int UBER_WIDTH = 64;
+const int UBER_HEIGHT = 64;
 COLOR UBER_COLOR_F;
 UBER_COLOR_F.Red = 0;
 UBER_COLOR_F.Green = 0;
@@ -547,3 +550,6 @@ const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
+
+
+#endif // _LOGOS_H_
