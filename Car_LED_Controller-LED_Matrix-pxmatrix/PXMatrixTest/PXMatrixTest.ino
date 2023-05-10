@@ -49,10 +49,10 @@ void setup() {
   delay(1000);
 
   #ifdef ESP32
-    timer = timerBegin(0, 80, true);
-    timerAttachInterrupt(timer, &display_updater, true);
-    timerAlarmWrite(timer, 500, true);
-    timerAlarmEnable(timer);
+    //timer = timerBegin(0, 80, true);
+    //timerAttachInterrupt(timer, &display_updater, true);
+    //timerAlarmWrite(timer, 500, true);
+    //timerAlarmEnable(timer);
   #endif
 
   delay(3000);
@@ -62,9 +62,11 @@ void setup() {
 void loop() {
   display.clearDisplay();
   drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
+  display.display(2000);
   delay(2000);
   display.clearDisplay();
   drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
+  display.display(2000);
   delay(2000);
 }
 
