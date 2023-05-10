@@ -1,7 +1,9 @@
 #include <PxMatrix.h>
 
 #define ESP32
-
+#define DISPLAY_WIDTH 64
+#define DISPLAY_HEIGHT 64
+#define REFRESH_RATE 70
 
 #ifdef ESP32
 
@@ -34,15 +36,16 @@ Ticker display_ticker;
 
 //PxMATRIX display(32,16,P_LAT, P_OE,P_A,P_B,P_C);
 //PxMATRIX display(64,32,P_LAT, P_OE,P_A,P_B,P_C,P_D);
-PxMATRIX display(64,64,P_LAT, P_OE,P_A,P_B,P_C,P_D,P_E);
+PxMATRIX display(DISPLAY_WIDTH,DISPLAY_HEIGHT,P_LAT, P_OE,P_A,P_B,P_C,P_D,P_E);
 
 #ifdef ESP8266
 // ISR for display refresh
 void display_updater()
 {
-  display.displayTestPattern(70);
-  // display.displayTestPixel(70);
-  //display.display(70);
+  //display.displayTestPattern(REFRESH_RATE);
+  // display.displayTestPixel(REFRESH_RATE);
+  display.clearDisplay();
+  display.display(REFRESH_RATE);
 }
 #endif
 
@@ -50,8 +53,9 @@ void display_updater()
 void IRAM_ATTR display_updater(){
   // Increment the counter and set the time of ISR
   portENTER_CRITICAL_ISR(&timerMux);
-  //isplay.display(70);
-  display.displayTestPattern(70);
+  display.clearDisplay();
+  display.display(REFRESH_RATE);
+  //display.displayTestPattern(REFRESH_RATE);
   portEXIT_CRITICAL_ISR(&timerMux);
 }
 #endif
@@ -67,6 +71,7 @@ Serial.begin(9600);
   display.setCursor(2,0);
   display.print("Pixel");
   Serial.println("hello");
+  delay(2000);
 
   #ifdef ESP8266
     display_ticker.attach(0.004, display_updater);
@@ -84,7 +89,18 @@ Serial.begin(9600);
 
 
 void loop() {
+  drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
+  delay(2000);
+  drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
+  delay(2000);
+}
 
- delay(100);
-
+void drawImage(bool *image, int width, int height, int xPos, int yPos, COLOR colorF, COLOR colorB) {
+  for (int xPos = 0; x < width; x++ ) {
+    for (int yPos = 0; y < height; y++ ) {
+      long Pos = (x + y * width) * 4;
+      COLOR col = image[Pos] ? colorF : colorB;
+      display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
+    }
+  }
 }
