@@ -63,6 +63,7 @@ void setup() {
 void loop() {
   display.clearDisplay();
   drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
+  display.latch(5000);
   delay(2000);
   display.clearDisplay();
   drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
