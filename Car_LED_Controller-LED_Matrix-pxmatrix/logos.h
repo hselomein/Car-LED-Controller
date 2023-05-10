@@ -1,3 +1,6 @@
+#ifndef _LOGOS_H_
+#define _LOGOS_H_
+
 #ifndef _PxMATRIX_H
     #include <PxMatrix.h>
 #endif
