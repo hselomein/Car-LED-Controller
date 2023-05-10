@@ -5,13 +5,13 @@
     #include <PxMatrix.h>
 #endif
 
-#ifndef COLOR
-    struct COLOR {
-        uint8_t Red;
-        uint8_t Green;
-        uint8_t Blue;
-    };
-#endif
+//#ifndef COLOR
+struct COLOR {
+	uint8_t Red;
+	uint8_t Green;
+	uint8_t Blue;
+};
+//#endif
 
 const int LYFT_WIDTH = 64;
 const int LYFT_HEIGHT = 64;
