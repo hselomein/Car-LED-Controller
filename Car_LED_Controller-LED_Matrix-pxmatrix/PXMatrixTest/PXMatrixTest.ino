@@ -30,7 +30,6 @@ void IRAM_ATTR display_updater(){
   // Increment the counter and set the time of ISR
   portENTER_CRITICAL_ISR(&timerMux);
   display.display(REFRESH_RATE);
-  //display.displayTestPattern(REFRESH_RATE);
   portEXIT_CRITICAL_ISR(&timerMux);
 }
 #endif
@@ -52,7 +51,7 @@ void setup() {
   #ifdef ESP32
     timer = timerBegin(0, 80, true);
     timerAttachInterrupt(timer, &display_updater, true);
-    timerAlarmWrite(timer, 4000, true);
+    timerAlarmWrite(timer, 1000, true);
     timerAlarmEnable(timer);
   #endif
 
@@ -63,7 +62,6 @@ void setup() {
 void loop() {
   display.clearDisplay();
   drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
-  display.latch(5000);
   delay(2000);
   display.clearDisplay();
   drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
