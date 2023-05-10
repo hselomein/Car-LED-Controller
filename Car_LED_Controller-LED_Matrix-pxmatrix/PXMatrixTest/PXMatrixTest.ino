@@ -4,7 +4,7 @@
 #define ESP32
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
-#define REFRESH_RATE 70
+#define REFRESH_RATE 20
 
 #ifdef ESP32
 
@@ -45,7 +45,6 @@ void display_updater()
 {
   //display.displayTestPattern(REFRESH_RATE);
   // display.displayTestPixel(REFRESH_RATE);
-  display.clearDisplay();
   display.display(REFRESH_RATE);
 }
 #endif
@@ -54,7 +53,6 @@ void display_updater()
 void IRAM_ATTR display_updater(){
   // Increment the counter and set the time of ISR
   portENTER_CRITICAL_ISR(&timerMux);
-  display.clearDisplay();
   display.display(REFRESH_RATE);
   //display.displayTestPattern(REFRESH_RATE);
   portEXIT_CRITICAL_ISR(&timerMux);
@@ -67,7 +65,8 @@ void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
   display.begin(4);
-  display.flushDisplay();
+  display.setDriverChip(FM6126A);
+  display.clearDisplay();
   display.setTextColor(myCYAN);
   display.setCursor(2,0);
   display.print("Pixel");
@@ -90,8 +89,10 @@ Serial.begin(9600);
 
 
 void loop() {
+  display.clearDisplay();
   drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
   delay(2000);
+  display.clearDisplay();
   drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
   delay(2000);
 }
