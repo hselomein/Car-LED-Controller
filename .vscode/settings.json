@@ -1,6 +1,7 @@
 {
     "arduino.useArduinoCli": true,
     "files.associations": {
-        "compare": "cpp"
+        "compare": "cpp",
+        "cmath": "cpp"
     }
 }

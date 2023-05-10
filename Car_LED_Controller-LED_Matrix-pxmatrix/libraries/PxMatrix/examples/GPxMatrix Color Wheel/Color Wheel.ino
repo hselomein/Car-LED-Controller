@@ -7,6 +7,8 @@
 // for Adafruit Industries.
 // BSD license, all text above must be included in any redistribution.
 
+#define ESP32
+#define ARDUINO_ARCH_ESP32
 
 #include <GPxMatrix.h>
 
@@ -16,7 +18,7 @@
 #define P_C    18
 #define P_D    5
 #define P_E    15
-#define P_CLK  0 
+#define P_CLK  14 
 #define P_LAT  22 
 #define P_OE   16
 
@@ -33,34 +35,40 @@ void setup() {
   uint16_t c;
 
   matrix.begin();
+  matrix.fillScreen((31 << 11) + (63 << 5) + 31);
+  matrix.updateDisplay();
+  delay(2000);
+  matrix.fillScreen(0);
 
-  for(x=0; x < matrix.width(); x++) {
-    dx = 63.5 - (float)x;
-    for(y=0; y < matrix.height(); y++) {
+  for(x=0; x < 64; x++) {
+    dx = 31.5 - (float)x;
+    for(y=0; y < 64; y++) {
       dy = 31.5 - (float)y;
-      d  = dx * dx + dy * dy;
-      if(d <= (128.5 * 64.5)) { // Inside the circle(ish)?
-        hue = (int)((atan2(dx, -dy) + PI) * 1536.0 / (PI * 2.0))*3;
-        d = sqrt(d);
-        if(d > 63.5) {
-          // Do a little pseudo anti-aliasing along perimeter
-          sat = 255;
-          val = (int)((1.0 - (d - 63.5)) * 255.0 + 0.5);
-        } else
-        {
-          // White at center
-          sat = (int)(d / 63.5 * 255.0 + 0.5);
-          val = 255;
-        }
-        c = matrix.ColorHSV(hue, sat, val, true);
+      hue = (int)((atan2(dx, -dy) + PI) * 180.0 / PI);
+      d = sqrt(dx * dx + dy * dy);
+      if (d <= 31.5) {
+        sat = (int)(d / 31.5 * 255.0 + 0.5);
+        val = 255;
       } else {
-        c = 0;
-      }
-      matrix.drawPixel(x, y, c);
+        sat = 0;
+        val = (int)(255.5 - (d - 31.5) * 18);
+    }      
+    c = matrix.ColorHSV(hue, sat, val, true);
+    matrix.drawPixel(x, y, c);
     }
   }
+  matrix.updateDisplay();
+  delay(5000);
 }
 
 void loop() {
-  // Do nothing -- image doesn't change
+  matrix.fillScreen(matrix.Color888(255, 0, 0));
+  matrix.updateDisplay();
+  delay(1000);
+  matrix.fillScreen(matrix.Color888(0, 255, 0));
+  matrix.updateDisplay();
+  delay(1000);
+  matrix.fillScreen(matrix.Color888(0, 0, 255));
+  matrix.updateDisplay();
+  delay(1000);
 }
