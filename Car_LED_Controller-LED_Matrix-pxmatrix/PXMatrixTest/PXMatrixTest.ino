@@ -4,7 +4,7 @@
 #define ESP32
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
-#define REFRESH_RATE 20
+#define REFRESH_RATE 50
 
 #ifdef ESP32
 
@@ -20,34 +20,8 @@ portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 
 #endif
 
-#ifdef ESP8266
-
-#include <Ticker.h>
-Ticker display_ticker;
-#define P_LAT 16
-#define P_A 5
-#define P_B 4
-#define P_C 15
-#define P_D 12
-#define P_E 0
-#define P_OE 2
-
-#endif
 // Pins for LED MATRIX
-
-//PxMATRIX display(32,16,P_LAT, P_OE,P_A,P_B,P_C);
-//PxMATRIX display(64,32,P_LAT, P_OE,P_A,P_B,P_C,P_D);
 PxMATRIX display(DISPLAY_WIDTH,DISPLAY_HEIGHT,P_LAT, P_OE,P_A,P_B,P_C,P_D,P_E);
-
-#ifdef ESP8266
-// ISR for display refresh
-void display_updater()
-{
-  //display.displayTestPattern(REFRESH_RATE);
-  // display.displayTestPixel(REFRESH_RATE);
-  display.display(REFRESH_RATE);
-}
-#endif
 
 #ifdef ESP32
 void IRAM_ATTR display_updater(){
@@ -71,11 +45,7 @@ Serial.begin(9600);
   display.setCursor(2,0);
   display.print("Pixel");
   Serial.println("hello");
-  delay(2000);
-
-  #ifdef ESP8266
-    display_ticker.attach(0.004, display_updater);
-  #endif
+  delay(1000);
 
   #ifdef ESP32
     timer = timerBegin(0, 80, true);
@@ -84,7 +54,7 @@ Serial.begin(9600);
     timerAlarmEnable(timer);
   #endif
 
-  delay(1000);
+  delay(3000);
 }
 
 
@@ -103,7 +73,8 @@ void drawImage(const bool *image, int width, int height, int xPos, int yPos, COL
       long Pos = (x + y * width) * 4;
       COLOR col = image[Pos] ? colorF : colorB;
       //display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
-      display.drawPixelRGB888(x + xPos, y + yPos, 255, 255, 255);
+      //display.drawPixelRGB888(x + xPos, y + yPos, 255, 255, 255);
+      display.drawPixel(x + xPos, y + yPos, display.color565(255, 255, 255));
     }
   }
 }
