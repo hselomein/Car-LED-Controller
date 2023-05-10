@@ -38,7 +38,7 @@ uint16_t myCYAN = display.color565(0, 255, 255);
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
-  display.begin(4);
+  display.begin(32);
   display.setDriverChip(FM6126A);
   display.clearDisplay();
   display.setTextColor(myCYAN);
@@ -72,9 +72,9 @@ void drawImage(const bool *image, int width, int height, int xPos, int yPos, COL
     for (int y = 0; y < height; y++ ) {
       long Pos = (x + y * width) * 4;
       COLOR col = image[Pos] ? colorF : colorB;
-      //display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
+      display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
       //display.drawPixelRGB888(x + xPos, y + yPos, 255, 255, 255);
-      display.drawPixel(x + xPos, y + yPos, display.color565(255, 255, 255));
+      //display.drawPixel(x + xPos, y + yPos, display.color565(255, 255, 255));
     }
   }
 }
