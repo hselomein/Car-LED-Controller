@@ -2,8 +2,11 @@
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
 #define REFRESH_RATE 1000
-#define BRIGHTNESS 1
 #define PxMATRIX_COLOR_DEPTH 8
+
+//#define BRIGHTNESS 1
+int Brightness = 255
+#define BrightFactor (255 / Brightness)
 
 #ifdef ESP32
 
@@ -42,7 +45,7 @@ void setup() {
   display.setDriverChip(FM6124);
   display.setFastUpdate(false);
   display.clearDisplay();
-  display.setBrightness(BRIGHTNESS);
+  //display.setBrightness(BRIGHTNESS);
   display.setTextColor(myCYAN);
   display.setCursor(2,0);
   display.print("Pixel");
@@ -60,18 +63,18 @@ void setup() {
 
 
 void loop() {
-  display.clearDisplay();
-  drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F_DIM, LYFT_COLOR_B_DIM);
-  delay(2000);
-  display.clearDisplay();
-  drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
-  delay(2000);
-  display.clearDisplay();
-  drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F_DIM, UBER_COLOR_B_DIM);
-  delay(2000);
-  display.clearDisplay();
-  drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
-  delay(2000);
+  while (true) {
+    Brightness -= 25;
+    if (Brightness < 0) {Brightness = 255;}
+
+    display.clearDisplay();
+    drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
+    delay(1000);
+
+    display.clearDisplay();
+    drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
+    delay(1000);
+  }
 }
 
 void drawImage(const bool *image, int width, int height, int xPos, int yPos, COLOR colorF, COLOR colorB) {
@@ -79,7 +82,7 @@ void drawImage(const bool *image, int width, int height, int xPos, int yPos, COL
     for (int y = 0; y < height; y++ ) {
       long Pos = (x + y * width) * 4;
       COLOR col = image[Pos] ? colorF : colorB;
-      display.drawPixelRGB888(x + xPos, y + yPos, col.Red, col.Green, col.Blue);
+      display.drawPixelRGB888(x + xPos, y + yPos, col.Red * BrightFactor, col.Green * BrightFactor, col.Blue * BrightFactor);
       //display.drawPixelRGB888(x + xPos, y + yPos, 255, 255, 255);
       //display.drawPixel(x + xPos, y + yPos, display.color565(255, 255, 255));
     }
