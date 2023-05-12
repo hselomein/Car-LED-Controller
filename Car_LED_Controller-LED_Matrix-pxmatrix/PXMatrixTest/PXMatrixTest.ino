@@ -5,7 +5,7 @@
 #define PxMATRIX_COLOR_DEPTH 8
 
 //#define BRIGHTNESS 1
-int Brightness = 255
+int Brightness = 255;
 #define BrightFactor (255 / Brightness)
 
 #ifdef ESP32
