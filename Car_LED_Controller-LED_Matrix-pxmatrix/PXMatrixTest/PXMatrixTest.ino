@@ -2,7 +2,7 @@
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 64
 #define REFRESH_RATE 1000
-#define BRIGHTNESS 255
+#define BRIGHTNESS 1
 #define PxMATRIX_COLOR_DEPTH 8
 
 #ifdef ESP32
@@ -39,8 +39,8 @@ uint16_t myCYAN = display.color565(0, 255, 255);
 void setup() {
   // put your setup code here, to run once:
   display.begin(32);
-  display.setDriverChip(FM6126A);
-  display.setFastUpdate(true);
+  display.setDriverChip(FM6124);
+  display.setFastUpdate(false);
   display.clearDisplay();
   display.setBrightness(BRIGHTNESS);
   display.setTextColor(myCYAN);
@@ -61,7 +61,13 @@ void setup() {
 
 void loop() {
   display.clearDisplay();
+  drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F_DIM, LYFT_COLOR_B_DIM);
+  delay(2000);
+  display.clearDisplay();
   drawImage(LYFT_LOGO, LYFT_WIDTH, LYFT_HEIGHT, 0, 0, LYFT_COLOR_F, LYFT_COLOR_B);
+  delay(2000);
+  display.clearDisplay();
+  drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F_DIM, UBER_COLOR_B_DIM);
   delay(2000);
   display.clearDisplay();
   drawImage(UBER_LOGO, UBER_WIDTH, UBER_HEIGHT, 0, 0, UBER_COLOR_F, UBER_COLOR_B);
