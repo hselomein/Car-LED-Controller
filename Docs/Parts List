@@ -1,0 +1,31 @@
+ESP32-WROOM-32
+  https://www.amazon.com/AITRIP-ESP32-DevKitC-Development-ESP32-WROOM-32U-Bluetooth/dp/B08HMJ1X6W/
+LED Strip - SK6818 - RGBWW - 144 Leds per meter. Total lenght is 193 leds
+  https://www.superlightingled.com/sk6812-rgbwwwa-144ledsm-dc5v-12mmwide-digital-intelligent-addressable-led-strip-lights-1m328ft-per-roll-p-2394.html
+Round Silicone LED Light Diffuser For Neon Light Art 270° Top Emitting Φ22mm - A different vendor has a 16mm tube
+  https://www.superlightingled.com/round-silicone-led-light-diffuser-for-neon-light-art-270-top-emitting-%CE%A622mm-p-4383.html
+20Amp Buck Converters x2
+  https://www.amazon.com/dp/B099S2VQ2Q?psc=1&ref=ppx_yo2ov_dt_b_product_details
+2 Relay Module
+  https://www.amazon.com/WMYCONGCONG-Channel-Optocoupler-Trigger-Expansion/dp/B081MVCS8F/
+I2C 2x16 character LCD
+  https://www.amazon.com/DORHEA-Yellow-Green-Backlight-Interface-Compatible/dp/B08TWPW7Q9?th=1
+Bi-Direntional Logic level converter
+  https://www.amazon.com/dp/B07F7W91LC?psc=1&ref=ppx_yo2ov_dt_b_product_details
+1 Momentary switch
+1 buck converter To simulate input voltages such as the DRL light 
+  https://www.amazon.com/Zixtec-LM2596-Converter-Module-1-25V-30V/dp/B07VVXF7YX/
+1 400uf Capacitor
+3 47k OHM resistors
+2 10k Ohm resistors
+1 Molex mx150 connector set - p/n: 33472-8044 
+  If you are using a ford vehicle, but always verify the light connector if you dont want to splice into your harness
+  
+  
+  
+  Potential Hardware Links
+https://www.superlightingled.com/sk6812-rgb-dc5v-60ledsm-side-emitting-addressable-led-strip-lights-240-4020smds-p-1160.html
+https://www.zhihoolight.com/digital-led-strip/side-light-rgbw-digital-addressable-4818-pixel-led-strip-tape-lights.html
+https://www.amazon.com/dp/B08CXG9M2S/ref=emc_b_5_t?th=1
+https://www.ebay.com/itm/334761847481
+  
