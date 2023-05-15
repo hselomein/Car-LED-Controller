@@ -45,10 +45,19 @@ Vehicle inpection mode, that will disable the lights, physical switch
 
 There is a parts list so you can build this as well.
 
+How to use with Platformio IDE:
+- You will need the Platformio-ide extension installed in VSCODE in order to compile the code
+The src folder is where the code you want to compile and upload code to the ESP32
+Edit code in the files outside the src folder
+Copy the file to the src folder and rename file file extension to .cpp
+Build as normal
+
+
 Code Notes:
 - led_controller-ESP32.ino  - this is the program for the esp32 architecture
-- led_controller-AVR.ino    - this is the unfinished program for the AVR architecture
+- Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix
 - Part List - this is the shopping list of parts for this project
+- PXMatrixTest.ino - Test program for 64x64 P2 LED Matrix using the PXMatrix library
 
 Corey Davis created the project and put together the prototypes.
 Yves Avady wrote the code for this project.
