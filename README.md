@@ -34,12 +34,18 @@ The number of LEDs in strip 144 pixels per meter, x4 individual pixelets, SK6812
 At powerup LED strip will sweep 3 times each pass leaving the light on brighter untill filled.
 It'll stay filled white unless another mode is selected or an action happens
 
+2 LED Matrices will be attached the front and back of the vehicle and show 1 of 3 screens
+  - Off or Blank for normal driving mode
+  - Uber Mode: Shows Uber logo
+  - Lyft Mode: Shows Lyft Logo
+
 Actions:
 DRL are in DRL Mode light will be full brightness
 DRL is in parking light mode will be half brightness
-Horn is pressed LED Strip will trun orange for the duration of the press
-UBER Mode will turn the lights Cyan
-Lyft Mide will trun the lights Magenta
+WHen not in Uber of Lyft mode, the LED Matrix will be blank or off
+Horn is pressed LED Strip will turn orange for the duration of the press
+UBER Mode will turn the lights Cyan and the LED Matrix will show the Uber logo
+Lyft Mide will turn the lights Magenta and the LED Matrix will show the Lyft Logo
 Angry Mode will be some orangy red color, cant be RED as that is illegal in the front
 Vehicle inpection mode, that will disable the lights, physical switch
 
@@ -52,15 +58,13 @@ Edit code in the files outside the src folder
 Copy the file to the src folder and rename file file extension to .cpp
 Build as normal
 
+How to use with Arduino IDE
+The .ino files in the root of the directory are the files to load in the to Arduino IDE
+
 
 Code Notes:
 - led_controller-ESP32.ino  - this is the program for the esp32 architecture
 - Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix
 - Part List - this is the shopping list of parts for this project
 - PXMatrixTest.ino - Test program for 64x64 P2 LED Matrix using the PXMatrix library
-
-Corey Davis created the project and put together the prototypes.
-Yves Avady wrote the code for this project.
-
-
 
