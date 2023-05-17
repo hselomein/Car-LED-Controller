@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------
-    Program:        car_led_controller
+    Program:        car_led_controller 
 
     Description:    Controls LED strip behavior based on various 
                     Inputs such as, drl, headlights, horn, and button
-		    activity. This is for the esp32
+		    activity. This is for the esp32 and led matrix
 
     Date:           3/1/2023
 
@@ -60,10 +60,10 @@ MatrixPanel_I2S_DMA *dma_display = nullptr;
 // Pins to device mapping
 #define RELAY_PIN_1     18        // D18 => In1 Relay
 #define RELAY_PIN_2     19        // D19 => In2 Relay
-#define LED_PIN         35        // D13 => LED Controller Signal
-#define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
-#define HORN_PIN        ADC1_CHANNEL_4        // Pin 32 => Horn Sense
-ezButton modeButton(34);  // create ezButton object that attach to pin 23;
+#define LED_PIN         23        // D13 => LED Controller Signal
+#define DRL_PIN         ADC1_CHANNEL_0        // Pin 33 => DRL Sense
+#define HORN_PIN        ADC1_CHANNEL_3       // Pin 32 => Horn Sense
+ezButton modeButton(34);  // create ezButton object that attach to pin 25;
 //#define PK_L_PIN        35        // D35 => Parking Lights Sense 
 //#define HIBM_PIN        33        // A33 => HiBeam Sense
 
@@ -155,9 +155,87 @@ cModes curMode;
 
 bool FirstLoop = true;
 
+void taskLCDUpdates( void * pvParameters ){
+  char tmpMessage[16];
+  
+  lcd.clear();    //clear the display and home the cursor
+ 
+  sprintf(tmpMessage, "Color  DRL  Horn"); 
+  lcd.setCursor(0,0); //move cursor to 1st line on display
+  lcd.print(tmpMessage);
+  delay(50); 
+
+  while(true){
+    if (curHorn > VOLT_BUF) {
+      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
+    } else {
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);  
+    }
+    lcd.setCursor(0,1); //move cursor to 2nd line on display
+    lcd.print(tmpMessage);
+
+    delay(LCD_UPDATE_INTERVAL);
+  }
+}
+
+void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
+  int ledLeft = 0; int ledRight = 0;
+  int offset;
+  for (int i = 1; i <= NUM_LEDS_HALF; i++) {
+    // Set current left and right LEDs based on the direction
+    if (boolDirection) {                //Out 
+      ledLeft = NUM_LEDS_HALF - i;
+      offset = 1; 
+    } else {                              //In
+      ledLeft = i; 
+      offset = -1;
+    }
+    ledRight = NUM_LEDS - ledLeft -1;
+
+    leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
+    leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight - offset, minColor);
+    if (msDelay) {
+      delay(msDelay);
+    }
+    leds.show();
+  }
+}
+
+void startupSequence() {
+  // Loop 4 times
+  //  1 - Towards center clear trail
+  //  2 - Away from center clear trail
+  //  3 - Towards center remain partial brightness
+  //  4 - Away from center remain full brightness 
+  uint32_t curDimColor = offCOLOR;
+  for (int i = 0; i < numLOOPS; i++){
+    switch(i) {
+      case 2:
+        curDimColor = dimCOLOR;
+        break;
+      case 3:
+        curDimColor = brightCOLOR;
+        break;
+      default:
+        curDimColor = offCOLOR;
+    }
+    // Perform the LED wave effect
+    ledWave(brightCOLOR, curDimColor, msDELAY, i % 2);
+  }
+
+  // Turn DefaultSolid Color:
+  leds.fill(DEFAULT_COLOR);
+  leds.show();
+}
+
+float Abs(float val) {
+  if (val > 0) { return val; }
+  else { return -val; }
+}
+
 void setup()
 {
-  Serial.begin(115200);   // serial monitor for debugging
+  Serial.begin(9600);   // serial monitor for debugging
   delay(250); // power-up safety delay
     
   //setup the button
@@ -176,7 +254,7 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(RELAY_PIN_2, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
-  
+  //pinMode(ezButton, INPUT);
   pinMode(DRL_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
   //pinMode(PK_L_PIN, INPUT);
@@ -208,29 +286,6 @@ void setup()
         1);               /* Core where the task should run */
 }
 
-void taskLCDUpdates( void * pvParameters ){
-  char tmpMessage[16];
-  
-  lcd.clear();    //clear the display and home the cursor
- 
-  sprintf(tmpMessage, "Color  DRL  Horn"); 
-  lcd.setCursor(0,0); //move cursor to 1st line on display
-  lcd.print(tmpMessage);
-  delay(50); 
-
-  while(true){
-    if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "ORNG %04.1fV %04.1fV", curDRL, curHorn);
-    } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);  
-    }
-    lcd.setCursor(0,1); //move cursor to 2nd line on display
-    lcd.print(tmpMessage);
-
-    delay(LCD_UPDATE_INTERVAL);
-  }
-}
-
 void loop()
 {
   static int    curSample = 1;
@@ -241,6 +296,10 @@ void loop()
   //curPkL += analogRead(PK_L_PIN);
   //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
+
+  Serial.print("Horn Voltage:"); Serial.println(curHorn);
+  Serial.print("DRL Voltage:"); Serial.println(curDRL);
+  Serial.print("Current Sample Number:"); Serial.println(curSample);
 
   modeButton.loop();      // MUST call the loop() function first
   Serial.println(modeButton.getState());
@@ -257,6 +316,7 @@ void loop()
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     //curPkL *= VOLT_ADJ;
     //curHiBeam *= VOLT_ADJ;
+   ;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -300,57 +360,3 @@ void loop()
   }
 }
 
-void startupSequence() {
-  // Loop 4 times
-  //  1 - Towards center clear trail
-  //  2 - Away from center clear trail
-  //  3 - Towards center remain partial brightness
-  //  4 - Away from center remain full brightness 
-  uint32_t curDimColor = offCOLOR;
-  for (int i = 0; i < numLOOPS; i++){
-    switch(i) {
-      case 2:
-        curDimColor = dimCOLOR;
-        break;
-      case 3:
-        curDimColor = brightCOLOR;
-        break;
-      default:
-        curDimColor = offCOLOR;
-    }
-    // Perform the LED wave effect
-    ledWave(brightCOLOR, curDimColor, msDELAY, i % 2);
-  }
-
-  // Turn DefaultSolid Color:
-  leds.fill(DEFAULT_COLOR);
-  leds.show();
-}
-
-void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
-  int ledLeft = 0; int ledRight = 0;
-  int offset;
-  for (int i = 1; i <= NUM_LEDS_HALF; i++) {
-    // Set current left and right LEDs based on the direction
-    if (boolDirection) {                //Out 
-      ledLeft = NUM_LEDS_HALF - i;
-      offset = 1; 
-    } else {                              //In
-      ledLeft = i; 
-      offset = -1;
-    }
-    ledRight = NUM_LEDS - ledLeft -1;
-
-    leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
-    leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight - offset, minColor);
-    if (msDelay) {
-      delay(msDelay);
-    }
-    leds.show();
-  }
-}
-
-float Abs(float val) {
-  if (val > 0) { return val; }
-  else { return -val; }
-}
