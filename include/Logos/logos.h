@@ -1,30 +1,13 @@
  #ifndef _LOGOS_H_
 #define _LOGOS_H_
 
-#ifndef _PxMATRIX_H
-    #include <PxMatrix.h>
+#ifndef _ESP32_HUB75_MATRIXPANEL_I2S_DMA_H
+    #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
+
 #endif
 
-#ifndef COLOR
-struct COLOR {
-	uint8_t Red;
-	uint8_t Green;
-	uint8_t Blue;
-};
-#endif
 
-const int LYFT_WIDTH = 64;
-const int LYFT_HEIGHT = 64;
-const COLOR LYFT_COLOR_F = {255, 0, 191};
-const COLOR LYFT_COLOR_F_DIM = {2, 0, 1};
-//LYFT_COLOR_F.Red = 191;
-//LYFT_COLOR_F.Green = 0;
-//LYFT_COLOR_F.Blue = 255;
-//const COLOR LYFT_COLOR_B_DIM = {3, 3, 3};
-const COLOR LYFT_COLOR_B = {255, 255, 255};
-//LYFT_COLOR_B.Red = 255;
-//LYFT_COLOR_B.Green = 255;
-//LYFT_COLOR_B.Blue = 255;
+//UBER and LYFT LOGOS
 const bool LYFT_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -284,18 +267,6 @@ const bool LYFT_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-const int UBER_WIDTH = 64;
-const int UBER_HEIGHT = 64;
-const COLOR UBER_COLOR_F = {0, 0, 0};
-//const COLOR UBER_COLOR_F_DIM = {0, 0, 0};
-//UBER_COLOR_F.Red = 0;
-//UBER_COLOR_F.Green = 0;
-//UBER_COLOR_F.Blue = 0;
-const COLOR UBER_COLOR_B = {255, 255, 255};
-//const COLOR UBER_COLOR_B_DIM = {3, 3, 3};
-//UBER_COLOR_B.Red = 255;
-//UBER_COLOR_B.Green = 255;
-//UBER_COLOR_B.Blue = 255;
 const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -554,6 +525,5 @@ const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
-
 
 #endif // _LOGOS_H_
