@@ -211,7 +211,7 @@ class cModes {
     void Init() {
       curColor = DEFAULT_COLOR;
       txtColor = "WHIT";
-      delay(400);
+      delay(100);
       modeButton.loop();      // MUST call the loop() function first
       modeButton.getCount();
       modeButton.resetCount();
@@ -303,24 +303,24 @@ void screentest() {
 
   // fix the screen with green
   dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
-  delay(500);
+  delay(100);
 
   // draw a box in yellow
   dma_display->drawRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(15, 15, 0));
-  delay(500);
+  delay(100);
 
   // draw an 'X' in red
   dma_display->drawLine(0, 0, dma_display->width() - 1, dma_display->height() - 1, dma_display->color444(15, 0, 0));
   dma_display->drawLine(dma_display->width() - 1, 0, 0, dma_display->height() - 1, dma_display->color444(15, 0, 0));
-  delay(500);
+  delay(100);
 
   // draw a blue circle
   dma_display->drawCircle(10, 10, 10, dma_display->color444(0, 0, 15));
-  delay(500);
+  delay(100);
 
   // fill a violet circle
   dma_display->fillCircle(40, 21, 10, dma_display->color444(15, 0, 15));
-  delay(500);
+  delay(100);
 
   // fill the screen with 'black'
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
@@ -331,7 +331,7 @@ void screentest() {
 
 void setup()
 {
-  Serial.begin(9600);   // serial monitor for debugging
+  //Serial.begin(9600);   // serial monitor for debugging
   delay(250); // power-up safety delay
     
   //setup the button
@@ -381,16 +381,15 @@ void setup()
   dma_display->clearScreen();
   dma_display->fillScreen(myWHITE);
 
-  screentest();
-
-  // Start LEDs
+    // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
   leds.begin();
   leds.show();
   leds.setBrightness(MAX_BRIGHTNESS);
 
   // Initiate startup lighting sequence
-  startupSequence();
+  startupSequence(); 
+  screentest();
 
   // Create task on Core 1 to Update LCD
   xTaskCreatePinnedToCore(
@@ -414,12 +413,12 @@ void loop()
   //curHiBeam += analogRead(HIBM_PIN);
   curSample++;
 
-  Serial.print("Horn Voltage:"); Serial.println(curHorn);
-  Serial.print("DRL Voltage:"); Serial.println(curDRL);
-  Serial.print("Current Sample Number:"); Serial.println(curSample);
+  //Serial.print("Horn Voltage:"); Serial.println(curHorn);
+  //Serial.print("DRL Voltage:"); Serial.println(curDRL);
+  //Serial.print("Current Sample Number:"); Serial.println(curSample);
 
   modeButton.loop();      // MUST call the loop() function first
-  Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
+  //Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
   if (FirstLoop) {
     curMode.Init();
     FirstLoop = false;
@@ -442,7 +441,7 @@ void loop()
       }
       leds.setBrightness(MIN_BRIGHTNESS);
       dma_display->setBrightness8(MIN_BRIGHTNESS);
-      Serial.println("DRL Brightness level LOW");
+      //Serial.println("DRL Brightness level LOW");
     } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
       if (!RelayPin1State) {
         RelayPin1State = true;
@@ -451,16 +450,16 @@ void loop()
       }
       leds.setBrightness(MAX_BRIGHTNESS);
       dma_display->setBrightness8(MAX_BRIGHTNESS);
-      Serial.println("DRL Brightness level MAX");
+      //Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
       leds.setBrightness(0);
       if (RelayPin1State) {
         RelayPin1State = false;
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF);
-        dma_display->fillScreen(myBLACK);
+        dma_display->setBrightness8(0);
       }
-      Serial.println("DRL Brightness level OFF");
+      //Serial.println("DRL Brightness level OFF");
     }
 
     if (curHorn > VOLT_BUF) {
