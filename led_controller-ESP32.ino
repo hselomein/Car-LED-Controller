@@ -11,60 +11,45 @@
     Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 #include <stdio.h>
-
 #include <Adafruit_NeoPixel.h>
-
 #include <ezButton.h> 
-
 #include <Wire.h>
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
-
 #include <driver/adc.h>
 #include <esp_adc_cal.h>
+#include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
+#include <logos.h>
 
-/*--------------------- RGB MATRIX DISPLAY PINS -------------------------
-This is for the future integration of an led matrix. Use this to map
-out which other pins can be used for other functions.
-----------------------------DO NOT DELETE-------------------------------*/
-//#define R1_PIN 25
-//#define G1_PIN 26
-//#define B1_PIN 27
-//#define R2_PIN 14
-//#define G2_PIN 12
-//#define B2_PIN 13
-//#define A_PIN 23
-//#define B_PIN 22 
-//#define C_PIN 5
-//#define D_PIN 17
-//#define E_PIN 32
-//#define LAT_PIN 4
-//#define OE_PIN 15
-//#define CLK_PIN 16
-
-/*-------------------------RBG MATRIX INITILIAZATION----------------------
-#include "ESP32-HUB75-MatrixPanel-I2S-DMA.h"
-
-
-
-#define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
-#define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
-#define PANEL_CHAIN 1   // Total number of panels chained one to another
+#define PROD  //Enable serial output for debug, change to DEBUG, do disable change to PROD
+#define NUM_MODES 2
 
 //MatrixPanel_I2S_DMA dma_display;
 MatrixPanel_I2S_DMA *dma_display = nullptr;
 
-
-*/
-
+//LED Martrix pin section
+#define R1_PIN 32
+#define G1_PIN 33
+#define B1_PIN 25
+#define R2_PIN 26
+#define G2_PIN 27
+#define B2_PIN 14
+#define A_PIN 13
+#define B_PIN 15 
+#define C_PIN 2
+#define D_PIN 4
+#define E_PIN 12
+#define LAT_PIN 17
+#define OE_PIN 5
+#define CLK_PIN 16
 
 // Pins to device mapping
 #define RELAY_PIN_1     18        // D18 => In1 Relay
 #define RELAY_PIN_2     19        // D19 => In2 Relay
-#define LED_PIN         35        // D13 => LED Controller Signal
-#define DRL_PIN         ADC1_CHANNEL_5        // Pin 33 => DRL Sense
-#define HORN_PIN        ADC1_CHANNEL_4        // Pin 32 => Horn Sense
-ezButton modeButton(34);  // create ezButton object that attach to pin 23;
+#define LED_PIN         23        // D13 => LED Controller Signal
+#define DRL_PIN         ADC1_CHANNEL_0        // Pin 33 => DRL Sense
+#define HORN_PIN        ADC1_CHANNEL_3       // Pin 32 => Horn Sense
+ezButton modeButton(34);  // create ezButton object that attach to pin 25;
 //#define PK_L_PIN        35        // D35 => Parking Lights Sense 
 //#define HIBM_PIN        33        // A33 => HiBeam Sense
 
@@ -79,10 +64,12 @@ hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config ex
 #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    // Subtract 1 to calculate indexes
 Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
+//Define lcd and led brightness
 #define MAX_BRIGHTNESS  255
 #define MIN_BRIGHTNESS  63
 #define MED_BRIGHTNESS  127
 
+//color definitions
 #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
 #define DEFAULT_COLOR   leds.Color( 0,  0,  0,   255 )     //White
 #define LYFT_COLOR      leds.Color( 255,  0, 255,  0 )     //Magenta
@@ -105,40 +92,92 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define LO_VOLT         2
 
 // Startup Configuration (Constants)
-#define msDELAY       5   //Number of ms LED stays on for.
+#define msDELAY       0   //Number of ms LED stays on for.
 #define numLOOPS      4   //Humber of passes over entire LED strip
 
-#define DEBOUNCE_TIME  100 // the debounce time in millisecond, increase this time if it still chatters
+#define DEBOUNCE_TIME  75 // the debounce time in millisecond, increase this time if it still chatters
+
+//-------------------------RBG MATRIX INITILIAZATION----------------------
+#define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
+#define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
+#define PANEL_CHAIN 1   // Total number of panels chained one to another
+
+//LED Maxtrix color initialization
+uint16_t myBLACK = dma_display->color565(0, 0, 0);
+uint16_t myWHITE = dma_display->color565(255, 255, 255);
+uint16_t myRED = dma_display->color565(255, 0, 0);
+uint16_t myGREEN = dma_display->color565(0, 255, 0);
+uint16_t myBLUE = dma_display->color565(0, 0, 255);
+uint16_t myMAGENTA = dma_display->color565(255, 0, 191);
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
 
-#define NUM_MODES 2
+void drawLyftLogo(){  
+dma_display->fillScreen(myBLACK);
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
+      long Pos = (xPos + yPos * 64) * 4;
+      uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
+      uint8_t green = LYFT_LOGO[Pos + 1] ? 0 : 255;
+      uint8_t blue = LYFT_LOGO[Pos] ? 191 : 255;
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(red, green, blue));
+    }
+  }
+}
+
+void drawUberLogo(){  
+dma_display->fillScreen(myBLACK);
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
+      long Pos = (xPos + yPos * 64) * 4;
+      uint8_t red = UBER_LOGO[Pos + 2] ? 0 : 255;
+      uint8_t green = UBER_LOGO[Pos + 1] ? 0 : 255;
+      uint8_t blue = UBER_LOGO[Pos] ? 0 : 255;
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(red, green, blue));
+    }
+  }
+}
 
 class cModes {
   public:
     int curColor;
     String txtColor;
+    bool isUberDisplayed;
+    bool isLyftDisplayed;
 
     void Increment () {
       if (modeButton.getCount() > NUM_MODES) { modeButton.resetCount(); }
       switch (modeButton.getCount()) {
         case 1:
+            if (isLyftDisplayed == true) {isLyftDisplayed = false;}
             curColor = UBER_COLOR;
             txtColor = "CYAN";          
             Serial.println("LED color set to Uber Mode color (Cyan)");
+            if (txtColor == "CYAN" && isUberDisplayed == false){
+              drawUberLogo();
+              isUberDisplayed = true;
+            } 
             break;
         case 2:
+            if (isUberDisplayed == true) {isUberDisplayed = false;}
             curColor = LYFT_COLOR;
             txtColor = "MGTA";
             Serial.println("LED color set to Lyft Mode color (Magenta)");
+            if (txtColor == "MGTA" && isLyftDisplayed == false){
+              drawLyftLogo();
+              isLyftDisplayed = true;
+            }
             break;
         default:
             curColor = DEFAULT_COLOR;
             txtColor = "WHIT";
             Serial.println("LED color set to Default Mode color (White)");
+            dma_display->fillScreen(myBLACK);
+            isLyftDisplayed = false;
+            isUberDisplayed = false;
             break;
       }
     }
@@ -146,7 +185,7 @@ class cModes {
     void Init() {
       curColor = DEFAULT_COLOR;
       txtColor = "WHIT";
-      delay(400);
+      delay(100);
       modeButton.loop();      // MUST call the loop() function first
       modeButton.getCount();
       modeButton.resetCount();
@@ -156,64 +195,9 @@ cModes curMode;
 
 bool FirstLoop = true;
 
-void setup()
-{
-  Serial.begin(115200);   // serial monitor for debugging
-  delay(250); // power-up safety delay
-    
-  //setup the button
-  modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
-  modeButton.setCountMode(COUNT_RISING);      // set a rising count for button
-
-  // set up the LCD:
-  lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
-  lcd.clear();            //clear the display  
-  lcd.home();             //move cursor to 1st line on display
-  lcd.print("LOADING");   
-  lcd.setCursor(0,1);     //move cursor to 2nd line on display
-  lcd.print("PLEASE WAIT");   
-
-  // Set pins as an input or output pin
-  pinMode(RELAY_PIN_1, OUTPUT);
-  pinMode(RELAY_PIN_2, OUTPUT);
-  pinMode(LED_PIN, OUTPUT);
-  
-  pinMode(DRL_PIN, INPUT);
-  pinMode(HORN_PIN, INPUT);
-  //pinMode(PK_L_PIN, INPUT);
-  //pinMode(HIBM_PIN, INPUT);
-
-  // Configure ADC
-  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
-  ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
-
-  // Start LEDs
-  digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
-  leds.begin();
-  leds.show();
-  leds.setBrightness(MAX_BRIGHTNESS);
-
-  // Initiate startup lighting sequence
-  startupSequence();
-
-  // Create task on Core 1 to Update LCD
-  xTaskCreatePinnedToCore(
-        taskLCDUpdates,   /* Function to implement the task */
-        "taskLCDUpdates", /* Name of the task */
-        10000,            /* Stack size in words */
-        NULL,             /* Task input parameter */
-        0,                /* Priority of the task */
-        NULL,             /* Task handle. */
-        1);               /* Core where the task should run */
-}
-
 void taskLCDUpdates( void * pvParameters ){
   char tmpMessage[16];
-  
   lcd.clear();    //clear the display and home the cursor
- 
   sprintf(tmpMessage, "Color  DRL  Horn"); 
   lcd.setCursor(0,0); //move cursor to 1st line on display
   lcd.print(tmpMessage);
@@ -227,77 +211,29 @@ void taskLCDUpdates( void * pvParameters ){
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
-
     delay(LCD_UPDATE_INTERVAL);
   }
 }
 
-void loop()
-{
-  static int    curSample = 1;
-  static bool   RelayPin1State = false;
-
-  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
-  curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  //curPkL += analogRead(PK_L_PIN);
-  //curHiBeam += analogRead(HIBM_PIN);
-  curSample++;
-
-  modeButton.loop();      // MUST call the loop() function first
-  Serial.println(modeButton.getState());
-  if (FirstLoop) {
-    curMode.Init();
-    FirstLoop = false;
-  } else {
-    curMode.Increment();
-  }
-
-  if (curSample > NUM_SAMPLES){
-    // Adjust voltages
-    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    //curPkL *= VOLT_ADJ;
-    //curHiBeam *= VOLT_ADJ;
-
-    if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
-      if (!RelayPin1State) {
-        RelayPin1State = true;
-        //turn on relay1
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-      }
-      leds.setBrightness(MIN_BRIGHTNESS);
-      Serial.println("DRL Brightness level LOW");
-    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
-      if (!RelayPin1State) {
-        RelayPin1State = true;
-        //turn on relay1
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-      }
-      leds.setBrightness(MAX_BRIGHTNESS);
-      Serial.println("DRL Brightness level MAX");
-    } else if (curDRL < VOLT_BUF) {
-      leds.setBrightness(0);
-      if (RelayPin1State) {
-        RelayPin1State = false;
-        //turn off relay1
-        digitalWrite(RELAY_PIN_1, RELAY_OFF);
-      }
-      Serial.println("DRL Brightness level OFF");
+void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
+  int ledLeft = 0; int ledRight = 0;
+  int offset;
+  for (int i = 1; i <= NUM_LEDS_HALF; i++) {
+    // Set current left and right LEDs based on the direction
+    if (boolDirection) {                //Out 
+      ledLeft = NUM_LEDS_HALF - i;
+      offset = 1; 
+    } else {                              //In
+      ledLeft = i; 
+      offset = -1;
     }
-
-    if (curHorn > VOLT_BUF) {
-      leds.fill(ANGRY_COLOR);  
-    } else {
-      leds.fill(curMode.curColor);  
+    ledRight = NUM_LEDS - ledLeft -1;
+    leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
+    leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight - offset, minColor);
+    if (msDelay) {
+      delay(msDelay);
     }
-
-    leds.show();                      //<--- May not be needed
-    
-    curSample = 1;
-    curDRL = 0;
-    curHorn = 0;
-    //curPkL = 0;
-    //curHiBeam = 0;
+    leds.show();
   }
 }
 
@@ -328,30 +264,189 @@ void startupSequence() {
   leds.show();
 }
 
-void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
-  int ledLeft = 0; int ledRight = 0;
-  int offset;
-  for (int i = 1; i <= NUM_LEDS_HALF; i++) {
-    // Set current left and right LEDs based on the direction
-    if (boolDirection) {                //Out 
-      ledLeft = NUM_LEDS_HALF - i;
-      offset = 1; 
-    } else {                              //In
-      ledLeft = i; 
-      offset = -1;
-    }
-    ledRight = NUM_LEDS - ledLeft -1;
-
-    leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
-    leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight - offset, minColor);
-    if (msDelay) {
-      delay(msDelay);
-    }
-    leds.show();
-  }
-}
-
 float Abs(float val) {
   if (val > 0) { return val; }
   else { return -val; }
+}
+
+void screentest() {
+
+  // fix the screen with green
+  dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
+  delay(100);
+
+  // draw a box in yellow
+  dma_display->drawRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(15, 15, 0));
+  delay(100);
+
+  // draw an 'X' in red
+  dma_display->drawLine(0, 0, dma_display->width() - 1, dma_display->height() - 1, dma_display->color444(15, 0, 0));
+  dma_display->drawLine(dma_display->width() - 1, 0, 0, dma_display->height() - 1, dma_display->color444(15, 0, 0));
+  delay(100);
+
+  // draw a blue circle
+  dma_display->drawCircle(10, 10, 10, dma_display->color444(0, 0, 15));
+  delay(100);
+
+  // fill a violet circle
+  dma_display->fillCircle(40, 21, 10, dma_display->color444(15, 0, 15));
+  delay(100);
+
+  // fill the screen with 'black'
+  dma_display->fillScreen(dma_display->color444(0, 0, 0));
+
+}
+
+
+
+void setup()
+{
+  #ifdef DEBUG
+    Serial.begin(115200);   // serial monitor for debugging
+  #endif
+  
+  delay(250); // power-up safety delay
+    
+  //setup the button
+  modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
+  modeButton.setCountMode(COUNT_RISING);      // set a rising count for button
+
+  // set up the LCD:
+  lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
+  lcd.clear();            //clear the display  
+  lcd.home();             //move cursor to 1st line on display
+  lcd.print("LOADING");   
+  lcd.setCursor(0,1);     //move cursor to 2nd line on display
+  lcd.print("PLEASE WAIT");   
+
+  // Set pins as an input or output pin
+  pinMode(RELAY_PIN_1, OUTPUT);
+  pinMode(RELAY_PIN_2, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(DRL_PIN, INPUT);
+  pinMode(HORN_PIN, INPUT);
+  //pinMode(PK_L_PIN, INPUT);
+  //pinMode(HIBM_PIN, INPUT);
+
+  // Configure ADC
+  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
+  ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
+
+  // LED MATRIX Module configuration
+  HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
+  HUB75_I2S_CFG mxconfig(
+    PANEL_RES_X,  // module width
+    PANEL_RES_Y,  // module height
+    PANEL_CHAIN,   // Chain length
+    _pins // pin mapping
+  );
+
+  //mxconfig.gpio.e = 12;
+  mxconfig.clkphase = false;
+  mxconfig.driver = HUB75_I2S_CFG::FM6124;
+
+  // Display Setup
+  dma_display = new MatrixPanel_I2S_DMA(mxconfig);
+  dma_display->begin();
+  dma_display->setBrightness8(MAX_BRIGHTNESS); //5-255 led matrix does not display using values lower than 5
+  dma_display->clearScreen();
+  dma_display->fillScreen(myWHITE);
+
+  // Start LEDs
+  digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
+  leds.begin();
+  leds.show();
+  leds.setBrightness(MAX_BRIGHTNESS);
+
+  // Initiate startup lighting sequence
+  startupSequence(); 
+  screentest();
+
+  // Create task on Core 1 to Update LCD
+  xTaskCreatePinnedToCore(
+        taskLCDUpdates,   /* Function to implement the task */
+        "taskLCDUpdates", /* Name of the task */
+        10000,            /* Stack size in words */
+        NULL,             /* Task input parameter */
+        0,                /* Priority of the task */
+        NULL,             /* Task handle. */
+        1);               /* Core where the task should run */
+}
+
+void loop()
+{
+  static int    curSample = 1;
+  static bool   RelayPin1State = false;
+
+  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
+  curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
+  //curPkL += analogRead(PK_L_PIN);
+  //curHiBeam += analogRead(HIBM_PIN);
+  curSample++;
+
+  Serial.print("Horn Voltage:"); Serial.println(curHorn);
+  Serial.print("DRL Voltage:"); Serial.println(curDRL);
+  Serial.print("Current Sample Number:"); Serial.println(curSample);
+
+  modeButton.loop();      // MUST call the loop() function first
+  Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
+  if (FirstLoop) {
+    curMode.Init();
+    FirstLoop = false;
+  } else {
+    curMode.Increment();
+  }
+
+  if (curSample > NUM_SAMPLES){
+    // Adjust voltages
+    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curPkL *= VOLT_ADJ;
+    //curHiBeam *= VOLT_ADJ;
+
+    if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
+      if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      }
+      leds.setBrightness(MIN_BRIGHTNESS);
+      dma_display->setBrightness8(MIN_BRIGHTNESS);
+      Serial.println("DRL Brightness level LOW");
+    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
+      if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      }
+      leds.setBrightness(MAX_BRIGHTNESS);
+      dma_display->setBrightness8(MAX_BRIGHTNESS);
+      Serial.println("DRL Brightness level MAX");
+    } else if (curDRL < VOLT_BUF) {
+      leds.setBrightness(0);
+      if (RelayPin1State) {
+        RelayPin1State = false;
+        //turn off relay1
+        digitalWrite(RELAY_PIN_1, RELAY_OFF);
+        dma_display->setBrightness8(0);
+      }
+      Serial.println("DRL Brightness level OFF");
+    }
+
+    if (curHorn > VOLT_BUF) {
+      leds.fill(ANGRY_COLOR);  
+    } else {
+      leds.fill(curMode.curColor);  
+    }
+
+    leds.show();                      //<--- May not be needed
+    
+    curSample = 1;
+    curDRL = 0;
+    curHorn = 0;
+    //curPkL = 0;
+    //curHiBeam = 0;
+  }
 }

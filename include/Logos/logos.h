@@ -3,9 +3,7 @@
 
 #ifndef _ESP32_HUB75_MATRIXPANEL_I2S_DMA_H
     #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
-
 #endif
-
 
 //UBER and LYFT LOGOS
 const bool LYFT_LOGO[] PROGMEM   =  {
