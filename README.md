@@ -54,12 +54,10 @@ There is a parts list so you can build this as well.
 How to use with Platformio IDE:
 - You will need the Platformio-ide extension installed in VSCODE in order to compile the code
 The src folder is where the code you want to compile and upload code to the ESP32
-Edit code in the files outside the src folder
-Copy the file to the src folder and rename file file extension to .cpp
-Build as normal
+Main program code is in the file main.cpp
 
 How to use with Arduino IDE
-The .ino files in the root of the directory are the files to load in the to Arduino IDE
+The Arduino project files are located in the ArduinoIDE folder.
 
 
 Code Notes:
