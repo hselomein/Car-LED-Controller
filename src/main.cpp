@@ -106,12 +106,12 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
 #define PANEL_CHAIN 1   // Total number of panels chained one to another
 
 //LED Maxtrix color initialization
-uint16_t MYBLACK = dma_display->color565(0, 0, 0);
-uint16_t MYWHITE = dma_display->color565(255, 255, 255);
-uint16_t MYRED = dma_display->color565(255, 0, 0);
-uint16_t MYGREEN = dma_display->color565(0, 255, 0);
-uint16_t MYBLUE = dma_display->color565(0, 0, 255);
-uint16_t MYMAGENTA = dma_display->color565(255, 0, 191);
+uint16_t myBlack = dma_display->color565(0, 0, 0);
+uint16_t myWHITE = dma_display->color565(255, 255, 255);
+uint16_t myRED = dma_display->color565(255, 0, 0);
+uint16_t myGREEN = dma_display->color565(0, 255, 0);
+uint16_t myBLUE = dma_display->color565(0, 0, 255);
+uint16_t myMAGENTA = dma_display->color565(255, 0, 191);
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
@@ -119,7 +119,7 @@ static float curHorn   = 0.0f;
 //static double curHiBeam = 0.0;
 
 void drawLyftLogo(){  
-dma_display->fillScreen(MYBLACK);
+dma_display->fillScreen(myBlack);
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
       long Pos = (xPos + yPos * 64) * 4;
@@ -132,7 +132,7 @@ dma_display->fillScreen(MYBLACK);
 }
 
 void drawUberLogo(){  
-dma_display->fillScreen(MYBLACK);
+dma_display->fillScreen(myBlack);
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
       long Pos = (xPos + yPos * 64) * 4;
@@ -184,7 +184,7 @@ class cModes {
             #ifdef DEBUG
             Serial.println("LED color set to Default Mode color (White)");
             #endif
-            dma_display->fillScreen(MYBLACK);
+            dma_display->fillScreen(myBlack);
             isLyftDisplayed = false;
             isUberDisplayed = false;
             break;
@@ -202,7 +202,7 @@ class cModes {
 };
 cModes curMode;
 
-bool FirstLoop = true;
+bool firstLoop = true;
 
 void taskLCDUpdates( void * pvParameters ){
   char tmpMessage[16];
@@ -361,7 +361,7 @@ void setup()
   dma_display->begin();
   dma_display->setBrightness8(MAX_BRIGHTNESS); //5-255 led matrix does not display using values lower than 5
   dma_display->clearScreen();
-  dma_display->fillScreen(MYWHITE);
+  dma_display->fillScreen(myWHITE);
 
   // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
@@ -408,9 +408,9 @@ void loop()
   #ifdef DEBUG
   Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
   #endif
-  if (FirstLoop) {
+  if (firstLoop) {
     curMode.Init();
-    FirstLoop = false;
+    firstLoop = false;
   } else {
     curMode.Increment();
   }
