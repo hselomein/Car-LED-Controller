@@ -61,8 +61,7 @@ The Arduino project files are located in the ArduinoIDE folder.
 
 
 Code Notes:
-- led_controller-ESP32.ino  - this is the program for the esp32 architecture
-- Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix
+- Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix for the arduino ide
 - Part List - this is the shopping list of parts for this project
-- PXMatrixTest.ino - Test program for 64x64 P2 LED Matrix using the PXMatrix library
+
 
