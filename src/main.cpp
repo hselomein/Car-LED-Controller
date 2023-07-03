@@ -118,6 +118,8 @@ static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
 
+//-------------functions-----------------
+
 void drawLyftLogo(){  
 dma_display->fillScreen(myBlack);
   for (int xPos = 0; xPos < 64; xPos++ ) {
@@ -279,34 +281,27 @@ float Abs(float val) {
 }
 
 void screentest() {
-
   // fix the screen with green
   dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
   delay(100);
-
   // draw a box in yellow
   dma_display->drawRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(15, 15, 0));
   delay(100);
-
   // draw an 'X' in red
   dma_display->drawLine(0, 0, dma_display->width() - 1, dma_display->height() - 1, dma_display->color444(15, 0, 0));
   dma_display->drawLine(dma_display->width() - 1, 0, 0, dma_display->height() - 1, dma_display->color444(15, 0, 0));
   delay(100);
-
   // draw a blue circle
   dma_display->drawCircle(10, 10, 10, dma_display->color444(0, 0, 15));
   delay(100);
-
   // fill a violet circle
   dma_display->fillCircle(40, 21, 10, dma_display->color444(15, 0, 15));
   delay(100);
-
   // fill the screen with 'black'
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
-
 }
 
-
+//-----------main program-----------------
 
 void setup()
 {
