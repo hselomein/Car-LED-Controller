@@ -52,6 +52,11 @@
   #define msDELAY       0   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
+static float curDRL    = 0.0f;
+static float curHorn   = 0.0f;
+//static double curPkL    = 0.0;
+//static double curHiBeam = 0.0;
+
 #include <TaskLCD.h>
 
 //EZ Button
@@ -105,11 +110,6 @@
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
 
 #include <logos.h>
-
-static float curDRL    = 0.0f;
-static float curHorn   = 0.0f;
-//static double curPkL    = 0.0;
-//static double curHiBeam = 0.0;
 
 //-------------functions-----------------
 class cModes {
