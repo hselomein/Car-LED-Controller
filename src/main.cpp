@@ -52,7 +52,6 @@
   #define msDELAY       0   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
-#include <logos.h>
 #include <TaskLCD.h>
 
 //EZ Button
@@ -104,6 +103,8 @@
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
+
+#include <logos.h>
 
 static float curDRL    = 0.0f;
 static float curHorn   = 0.0f;
