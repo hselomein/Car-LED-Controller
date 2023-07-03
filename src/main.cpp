@@ -127,7 +127,7 @@ class cModes {
             txtColor = "UBER"; 
             if (DEBUG) {Serial.println("LED color set to Uber Mode color (Seafoam Green)");}         
             if (txtColor == "UBER" && isUberDisplayed == false){
-              drawUberLogo();
+              drawUberLogo(dma_display);
               isUberDisplayed = true;
             } 
             break;
@@ -137,7 +137,7 @@ class cModes {
             txtColor = "LYFT";
             if (DEBUG) {Serial.println("LED color set to Lyft Mode color (Magenta)");}
             if (txtColor == "LYFT" && isLyftDisplayed == false){
-              drawLyftLogo();
+              drawLyftLogo(dma_display);
               isLyftDisplayed = true;
             }
             break;

@@ -524,7 +524,7 @@ const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
 
-void drawLyftLogo(){  
+void drawLyftLogo(dma_display as MatrixPanel_I2S_DMA){  
 dma_display->fillScreen(color565(0, 0, 0));
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
@@ -537,7 +537,7 @@ dma_display->fillScreen(color565(0, 0, 0));
   }
 }
 
-void drawUberLogo(){  
+void drawUberLogo(dma_display as MatrixPanel_I2S_DMA){  
 dma_display->fillScreen(color565(0, 0, 0));
   for (int xPos = 0; xPos < 64; xPos++ ) {
     for (int yPos = 0; yPos < 64; yPos++ ) {
