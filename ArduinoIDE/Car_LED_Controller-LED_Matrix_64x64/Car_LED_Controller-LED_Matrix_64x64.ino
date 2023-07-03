@@ -17,7 +17,7 @@
 #include <driver/adc.h>
 #include <esp_adc_cal.h>
 #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
-#include <logos.h>
+#include <logos.h>  //uber and luft logos
 
 //Build Configuration Options
 #define PROD  //Enable serial output for debug, change to DEBUG, to disable change to PROD
