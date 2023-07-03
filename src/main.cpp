@@ -144,7 +144,7 @@ class cModes {
             curColor = DEFAULT_COLOR;
             txtColor = "WHIT";
             if (DEBUG) {Serial.println("LED color set to Default Mode color (White)");}
-            dma_display->fillScreen(color565(0, 0, 0));
+            dma_display->fillScreen(dma_display->color565(0, 0, 0));
             isLyftDisplayed = false;
             isUberDisplayed = false;
             break;
@@ -294,7 +294,7 @@ void setup()
     dma_display->begin();
     dma_display->setBrightness8(MAX_BRIGHTNESS); //5-255 led matrix does not display using values lower than 5
     dma_display->clearScreen();
-    dma_display->fillScreen(color565(255, 255, 255));
+    dma_display->fillScreen(dma_display->color565(255, 255, 255));
 
   // Start LEDs
     digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
