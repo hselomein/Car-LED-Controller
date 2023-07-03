@@ -15,9 +15,6 @@
 //#define NO_LED_STRIP    //for future development
 #define NUM_MODES 2
 
-#include <logos.h>
-#include <TaskLCD.h>
-
 //Arduino Standard
   #include <stdio.h>
   #include <Wire.h>
@@ -54,6 +51,9 @@
   // Startup Configuration (Constants)
   #define msDELAY       0   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
+
+#include <logos.h>
+#include <TaskLCD.h>
 
 //EZ Button
   #include <ezButton.h> 
