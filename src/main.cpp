@@ -57,8 +57,6 @@ static float curHorn   = 0.0f;
 //static double curPkL    = 0.0;
 //static double curHiBeam = 0.0;
 
-#include <TaskLCD.h>
-
 //EZ Button
   #include <ezButton.h> 
   ezButton modeButton(34);  // create ezButton object that attach to pin 34;
@@ -163,6 +161,8 @@ class cModes {
     }
 };
 cModes curMode;
+
+#include <TaskLCD.h>
 
 bool firstLoop = true;
 
