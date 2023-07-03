@@ -1,5 +1,5 @@
- #ifndef _LOGOS_H_
-#define _LOGOS_H_
+#ifndef _LOGOS_H_
+	#define _LOGOS_H_
 
 #ifndef _ESP32_HUB75_MATRIXPANEL_I2S_DMA_H
     #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
@@ -523,5 +523,31 @@ const bool UBER_LOGO[] PROGMEM   =  {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
+
+void drawLyftLogo(){  
+dma_display->fillScreen(color565(0, 0, 0));
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
+      long Pos = (xPos + yPos * 64) * 4;
+      uint8_t red = LYFT_LOGO[Pos + 2] ? 255 : 255;
+      uint8_t green = LYFT_LOGO[Pos + 1] ? 0 : 255;
+      uint8_t blue = LYFT_LOGO[Pos] ? 191 : 255;
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(red, green, blue));
+    }
+  }
+}
+
+void drawUberLogo(){  
+dma_display->fillScreen(color565(0, 0, 0));
+  for (int xPos = 0; xPos < 64; xPos++ ) {
+    for (int yPos = 0; yPos < 64; yPos++ ) {
+      long Pos = (xPos + yPos * 64) * 4;
+      uint8_t red = UBER_LOGO[Pos + 2] ? 0 : 255;
+      uint8_t green = UBER_LOGO[Pos + 1] ? 0 : 255;
+      uint8_t blue = UBER_LOGO[Pos] ? 0 : 255;
+      dma_display->drawPixel(xPos, yPos, dma_display->color565(red, green, blue));
+    }
+  }
+}
 
 #endif // _LOGOS_H_
