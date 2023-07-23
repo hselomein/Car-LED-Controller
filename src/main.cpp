@@ -9,8 +9,8 @@
     Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 //Build Configuration Options
-#define DEBUG true      //Enable serial output for debug, change to "false" to disable
-#define SCREENTEST true //To enable the boot up screen test, change to, to disable change to "false"
+#define DEBUG false      //Enable serial output for debug, change to "false" to disable
+#define SCREENTEST false //To enable the boot up screen test, change to, to disable change to "false"
 //#define NO_LED_MATRIX   //for future development
 //#define NO_LED_STRIP    //for future development
 #define NUM_MODES 2

@@ -10,8 +10,6 @@
             "includePath": [
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/include",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/src",
-                "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/logos",
-                "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/PxMatrix_LED_MATRIX_library",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/hd44780",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ezButton/src",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ESP32_HUB75_LED_MATRIX_PANEL_DMA_Display/src",
@@ -238,6 +236,7 @@
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/GPxMatrix",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/LiquidCrystal_I2C",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/Mouse/src",
+                "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/PxMatrix_LED_MATRIX_library",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/RGB_matrix_Panel",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/RTClib/src",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/SD/src",
@@ -245,6 +244,7 @@
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/SimpleKalmanFilter/src",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/WaveHC",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ezTime/src",
+                "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/logos",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/Adafruit_BusIO",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/Adafruit_NeoPixel",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/ESP32-HUB75-MatrixPanel-I2S-DMA",
@@ -290,8 +290,6 @@
                 "path": [
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/include",
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/src",
-                    "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/logos",
-                    "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/PxMatrix_LED_MATRIX_library",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/hd44780",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ezButton/src",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ESP32_HUB75_LED_MATRIX_PANEL_DMA_Display/src",
@@ -518,6 +516,7 @@
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/GPxMatrix",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/LiquidCrystal_I2C",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/Mouse/src",
+                    "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/PxMatrix_LED_MATRIX_library",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/RGB_matrix_Panel",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/RTClib/src",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/SD/src",
@@ -525,6 +524,7 @@
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/SimpleKalmanFilter/src",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/WaveHC",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/ezTime/src",
+                    "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/logos",
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/Adafruit_BusIO",
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/Adafruit_NeoPixel",
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/lib/ESP32-HUB75-MatrixPanel-I2S-DMA",
@@ -567,7 +567,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60107",
+                "PLATFORMIO=60109",
                 "ARDUINO_ESP32_DEV",
                 "HAVE_CONFIG_H",
                 "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"",
@@ -586,8 +586,8 @@
                 "ARDUINO_PARTITION_default",
                 ""
             ],
-            "cStandard": "c99",
-            "cppStandard": "c++11",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++11",
             "compilerPath": "C:/Users/hselo/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
             "compilerArgs": [
                 "-mlongcalls",
