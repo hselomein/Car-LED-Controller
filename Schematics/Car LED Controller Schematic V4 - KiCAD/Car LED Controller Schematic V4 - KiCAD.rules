@@ -1,0 +1,83 @@
+
+(rules PCB Car LED Controller Schematic V4 - No Logic Level Converter
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 11418)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.5)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.7)
+    )
+  )
+  (rule
+    (width 500.0)
+    (clearance 200.2)
+    (clearance 100.0 (type smd_to_turn_gap))
+    (clearance 200.2 (type smd))
+    (clearance 200.2 (type "kicad_default"))
+    (clearance 200.2 (type kicad))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-kicad_default" "Via[0-1]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    "Net-(U1-SENSOR_VP)" GND "Net-(U1-SENSOR_VN)" "Net-(U1-IO35)" "Net-(U1-IO19)" +5V "Net-(J2-Pin_1)" "Net-(J3-Pin_2)"
+    "Net-(J3-Pin_3)" "Net-(J3-Pin_4)" "Net-(J3-Pin_5)" "Net-(J4-OE)" "Net-(J4-G1)" "Net-(J4-CLK)" "Net-(J4-G2)" "Net-(J4-E)"
+    "Net-(J4-A)" "Net-(J4-B)" "Net-(J4-C)" "Net-(J4-D)" "Net-(J4-LAT)" +3.3V "Net-(J5-Pin_2)" "Net-(J5-Pin_3)"
+    "unconnected-(U1-EN-PadJ2-2)" "unconnected-(U1-SD2-PadJ2-16)" "unconnected-(U1-SD3-PadJ2-17)" "unconnected-(U1-CMD-PadJ2-18)" "Net-(U1-IO23)" "Net-(U1-IO22)" "unconnected-(U1-TXD0-PadJ3-4)" "unconnected-(U1-RXD0-PadJ3-5)"
+    "Net-(U1-IO21)" "Net-(U1-IO18)" "unconnected-(U1-IO0-PadJ3-14)" "unconnected-(U1-SD1-PadJ3-17)" "unconnected-(U1-SD0-PadJ3-18)" "unconnected-(U1-CLK-PadJ3-19)" "Net-(J4-R1)" "Net-(J4-B1)"
+    "Net-(J4-R2)" "Net-(J4-B2)" "Net-(J5-Pin_4)" "Net-(J5-Pin_5)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
