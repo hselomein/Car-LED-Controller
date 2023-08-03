@@ -25,8 +25,8 @@
   #define RELAY_PIN_1 18        // D18 => In1 Relay
   #define RELAY_PIN_2 19        // D19 => In2 Relay
   #define LED_PIN     23        // D23 => LED Controller Signal
-  #define DRL_PIN     ADC1_CHANNEL_0        // Pin 33 => DRL Sense
-  #define HORN_PIN    ADC1_CHANNEL_3       // Pin 32 => Horn Sense
+  #define DRL_PIN     ADC1_CHANNEL_0        // Pin 39 => DRL Sense
+  #define HORN_PIN    ADC1_CHANNEL_3       // Pin 36 => Horn Sense
   //#define PK_L_PIN        35        // D35 => Parking Lights Sense (Reserved) 
   //#define HIBM_PIN        33        // D33 => HiBeam Sense (Reserved)
 

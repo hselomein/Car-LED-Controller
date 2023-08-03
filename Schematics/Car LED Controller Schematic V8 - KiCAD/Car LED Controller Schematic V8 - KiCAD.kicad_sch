@@ -873,37 +873,37 @@
     (uuid ea1e6774-46fc-4da4-a2b5-2fb37ac95456)
   )
 
-  (wire (pts (xy 54.61 74.93) (xy 120.65 74.93))
-    (stroke (width 0) (type default))
-    (uuid 01949c56-1a4d-416f-a8bf-7b13d2be157f)
-  )
   (wire (pts (xy 228.6 91.44) (xy 228.6 88.9))
     (stroke (width 0) (type default))
     (uuid 024598df-669b-4d1e-a147-f22cd500b8d3)
   )
-  (wire (pts (xy 62.23 67.31) (xy 62.23 88.9))
+  (wire (pts (xy 57.15 146.05) (xy 57.15 114.3))
     (stroke (width 0) (type default))
-    (uuid 07085104-1be4-496b-a133-b58eb6b55926)
-  )
-  (wire (pts (xy 125.73 138.43) (xy 125.73 166.37))
-    (stroke (width 0) (type default))
-    (uuid 0785d198-8d87-43f9-a7f5-a79a86811cbb)
+    (uuid 025078e6-ad85-4ba2-ae8b-3cfebcb48c94)
   )
   (wire (pts (xy 138.43 39.37) (xy 153.67 39.37))
     (stroke (width 0) (type default))
     (uuid 08cb3544-e30b-4036-b829-385635ab2932)
   )
-  (wire (pts (xy 118.11 138.43) (xy 118.11 158.75))
+  (wire (pts (xy 73.66 139.7) (xy 67.31 139.7))
     (stroke (width 0) (type default))
-    (uuid 0b4fb934-88f7-42b8-b4ef-4793345d9269)
+    (uuid 0a9be522-1cb3-45bd-9547-f8d89c8ad0bf)
   )
   (wire (pts (xy 208.28 88.9) (xy 213.36 88.9))
     (stroke (width 0) (type default))
     (uuid 0c8599aa-5277-4f37-aa6e-49aadb5daa00)
   )
-  (wire (pts (xy 59.69 69.85) (xy 125.73 69.85))
+  (wire (pts (xy 62.23 88.9) (xy 62.23 62.23))
     (stroke (width 0) (type default))
-    (uuid 0e386ab5-09e1-42c3-ab90-b653f87d3173)
+    (uuid 0d57b810-acbb-47ab-aa2f-5c5c6fc95585)
+  )
+  (wire (pts (xy 73.66 85.09) (xy 73.66 139.7))
+    (stroke (width 0) (type default))
+    (uuid 0f626e82-bf72-41cd-8c2e-6b426ba45b19)
+  )
+  (wire (pts (xy 62.23 114.3) (xy 62.23 140.97))
+    (stroke (width 0) (type default))
+    (uuid 1075ec18-ae49-49bf-bd37-73eeb3d63001)
   )
   (wire (pts (xy 228.6 60.96) (xy 153.67 60.96))
     (stroke (width 0) (type default))
@@ -917,37 +917,49 @@
     (stroke (width 0) (type default))
     (uuid 11ac2f9b-f09f-426e-8e4e-b6ec43f42572)
   )
+  (wire (pts (xy 125.73 85.09) (xy 73.66 85.09))
+    (stroke (width 0) (type default))
+    (uuid 181349b5-208e-4ef9-acdf-1add91a046eb)
+  )
   (wire (pts (xy 153.67 35.56) (xy 153.67 39.37))
     (stroke (width 0) (type default))
     (uuid 1991aab6-44c2-4145-9d87-7343129e66bb)
   )
-  (wire (pts (xy 62.23 114.3) (xy 62.23 156.21))
+  (wire (pts (xy 130.81 97.79) (xy 130.81 64.77))
     (stroke (width 0) (type default))
-    (uuid 20baa2e2-a5f4-4a16-884c-9a0004f26ccd)
+    (uuid 1d7f9e69-60e3-40db-96d0-826259738d73)
   )
   (wire (pts (xy 213.36 36.83) (xy 210.82 36.83))
     (stroke (width 0) (type default))
     (uuid 22bfc20b-0e06-4fa7-b973-a24536a69d04)
   )
-  (wire (pts (xy 64.77 64.77) (xy 64.77 88.9))
-    (stroke (width 0) (type default))
-    (uuid 2538afbc-d50e-4ab1-9046-c9c4621582bb)
-  )
   (wire (pts (xy 241.3 74.93) (xy 233.68 74.93))
     (stroke (width 0) (type default))
     (uuid 2c0c16a6-5e5f-4d96-992f-d058766a59a5)
+  )
+  (wire (pts (xy 59.69 143.51) (xy 78.74 143.51))
+    (stroke (width 0) (type default))
+    (uuid 2ceb7bb4-0778-4e56-83ca-4b86e0d9cf6d)
   )
   (wire (pts (xy 226.06 149.86) (xy 236.22 149.86))
     (stroke (width 0) (type default))
     (uuid 2d934688-4669-499d-9722-6d666a4b303d)
   )
+  (wire (pts (xy 76.2 140.97) (xy 76.2 90.17))
+    (stroke (width 0) (type default))
+    (uuid 30feba52-5581-4546-8277-3bb1ac8b1204)
+  )
+  (wire (pts (xy 123.19 138.43) (xy 123.19 149.86))
+    (stroke (width 0) (type default))
+    (uuid 32018f89-59b4-4c9f-852d-578d4a49514e)
+  )
   (wire (pts (xy 135.89 157.48) (xy 190.5 157.48))
     (stroke (width 0) (type default))
     (uuid 337fdc18-ece0-40af-90d2-49251d4a6245)
   )
-  (wire (pts (xy 118.11 158.75) (xy 59.69 158.75))
+  (wire (pts (xy 29.21 152.4) (xy 125.73 152.4))
     (stroke (width 0) (type default))
-    (uuid 34263fcd-6679-4ed7-a0ce-2a962407a406)
+    (uuid 36dbcadd-9895-4661-ba9d-15b6280f4049)
   )
   (wire (pts (xy 187.96 88.9) (xy 187.96 63.5))
     (stroke (width 0) (type default))
@@ -957,9 +969,29 @@
     (stroke (width 0) (type default))
     (uuid 3aaad0fe-0f50-4995-aa28-d127e9cca21d)
   )
+  (wire (pts (xy 113.03 146.05) (xy 57.15 146.05))
+    (stroke (width 0) (type default))
+    (uuid 3b5eb3a4-582a-48f5-92a5-b3f74af71830)
+  )
+  (wire (pts (xy 78.74 143.51) (xy 78.74 87.63))
+    (stroke (width 0) (type default))
+    (uuid 3c04f7be-7e58-44ed-9538-047ee90e06a2)
+  )
   (wire (pts (xy 138.43 39.37) (xy 138.43 97.79))
     (stroke (width 0) (type default))
     (uuid 3c5f3889-f471-4e5b-af90-f442202494a8)
+  )
+  (wire (pts (xy 113.03 67.31) (xy 59.69 67.31))
+    (stroke (width 0) (type default))
+    (uuid 4035991e-9a87-40c1-8dee-dd06b091a162)
+  )
+  (wire (pts (xy 123.19 149.86) (xy 54.61 149.86))
+    (stroke (width 0) (type default))
+    (uuid 405cf6b6-34e7-494c-a0d6-f0fbd1468be0)
+  )
+  (wire (pts (xy 62.23 62.23) (xy 120.65 62.23))
+    (stroke (width 0) (type default))
+    (uuid 40c26e4b-1756-4b91-aef7-2ffaf662d244)
   )
   (wire (pts (xy 213.36 34.29) (xy 210.82 34.29))
     (stroke (width 0) (type default))
@@ -969,6 +1001,10 @@
     (stroke (width 0) (type default))
     (uuid 43a053eb-082f-4d84-8b07-9d8a0177e484)
   )
+  (wire (pts (xy 67.31 69.85) (xy 67.31 88.9))
+    (stroke (width 0) (type default))
+    (uuid 43ca37c7-6fc1-41c0-bf6d-551b44eba213)
+  )
   (wire (pts (xy 143.51 154.94) (xy 190.5 154.94))
     (stroke (width 0) (type default))
     (uuid 44c47c3c-e1de-46dc-b29c-e4458593aad3)
@@ -977,57 +1013,33 @@
     (stroke (width 0) (type default))
     (uuid 45de7cff-d2e0-4184-a5f0-4cb3a1abf593)
   )
-  (wire (pts (xy 113.03 80.01) (xy 113.03 97.79))
+  (wire (pts (xy 78.74 87.63) (xy 133.35 87.63))
     (stroke (width 0) (type default))
-    (uuid 46118258-9c7d-4a71-9bc3-e0ce29e702c1)
+    (uuid 4d1234b1-c981-4502-a78c-1567436dd8ff)
   )
-  (wire (pts (xy 62.23 156.21) (xy 113.03 156.21))
-    (stroke (width 0) (type default))
-    (uuid 48878184-cf62-4e3e-9c94-f842894e2901)
-  )
-  (wire (pts (xy 120.65 74.93) (xy 120.65 97.79))
-    (stroke (width 0) (type default))
-    (uuid 4948a5c0-cf80-46d1-9588-34fb0af0f202)
-  )
-  (wire (pts (xy 86.36 87.63) (xy 115.57 87.63))
+  (wire (pts (xy 96.52 92.71) (xy 115.57 92.71))
     (stroke (width 0) (type default))
     (uuid 4d47b631-c90d-4a6e-a5cf-39f3a7189c6c)
-  )
-  (wire (pts (xy 57.15 72.39) (xy 57.15 88.9))
-    (stroke (width 0) (type default))
-    (uuid 4f400243-439c-4191-912c-b2c7fda44a28)
-  )
-  (wire (pts (xy 54.61 114.3) (xy 54.61 163.83))
-    (stroke (width 0) (type default))
-    (uuid 4f532b4f-a094-4745-b67c-639d8aa79772)
-  )
-  (wire (pts (xy 125.73 97.79) (xy 125.73 69.85))
-    (stroke (width 0) (type default))
-    (uuid 504bea0f-5c4c-4e10-adad-afc566b06ffe)
-  )
-  (wire (pts (xy 113.03 138.43) (xy 113.03 156.21))
-    (stroke (width 0) (type default))
-    (uuid 51cf693c-f33e-491a-9c0a-2cf33c1b36fc)
   )
   (wire (pts (xy 233.68 74.93) (xy 233.68 81.28))
     (stroke (width 0) (type default))
     (uuid 527f91a0-4d1f-48f2-a200-c57e95d9d1ae)
   )
-  (wire (pts (xy 67.31 62.23) (xy 133.35 62.23))
+  (wire (pts (xy 59.69 67.31) (xy 59.69 88.9))
     (stroke (width 0) (type default))
-    (uuid 57068335-6aae-4529-80f0-52a88142f708)
+    (uuid 530b8c27-16cb-4708-858c-634268ae59d4)
   )
-  (wire (pts (xy 54.61 163.83) (xy 123.19 163.83))
+  (wire (pts (xy 113.03 138.43) (xy 113.03 146.05))
     (stroke (width 0) (type default))
-    (uuid 5b104de5-946c-4826-a1cf-66bd340748a9)
+    (uuid 56a8008b-0eb9-49ab-bc9c-2cd44cb41622)
   )
-  (wire (pts (xy 52.07 166.37) (xy 125.73 166.37))
+  (wire (pts (xy 54.61 88.9) (xy 54.61 73.66))
     (stroke (width 0) (type default))
-    (uuid 5ce8b0f5-a2de-48c8-b006-01d264d677ed)
+    (uuid 5828bc55-9855-4b7d-97a4-6a685d975330)
   )
-  (wire (pts (xy 49.53 80.01) (xy 113.03 80.01))
+  (wire (pts (xy 29.21 73.66) (xy 29.21 152.4))
     (stroke (width 0) (type default))
-    (uuid 5e75e357-2002-4620-b2a6-fc00d85d641b)
+    (uuid 5b52faaf-e5eb-47c2-8010-226c241721fc)
   )
   (wire (pts (xy 228.6 88.9) (xy 233.68 88.9))
     (stroke (width 0) (type default))
@@ -1037,17 +1049,21 @@
     (stroke (width 0) (type default))
     (uuid 6a2d6b70-d904-4564-ae36-c69737cd7cb4)
   )
-  (wire (pts (xy 57.15 161.29) (xy 120.65 161.29))
+  (wire (pts (xy 33.02 77.47) (xy 33.02 142.24))
     (stroke (width 0) (type default))
-    (uuid 6d20cabf-0b8e-4357-9c4d-42fd6bc2a50e)
+    (uuid 6c7191d1-8461-4bca-8ff1-a756ac0e7c10)
+  )
+  (wire (pts (xy 52.07 88.9) (xy 52.07 76.2))
+    (stroke (width 0) (type default))
+    (uuid 6d2832b7-49af-4ad7-a22f-07251bea5a80)
+  )
+  (wire (pts (xy 120.65 62.23) (xy 120.65 97.79))
+    (stroke (width 0) (type default))
+    (uuid 6e2f5278-5946-4d0d-99fd-b7e1978d8f80)
   )
   (wire (pts (xy 236.22 144.78) (xy 236.22 147.32))
     (stroke (width 0) (type default))
     (uuid 72c03c67-8d2c-4553-acbb-de2c8f34bc1a)
-  )
-  (wire (pts (xy 110.49 138.43) (xy 110.49 153.67))
-    (stroke (width 0) (type default))
-    (uuid 73ddd1ca-8811-4bc5-b798-5a1e49fb9260)
   )
   (wire (pts (xy 167.64 88.9) (xy 172.72 88.9))
     (stroke (width 0) (type default))
@@ -1057,17 +1073,13 @@
     (stroke (width 0) (type default))
     (uuid 7761c219-1499-46db-abc3-03372ba6a256)
   )
-  (wire (pts (xy 123.19 138.43) (xy 123.19 163.83))
-    (stroke (width 0) (type default))
-    (uuid 7d7e895f-896b-4290-a10e-f0d24f9e272b)
-  )
   (wire (pts (xy 143.51 97.79) (xy 143.51 64.77))
     (stroke (width 0) (type default))
     (uuid 801d1253-2e5a-4925-8f60-bd03bf9356d7)
   )
-  (wire (pts (xy 67.31 153.67) (xy 67.31 114.3))
+  (wire (pts (xy 125.73 97.79) (xy 125.73 85.09))
     (stroke (width 0) (type default))
-    (uuid 825f19fc-7ddb-4557-b3f3-b97b0fd986a5)
+    (uuid 81e404fa-1b7e-4d2d-bb4a-ed6ef15f734f)
   )
   (wire (pts (xy 130.81 138.43) (xy 130.81 146.05))
     (stroke (width 0) (type default))
@@ -1077,13 +1089,13 @@
     (stroke (width 0) (type default))
     (uuid 8344b7c0-9bc3-438a-ba1f-4f71ac85e1e8)
   )
-  (wire (pts (xy 52.07 114.3) (xy 52.07 166.37))
+  (wire (pts (xy 118.11 144.78) (xy 52.07 144.78))
     (stroke (width 0) (type default))
-    (uuid 89be58ad-0d10-46c6-81b4-4b8cee610626)
+    (uuid 88104449-e42c-4b09-87fb-604eab63e1e8)
   )
-  (wire (pts (xy 128.27 67.31) (xy 128.27 97.79))
+  (wire (pts (xy 30.48 76.2) (xy 30.48 147.32))
     (stroke (width 0) (type default))
-    (uuid 8c900a27-a57e-4f4d-aba4-66409ecdeaf7)
+    (uuid 8b424360-8bdf-43f6-a304-0cb51f68da02)
   )
   (wire (pts (xy 135.89 97.79) (xy 135.89 62.23))
     (stroke (width 0) (type default))
@@ -1093,45 +1105,57 @@
     (stroke (width 0) (type default))
     (uuid 955e1b2f-9d60-4819-8ffa-48c90b4741be)
   )
-  (wire (pts (xy 52.07 77.47) (xy 52.07 88.9))
+  (wire (pts (xy 130.81 64.77) (xy 64.77 64.77))
     (stroke (width 0) (type default))
-    (uuid 97bbc208-32ef-4145-8416-e4251db358d3)
+    (uuid 9842248c-62b6-463d-8861-66f14996d70c)
+  )
+  (wire (pts (xy 33.02 142.24) (xy 110.49 142.24))
+    (stroke (width 0) (type default))
+    (uuid 98c5a4be-8aa0-491a-a34f-ca62eddd090e)
   )
   (wire (pts (xy 172.72 88.9) (xy 172.72 91.44))
     (stroke (width 0) (type default))
     (uuid 993bf9b0-2693-4617-aacf-50e05d2bb570)
   )
-  (wire (pts (xy 110.49 153.67) (xy 67.31 153.67))
+  (wire (pts (xy 52.07 144.78) (xy 52.07 114.3))
     (stroke (width 0) (type default))
-    (uuid 9b594e1c-4e1f-4821-a640-7558d38a67fb)
+    (uuid 9b761cc9-a85a-4f0b-b768-c4b66e38d5bf)
   )
   (wire (pts (xy 241.3 72.39) (xy 213.36 72.39))
     (stroke (width 0) (type default))
     (uuid 9b7e6510-8926-4bbe-aaac-9e37ff59ff46)
   )
-  (wire (pts (xy 62.23 67.31) (xy 128.27 67.31))
-    (stroke (width 0) (type default))
-    (uuid 9b8268d1-457b-4e7a-9edb-591f53bd4b6d)
-  )
   (wire (pts (xy 130.81 146.05) (xy 153.67 146.05))
     (stroke (width 0) (type default))
     (uuid 9e47ed41-1bd0-459c-b7c8-129bbfa48f82)
   )
-  (wire (pts (xy 57.15 72.39) (xy 123.19 72.39))
+  (wire (pts (xy 54.61 149.86) (xy 54.61 114.3))
     (stroke (width 0) (type default))
-    (uuid a0979cbd-89b5-4765-84a6-b782c01442e2)
+    (uuid 9eb7749e-4ca2-453c-82e0-7d650e3f306f)
+  )
+  (wire (pts (xy 113.03 97.79) (xy 113.03 67.31))
+    (stroke (width 0) (type default))
+    (uuid 9fa8077a-2063-4503-a273-1bca7c762d15)
+  )
+  (wire (pts (xy 133.35 87.63) (xy 133.35 97.79))
+    (stroke (width 0) (type default))
+    (uuid a09723aa-6beb-430f-96b0-762ad86e640f)
   )
   (wire (pts (xy 135.89 138.43) (xy 135.89 157.48))
     (stroke (width 0) (type default))
     (uuid a38679c0-14c3-4c5c-b293-afe766b81929)
   )
-  (wire (pts (xy 54.61 74.93) (xy 54.61 88.9))
+  (wire (pts (xy 64.77 64.77) (xy 64.77 88.9))
     (stroke (width 0) (type default))
-    (uuid a5d63eb6-c8c9-4829-93d5-597baf8595aa)
+    (uuid a4ed7082-7b53-4c5f-9e86-8e703df84957)
   )
   (wire (pts (xy 187.96 91.44) (xy 187.96 88.9))
     (stroke (width 0) (type default))
     (uuid a6894d34-650a-4dae-b361-b246402d7f4b)
+  )
+  (wire (pts (xy 118.11 138.43) (xy 118.11 144.78))
+    (stroke (width 0) (type default))
+    (uuid a7a5990d-ea2a-4bdb-a1fc-c76ab5d41dc6)
   )
   (wire (pts (xy 128.27 149.86) (xy 190.5 149.86))
     (stroke (width 0) (type default))
@@ -1145,41 +1169,45 @@
     (stroke (width 0) (type default))
     (uuid a9b62c55-5779-4587-98fc-51372c120419)
   )
-  (wire (pts (xy 59.69 69.85) (xy 59.69 88.9))
+  (wire (pts (xy 67.31 114.3) (xy 67.31 139.7))
     (stroke (width 0) (type default))
-    (uuid ac304a1e-624f-4b48-aa26-c0b104ff4571)
+    (uuid ae40fb8f-5a7d-4025-a16b-8717c706d0b9)
   )
   (wire (pts (xy 233.68 88.9) (xy 233.68 91.44))
     (stroke (width 0) (type default))
     (uuid aee53a5c-83de-4f6f-80d0-9422ef6fe1ce)
   )
-  (wire (pts (xy 123.19 72.39) (xy 123.19 97.79))
+  (wire (pts (xy 49.53 88.9) (xy 49.53 77.47))
     (stroke (width 0) (type default))
-    (uuid b2bbf6ae-c8c8-44a9-a92b-18122e76eafb)
+    (uuid af36360c-5ebc-44e5-97ed-e7f84b64c936)
   )
-  (wire (pts (xy 57.15 114.3) (xy 57.15 161.29))
+  (wire (pts (xy 128.27 97.79) (xy 128.27 69.85))
     (stroke (width 0) (type default))
-    (uuid b411a857-eccc-43a4-bd1a-4702efa16906)
-  )
-  (wire (pts (xy 64.77 64.77) (xy 130.81 64.77))
-    (stroke (width 0) (type default))
-    (uuid b67f2a5c-e9ce-495e-82da-330b8a238fcf)
+    (uuid b6157e8d-2e76-40d5-9956-f7f1a7a924da)
   )
   (wire (pts (xy 143.51 138.43) (xy 143.51 154.94))
     (stroke (width 0) (type default))
     (uuid b684b68a-00e8-4e99-b5c1-7c80c97a944b)
   )
-  (wire (pts (xy 59.69 114.3) (xy 59.69 158.75))
+  (wire (pts (xy 76.2 90.17) (xy 118.11 90.17))
     (stroke (width 0) (type default))
-    (uuid bc16a3d9-f3db-43c5-a4bf-b00e1fe11c56)
+    (uuid b6872aac-bd89-454d-ac5c-f7ab70b2d318)
+  )
+  (wire (pts (xy 57.15 72.39) (xy 123.19 72.39))
+    (stroke (width 0) (type default))
+    (uuid b97ce971-70ad-447e-bce2-4afecb550578)
+  )
+  (wire (pts (xy 52.07 76.2) (xy 30.48 76.2))
+    (stroke (width 0) (type default))
+    (uuid bb447e5a-7912-4c0a-b67f-ee46becdbc41)
+  )
+  (wire (pts (xy 118.11 90.17) (xy 118.11 97.79))
+    (stroke (width 0) (type default))
+    (uuid be44a144-d1a9-42b4-b6bf-2f1f34c8c457)
   )
   (wire (pts (xy 241.3 67.31) (xy 172.72 67.31))
     (stroke (width 0) (type default))
     (uuid bf0d8866-5f36-4f5e-8605-5cfb62a570c8)
-  )
-  (wire (pts (xy 67.31 62.23) (xy 67.31 88.9))
-    (stroke (width 0) (type default))
-    (uuid bf40f680-2238-41ab-93d1-6725849b22ce)
   )
   (wire (pts (xy 208.28 62.23) (xy 208.28 88.9))
     (stroke (width 0) (type default))
@@ -1193,17 +1221,9 @@
     (stroke (width 0) (type default))
     (uuid c4f5ef90-cb30-4291-a391-697f52f87e5e)
   )
-  (wire (pts (xy 52.07 77.47) (xy 118.11 77.47))
-    (stroke (width 0) (type default))
-    (uuid c713b7a7-3aee-43c5-bd79-5865376805ce)
-  )
   (wire (pts (xy 140.97 63.5) (xy 187.96 63.5))
     (stroke (width 0) (type default))
     (uuid caf07550-40b8-4837-a5e9-52a6bdf9372c)
-  )
-  (wire (pts (xy 130.81 64.77) (xy 130.81 97.79))
-    (stroke (width 0) (type default))
-    (uuid cdcf7c77-23aa-4ec4-9e82-d82c9f2a4dc6)
   )
   (wire (pts (xy 167.64 64.77) (xy 167.64 88.9))
     (stroke (width 0) (type default))
@@ -1212,6 +1232,10 @@
   (wire (pts (xy 213.36 88.9) (xy 213.36 91.44))
     (stroke (width 0) (type default))
     (uuid ceaa28ff-2dcd-4954-9019-38ec417fa0cd)
+  )
+  (wire (pts (xy 120.65 147.32) (xy 120.65 138.43))
+    (stroke (width 0) (type default))
+    (uuid cf069195-8b04-4f55-9c4b-ededdb847724)
   )
   (wire (pts (xy 226.06 157.48) (xy 236.22 157.48))
     (stroke (width 0) (type default))
@@ -1225,25 +1249,49 @@
     (stroke (width 0) (type default))
     (uuid d4a3ed21-f061-4810-bf67-24ebe47bfe2f)
   )
-  (wire (pts (xy 133.35 62.23) (xy 133.35 97.79))
+  (wire (pts (xy 30.48 147.32) (xy 120.65 147.32))
     (stroke (width 0) (type default))
-    (uuid da0b8bd9-6993-4cb3-a646-dee655f40394)
+    (uuid d5bb728d-da45-4924-8235-50608de7753b)
+  )
+  (wire (pts (xy 57.15 88.9) (xy 57.15 72.39))
+    (stroke (width 0) (type default))
+    (uuid d62d542e-f205-4097-9657-d6540fb411ec)
+  )
+  (wire (pts (xy 49.53 77.47) (xy 33.02 77.47))
+    (stroke (width 0) (type default))
+    (uuid d83842aa-bfb0-46ec-82be-75de3e89423f)
+  )
+  (wire (pts (xy 128.27 69.85) (xy 67.31 69.85))
+    (stroke (width 0) (type default))
+    (uuid db16fbce-c405-4d02-9d4a-99766853ff67)
+  )
+  (wire (pts (xy 125.73 152.4) (xy 125.73 138.43))
+    (stroke (width 0) (type default))
+    (uuid dd326bd7-1347-4083-aecb-2e48c0235e78)
   )
   (wire (pts (xy 135.89 62.23) (xy 208.28 62.23))
     (stroke (width 0) (type default))
     (uuid dd4e0bca-a49d-43f3-98d4-754aca94a22e)
   )
-  (wire (pts (xy 118.11 77.47) (xy 118.11 97.79))
+  (wire (pts (xy 123.19 72.39) (xy 123.19 97.79))
     (stroke (width 0) (type default))
-    (uuid de20239e-e300-47f2-80a0-12e196d0a822)
+    (uuid e1af9e1d-7f17-4d86-bb54-126842dc060d)
+  )
+  (wire (pts (xy 59.69 114.3) (xy 59.69 143.51))
+    (stroke (width 0) (type default))
+    (uuid e2ae796a-a7f1-4422-8ea7-9e8b2835000b)
   )
   (wire (pts (xy 146.05 152.4) (xy 190.5 152.4))
     (stroke (width 0) (type default))
     (uuid ec0502b2-89f1-4bc0-ad4d-26aec476022a)
   )
-  (wire (pts (xy 49.53 80.01) (xy 49.53 88.9))
+  (wire (pts (xy 54.61 73.66) (xy 29.21 73.66))
     (stroke (width 0) (type default))
-    (uuid ec0c5df1-58de-4db7-93c2-18c444c6c317)
+    (uuid edf50ecf-7d8c-499c-b7b6-f70b01533bf5)
+  )
+  (wire (pts (xy 110.49 142.24) (xy 110.49 138.43))
+    (stroke (width 0) (type default))
+    (uuid efc33b6a-3b46-4cb0-8965-d05655ae62fb)
   )
   (wire (pts (xy 187.96 88.9) (xy 193.04 88.9))
     (stroke (width 0) (type default))
@@ -1261,58 +1309,37 @@
     (stroke (width 0) (type default))
     (uuid f68e253f-c0a8-4565-87e1-ac67418916e3)
   )
-  (wire (pts (xy 120.65 138.43) (xy 120.65 161.29))
-    (stroke (width 0) (type default))
-    (uuid f8d96b56-c6c2-468b-8fe3-e1df6fcb4a77)
-  )
-  (wire (pts (xy 115.57 87.63) (xy 115.57 97.79))
+  (wire (pts (xy 115.57 92.71) (xy 115.57 97.79))
     (stroke (width 0) (type default))
     (uuid f99a861f-bb31-4900-a2ca-8c8f0ce2df32)
   )
-
-  (label "Net-(J4-E)" (at 57.15 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 313e4552-e103-4a59-860b-d7e760bfcb4b)
+  (wire (pts (xy 96.52 92.71) (xy 96.52 118.11))
+    (stroke (width 0) (type default))
+    (uuid fb0ac908-e3b1-4d10-84f6-8b8835b65543)
   )
-  (label "Net-(J4-D)" (at 62.23 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 56399abc-9428-4495-acc5-c0a61e8fcfcf)
-  )
-  (label "Net-(J4-LAT)" (at 67.31 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 8213279c-261e-4ea4-ab13-78bedc49e3da)
-  )
-  (label "Net-(J4-B)" (at 59.69 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 845f57e5-74a9-4a54-989d-bb3abf4eb5c0)
-  )
-  (label "Net-(J4-G2)" (at 54.61 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid c82d1f57-e686-46a6-bb7b-c38ffc2299ea)
-  )
-  (label "Net-(J4-G1)" (at 52.07 114.3 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid e6aae39b-c0c9-4506-bcd4-81c4df7cde8f)
+  (wire (pts (xy 62.23 140.97) (xy 76.2 140.97))
+    (stroke (width 0) (type default))
+    (uuid ff8c2eb6-4962-4ade-b4b5-5fabd7f52ef8)
   )
 
-  (symbol (lib_id "power:GND") (at 86.36 87.63 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 96.52 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 056d2c72-094b-45d1-9876-90f90f30e084)
-    (property "Reference" "#PWR021" (at 86.36 93.98 0)
+    (property "Reference" "#PWR021" (at 96.52 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 86.36 92.71 0)
+    (property "Value" "GND" (at 96.52 123.19 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 86.36 87.63 0)
+    (property "Footprint" "" (at 96.52 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 86.36 87.63 0)
+    (property "Datasheet" "" (at 96.52 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid dabb1469-c34b-472a-90d1-6f2a0b8f2695))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR021") (unit 1)
         )
@@ -1337,7 +1364,7 @@
     )
     (pin "1" (uuid 30290030-58f5-4aaf-b3f7-665ce938e74a))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR09") (unit 1)
         )
@@ -1368,7 +1395,7 @@
           (reference "R4") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R17") (unit 1)
         )
@@ -1421,7 +1448,7 @@
           (reference "U2") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "U2") (unit 1)
         )
@@ -1452,7 +1479,7 @@
           (reference "R9") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R10") (unit 1)
         )
@@ -1477,7 +1504,7 @@
     )
     (pin "1" (uuid 5d989495-c3cd-4819-a77c-221d3a29a080))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR08") (unit 1)
         )
@@ -1508,7 +1535,7 @@
           (reference "R4") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R15") (unit 1)
         )
@@ -1533,7 +1560,7 @@
     )
     (pin "1" (uuid 91e8cb12-6ac1-41c7-b830-91ddda275ffe))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR023") (unit 1)
         )
@@ -1564,7 +1591,7 @@
           (reference "C1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "C5") (unit 1)
         )
@@ -1589,7 +1616,7 @@
     )
     (pin "1" (uuid 570bb583-844d-4d32-9d31-a75ebe2d278e))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR020") (unit 1)
         )
@@ -1614,7 +1641,7 @@
     )
     (pin "1" (uuid 5462a682-594c-4afe-9587-350a9f08bd17))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR07") (unit 1)
         )
@@ -1645,7 +1672,7 @@
           (reference "R9") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R12") (unit 1)
         )
@@ -1676,7 +1703,7 @@
           (reference "R9") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R14") (unit 1)
         )
@@ -1701,7 +1728,7 @@
     )
     (pin "1" (uuid e6d58846-ac9a-4a11-a873-ae6ac51580c1))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR019") (unit 1)
         )
@@ -1726,7 +1753,7 @@
     )
     (pin "1" (uuid cba82944-da58-46a6-b10b-6646afde0ba7))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR031") (unit 1)
         )
@@ -1755,7 +1782,7 @@
     (pin "4" (uuid f1b7e2a4-b0db-45c2-a797-e475582e4586))
     (pin "5" (uuid d94481f0-6179-4aed-b4e7-64b6cbf60b34))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "J5") (unit 1)
         )
@@ -1780,7 +1807,7 @@
     )
     (pin "1" (uuid e5017f4f-8f2d-4ec6-9eeb-7090c1568734))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR022") (unit 1)
         )
@@ -1811,7 +1838,7 @@
           (reference "C1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "C6") (unit 1)
         )
@@ -1842,7 +1869,7 @@
           (reference "J4") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "J2") (unit 1)
         )
@@ -1867,7 +1894,7 @@
     )
     (pin "1" (uuid cdf1dd4f-9812-4119-9847-3733473a7539))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR011") (unit 1)
         )
@@ -1892,7 +1919,7 @@
     )
     (pin "1" (uuid 34485fd3-cd32-4aa7-ad2a-b8a762482883))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR026") (unit 1)
         )
@@ -1941,7 +1968,7 @@
     (pin "15" (uuid ad6d9b97-0224-49e7-8466-c0f9efbc1994))
     (pin "16" (uuid bbf092da-0387-488e-bbca-cbb102b800c6))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "J4") (unit 1)
         )
@@ -1966,7 +1993,7 @@
     )
     (pin "1" (uuid 9fe44260-25ee-44a6-9a50-4035c511783f))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR02") (unit 1)
         )
@@ -1991,7 +2018,7 @@
     )
     (pin "1" (uuid fb547d0d-cf63-4dce-ae9e-cbd4c6561e48))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR06") (unit 1)
         )
@@ -2016,7 +2043,7 @@
     )
     (pin "1" (uuid dcb5a7ee-4c01-4c7e-9e11-96fc3ce97762))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR03") (unit 1)
         )
@@ -2041,7 +2068,7 @@
     )
     (pin "1" (uuid d87686a0-5610-48f6-a94c-a8e224b740af))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR032") (unit 1)
         )
@@ -2072,7 +2099,7 @@
           (reference "C1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "C8") (unit 1)
         )
@@ -2103,7 +2130,7 @@
           (reference "R9") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R16") (unit 1)
         )
@@ -2134,7 +2161,7 @@
           (reference "J3") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "J1") (unit 1)
         )
@@ -2165,7 +2192,7 @@
           (reference "R4") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R13") (unit 1)
         )
@@ -2196,7 +2223,7 @@
           (reference "R4") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R11") (unit 1)
         )
@@ -2227,7 +2254,7 @@
           (reference "C1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "C7") (unit 1)
         )
@@ -2252,7 +2279,7 @@
     )
     (pin "1" (uuid 61dac2cc-2a2f-4b36-ad68-029d1d86709c))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR04") (unit 1)
         )
@@ -2277,7 +2304,7 @@
     )
     (pin "1" (uuid db344832-4264-4294-8c1b-b1e71922f382))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR013") (unit 1)
         )
@@ -2312,7 +2339,7 @@
           (reference "J2") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "J3") (unit 1)
         )
@@ -2337,7 +2364,7 @@
     )
     (pin "1" (uuid 38ca7819-e0fe-43ca-895a-9b1acf49a831))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR015") (unit 1)
         )
@@ -2362,7 +2389,7 @@
     )
     (pin "1" (uuid b8c16656-0d67-4861-8ef4-4bc8cb3f9eae))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR027") (unit 1)
         )
@@ -2387,7 +2414,7 @@
     )
     (pin "1" (uuid 591b9006-39bd-455b-a8eb-f1c650a22191))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR01") (unit 1)
         )
@@ -2412,7 +2439,7 @@
     )
     (pin "1" (uuid 65b76adb-ea7e-488b-837d-d5bc59aa3bc7))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR010") (unit 1)
         )
@@ -2437,7 +2464,7 @@
     )
     (pin "1" (uuid 0f586a84-987e-4e77-811f-71c38387ff92))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR014") (unit 1)
         )
@@ -2519,7 +2546,7 @@
           (reference "U1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "U1") (unit 1)
         )
@@ -2544,7 +2571,7 @@
     )
     (pin "1" (uuid e3ac5716-9ebc-4845-8dfc-a7532bbadf0f))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR012") (unit 1)
         )
@@ -2575,7 +2602,7 @@
           (reference "R1") (unit 1)
         )
       )
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "R1") (unit 1)
         )
@@ -2600,7 +2627,7 @@
     )
     (pin "1" (uuid 4964b5ae-b177-4a32-9aa7-43b65d1a289c))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR05") (unit 1)
         )
@@ -2625,7 +2652,7 @@
     )
     (pin "1" (uuid a02a3c53-c083-449b-ba2f-84fb4219c4d8))
     (instances
-      (project "Car LED Controller Schematic V4 - KiCAD"
+      (project "Car LED Controller Schematic V8 - KiCAD"
         (path "/a58fb6f5-162c-4767-8872-78e5b371198c"
           (reference "#PWR030") (unit 1)
         )
