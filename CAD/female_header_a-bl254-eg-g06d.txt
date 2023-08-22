@@ -1,0 +1,9 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-23062010-067691";"";
+"REFERENCE";"A-BL254-EG-G06D";"";
+"TraceParts.PartTitle";"Female header, pitch 2.54mm, straight, single row, 6 contacts, plating : Gold flash";"";
+"TraceParts.InstanceId";"10-23062010-06769156Y2MIX8X4IEXNJGWE08U56E3";"";
+"SUPPLIER";"ASSMANN WSW components";"";
+"DESIGN";"Female header, pitch 2.54mm, straight, single row, 6 contacts, plating : Gold flash";"";
+"TraceParts.PartVersion";"1.2.0";"";
+"TraceParts.PartLanguage";"en";"";
