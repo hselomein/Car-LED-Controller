@@ -88,19 +88,19 @@ static float curHorn   = 0.0f;
   //LED Martrix pin section
   //This is configured using a P2 64x64 LED Matrix, which has an E pin.
   #define R1_PIN  32
-  #define G1_PIN  15
-  #define B1_PIN  33
-  #define R2_PIN  25
-  #define G2_PIN  2
-  #define B2_PIN  26
-  #define A_PIN   27
-  #define B_PIN   5 
-  #define C_PIN   14
-  #define D_PIN   17
-  #define E_PIN   4  
-  #define LAT_PIN 5
-  #define OE_PIN  13
-  #define CLK_PIN 12
+  #define G1_PIN  33
+  #define B1_PIN  25
+  #define R2_PIN  26
+  #define G2_PIN  27
+  #define B2_PIN  14
+  #define A_PIN   13
+  #define B_PIN   15 
+  #define C_PIN   2
+  #define D_PIN   4
+  #define E_PIN   12  
+  #define LAT_PIN 17
+  #define OE_PIN  5
+  #define CLK_PIN 16
 
   //LED Matrix Initialization
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
