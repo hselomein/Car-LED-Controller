@@ -66,7 +66,7 @@ static float curHorn   = 0.0f;
   #include <Adafruit_NeoPixel.h>
 
   //LED Controller Section
-  #define NUM_LEDS        193  //193 leds is the lenght of the hood weather strip including 15 leds on each side to show thru the headlights.
+  #define NUM_LEDS        161  //161 leds is the lenght of the hood weather strip
   #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    // Subtract 1 to calculate indexes
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
