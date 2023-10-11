@@ -3,17 +3,17 @@
     Description:    Controls LED strip behavior based on various 
                     Inputs such as, drl, headlights, horn, and button
 		                activity. This is for the esp32 38pin device
-    Date:           5/18/2023
-    Version:        1
+    Date:           10/11/2023  
+    Version:        .9b
     Authors:        Yves Avady
     Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 //Build Configuration Options
-#define DEBUG false      //Enable serial output for debug, change to "false" to disable
-#define SCREENTEST false //To enable the boot up screen test, change to, to disable change to "false"
+  #define DEBUG false      //Enable serial output for debug, change to "false" to disable
+  #define SCREENTEST false //To enable the boot up screen test, change to, to disable change to "false"
 //#define NO_LED_MATRIX   //for future development
 //#define NO_LED_STRIP    //for future development
-#define NUM_MODES 2
+  #define NUM_MODES 2
 
 //Arduino Standard
   #include <stdio.h>
@@ -21,7 +21,7 @@
   #include <driver/adc.h>
   #include <esp_adc_cal.h>
 
-  // Pins to device mapping
+// Pins to device mapping
   #define RELAY_PIN_1 18        // D18 => In1 Relay
   #define RELAY_PIN_2 19        // D19 => In2 Relay
   #define LED_PIN     23        // D23 => LED Controller Signal
@@ -30,7 +30,7 @@
   //#define PK_L_PIN        35        // D35 => Parking Lights Sense (Reserved) 
   //#define HIBM_PIN        33        // D33 => HiBeam Sense (Reserved)
 
-  //Define lcd and led brightness
+//Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
   #define MIN_BRIGHTNESS  63
   #define MED_BRIGHTNESS  127
@@ -48,14 +48,14 @@
   #define HI_VOLT         12
   #define LO_VOLT         2
 
-  // Startup Configuration (Constants)
+// Startup Configuration (Constants)
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
-static float curDRL    = 0.0f;
-static float curHorn   = 0.0f;
-//static double curPkL    = 0.0;
-//static double curHiBeam = 0.0;
+  static float curDRL    = 0.0f;
+  static float curHorn   = 0.0f;
+  //static float curPkL    = 0.0f;
+  //static float curHiBeam = 0.0f;
 
 //EZ Button
   #include <ezButton.h> 
@@ -65,14 +65,14 @@ static float curHorn   = 0.0f;
 //LED Strip
   #include <Adafruit_NeoPixel.h>
 
-  //LED Controller Section
+//LED Controller Section
   #define NUM_LEDS  134   //161 leds is the lenght of the hood weather strip, 36 for the COB strip
   #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
   #define LEDS_PER_PIXEL 1
   #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
   #define RGBW_STRIP false //for RGB Strips change to false
-  #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip
-  #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip
+  #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
+  #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   
   #if RGBW_STRIP == true
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
@@ -101,11 +101,18 @@ static float curHorn   = 0.0f;
 //LED Matrix Panel
   #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
 
-  //MatrixPanel_I2S_DMA dma_display;
+//MatrixPanel_I2S_DMA dma_display;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
-  //LED Martrix pin section
-  #define PCB_TYPE 1  //for LED Matrix Controller V8 use "1", for LED Matrix Controller V9 or Yves Version use "2", 
-                           //For waveguide standard pinout use "3", for working pinout 2 use "2"
+//LED Martrix pin section
+  #define PCB_TYPE 1  
+                      /*-------------------------------------------------- 
+                      Set PCB_TYPE to the appropaite PCB version
+                      for LED Matrix Controller V8 use "1", 
+                      for LED Matrix Controller V9 or Yves Version use "2",
+                      for working pinout 2 use "3"
+                      for waveguide standard pinout use "4",
+                      ---------------------------------------------------*/
+
   #if PCB_TYPE==1
 //This is configured using a P2 64x64 LED Matrix, which has an E pin.
 //Pinout for LED Matrix Controller V8
@@ -266,11 +273,11 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
 }
 
 void startupSequence() {
-  // Loop 4 times
-  //  1 - Towards center clear trail
-  //  2 - Away from center clear trail
-  //  3 - Towards center remain partial brightness
-  //  4 - Away from center remain full brightness 
+ // Loop 4 times
+ //  1 - Towards center clear trail
+ //  2 - Away from center clear trail
+ //  3 - Towards center remain partial brightness
+ //  4 - Away from center remain full brightness 
   uint32_t curDimColor = OFFCOLOR;
   for (int i = 0; i < numLOOPS; i++){
     switch(i) {
@@ -283,7 +290,7 @@ void startupSequence() {
       default:
         curDimColor = OFFCOLOR;
     }
-    // Perform the LED wave effect
+  // Perform the LED wave effect
     ledWave(BRIGHTCOLOR, curDimColor, msDELAY, i % 2);
   }
 
@@ -322,15 +329,15 @@ void screentest() {
 
 void setup()
 {
-  if (DEBUG) {Serial.begin(115200);}   // serial monitor for debugging
-  
   // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
   leds.begin();
   leds.show();
   leds.setBrightness(MAX_BRIGHTNESS);
 
-  delay(250); // power-up safety delay 
+  //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
+
+  if (DEBUG) {Serial.begin(115200);}   // serial monitor for debugging
     
   //setup the button
   modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
@@ -396,8 +403,8 @@ void loop()
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  //curPkL += analogRead(PK_L_PIN);
-  //curHiBeam += analogRead(HIBM_PIN);
+  //curPkL += esp_adc_cal_raw_to_voltage(adc1_get_raw(PK_L_PIN), &ADC1_Characteristics);
+  //curHiBeam += esp_adc_cal_raw_to_voltage(adc1_get_raw(HIBM_PIN), &ADC1_Characteristics);
   curSample++;
 
   if (DEBUG) {
@@ -420,8 +427,8 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    //curPkL *= VOLT_ADJ;
-    //curHiBeam *= VOLT_ADJ;
+    //curPkL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curHiBeam *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -458,8 +465,7 @@ void loop()
       leds.fill(curMode.curColor);  
     }
 
-    leds.show();                      //<--- May not be needed
-    
+    leds.show();           
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
