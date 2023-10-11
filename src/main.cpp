@@ -49,7 +49,7 @@
   #define LO_VOLT         2
 
   // Startup Configuration (Constants)
-  #define msDELAY       0   //Number of ms LED stays on for.
+  #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
 static float curDRL    = 0.0f;
@@ -66,10 +66,16 @@ static float curHorn   = 0.0f;
   #include <Adafruit_NeoPixel.h>
 
   //LED Controller Section
-  #define NUM_LEDS        161  //161 leds is the lenght of the hood weather strip
-  #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    // Subtract 1 to calculate indexes
-  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, NEO_GRBW + NEO_KHZ800);
-
+  #define NUM_LEDS  134   //161 leds is the lenght of the hood weather strip, 36 for the COB strip
+  #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
+  #define LEDS_PER_PIXEL 1
+  #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
+  #define RGBW_STRIP false //for RGB Strips change to false
+  #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip
+  #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip
+  
+  #if RGBW_STRIP == true
+  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgbw format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
   #define DEFAULT_COLOR   leds.Color( 0,  0,  0,   255 )     //White
@@ -78,14 +84,29 @@ static float curHorn   = 0.0f;
   #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
   #define DIMCOLOR      leds.Color(  50,  50,  50,  50 )     //Dim White
   #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
+  #endif
 
+  #if RGBW_STRIP == false
+  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGB_COLOR_ORDER + NEO_KHZ800);
+  //color definitions values, are expressed in rgb format
+  #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
+  #define DEFAULT_COLOR   leds.Color( 255, 255, 255 )     //White
+  #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
+  #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
+  #define BRIGHTCOLOR   leds.Color( 255,  255,  255 )     //Full White
+  #define DIMCOLOR      leds.Color(  50,  50,   50  )     //Dim White
+  #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
+  #endif
+   
 //LED Matrix Panel
   #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
 
   //MatrixPanel_I2S_DMA dma_display;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
-
   //LED Martrix pin section
+  #define PCB_TYPE 1  //for LED Matrix Controller V8 use "1", for LED Matrix Controller V9 or Yves Version use "2", 
+                           //For waveguide standard pinout use "3", for working pinout 2 use "4"
+  #if PCB_TYPE==1
   //This is configured using a P2 64x64 LED Matrix, which has an E pin.
   //Pinout for LED Matrix Controller V8
   #define R1_PIN  25
@@ -102,9 +123,10 @@ static float curHorn   = 0.0f;
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
-/*  
-Use this alertnate pinout for LED Matrix Controller V9 or Yves Version
-PCB V8
+  #endif
+ 
+// Pinout for LED Matrix Controller V9 or Yves Version
+  #if PCB_TYPE==2
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  33
@@ -119,8 +141,9 @@ PCB V8
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
+  #endif
   
-working pinout 2
+  #if PCB_TYPE==3
   #define R1_PIN  32
   #define G1_PIN  33
   #define B1_PIN  25
@@ -135,8 +158,10 @@ working pinout 2
   #define LAT_PIN 17
   #define OE_PIN  5
   #define CLK_PIN 16
-  
-wave share pinout
+  #endif
+
+  //wave share pinout
+  #if PCB_TYPE==4
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  27
@@ -151,8 +176,8 @@ wave share pinout
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
-  */
-
+  #endif
+  
   //LED Matrix Initialization
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
@@ -298,7 +323,13 @@ void setup()
 {
   if (DEBUG) {Serial.begin(115200);}   // serial monitor for debugging
   
-  delay(250); // power-up safety delay
+  // Start LEDs
+  digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
+  leds.begin();
+  leds.show();
+  leds.setBrightness(MAX_BRIGHTNESS);
+
+  delay(250); // power-up safety delay 
     
   //setup the button
   modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
@@ -347,11 +378,7 @@ void setup()
     dma_display->clearScreen();
     dma_display->fillScreen(dma_display->color565(255, 255, 255));
 
-  // Start LEDs
-    digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
-    leds.begin();
-    leds.show();
-    leds.setBrightness(MAX_BRIGHTNESS);
+
 
   // Initiate startup lighting sequence
     startupSequence(); 
