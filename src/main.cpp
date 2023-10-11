@@ -105,10 +105,10 @@ static float curHorn   = 0.0f;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
   //LED Martrix pin section
   #define PCB_TYPE 1  //for LED Matrix Controller V8 use "1", for LED Matrix Controller V9 or Yves Version use "2", 
-                           //For waveguide standard pinout use "3", for working pinout 2 use "4"
+                           //For waveguide standard pinout use "3", for working pinout 2 use "2"
   #if PCB_TYPE==1
-  //This is configured using a P2 64x64 LED Matrix, which has an E pin.
-  //Pinout for LED Matrix Controller V8
+//This is configured using a P2 64x64 LED Matrix, which has an E pin.
+//Pinout for LED Matrix Controller V8
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  33
@@ -143,6 +143,7 @@ static float curHorn   = 0.0f;
   #define CLK_PIN 16
   #endif
   
+//working pinout 2  
   #if PCB_TYPE==3
   #define R1_PIN  32
   #define G1_PIN  33
@@ -160,7 +161,7 @@ static float curHorn   = 0.0f;
   #define CLK_PIN 16
   #endif
 
-  //wave share pinout
+//wave share pinout
   #if PCB_TYPE==4
   #define R1_PIN  25
   #define G1_PIN  26
