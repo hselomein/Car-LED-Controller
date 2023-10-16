@@ -90,7 +90,7 @@
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGB_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgb format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
-  #define DEFAULT_COLOR   leds.Color( 255, 255, 255 )     //White
+  #define DEFAULT_COLOR   leds.Color( 200, 255, 255 )     //White
   #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
   #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
   #define BRIGHTCOLOR   leds.Color( 255,  255,  255 )     //Full White
@@ -449,12 +449,12 @@ void loop()
       dma_display->setBrightness8(MAX_BRIGHTNESS);
       if (DEBUG) {Serial.println("DRL Brightness level MAX");}
     } else if (curDRL < VOLT_BUF) {
-      leds.setBrightness(0);
+      leds.setBrightness(MAX_BRIGHTNESS);  //change back to 0 after solving left indicator / drl off issue
       if (RelayPin1State) {
-        RelayPin1State = false;
+        RelayPin1State = true; //change back to false after solving left indicator / drl off issue
         //turn off relay1
-        digitalWrite(RELAY_PIN_1, RELAY_OFF);
-        dma_display->setBrightness8(0);
+        digitalWrite(RELAY_PIN_1, RELAY_ON); //change back to RELAY_OFF after solving left indicator / drl off issue
+        dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
       }
       if (DEBUG) {Serial.println("DRL Brightness level OFF");}
     }
