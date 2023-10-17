@@ -457,7 +457,7 @@ void loop()
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
       }
       if (DEBUG) {Serial.println("DRL Brightness level OFF");}
-    } else if ((curDRL_left < VOLT_BUF) && (curDRL_right > (LO_VOLT - VOLT_BUF))) {
+    } else if ((curDRL_left < VOLT_BUF) && (Abs(curDRL_right - LO_VOLT) < VOLT_BUF)) {
       //do something with the left indicator
     } else if ((Abs(curDRL_left - LO_VOLT) < VOLT_BUF) && (curDRL_right < VOLT_BUF)) {
       //do something with the right indicator
