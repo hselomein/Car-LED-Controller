@@ -25,10 +25,10 @@
   #define RELAY_PIN_1 18        // D18 => In1 Relay
   #define RELAY_PIN_2 19        // D19 => In2 Relay
   #define LED_PIN     23        // D23 => LED Controller Signal
-  #define DRL_PIN     ADC1_CHANNEL_0        // Pin 39 => DRL Sense
-  #define HORN_PIN    ADC1_CHANNEL_3       // Pin 36 => Horn Sense
-  //#define PK_L_PIN        35        // D35 => Parking Lights Sense (Reserved) 
-  //#define HIBM_PIN        33        // D33 => HiBeam Sense (Reserved)
+  #define DRL_L_PIN   ADC1_CHANNEL_0  // Pin 39 => Left DRL Sense
+  #define HORN_PIN    ADC1_CHANNEL_3  // Pin 36 => Horn Sense
+  #define DRL_R_PIN   ADC1_CHANNEL_7  // D35 => Right DRL Sense
+  //#define HIBM_PIN    33  // D33 => HiBeam Sense (Reserved)
 
 //Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
@@ -52,9 +52,9 @@
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
-  static float curDRL    = 0.0f;
+  static float curDRL_left    = 0.0f;
   static float curHorn   = 0.0f;
-  //static float curPkL    = 0.0f;
+  static float curDRL_right    = 0.0f;
   //static float curHiBeam = 0.0f;
 
 //EZ Button
@@ -355,15 +355,15 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(RELAY_PIN_2, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
-  pinMode(DRL_PIN, INPUT);
+  pinMode(DRL_L_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
-  //pinMode(PK_L_PIN, INPUT);
+  pinMode(DRL_R_PIN, INPUT);
   //pinMode(HIBM_PIN, INPUT);
 
   // Configure ADC
   esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_L_PIN, ADC_ATTEN_DB_11));
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
 
   // LED MATRIX Module configuration
@@ -401,15 +401,15 @@ void loop()
   static int    curSample = 1;
   static bool   RelayPin1State = false;
 
-  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
+  curDRL_left += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_L_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  //curPkL += esp_adc_cal_raw_to_voltage(adc1_get_raw(PK_L_PIN), &ADC1_Characteristics);
+  curDRL_right += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_R_PIN), &ADC1_Characteristics);
   //curHiBeam += esp_adc_cal_raw_to_voltage(adc1_get_raw(HIBM_PIN), &ADC1_Characteristics);
   curSample++;
 
   if (DEBUG) {
     Serial.print("Horn Voltage:"); Serial.println(curHorn);
-    Serial.print("DRL Voltage:"); Serial.println(curDRL);
+    Serial.print("DRL Voltage:"); Serial.println(curDRL_left);
     Serial.print("Current Sample Number:"); Serial.println(curSample);
   }
 
@@ -425,12 +425,12 @@ void loop()
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
-    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    curDRL_left *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    //curPkL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    curDRL_right *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     //curHiBeam *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 
-    if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
+    if ((Abs(curDRL_left - LO_VOLT) < VOLT_BUF) || (Abs(curDRL_right - LO_VOLT) < VOLT_BUF)) {
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
@@ -439,7 +439,7 @@ void loop()
       leds.setBrightness(MIN_BRIGHTNESS);
       dma_display->setBrightness8(MIN_BRIGHTNESS);
       if (DEBUG) {Serial.println("DRL Brightness level LOW");}
-    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
+    } else if ((curDRL_left > (HI_VOLT - VOLT_BUF)) || (curDRL_right > (HI_VOLT - VOLT_BUF))) {
       if (!RelayPin1State) {
         RelayPin1State = true;
         //turn on relay1
@@ -448,7 +448,7 @@ void loop()
       leds.setBrightness(MAX_BRIGHTNESS);
       dma_display->setBrightness8(MAX_BRIGHTNESS);
       if (DEBUG) {Serial.println("DRL Brightness level MAX");}
-    } else if (curDRL < VOLT_BUF) {
+    } else if ((curDRL_left < VOLT_BUF) || (curDRL_right < VOLT_BUF)) {
       leds.setBrightness(MAX_BRIGHTNESS);  //change back to 0 after solving left indicator / drl off issue
       if (RelayPin1State) {
         RelayPin1State = true; //change back to false after solving left indicator / drl off issue
@@ -457,6 +457,10 @@ void loop()
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
       }
       if (DEBUG) {Serial.println("DRL Brightness level OFF");}
+    } else if ((curDRL_left < VOLT_BUF) && (curDRL_right > (LO_VOLT - VOLT_BUF))) {
+      //do something with the left indicator
+    } else if ((Abs(curDRL_left - LO_VOLT) < VOLT_BUF) && (curDRL_right < VOLT_BUF)) {
+      //do something with the right indicator
     }
 
     if (curHorn > VOLT_BUF) {
@@ -467,9 +471,9 @@ void loop()
 
     leds.show();           
     curSample = 1;
-    curDRL = 0;
+    curDRL_left = 0;
     curHorn = 0;
-    //curPkL = 0;
+    curDRL_right = 0;
     //curHiBeam = 0;
   }
 }

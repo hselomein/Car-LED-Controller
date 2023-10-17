@@ -20,9 +20,9 @@ void taskLCDUpdates( void * pvParameters ){
 
   while(true){
     if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL, curHorn); 
+      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL_left, curHorn); 
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL_left, curHorn);  
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
