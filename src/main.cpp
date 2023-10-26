@@ -22,13 +22,12 @@
   #include <esp_adc_cal.h>
 
 // Pins to device mapping
-  #define RELAY_PIN_1 18        // D18 => In1 Relay
-  #define RELAY_PIN_2 19        // D19 => In2 Relay
-  #define LED_PIN     23        // D23 => LED Controller Signal
-  #define DRL_PIN     ADC1_CHANNEL_0        // Pin 39 => DRL Sense
-  #define HORN_PIN    ADC1_CHANNEL_3       // Pin 36 => Horn Sense
-  //#define PK_L_PIN        35        // D35 => Parking Lights Sense (Reserved) 
-  //#define HIBM_PIN        33        // D33 => HiBeam Sense (Reserved)
+  #define RELAY_PIN_1 18              // Pin 18 => In1 Relay
+  #define LED_PIN     23              // Pin 23 => LED Controller Signal
+  #define DRL_PIN     ADC1_CHANNEL_0  // Pin 39 => DRL Sense
+  #define HORN_PIN    ADC1_CHANNEL_3  // Pin 36 => Horn Sense
+  //#define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Right DRL Sense
+  //#define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => HiBeam Sense (Reserved)
 
 //Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
@@ -52,14 +51,14 @@
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Humber of passes over entire LED strip
 
-  static float curDRL    = 0.0f;
-  static float curHorn   = 0.0f;
-  //static float curPkL    = 0.0f;
-  //static float curHiBeam = 0.0f;
+  static float curDRL   = 0.0f;
+  static float curHorn  = 0.0f;
+  //static float curInd_L = 0.0f;
+  //static float curInd_R = 0.0f;
 
 //EZ Button
   #include <ezButton.h> 
-  ezButton modeButton(34);  // create ezButton object that attach to pin 34;
+  ezButton modeButton(19);  // create ezButton object that attach to pin 34;
   #define DEBOUNCE_TIME 75 // the debounce time in millisecond, increase this time if it still chatters
 
 //LED Strip
@@ -353,18 +352,19 @@ void setup()
 
   // Set pins as an input or output pin
   pinMode(RELAY_PIN_1, OUTPUT);
-  pinMode(RELAY_PIN_2, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
-  //pinMode(PK_L_PIN, INPUT);
-  //pinMode(HIBM_PIN, INPUT);
+  //pinMode(IND_L_PIN, INPUT);
+  //pinMode(IND_R_PIN, INPUT);
 
   // Configure ADC
   esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
+  //ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
+  //ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
 
   // LED MATRIX Module configuration
     HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
@@ -403,8 +403,8 @@ void loop()
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  //curPkL += esp_adc_cal_raw_to_voltage(adc1_get_raw(PK_L_PIN), &ADC1_Characteristics);
-  //curHiBeam += esp_adc_cal_raw_to_voltage(adc1_get_raw(HIBM_PIN), &ADC1_Characteristics);
+  //curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
+  //curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
   curSample++;
 
   if (DEBUG) {
@@ -427,8 +427,8 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    //curPkL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    //curHiBeam *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -469,7 +469,7 @@ void loop()
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
-    //curPkL = 0;
-    //curHiBeam = 0;
+    //curInd_L = 0;
+    //curInd_R = 0;
   }
 }
