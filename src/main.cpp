@@ -10,7 +10,7 @@
 -----------------------------------------------------------------*/
 //Build Configuration Options
   #define DEBUG false      //Enable serial output for debug, change to "false" to disable
-  #define SCREENTEST false //To enable the boot up screen test, change to, to disable change to "false"
+  #define SCREENTEST true //To enable the boot up screen test, change to, to disable change to "false"
 //#define NO_LED_MATRIX   //for future development
 //#define NO_LED_STRIP    //for future development
   #define NUM_MODES 2
@@ -22,13 +22,13 @@
   #include <esp_adc_cal.h>
 
 // Pins to device mapping
-  #define RELAY_PIN_1 18        // Pin 18 => In1 Relay
-  #define RELAY_PIN_2 19        // Pin 19 => In2 Relay
-  #define LED_PIN     23        // Pin 23 => LED Controller Signal
-  #define DRL_L_PIN   ADC1_CHANNEL_0  // Pin 39 => Left DRL Sense
-  #define HORN_PIN    ADC1_CHANNEL_3  // Pin 36 => Horn Sense
-  #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense
-  #define IND_L_PIN   ADC1_CHANNEL_5  // Pin 33 => Left Indicator Sense
+  #define RELAY_PIN_1 18        // D18 => In1 Relay
+  #define RELAY_PIN_2 19        // D19 => In2 Relay
+  #define LED_PIN     23        // D23 => LED Controller Signal
+  #define DRL_PIN     ADC1_CHANNEL_0        // Pin 39 => DRL Sense
+  #define HORN_PIN    ADC1_CHANNEL_3       // Pin 36 => Horn Sense
+  //#define PK_L_PIN        35        // D35 => Parking Lights Sense (Reserved) 
+  //#define HIBM_PIN        33        // D33 => HiBeam Sense (Reserved)
 
 //Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
@@ -54,8 +54,8 @@
 
   static float curDRL    = 0.0f;
   static float curHorn   = 0.0f;
-  static float curIND_R    = 0.0f;
-  static float curIND_L = 0.0f;
+  //static float curPkL    = 0.0f;
+  //static float curHiBeam = 0.0f;
 
 //EZ Button
   #include <ezButton.h> 
@@ -355,18 +355,16 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(RELAY_PIN_2, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
-  pinMode(DRL_L_PIN, INPUT);
+  pinMode(DRL_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
-  pinMode(IND_R_PIN, INPUT);
-  pinMode(IND_L_PIN, INPUT);
+  //pinMode(PK_L_PIN, INPUT);
+  //pinMode(HIBM_PIN, INPUT);
 
   // Configure ADC
   esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_L_PIN, ADC_ATTEN_DB_11));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
-  ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
 
   // LED MATRIX Module configuration
     HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
@@ -377,6 +375,7 @@ void setup()
       _pins // pin mapping
     );
 
+    //mxconfig.gpio.e = 12;
     mxconfig.clkphase = false;
     mxconfig.driver = HUB75_I2S_CFG::FM6124;
 
@@ -402,17 +401,15 @@ void loop()
   static int    curSample = 1;
   static bool   RelayPin1State = false;
 
-  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_L_PIN), &ADC1_Characteristics);
+  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  curIND_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
-  curIND_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
+  //curPkL += esp_adc_cal_raw_to_voltage(adc1_get_raw(PK_L_PIN), &ADC1_Characteristics);
+  //curHiBeam += esp_adc_cal_raw_to_voltage(adc1_get_raw(HIBM_PIN), &ADC1_Characteristics);
   curSample++;
 
   if (DEBUG) {
     Serial.print("Horn Voltage:"); Serial.println(curHorn);
     Serial.print("DRL Voltage:"); Serial.println(curDRL);
-    Serial.print("Left Indicator Voltage:"); Serial.println(curIND_L);
-    Serial.print("Right Indicator Voltage:"); Serial.println(curIND_R);
     Serial.print("Current Sample Number:"); Serial.println(curSample);
   }
 
@@ -430,8 +427,8 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    curIND_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    curIND_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curPkL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curHiBeam *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -460,10 +457,6 @@ void loop()
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
       }
       if (DEBUG) {Serial.println("DRL Brightness level OFF");}
-    } else if ((curDRL < VOLT_BUF) && (Abs(curIND_R - LO_VOLT) < VOLT_BUF)) {
-      //do something with the left indicator
-    } else if ((Abs(curDRL - LO_VOLT) < VOLT_BUF) && (curIND_R < VOLT_BUF)) {
-      //do something with the right indicator
     }
 
     if (curHorn > VOLT_BUF) {
@@ -476,7 +469,7 @@ void loop()
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
-    curIND_R = 0;
-    curIND_L = 0;
+    //curPkL = 0;
+    //curHiBeam = 0;
   }
 }
