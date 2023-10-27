@@ -1,6 +1,6 @@
 #include <TaskLCD.h>
 
-void taskLCDUpdates( void * pvParameters ){
+void taskLCDUpdates( void * pvParameters) {
   char tmpMessage[16];
   lcd.clear();    //clear the display and home the cursor
   sprintf(tmpMessage, "MODE DRL   Horn "); 
@@ -9,10 +9,10 @@ void taskLCDUpdates( void * pvParameters ){
   delay(50); 
 
   while(true){
-    if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL, curHorn); 
+    if (Horn > BUF) {
+      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, Horn); 
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, Horn);  
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
