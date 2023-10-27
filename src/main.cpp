@@ -28,12 +28,8 @@
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
   #define DRL_PIN     ADC1_CHANNEL_0    // Pin 39 => DRL Sense
   #define HORN_PIN    ADC1_CHANNEL_3    // Pin 36 => Horn Sense
-  //#if LEFT_IND == true
   #define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Left Indicator 
-  //#endif
-  //#if RIGHT_IND == true
   #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense (Reserved)
-  //#endif
 
 //Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
@@ -368,21 +364,21 @@ void setup()
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
   if (DEBUG) {Serial.println("Init ADC 1");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
-  delay(150); // see if timing has effect on crashing
+  //delay(150); // see if timing has effect on crashing
   if (DEBUG) {Serial.println("Init ADC 2");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
-  delay(150); // see if timing has effect on crashing
-#if RIGHT_IND == true
-  if (DEBUG) {Serial.println("Init ADC 3");} 
-  ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
-  delay(150); // see if timing has effect on crashing
-#endif
-#if LEFT_IND == true
-  if (DEBUG) {Serial.println("Init ADC 4");}
-  ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
-  delay(150); // see if timing has effect on crashing
-#endif
-    
+  //delay(150); // see if timing has effect on crashing
+  if (RIGHT_IND) {
+    if (DEBUG) {Serial.println("Init ADC 3");} 
+    ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
+    //delay(150); // see if timing has effect on crashing
+  }
+  if (LEFT_IND) {
+    if (DEBUG) {Serial.println("Init ADC 4");}
+    ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
+    //delay(150); // see if timing has effect on crashing
+  }
+
   // LED MATRIX Module configuration
     HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
     HUB75_I2S_CFG mxconfig(
@@ -420,12 +416,8 @@ void loop()
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-#if LEFT_IND == true 
-    curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
-#endif  
-#if RIGHT_IND == true
-    curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
-#endif
+  if (LEFT_IND) curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
+  if (RIGHT_IND) curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
   curSample++;
 
   if (DEBUG) {
@@ -448,12 +440,8 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#if LEFT_IND == true
-      curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#endif
-#if RIGHT_IND == true
-      curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#endif
+  if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+  if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -491,11 +479,7 @@ void loop()
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
-#if LEFT_IND == true 
-      curInd_L = 0;
-#endif
-#if RIGHT_IND == true  
-      curInd_R = 0;
-#endif  
+    if (LEFT_IND) curInd_L = 0;
+    if (RIGHT_IND) curInd_R = 0;
   }
 }
