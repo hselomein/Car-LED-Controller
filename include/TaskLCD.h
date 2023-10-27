@@ -12,9 +12,9 @@
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
-#define BUF VOLT_BUF
-#define HORN curHorn
-#define DRL curDRL
+float BUF = VOLT_BUF;
+float HORN = curHorn;
+float DRL = curDRL;
 
 void taskLCDUpdates( void * pvParameters );
 
