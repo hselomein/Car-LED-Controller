@@ -194,6 +194,8 @@
 
 #include <logos.h>
 
+#include <TaskLCD.h>
+
 //-------------functions-----------------
 class cModes {
   public:
@@ -246,8 +248,6 @@ class cModes {
     }
 };
 cModes curMode;
-
-#include <TaskLCD.h>
 
 bool firstLoop = true;
 
