@@ -365,7 +365,7 @@ void setup()
 //  #if LEFT_IND == true
   pinMode(IND_L_PIN, INPUT);}
 //  #endif
-  #if (RIGHT_IND) {
+  if (RIGHT_IND) {
 //  #if RIGHT_IND == true
   pinMode(IND_R_PIN, INPUT);}
 //  #endif
