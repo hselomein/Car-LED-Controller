@@ -377,16 +377,16 @@ void setup()
   delay(150); // see if timing has effect on crashing
   if (DEBUG) {Serial.println("Init ADC 2");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
-  delay(150); 
+  delay(150); // see if timing has effect on crashing
   #if RIGHT_IND == true
   if (DEBUG) {Serial.println("Init ADC 3");} 
   ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
-  delay(150);
+  delay(150); // see if timing has effect on crashing
   #endif
   #if LEFT_IND == true
   if (DEBUG) {Serial.println("Init ADC 4");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
-  delay(150);
+  delay(150); // see if timing has effect on crashing
   #endif
     
   // LED MATRIX Module configuration
