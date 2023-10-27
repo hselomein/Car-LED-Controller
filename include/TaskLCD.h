@@ -1,6 +1,8 @@
 #ifndef _TASKLCD_H_
 #define _TASKLCD_H_
 
+#include <stdio.h>
+#include <Wire.h>
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
