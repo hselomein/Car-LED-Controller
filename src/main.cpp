@@ -361,14 +361,8 @@ void setup()
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
-  if (LEFT_IND) {
-//  #if LEFT_IND == true
-  pinMode(IND_L_PIN, INPUT);}
-//  #endif
-  if (RIGHT_IND) {
-//  #if RIGHT_IND == true
-  pinMode(IND_R_PIN, INPUT);}
-//  #endif
+  if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
+  if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
