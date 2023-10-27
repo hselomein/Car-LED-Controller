@@ -9,10 +9,10 @@ void taskLCDUpdates( void * pvParameters) {
   delay(50); 
 
   while(true){
-    if (Horn > BUF) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, Horn); 
+    if (HORN > BUF) {
+      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, HORN); 
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, Horn);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);  
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
