@@ -213,7 +213,7 @@ class cModes {
             if (isLyftDisplayed == true) {isLyftDisplayed = false;}
             curColor = UBER_COLOR;
             txtColor = "UBER"; 
-            if (DEBUG) {Serial.println("LED color set to Uber Mode color (Seafoam Green)");}         
+            if (DEBUG) Serial.println("LED color set to Uber Mode color (Seafoam Green)");         
             if (txtColor == "UBER" && isUberDisplayed == false){
               drawUberLogo(dma_display);
               isUberDisplayed = true;
@@ -223,7 +223,7 @@ class cModes {
             if (isUberDisplayed == true) {isUberDisplayed = false;}
             curColor = LYFT_COLOR;
             txtColor = "LYFT";
-            if (DEBUG) {Serial.println("LED color set to Lyft Mode color (Magenta)");}
+            if (DEBUG) Serial.println("LED color set to Lyft Mode color (Magenta)");
             if (txtColor == "LYFT" && isLyftDisplayed == false){
               drawLyftLogo(dma_display);
               isLyftDisplayed = true;
@@ -232,7 +232,7 @@ class cModes {
         default:
             curColor = DEFAULT_COLOR;
             txtColor = "WHIT";
-            if (DEBUG) {Serial.println("LED color set to Default Mode color (White)");}
+            if (DEBUG) Serial.println("LED color set to Default Mode color (White)");
             dma_display->fillScreen(dma_display->color565(0, 0, 0));
             isLyftDisplayed = false;
             isUberDisplayed = false;
@@ -270,9 +270,7 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     ledRight = NUM_LEDS - ledLeft -1;
     leds.setPixelColor(ledLeft, maxColor);              leds.setPixelColor(ledRight, maxColor);
     leds.setPixelColor(ledLeft + offset, minColor);     leds.setPixelColor(ledRight - offset, minColor);
-    if (msDelay) {
-      delay(msDelay);
-    }
+    if (msDelay) delay(msDelay);
     leds.show();
   }
 }
@@ -305,8 +303,8 @@ void startupSequence() {
 }
 
 float Abs(float val) {
-  if (val > 0) { return val; }
-  else { return -val; }
+  if (val > 0) return val;
+  else return -val;
 }
 
 void screentest() {
@@ -342,7 +340,7 @@ void setup()
 
   //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
 
-  if (DEBUG) {Serial.begin(115200);}   // serial monitor for debugging
+  if (DEBUG) Serial.begin(115200);   // serial monitor for debugging
     
   //setup the button
   modeButton.setDebounceTime(DEBOUNCE_TIME);  // set debounce time to 50 milliseconds    
@@ -410,7 +408,7 @@ void setup()
   // Initiate startup lighting sequence
     startupSequence(); 
 
-  if (SCREENTEST) {screentest();}
+  if (SCREENTEST) screentest();
 
   initTaskLCD();
 }
@@ -437,7 +435,7 @@ void loop()
   }
 
   modeButton.loop();      // MUST call the loop() function first
-  if (DEBUG) {Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());}
+  if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
 
   if (firstLoop) {
     curMode.Init();
@@ -465,7 +463,7 @@ void loop()
       }
       leds.setBrightness(MIN_BRIGHTNESS);
       dma_display->setBrightness8(MIN_BRIGHTNESS);
-      if (DEBUG) {Serial.println("DRL Brightness level LOW");}
+      if (DEBUG) Serial.println("DRL Brightness level LOW");
     } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
       if (!RelayPin1State) {
         RelayPin1State = true;
@@ -474,7 +472,7 @@ void loop()
       }
       leds.setBrightness(MAX_BRIGHTNESS);
       dma_display->setBrightness8(MAX_BRIGHTNESS);
-      if (DEBUG) {Serial.println("DRL Brightness level MAX");}
+      if (DEBUG) Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
       leds.setBrightness(MAX_BRIGHTNESS);  //change back to 0 after solving left indicator / drl off issue
       if (RelayPin1State) {
@@ -483,15 +481,12 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON); //change back to RELAY_OFF after solving left indicator / drl off issue
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
       }
-      if (DEBUG) {Serial.println("DRL Brightness level OFF");}
+      if (DEBUG) Serial.println("DRL Brightness level OFF");
     }
 
-    if (curHorn > VOLT_BUF) {
-      leds.fill(ANGRY_COLOR);  
-    } else {
-      leds.fill(curMode.curColor);  
-    }
-
+    if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR);  
+    else leds.fill(curMode.curColor);  
+    
     leds.show();           
     curSample = 1;
     curDRL = 0;
