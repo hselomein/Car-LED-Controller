@@ -22,7 +22,7 @@
   #include <Wire.h>
   #include <driver/adc.h>
   #include <esp_adc_cal.h>
-
+  
 // Pins to device mapping
   #define RELAY_PIN_1 18                // Pin 18 => In1 Relay
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
@@ -48,6 +48,7 @@
   #define VOLT_BUF        1
   #define HI_VOLT         12
   #define LO_VOLT         2
+  
 
 // Startup Configuration (Constants)
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
@@ -57,6 +58,8 @@
   static float curHorn  = 0.0f;
   static float curInd_L = 0.0f;
   static float curInd_R = 0.0f;
+
+  #include <TaskLCD.h>
 
 //EZ Button
   #include <ezButton.h> 
@@ -194,7 +197,7 @@
 
 #include <logos.h>
 
-#include <TaskLCD.h>
+
 
 //-------------functions-----------------
 class cModes {

@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-Car LED Controller Project",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}
