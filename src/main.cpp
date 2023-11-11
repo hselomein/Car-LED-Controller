@@ -18,8 +18,8 @@
   #define RIGHT_IND false  //enable right indicator code for testing
 
 //Arduino Standard
-  #include <stdio.h>
-  #include <Wire.h>
+  //#include <stdio.h>
+ //#include <Wire.h>
   #include <driver/adc.h>
   #include <esp_adc_cal.h>
   
@@ -59,7 +59,7 @@
   static float curInd_L = 0.0f;
   static float curInd_R = 0.0f;
 
-  #include <TaskLCD.h>
+  
 
 //EZ Button
   #include <ezButton.h> 
@@ -251,6 +251,8 @@ class cModes {
     }
 };
 cModes curMode;
+
+#include <TaskLCD.h>
 
 bool firstLoop = true;
 
