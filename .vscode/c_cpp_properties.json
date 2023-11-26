@@ -1,9 +1,13 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
     "configurations": [
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/**",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/include",
                 "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/src",
                 "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/hd44780",
@@ -276,7 +280,8 @@
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
-                "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src"
+                "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
+                ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,

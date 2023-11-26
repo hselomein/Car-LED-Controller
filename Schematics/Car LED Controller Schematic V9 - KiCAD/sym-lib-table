@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "PC817X3NSZ9F")(type "KiCad")(uri "${KIPRJMOD}/Library/footprints/PC817X3NSZ9F/PC817X3NSZ9F.kicad_sym")(options "")(descr ""))
+  (lib (name "Connector_Generic1")(type "KiCad")(uri "${KIPRJMOD}/Library/footprints/Library.pretty/Connector_Generic.kicad_sym")(options "")(descr ""))
+)
