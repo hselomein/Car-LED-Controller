@@ -16,6 +16,7 @@
   #define NUM_MODES 2
   #define LEFT_IND false   //enable left indicator code for testing
   #define RIGHT_IND false  //enable right indicator code for testing
+  #define V9_PCB false     //enble if you are using V9 LED Controller PCB
 
 //Arduino Standard
   //#include <stdio.h>
@@ -27,10 +28,23 @@
   #define RELAY_PIN_1 18                // Pin 18 => In1 Relay
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
   #define DRL_PIN     ADC1_CHANNEL_0    // Pin 39 => DRL Sense
-  #define HORN_PIN    ADC1_CHANNEL_3    // Pin 36 => Horn Sense
+
+  #if V9_PCB == false
+  #define HORN_PIN    ADC1_CHANNEL_3  // Pin 39 => Horn Sense
   #define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Left Indicator 
   #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense (Reserved)
+  #endif
+  #if V9_PCB == true
+  #include <SimpleButton.h>
+  using namespace simplebutton;
+  #define HORN_PIN    39  // Pin 39 => Horn Sense
+  #define IND_L_PIN   34  // Pin 34 => Left Indicator 
+  #define IND_R_PIN   35  // Pin 35 => Right Indicator Sense (Reserved)
+  Button* Horn_Button = NULL;
+  Button* Ind_L_Button = NULL;
+  Button* Ind_R_Button = NULL;
 
+  #endif
 //Define lcd and led brightness
   #define MAX_BRIGHTNESS  255
   #define MIN_BRIGHTNESS  63
