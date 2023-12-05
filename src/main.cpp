@@ -16,7 +16,7 @@
   #define NUM_MODES 2
   #define LEFT_IND false   //enable left indicator code for testing
   #define RIGHT_IND false  //enable right indicator code for testing
-  #define V9_PCB false     //enble if you are using V9 LED Controller PCB
+  #define V9_PCB true     //enble if you are using V9 LED Controller PCB
 
 //Arduino Standard
   //#include <stdio.h>
@@ -373,9 +373,22 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
-  pinMode(HORN_PIN, INPUT);
+  if (V9_PCB == false) pinMode(HORN_PIN, INPUT);
   if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
   if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
+
+  #if V9_PCB == true
+  Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttonsef
+  Ind_L_Button = new Button(IND_L_PIN, true);
+  Ind_R_Button = new Button(IND_R_PIN, true);
+  Horn_Button->setOnClicked([]() {
+        leds.fill(ANGRY_COLOR);
+    });
+  Horn_Button->setOnReleased([]() {
+        leds.fill(curMode.curColor);
+    });
+ 
+  #endif
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
@@ -384,19 +397,27 @@ void setup()
   if (DEBUG) {Serial.println("Init ADC 1");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
   //delay(150); // see if timing has effect on crashing
+#if V9_PCB == false
   if (DEBUG) {Serial.println("Init ADC 2");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
   //delay(150); // see if timing has effect on crashing
+#endif
+
+#if V9_PCB == false
   if (RIGHT_IND) {
     if (DEBUG) {Serial.println("Init ADC 3");} 
     ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
     //delay(150); // see if timing has effect on crashing
   }
+#endif
+
+#if V9_PCB == false
   if (LEFT_IND) {
     if (DEBUG) {Serial.println("Init ADC 4");}
     ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
     //delay(150); // see if timing has effect on crashing
   }
+#endif
 
   // LED MATRIX Module configuration
     HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
@@ -434,9 +455,11 @@ void loop()
   static bool   RelayPin1State = false;
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
+#if V9_PCB == false
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
   if (LEFT_IND) curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
   if (RIGHT_IND) curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
+#endif
   curSample++;
 
   if (DEBUG) {
@@ -447,6 +470,11 @@ void loop()
 
   modeButton.loop();      // MUST call the loop() function first
   if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
+#if V9_PCB == true
+  Horn_Button->update();
+  Ind_L_Button->update();
+  Ind_R_Button->update();
+#endif
 
   if (firstLoop) {
     curMode.Init();
@@ -458,9 +486,11 @@ void loop()
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+#if V9_PCB == false
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+#endif
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
       if (!RelayPin1State) {
@@ -491,9 +521,15 @@ void loop()
       if (DEBUG) Serial.println("DRL Brightness level OFF");
     }
 
-    if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR);  
-    else leds.fill(curMode.curColor);  
-    
+#if V9_PCB == false
+    if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
+#endif
+#if V9_PCB == true
+  bool currentButtonState = Horn_Button->getState();
+    if (!currentButtonState) leds.fill(ANGRY_COLOR);   
+#endif 
+    else leds.fill(curMode.curColor);
+
     leds.show();           
     curSample = 1;
     curDRL = 0;
