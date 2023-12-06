@@ -373,7 +373,9 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
-  if (V9_PCB == false) pinMode(HORN_PIN, INPUT);
+  if (V9_PCB) pinMode(HORN_PIN, INPUT);
+  if (V9_PCB) pinMode(IND_L_PIN, INPUT);
+  if (V9_PCB) pinMode(IND_R_PIN, INPUT);
   if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
   if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
 
@@ -381,13 +383,6 @@ void setup()
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttonsef
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
-  Horn_Button->setOnClicked([]() {
-        leds.fill(ANGRY_COLOR);
-    });
-  Horn_Button->setOnReleased([]() {
-        leds.fill(curMode.curColor);
-    });
- 
   #endif
 
   // Configure ADC
@@ -525,11 +520,47 @@ void loop()
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
 #endif
 #if V9_PCB == true
-  bool currentButtonState = Horn_Button->getState();
-    if (!currentButtonState) leds.fill(ANGRY_COLOR);   
-#endif 
-    else leds.fill(curMode.curColor);
+  int ledLeft = 0; 
+  int ledRight = 0;
+  int offset;
+  bool currentHornButtonState = Horn_Button->getState();
+  bool currentInd_LButtonState = Ind_L_Button->getState();
+  bool currentInd_RButtonState = Ind_R_Button->getState();
 
+    if (!currentHornButtonState) leds.fill(ANGRY_COLOR);
+    else if (!currentInd_RButtonState && currentInd_LButtonState) {
+      for (int i = 1; i <= NUM_LEDS_HALF; i++){
+        ledLeft = NUM_LEDS_HALF - i;
+        leds.setPixelColor(ledLeft, ANGRY_COLOR);
+        delay(int(400 / NUM_PIXELS + 0.5));
+        leds.show();
+      }
+          leds.show();
+          } 
+    else if (!currentInd_LButtonState && currentInd_RButtonState) {
+      for (int o = NUM_LEDS_HALF; o <= NUM_LEDS; o++){
+        //ledLeft = NUM_LEDS_HALF - o;
+        //ledRight = NUM_LEDS - ledLeft -1;
+        leds.setPixelColor(o, ANGRY_COLOR);
+        delay(int(400 / NUM_PIXELS + 0.5));
+        leds.show();
+      }
+          leds.show();
+          } 
+        else if (!currentInd_RButtonState && !currentInd_LButtonState) {
+      for (int p = 1; p <= NUM_LEDS_HALF; p++) {
+    // Set current left and right LEDs based on the direction
+        ledLeft = NUM_LEDS_HALF - p;
+        offset = 1; 
+        ledRight = NUM_LEDS - ledLeft -1;
+        leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
+        delay(int(400 / NUM_PIXELS + 0.5));
+        leds.show();
+      }
+          leds.show();
+          } 
+    else leds.fill(curMode.curColor);
+#endif 
     leds.show();           
     curSample = 1;
     curDRL = 0;

@@ -26,10 +26,19 @@ void taskLCDUpdates( void * pvParameters) {
   delay(50); 
 
   while(true){
-    if (HORN > BUF) {
+    bool currentHornButtonState = Horn_Button->getState();
+    bool currentInd_LButtonState = Ind_L_Button->getState();
+    bool currentInd_RButtonState = Ind_R_Button->getState();
+    if (!currentHornButtonState) {
       sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, HORN); 
+    } else if (!currentInd_LButtonState && currentInd_RButtonState) {
+      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", DRL, HORN); 
+    } else if (!currentInd_RButtonState && currentInd_LButtonState) {
+      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
+    } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
+      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);  
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
