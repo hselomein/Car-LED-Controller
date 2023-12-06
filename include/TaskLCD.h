@@ -36,7 +36,7 @@ void taskLCDUpdates( void * pvParameters) {
     } else if (!currentInd_RButtonState && currentInd_LButtonState) {
       sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
     } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
-      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
+      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", DRL, HORN); 
     } else {
       sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);
     }
