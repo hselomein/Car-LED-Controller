@@ -9,14 +9,14 @@
     Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 //Build Configuration Options
-  #define DEBUG false      //Enable serial output for debug, change to "false" to disable
-  #define SCREENTEST false //To enable the boot up screen test, change to, to disable change to "false"
-//#define NO_LED_MATRIX   //for future development
-//#define NO_LED_STRIP    //for future development
-  #define NUM_MODES 2
-  #define LEFT_IND false   //enable left indicator code for testing
-  #define RIGHT_IND false  //enable right indicator code for testing
-  #define V9_PCB true     //enble if you are using V9 LED Controller PCB
+  #define DEBUG false       //Enable serial output for debug, change to "false" to disable
+  #define SCREENTEST false  //To enable the boot up screen test, change to, to disable change to "false"
+  #define LED_MATRIX true   //Set to false if you want to use a 64x64 LED Matrix
+//#define LED_STRIP         //for future development
+  #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
+  #define LEFT_IND false    //enable left indicator code for testing
+  #define RIGHT_IND false   //enable right indicator code for testing
+  #define V9_PCB true       //enble if you are using V9 LED Controller PCB
 
 //Arduino Standard
   //#include <stdio.h>
@@ -34,7 +34,7 @@
   #define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Left Indicator 
   #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense (Reserved)
   #endif
-  #if V9_PCB == true
+  #if V9_PCB 
   #include <SimpleButton.h>
   using namespace simplebutton;
   #define HORN_PIN    39  // Pin 39 => Horn Sense
@@ -92,7 +92,7 @@
   #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   
-  #if RGBW_STRIP == true
+  #if RGBW_STRIP 
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgbw format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
@@ -115,7 +115,8 @@
   #define DIMCOLOR      leds.Color(  50,  50,   50  )     //Dim White
   #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
   #endif
-   
+
+#if LED_MATRIX    
 //LED Matrix Panel
   #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
 
@@ -210,7 +211,7 @@
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
 
 #include <logos.h>
-
+#endif
 
 
 //-------------functions-----------------
@@ -225,22 +226,26 @@ class cModes {
       if (modeButton.getCount() > NUM_MODES) { modeButton.resetCount(); }
       switch (modeButton.getCount()) {
         case 1:
-            if (isLyftDisplayed == true) {isLyftDisplayed = false;}
+            if (isLyftDisplayed == true) {isLyftDisplayed == false;}
             curColor = UBER_COLOR;
             txtColor = "UBER"; 
             if (DEBUG) Serial.println("LED color set to Uber Mode color (Seafoam Green)");         
             if (txtColor == "UBER" && isUberDisplayed == false){
+#if LED_MATRIX            
               drawUberLogo(dma_display);
+#endif              
               isUberDisplayed = true;
             } 
             break;
         case 2:
-            if (isUberDisplayed == true) {isUberDisplayed = false;}
+            if (isUberDisplayed == true) {isUberDisplayed == false;}
             curColor = LYFT_COLOR;
             txtColor = "LYFT";
             if (DEBUG) Serial.println("LED color set to Lyft Mode color (Magenta)");
             if (txtColor == "LYFT" && isLyftDisplayed == false){
-              drawLyftLogo(dma_display);
+#if LED_MATRIX            
+            drawLyftLogo(dma_display);
+#endif            
               isLyftDisplayed = true;
             }
             break;
@@ -248,7 +253,9 @@ class cModes {
             curColor = DEFAULT_COLOR;
             txtColor = "WHIT";
             if (DEBUG) Serial.println("LED color set to Default Mode color (White)");
+#if LED_MATRIX            
             dma_display->fillScreen(dma_display->color565(0, 0, 0));
+#endif            
             isLyftDisplayed = false;
             isUberDisplayed = false;
             break;
@@ -322,6 +329,7 @@ float Abs(float val) {
   else return -val;
 }
 
+#if LED_MATRIX 
 void screentest() {
   // fix the screen with green
   dma_display->fillRect(0, 0, dma_display->width(), dma_display->height(), dma_display->color444(0, 15, 0));
@@ -342,7 +350,7 @@ void screentest() {
   // fill the screen with 'black'
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
 }
-
+#endif
 //-----------main program-----------------
 
 void setup()
@@ -379,7 +387,7 @@ void setup()
   if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
   if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
 
-  #if V9_PCB == true
+  #if V9_PCB 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttonsef
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
@@ -414,6 +422,7 @@ void setup()
   }
 #endif
 
+#if LED_MATRIX 
   // LED MATRIX Module configuration
     HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
     HUB75_I2S_CFG mxconfig(
@@ -433,13 +442,15 @@ void setup()
     dma_display->setBrightness8(MAX_BRIGHTNESS); //5-255 led matrix does not display using values lower than 5
     dma_display->clearScreen();
     dma_display->fillScreen(dma_display->color565(255, 255, 255));
-
+#endif
 
 
   // Initiate startup lighting sequence
     startupSequence(); 
 
+#if LED_MATRIX 
   if (SCREENTEST) screentest();
+#endif
 
   initTaskLCD();
 }
@@ -465,7 +476,7 @@ void loop()
 
   modeButton.loop();      // MUST call the loop() function first
   if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
-#if V9_PCB == true
+#if V9_PCB 
   Horn_Button->update();
   Ind_L_Button->update();
   Ind_R_Button->update();
@@ -481,8 +492,9 @@ void loop()
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#if V9_PCB == false
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+#if V9_PCB == false
+    
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 #endif
@@ -494,7 +506,9 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
+#if LED_MATRIX      
       dma_display->setBrightness8(MIN_BRIGHTNESS);
+#endif
       if (DEBUG) Serial.println("DRL Brightness level LOW");
     } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
       if (!RelayPin1State) {
@@ -503,7 +517,9 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MAX_BRIGHTNESS);
+#if LED_MATRIX
       dma_display->setBrightness8(MAX_BRIGHTNESS);
+#endif
       if (DEBUG) Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
       leds.setBrightness(MAX_BRIGHTNESS);  //change back to 0 after solving left indicator / drl off issue
@@ -511,7 +527,9 @@ void loop()
         RelayPin1State = true; //change back to false after solving left indicator / drl off issue
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_ON); //change back to RELAY_OFF after solving left indicator / drl off issue
+#if LED_MATRIX
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
+#endif
       }
       if (DEBUG) Serial.println("DRL Brightness level OFF");
     }
@@ -519,7 +537,7 @@ void loop()
 #if V9_PCB == false
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
 #endif
-#if V9_PCB == true
+#if V9_PCB 
   int ledLeft = 0; 
   int ledRight = 0;
   int offset;
@@ -539,8 +557,6 @@ void loop()
           } 
     else if (!currentInd_LButtonState && currentInd_RButtonState) {
       for (int o = NUM_LEDS_HALF; o <= NUM_LEDS; o++){
-        //ledLeft = NUM_LEDS_HALF - o;
-        //ledRight = NUM_LEDS - ledLeft -1;
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(int(400 / NUM_PIXELS + 0.5));
         leds.show();
