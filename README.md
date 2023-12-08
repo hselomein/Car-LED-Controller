@@ -57,10 +57,13 @@ Vehicle inspection mode, which will disable the lights, physical switch
 There is a parts list so you can build this as well.
 
 How to use with Platform-io IDE:
+
 - You will need the Platformio-ide extension installed in VSCODE to compile the code
 The src folder is where the code you want to compile and upload code to the ESP32
 The main program code is in the file "main.cpp".
 How to use with Arduino IDE
+
+
 The Arduino project files are located in the ArduinoIDE folder. This part is not complete still porting the code
 
 This program is modular. You can enable or disable specific features by setting directives to true or false.
