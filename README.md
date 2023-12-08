@@ -11,23 +11,23 @@ The LED strip is a 12v WS2811 with 120 LEDs per meter
 The number of LEDs in the strip 144 pixels per meter, x4 individual pixelets, WS2811 Chip 
 
 LED Strip Actions:
-Startup is a night rider style sweep 3 times until it is a solid white bar
-DRL Modes will control the LED strip brightness.
+- Startup is a night rider style sweep 3 times until it is a solid white bar
+- DRL Modes will control the LED strip brightness.
 
-  When DRLs are in Daytime Running Light Mode strip will be at full brightness
-  When DRLs are used as parking lights, the strip will be dimmed to a lower brightness
+-  When DRLs are in Daytime Running Light Mode strip will be at full brightness
+-  When DRLs are used as parking lights, the strip will be dimmed to a lower brightness
   
-Horn usage makes the lights turn dark amber to represent "Angry Mode"
-Indicators will show using a single chasing pattern that stays on for as long as the voltage is applied. This is to match the blink of the indicator circuit
-When hazard lights are on there will be a chasing pattern starting from the middle and ending at the ends
-There will be a button to cycle between Normal, Uber, and Lyft Modes
-Uber Mode, the led strip will be CYAN
-LYFT Mode, the led strip will be Magenta
+- Horn usage makes the lights turn dark amber to represent "Angry Mode"
+- Indicators will show using a single chasing pattern that stays on for as long as the voltage is applied. This is to match the blink of the indicator circuit
+- When hazard lights are on there will be a chasing pattern starting from the middle and ending at the ends
+- There will be a button to cycle between Normal, Uber, and Lyft Modes
+- Uber Mode, the led strip will be a Seafoam Greem color
+- LYFT Mode, the led strip will be Magenta
 There will be a physical switch installed to disable the light for law enforcement and/or vehicle inspection purposes
 
-There will be 5 voltage reading inputs 2 will be reserved for future uses
+There are 5 voltage reading inputs 
 
-  - DRL Left Sensing,
+  - DRL Left Sensing, 
   - DRL right Sensing,
   - Horn Sensing,
   - Left Indicator,
@@ -57,14 +57,12 @@ Vehicle inspection mode, which will disable the lights, physical switch
 There is a parts list so you can build this as well.
 
 How to use with Platform-io IDE:
-
 - You will need the Platformio-ide extension installed in VSCODE to compile the code
 The src folder is where the code you want to compile and upload code to the ESP32
 The main program code is in the file "main.cpp".
+
 How to use with Arduino IDE
-
-
-The Arduino project files are located in the ArduinoIDE folder. This part is not complete still porting the code
+- The Arduino project files are located in the ArduinoIDE folder. This part is not complete still porting the code
 
 This program is modular. You can enable or disable specific features by setting directives to true or false.
 
