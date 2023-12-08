@@ -70,7 +70,7 @@ Examples:
   - //Build Configuration Options
   -   #define DEBUG false       //Enable serial output for debug, change to "false" to disable
   -   #define SCREENTEST false  //To enable the bootup screen test, change to, to disable change to "false"
-  -   #define LED_MATRIX true   //Set to false if you want to use a 64x64 LED Matrix
+  -   #define LED_MATRIX true   //Set to false if you do not want to use a 64x64 LED Matrix
   - //#define LED_STRIP         //for future development
   -   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
   -   #define LEFT_IND false    //enable left indicator code for testing
