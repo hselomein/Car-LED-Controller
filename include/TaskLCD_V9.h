@@ -12,9 +12,7 @@
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
-float BUF = VOLT_BUF;
-float HORN = curHorn;
-float DRL = curDRL;
+
 
 //void taskLCDUpdates( void * pvParameters );
 void taskLCDUpdates( void * pvParameters) {
@@ -30,15 +28,15 @@ void taskLCDUpdates( void * pvParameters) {
     bool currentInd_LButtonState = Ind_L_Button->getState();
     bool currentInd_RButtonState = Ind_R_Button->getState();
     if (!currentHornButtonState) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, HORN); 
+      sprintf(tmpMessage, "HORN %s %s", curDRL, hornState); 
     } else if (!currentInd_LButtonState && currentInd_RButtonState) {
-      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", DRL, HORN); 
+      sprintf(tmpMessage, "LEFT %s %s", curDRL, hornState); 
     } else if (!currentInd_RButtonState && currentInd_LButtonState) {
-      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
+      sprintf(tmpMessage, "RGHT %s %s", curDRL, hornState); 
     } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
-      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", DRL, HORN); 
+      sprintf(tmpMessage, "HZRD %s %s", curDRL, hornState); 
     } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);
+      sprintf(tmpMessage, "%s %sV %sV", curMode.txtColor, curDRL, hornState);
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);

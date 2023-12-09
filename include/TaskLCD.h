@@ -12,9 +12,6 @@
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 
-float BUF = VOLT_BUF;
-float HORN = curHorn;
-float DRL = curDRL;
 
 //void taskLCDUpdates( void * pvParameters );
 void taskLCDUpdates( void * pvParameters) {
@@ -26,19 +23,32 @@ void taskLCDUpdates( void * pvParameters) {
   delay(50); 
 
   while(true){
-    bool currentHornButtonState = Horn_Button->getState();
-    bool currentInd_LButtonState = Ind_L_Button->getState();
-    bool currentInd_RButtonState = Ind_R_Button->getState();
-    if (!currentHornButtonState) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", DRL, HORN); 
-    } else if (!currentInd_LButtonState && currentInd_RButtonState) {
-      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", DRL, HORN); 
-    } else if (!currentInd_RButtonState && currentInd_LButtonState) {
-      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", DRL, HORN); 
-    } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
-      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", DRL, HORN); 
-    } else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, DRL, HORN);
+#if LEFT_IND
+     bool currentInd_LButtonState = Ind_L_Button->getState();
+#endif
+#if RIGHT_IND
+     bool currentInd_RButtonState = Ind_R_Button->getState();
+#endif
+    if (curHorn > VOLT_BUF) {
+      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL, curHorn); 
+    }
+#if LEFT_IND    
+     else if (LEFT_IND && !currentInd_LButtonState && currentInd_RButtonState) {
+      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", curDRL, curHorn); 
+    } 
+#endif
+#if RIGHT_IND    
+    else if (RIGHT_IND && !currentInd_RButtonState && currentInd_LButtonState) {
+      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", curDRL, curHorn);      
+    } 
+#endif
+#if RIGHT_IND    
+    else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
+      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", curDRL, curHorn); 
+    } 
+#endif    
+    else {
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);

@@ -16,7 +16,7 @@
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
   #define LEFT_IND false    //enable left indicator code for testing
   #define RIGHT_IND false   //enable right indicator code for testing
-  #define V9_PCB true       //enble if you are using V9 LED Controller PCB
+  #define PCB_V9 true       //enble if you are using V9 LED Controller PCB
 
 //Arduino Standard
   //#include <stdio.h>
@@ -29,12 +29,12 @@
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
   #define DRL_PIN     ADC1_CHANNEL_0    // Pin 39 => DRL Sense
 
-  #if V9_PCB == false
+  #if PCB_V9 == false
   #define HORN_PIN    ADC1_CHANNEL_3  // Pin 39 => Horn Sense
   #define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Left Indicator 
   #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense (Reserved)
   #endif
-  #if V9_PCB 
+  #if PCB_V9 
   #include <SimpleButton.h>
   using namespace simplebutton;
   #define HORN_PIN    39  // Pin 39 => Horn Sense
@@ -72,6 +72,10 @@
   static float curHorn  = 0.0f;
   static float curInd_L = 0.0f;
   static float curInd_R = 0.0f;
+#if PCB_V9 
+  String drlState;
+  String hornState;
+#endif
 
   
 
@@ -88,9 +92,13 @@
   #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
   #define LEDS_PER_PIXEL 1
   #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
+  #define NUM_PIXELS_HALF (NUM_PIXELS / 2)
   #define RGBW_STRIP false //for RGB Strips change to false
   #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
+  #define flashRATE int((60/120)*1000) // how many flashes per minute as specifed by car manufacturer 
+  #define msIND_DELAY  int(flashRATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
+
   
   #if RGBW_STRIP 
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
@@ -273,7 +281,18 @@ class cModes {
 };
 cModes curMode;
 
+#if PCB_V9 == false
 #include <TaskLCD.h>
+#endif
+
+#if PCB_V9
+#include <TaskLCD_V9.h>
+#endif
+
+#if PCB_V9 == false //V8 Boards require a different order of variavbles
+String drlState;
+String hornState;
+#endif
 
 bool firstLoop = true;
 
@@ -381,13 +400,13 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
-  if (V9_PCB) pinMode(HORN_PIN, INPUT);
-  if (V9_PCB) pinMode(IND_L_PIN, INPUT);
-  if (V9_PCB) pinMode(IND_R_PIN, INPUT);
+  if (PCB_V9) pinMode(HORN_PIN, INPUT);
+  if (PCB_V9) pinMode(IND_L_PIN, INPUT);
+  if (PCB_V9) pinMode(IND_R_PIN, INPUT);
   if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
   if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
 
-  #if V9_PCB 
+  #if PCB_V9 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttonsef
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
@@ -400,13 +419,13 @@ void setup()
   if (DEBUG) {Serial.println("Init ADC 1");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
   //delay(150); // see if timing has effect on crashing
-#if V9_PCB == false
+#if PCB_V9 == false
   if (DEBUG) {Serial.println("Init ADC 2");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
   //delay(150); // see if timing has effect on crashing
 #endif
 
-#if V9_PCB == false
+#if PCB_V9 == false
   if (RIGHT_IND) {
     if (DEBUG) {Serial.println("Init ADC 3");} 
     ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
@@ -414,7 +433,7 @@ void setup()
   }
 #endif
 
-#if V9_PCB == false
+#if PCB_V9 == false
   if (LEFT_IND) {
     if (DEBUG) {Serial.println("Init ADC 4");}
     ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
@@ -444,6 +463,8 @@ void setup()
     dma_display->fillScreen(dma_display->color565(255, 255, 255));
 #endif
 
+  String drlState;
+  String hornState;
 
   // Initiate startup lighting sequence
     startupSequence(); 
@@ -459,9 +480,10 @@ void loop()
 {
   static int    curSample = 1;
   static bool   RelayPin1State = false;
+  
 
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
-#if V9_PCB == false
+#if PCB_V9 == false
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
   if (LEFT_IND) curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
   if (RIGHT_IND) curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
@@ -476,7 +498,7 @@ void loop()
 
   modeButton.loop();      // MUST call the loop() function first
   if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(modeButton.getState());
-#if V9_PCB 
+#if PCB_V9 
   Horn_Button->update();
   Ind_L_Button->update();
   Ind_R_Button->update();
@@ -493,7 +515,7 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#if V9_PCB == false
+#if PCB_V9 == false
     
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
@@ -506,6 +528,7 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
+      drlState = "LOW";
 #if LED_MATRIX      
       dma_display->setBrightness8(MIN_BRIGHTNESS);
 #endif
@@ -517,40 +540,44 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MAX_BRIGHTNESS);
+      drlState = "HIGH";
 #if LED_MATRIX
       dma_display->setBrightness8(MAX_BRIGHTNESS);
 #endif
       if (DEBUG) Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
-      leds.setBrightness(MAX_BRIGHTNESS);  //change back to 0 after solving left indicator / drl off issue
+      leds.setBrightness(0);  //change back to 0 after solving left indicator / drl off issue
       if (RelayPin1State) {
         RelayPin1State = true; //change back to false after solving left indicator / drl off issue
         //turn off relay1
-        digitalWrite(RELAY_PIN_1, RELAY_ON); //change back to RELAY_OFF after solving left indicator / drl off issue
-#if LED_MATRIX
+        digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
+        drlState = "OFF";
+#if (LED_MATRIX)
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
       }
       if (DEBUG) Serial.println("DRL Brightness level OFF");
     }
 
-#if V9_PCB == false
+#if PCB_V9 == false
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
 #endif
-#if V9_PCB 
+#if PCB_V9 
   int ledLeft = 0; 
   int ledRight = 0;
-  int offset;
   bool currentHornButtonState = Horn_Button->getState();
   bool currentInd_LButtonState = Ind_L_Button->getState();
   bool currentInd_RButtonState = Ind_R_Button->getState();
 
-    if (!currentHornButtonState) leds.fill(ANGRY_COLOR);
+    if (!currentHornButtonState) {
+      leds.fill(ANGRY_COLOR);
+      hornState = "BEEP";
+    }
     else if (!currentInd_RButtonState && currentInd_LButtonState) {
       for (int i = 1; i <= NUM_LEDS_HALF; i++){
         ledLeft = NUM_LEDS_HALF - i;
         leds.setPixelColor(ledLeft, ANGRY_COLOR);
-        delay(int(400 / NUM_PIXELS + 0.5));
+        delay(msIND_DELAY);
         leds.show();
       }
           leds.show();
@@ -558,24 +585,26 @@ void loop()
     else if (!currentInd_LButtonState && currentInd_RButtonState) {
       for (int o = NUM_LEDS_HALF; o <= NUM_LEDS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
-        delay(int(400 / NUM_PIXELS + 0.5));
+        delay(msIND_DELAY);
         leds.show();
       }
           leds.show();
           } 
         else if (!currentInd_RButtonState && !currentInd_LButtonState) {
-      for (int p = 1; p <= NUM_LEDS_HALF; p++) {
-    // Set current left and right LEDs based on the direction
-        ledLeft = NUM_LEDS_HALF - p;
-        offset = 1; 
-        ledRight = NUM_LEDS - ledLeft -1;
-        leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
-        delay(int(400 / NUM_PIXELS + 0.5));
-        leds.show();
-      }
+            for (int p = 1; p <= NUM_LEDS_HALF; p++) {
+          // Set current left and right LEDs based on the direction
+          ledLeft = NUM_LEDS_HALF - p;
+          ledRight = NUM_LEDS - ledLeft - 1;
+          leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
+          delay(msIND_DELAY);
           leds.show();
-          } 
+        }
+
+          leds.show();
+          }
+          
     else leds.fill(curMode.curColor);
+    hornState = "OFF";
 #endif 
     leds.show();           
     curSample = 1;
