@@ -372,6 +372,7 @@ void screentest() {
 #endif
 
 void right_indicator(){
+  if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_HALF - 10; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -380,6 +381,7 @@ void right_indicator(){
           } 
 
 void left_indicator(){
+  if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int o = NUM_PIXELS_HALF + 10; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -388,6 +390,7 @@ void left_indicator(){
 }
 
 void hazard_indicator(){
+    if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
       int ledLeft = 0; int ledRight = 0;
         for (int p = 1; p <= NUM_PIXELS_HALF; p++) {
           // Set current left and right LEDs based on the direction
@@ -548,6 +551,7 @@ void loop()
     
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+  
 #endif
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
@@ -606,7 +610,8 @@ void loop()
     else leds.fill(curMode.curColor);
     hornState = " OFF";
 #endif 
-    leds.show(); 
+
+   leds.show(); 
 
     curSample = 1;
     curDRL = 0;
