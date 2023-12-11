@@ -370,6 +370,34 @@ void screentest() {
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
 }
 #endif
+
+void right_indicator(){
+      for (int i = NUM_PIXELS_HALF - 10; i >= 0; i--){
+        leds.setPixelColor(i, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
+      }
+          } 
+
+void left_indicator(){
+      for (int o = NUM_PIXELS_HALF + 10; o <= NUM_PIXELS; o++){
+        leds.setPixelColor(o, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
+      }
+}
+
+void hazard_indicator(){
+      int ledLeft = 0; int ledRight = 0;
+        for (int p = 1; p <= NUM_PIXELS_HALF; p++) {
+          // Set current left and right LEDs based on the direction
+          ledLeft = NUM_PIXELS_HALF - p;
+          ledRight = NUM_PIXELS - ledLeft - 1;
+          leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
+          delay(msIND_DELAY);
+          leds.show();
+        }
+}
 //-----------main program-----------------
 
 void setup()
@@ -507,6 +535,7 @@ void loop()
   if (firstLoop) {
     curMode.Init();
     firstLoop = false;
+    drlState = "OFF ";
   } else {
     curMode.Increment();
   }
@@ -528,7 +557,7 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
-      drlState = "LOW";
+      drlState = "LOW ";
 #if LED_MATRIX      
       dma_display->setBrightness8(MIN_BRIGHTNESS);
 #endif
@@ -548,10 +577,10 @@ void loop()
     } else if (curDRL < VOLT_BUF) {
       leds.setBrightness(0);  //change back to 0 after solving left indicator / drl off issue
       if (RelayPin1State) {
-        RelayPin1State = true; //change back to false after solving left indicator / drl off issue
+        RelayPin1State = false; //change back to false after solving left indicator / drl off issue
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
-        drlState = "OFF";
+        drlState = " OFF";
 #if (LED_MATRIX)
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
@@ -563,8 +592,6 @@ void loop()
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
 #endif
 #if PCB_V9 
-  int ledLeft = 0; 
-  int ledRight = 0;
   bool currentHornButtonState = Horn_Button->getState();
   bool currentInd_LButtonState = Ind_L_Button->getState();
   bool currentInd_RButtonState = Ind_R_Button->getState();
@@ -573,40 +600,14 @@ void loop()
       leds.fill(ANGRY_COLOR);
       hornState = "BEEP";
     }
-    else if (!currentInd_RButtonState && currentInd_LButtonState) {
-      for (int i = 1; i <= NUM_LEDS_HALF; i++){
-        ledLeft = NUM_LEDS_HALF - i;
-        leds.setPixelColor(ledLeft, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        leds.show();
-      }
-          leds.show();
-          } 
-    else if (!currentInd_LButtonState && currentInd_RButtonState) {
-      for (int o = NUM_LEDS_HALF; o <= NUM_LEDS; o++){
-        leds.setPixelColor(o, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        leds.show();
-      }
-          leds.show();
-          } 
-        else if (!currentInd_RButtonState && !currentInd_LButtonState) {
-            for (int p = 1; p <= NUM_LEDS_HALF; p++) {
-          // Set current left and right LEDs based on the direction
-          ledLeft = NUM_LEDS_HALF - p;
-          ledRight = NUM_LEDS - ledLeft - 1;
-          leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
-          delay(msIND_DELAY);
-          leds.show();
-        }
-
-          leds.show();
-          }
-          
+    else if (!currentInd_RButtonState && !currentInd_LButtonState) { hazard_indicator(); }
+    else if (!currentInd_RButtonState && currentInd_LButtonState) { right_indicator(); } 
+    else if (!currentInd_LButtonState && currentInd_RButtonState) { left_indicator(); }
     else leds.fill(curMode.curColor);
-    hornState = "OFF";
+    hornState = " OFF";
 #endif 
-    leds.show();           
+    leds.show(); 
+
     curSample = 1;
     curDRL = 0;
     curHorn = 0;

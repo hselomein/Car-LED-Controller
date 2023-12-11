@@ -1,5 +1,5 @@
-#ifndef _TASKLCD_H_
-#define _TASKLCD_H_
+#ifndef _TASKLCD_V9_H_
+#define _TASKLCD_V9_H_
 
 #include <stdio.h>
 #include <Wire.h>
@@ -28,15 +28,15 @@ void taskLCDUpdates( void * pvParameters) {
     bool currentInd_LButtonState = Ind_L_Button->getState();
     bool currentInd_RButtonState = Ind_R_Button->getState();
     if (!currentHornButtonState) {
-      sprintf(tmpMessage, "HORN %s %s", curDRL, hornState); 
+      sprintf(tmpMessage, "HORN %s %s", drlState, hornState); 
     } else if (!currentInd_LButtonState && currentInd_RButtonState) {
-      sprintf(tmpMessage, "LEFT %s %s", curDRL, hornState); 
+      sprintf(tmpMessage, "LEFT %s %s", drlState, hornState); 
     } else if (!currentInd_RButtonState && currentInd_LButtonState) {
-      sprintf(tmpMessage, "RGHT %s %s", curDRL, hornState); 
+      sprintf(tmpMessage, "RGHT %s %s", drlState, hornState); 
     } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
-      sprintf(tmpMessage, "HZRD %s %s", curDRL, hornState); 
+      sprintf(tmpMessage, "HZRD %s %s", drlState, hornState); 
     } else {
-      sprintf(tmpMessage, "%s %sV %sV", curMode.txtColor, curDRL, hornState);
+      sprintf(tmpMessage, "%s %s %s", curMode.txtColor, drlState, hornState);
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
@@ -57,4 +57,4 @@ void initTaskLCD() {
 
 }
 
-#endif // _TASKLCD_H_
+#endif // _TASKLCD_V9_H_
