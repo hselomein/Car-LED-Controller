@@ -372,7 +372,7 @@ void screentest() {
 #endif
 
 void right_indicator(){
-  if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+  if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_HALF - 10; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -381,7 +381,7 @@ void right_indicator(){
           } 
 
 void left_indicator(){
-  if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+  if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int o = NUM_PIXELS_HALF + 10; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -390,7 +390,7 @@ void left_indicator(){
 }
 
 void hazard_indicator(){
-    if (drlState = " OFF") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+    if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
       int ledLeft = 0; int ledRight = 0;
         for (int p = 1; p <= NUM_PIXELS_HALF; p++) {
           // Set current left and right LEDs based on the direction
@@ -584,7 +584,7 @@ void loop()
         RelayPin1State = false; //change back to false after solving left indicator / drl off issue
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
-        drlState = " OFF";
+        drlState = "OFF ";
 #if (LED_MATRIX)
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
@@ -608,7 +608,7 @@ void loop()
     else if (!currentInd_RButtonState && currentInd_LButtonState) { right_indicator(); } 
     else if (!currentInd_LButtonState && currentInd_RButtonState) { left_indicator(); }
     else leds.fill(curMode.curColor);
-    hornState = " OFF";
+    hornState = "OFF ";
 #endif 
 
    leds.show(); 
