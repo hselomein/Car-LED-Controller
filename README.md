@@ -8,7 +8,7 @@ This project controls an addressable LED Strip and LED matrix using the light in
 
 With this project, we are taking an esp32 microcontroller and making an LED controller for the strip. 
 The LED strip is a 12v WS2811 with 120 LEDs per meter
-The number of LEDs in the strip 144 pixels per meter, x4 individual pixelets, WS2811 Chip 
+
 
 LED Strip Actions:
 - Startup is a night rider style sweep 3 times until it is a solid white bar
