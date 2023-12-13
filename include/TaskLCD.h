@@ -23,15 +23,18 @@ void taskLCDUpdates( void * pvParameters) {
   delay(50); 
 
   while(true){
+#if BTN_INTERRUPTS
 #if LEFT_IND
      bool currentInd_LButtonState = Ind_L_Button->getState();
 #endif
 #if RIGHT_IND
      bool currentInd_RButtonState = Ind_R_Button->getState();
 #endif
+#endif
     if (curHorn > VOLT_BUF) {
       sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL, curHorn); 
     }
+#if BTN_INTERRUPTS    
 #if LEFT_IND    
      else if (LEFT_IND && !currentInd_LButtonState && currentInd_RButtonState) {
       sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", curDRL, curHorn); 
@@ -46,7 +49,8 @@ void taskLCDUpdates( void * pvParameters) {
     else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
       sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", curDRL, curHorn); 
     } 
-#endif    
+#endif  
+#endif 
     else {
       sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);
     }
