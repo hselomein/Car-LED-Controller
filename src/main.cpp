@@ -282,11 +282,11 @@ class cModes {
 };
 cModes curMode;
 
-#if PCB_V9
+#if PCB_V9 == false
 #include <TaskLCD.h>
 #endif
 
-#if PCB_V9 == false
+#if PCB_V9 
 #include <TaskLCD_V9.h>
 #endif
 
@@ -341,7 +341,7 @@ void startupSequence() {
 
   // Turn DefaultSolid Color:
   leds.fill(DEFAULT_COLOR);
-  drlState = "HIGH";
+  //drlState = "HIGH";
   leds.show();
 }
 
@@ -402,6 +402,16 @@ void hazard_indicator(){
           delay(msIND_DELAY);
           leds.show();
         }
+}
+
+void drl_mon(){
+    if (curDRL > (HI_VOLT - VOLT_BUF)){
+      drlState = "HIGH";
+  }else if (Abs(curDRL - LO_VOLT) < VOLT_BUF){
+      drlState = "LOw ";
+  } else if (curDRL < VOLT_BUF){
+      drlState = "OFF ";
+  }
 }
 //-----------main program-----------------
 
@@ -522,7 +532,6 @@ void loop()
   static int    curSample = 1;
   static bool   RelayPin1State = false;
   
-
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
 #if PCB_V9 == false
   curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
@@ -547,10 +556,12 @@ void loop()
 #endif
 #endif
 
+  drl_mon();
+
   if (firstLoop) {
     curMode.Init();
     firstLoop = false;
-    drlState = "OFF ";
+    //drlState = "HIGH";
   } else {
     curMode.Increment();
   }
@@ -573,7 +584,7 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
-      drlState = "LOW ";
+      //drlState = "LOW ";
 #if LED_MATRIX      
       dma_display->setBrightness8(MIN_BRIGHTNESS);
 #endif
@@ -585,7 +596,7 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MAX_BRIGHTNESS);
-      drlState = "HIGH";
+      //drlState = "HIGH";
 #if LED_MATRIX
       dma_display->setBrightness8(MAX_BRIGHTNESS);
 #endif
@@ -596,7 +607,7 @@ void loop()
         RelayPin1State = false; //change back to false after solving left indicator / drl off issue
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
-        drlState = "OFF ";
+        //drlState = "OFF ";
 #if (LED_MATRIX)
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
