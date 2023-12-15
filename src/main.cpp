@@ -405,10 +405,10 @@ void hazard_indicator(){
 }
 
 void drl_mon(){
-    if (curDRL > (HI_VOLT - VOLT_BUF)){
+  if (curDRL > LO_VOLT && curDRL < (HI_VOLT - VOLT_BUF)){
+      drlState = "LOW ";
+  } else if (curDRL > (HI_VOLT - VOLT_BUF)){
       drlState = "HIGH";
-  }else if (Abs(curDRL - LO_VOLT) < VOLT_BUF){
-      drlState = "LOw ";
   } else if (curDRL < VOLT_BUF){
       drlState = "OFF ";
   }
@@ -556,8 +556,6 @@ void loop()
 #endif
 #endif
 
-  drl_mon();
-
   if (firstLoop) {
     curMode.Init();
     firstLoop = false;
@@ -608,12 +606,14 @@ void loop()
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
         //drlState = "OFF ";
-#if (LED_MATRIX)
+#if LED_MATRIX
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
       }
       if (DEBUG) Serial.println("DRL Brightness level OFF");
     }
+
+  drl_mon();
 
 #if PCB_V9 == false
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
@@ -621,8 +621,8 @@ void loop()
 #if PCB_V9 
   bool currentHornButtonState = Horn_Button->getState();
 #if BTN_INTERRUPTS == false   
-bool currentInd_LButtonState = Ind_L_Button->getState();
-bool currentInd_RButtonState = Ind_R_Button->getState();
+  bool currentInd_LButtonState = Ind_L_Button->getState();
+  bool currentInd_RButtonState = Ind_R_Button->getState();
 #endif
 
     if (!currentHornButtonState) {
