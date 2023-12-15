@@ -94,6 +94,9 @@
   #define LEDS_PER_PIXEL 1
   #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
   #define NUM_PIXELS_HALF (NUM_PIXELS / 2)
+  #define NUM_PIXELS_THIRD (NUM_PIXELS / 3)
+  #define NUM_PIXELS_QUARTER (NUM_PIXELS / 4)
+  #define NUM_PIXELS_FIFTH (NUM_PIXELS / 5)
   #define RGBW_STRIP false //for RGB Strips change to false
   #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
@@ -341,7 +344,6 @@ void startupSequence() {
 
   // Turn DefaultSolid Color:
   leds.fill(DEFAULT_COLOR);
-  //drlState = "HIGH";
   leds.show();
 }
 
@@ -375,7 +377,7 @@ void screentest() {
 
 void right_indicator(){
   if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-      for (int i = NUM_PIXELS_HALF - 10; i >= 0; i--){
+      for (int i = NUM_PIXELS_HALF - 20; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
         leds.show();
@@ -384,7 +386,7 @@ void right_indicator(){
 
 void left_indicator(){
   if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-      for (int o = NUM_PIXELS_HALF + 10; o <= NUM_PIXELS; o++){
+      for (int o = NUM_PIXELS_HALF + 20; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
         leds.show();
@@ -393,10 +395,11 @@ void left_indicator(){
 
 void hazard_indicator(){
     if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+    //left_indicator();         right_indicator();
       int ledLeft = 0; int ledRight = 0;
-        for (int p = 1; p <= NUM_PIXELS_HALF; p++) {
+        for (int p = 1; p <= NUM_PIXELS_THIRD; p++) {
           // Set current left and right LEDs based on the direction
-          ledLeft = NUM_PIXELS_HALF - p;
+          ledLeft = NUM_PIXELS_THIRD - p;
           ledRight = NUM_PIXELS - ledLeft - 1;
           leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
           delay(msIND_DELAY);
@@ -413,6 +416,7 @@ void drl_mon(){
       drlState = "OFF ";
   }
 }
+
 //-----------main program-----------------
 
 void setup()
@@ -559,7 +563,6 @@ void loop()
   if (firstLoop) {
     curMode.Init();
     firstLoop = false;
-    //drlState = "HIGH";
   } else {
     curMode.Increment();
   }
@@ -568,11 +571,10 @@ void loop()
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+
 #if PCB_V9 == false
-    
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-  
 #endif
 
     if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
@@ -582,7 +584,6 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MIN_BRIGHTNESS);
-      //drlState = "LOW ";
 #if LED_MATRIX      
       dma_display->setBrightness8(MIN_BRIGHTNESS);
 #endif
@@ -594,7 +595,6 @@ void loop()
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       leds.setBrightness(MAX_BRIGHTNESS);
-      //drlState = "HIGH";
 #if LED_MATRIX
       dma_display->setBrightness8(MAX_BRIGHTNESS);
 #endif
@@ -605,7 +605,6 @@ void loop()
         RelayPin1State = false; //change back to false after solving left indicator / drl off issue
         //turn off relay1
         digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
-        //drlState = "OFF ";
 #if LED_MATRIX
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
