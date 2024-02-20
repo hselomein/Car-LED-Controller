@@ -38,12 +38,14 @@
   #if PCB_V9 
   #include <SimpleButton.h>
   using namespace simplebutton;
+  #define MODE_PIN  19  // Pin 19 => Mode Selection Button
   #define HORN_PIN    39  // Pin 39 => Horn Sense
   #define IND_L_PIN   34  // Pin 34 => Left Indicator 
-  #define IND_R_PIN   35  // Pin 35 => Right Indicator Sense (Reserved)
+  #define IND_R_PIN   35  // Pin 35 => Right Indicator 
   Button* Horn_Button = NULL;
   Button* Ind_L_Button = NULL;
   Button* Ind_R_Button = NULL;
+  Button* Mode_Button = NULL; 
 
   #endif
 //Define lcd and led brightness
@@ -134,19 +136,9 @@
 
 //MatrixPanel_I2S_DMA dma_display;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
+
 //LED Martrix pin section
-  #define PCB_TYPE 1  
-                      /*-------------------------------------------------- 
-                      Set PCB_TYPE to the appropaite PCB version
-                      for LED Matrix Controller V8 use "1", 
-                      for LED Matrix Controller V9 or Yves Version use "2",
-                      for working pinout 2 use "3"
-                      for waveguide standard pinout use "4",
-                      ---------------------------------------------------*/
-
-  #if PCB_TYPE==1
 //This is configured using a P2 64x64 LED Matrix, which has an E pin.
-//Pinout for LED Matrix Controller V8
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  33
@@ -161,61 +153,6 @@
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
-  #endif
- 
-// Pinout for LED Matrix Controller V9 or Yves Version
-  #if PCB_TYPE==2
-  #define R1_PIN  25
-  #define G1_PIN  26
-  #define B1_PIN  33
-  #define R2_PIN  14
-  #define G2_PIN  12
-  #define B2_PIN  13
-  #define A_PIN   27
-  #define B_PIN   2 
-  #define C_PIN   5
-  #define D_PIN   17
-  #define E_PIN   32  
-  #define LAT_PIN 4
-  #define OE_PIN  15
-  #define CLK_PIN 16
-  #endif
-  
-//working pinout 2  
-  #if PCB_TYPE==3
-  #define R1_PIN  32
-  #define G1_PIN  33
-  #define B1_PIN  25
-  #define R2_PIN  26
-  #define G2_PIN  27
-  #define B2_PIN  14
-  #define A_PIN   13
-  #define B_PIN   15 
-  #define C_PIN   2
-  #define D_PIN   4
-  #define E_PIN   12  
-  #define LAT_PIN 17
-  #define OE_PIN  5
-  #define CLK_PIN 16
-  #endif
-
-//wave share pinout
-  #if PCB_TYPE==4
-  #define R1_PIN  25
-  #define G1_PIN  26
-  #define B1_PIN  27
-  #define R2_PIN  14
-  #define G2_PIN  12
-  #define B2_PIN  13
-  #define A_PIN   23
-  #define B_PIN   22 
-  #define C_PIN   5
-  #define D_PIN   17
-  #define E_PIN   32  
-  #define LAT_PIN 4
-  #define OE_PIN  15
-  #define CLK_PIN 16
-  #endif
   
   //LED Matrix Initialization
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
@@ -293,7 +230,7 @@ cModes curMode;
 #include <TaskLCD_V9.h>
 #endif
 
-#if PCB_V9 == false //V8 Boards require a different order of variavbles
+#if PCB_V9 == false //V8 Boards require a different order of variables
 String drlState;
 String hornState;
 #endif
@@ -375,6 +312,7 @@ void screentest() {
 }
 #endif
 
+
 void right_indicator(){
   if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_HALF - 20; i >= 0; i--){
@@ -401,7 +339,7 @@ void hazard_indicator(){
           // Set current left and right LEDs based on the direction
           ledLeft = NUM_PIXELS_THIRD - p;
           ledRight = NUM_PIXELS - ledLeft - 1;
-          leds.setPixelColor(ledLeft, ANGRY_COLOR);              leds.setPixelColor(ledRight, ANGRY_COLOR);
+          leds.setPixelColor(ledLeft, ANGRY_COLOR); leds.setPixelColor(ledRight, ANGRY_COLOR);
           delay(msIND_DELAY);
           leds.show();
         }
@@ -414,6 +352,33 @@ void drl_mon(){
       drlState = "HIGH";
   } else if (curDRL < VOLT_BUF){
       drlState = "OFF ";
+  }
+}
+
+enum indState {
+	OFF = 0,
+  RIGHT,
+	LEFT,
+	HAZARD
+	};
+
+enum indState indStatus = OFF;
+
+void indicator_function(){
+  switch (indStatus)
+  {
+  case 1:
+    right_indicator();
+    break;
+  case 2:
+    left_indicator();
+    break;
+  case 3:
+    hazard_indicator();
+    break;  
+  default:
+    indStatus = OFF;
+    break;
   }
 }
 
@@ -454,6 +419,7 @@ void setup()
   if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
 
 #if PCB_V9 
+  Mode_Button = new Button(MODE_PIN, false);
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
 #if BTN_INTERRUPTS == false 
   Ind_L_Button = new Button(IND_L_PIN, true);
@@ -630,12 +596,22 @@ void loop()
     }
    
 #if BTN_INTERRUPTS == false    
-    else if (!currentInd_RButtonState && !currentInd_LButtonState) { hazard_indicator(); }
-    else if (!currentInd_RButtonState && currentInd_LButtonState) { right_indicator(); } 
-    else if (!currentInd_LButtonState && currentInd_RButtonState) { left_indicator(); }
+    else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
+      indStatus = HAZARD;
+      hazard_indicator();
+      }
+    else if (!currentInd_RButtonState && currentInd_LButtonState) { 
+      indStatus = RIGHT;
+      right_indicator(); 
+      } 
+    else if (!currentInd_LButtonState && currentInd_RButtonState) { 
+      indStatus = LEFT ;
+      left_indicator();
+      }
 #endif    
     else leds.fill(curMode.curColor);
     hornState = "OFF ";
+    indStatus = OFF;
 #endif 
 
    leds.show(); 
