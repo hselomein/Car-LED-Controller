@@ -314,7 +314,7 @@ void screentest() {
 
 
 void right_indicator(){
-  if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_HALF - 20; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -323,7 +323,7 @@ void right_indicator(){
           } 
 
 void left_indicator(){
-  if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int o = NUM_PIXELS_HALF + 20; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -332,12 +332,12 @@ void left_indicator(){
 }
 
 void hazard_indicator(){
-    if (drlState = "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
     //left_indicator();         right_indicator();
       int ledLeft = 0; int ledRight = 0;
         for (int p = 1; p <= NUM_PIXELS_THIRD; p++) {
           // Set current left and right LEDs based on the direction
-          ledLeft = NUM_PIXELS_THIRD - p;
+          ledLeft = NUM_PIXELS_THIRD - p;   
           ledRight = NUM_PIXELS - ledLeft - 1;
           leds.setPixelColor(ledLeft, ANGRY_COLOR); leds.setPixelColor(ledRight, ANGRY_COLOR);
           delay(msIND_DELAY);
@@ -566,11 +566,11 @@ void loop()
 #endif
       if (DEBUG) Serial.println("DRL Brightness level MAX");
     } else if (curDRL < VOLT_BUF) {
-      leds.setBrightness(0);  //change back to 0 after solving left indicator / drl off issue
+      leds.setBrightness(0);  
       if (RelayPin1State) {
-        RelayPin1State = false; //change back to false after solving left indicator / drl off issue
+        RelayPin1State = false; 
         //turn off relay1
-        digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
+        digitalWrite(RELAY_PIN_1, RELAY_OFF); 
 #if LED_MATRIX
         dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
 #endif
@@ -610,11 +610,11 @@ void loop()
       }
 #endif    
     else leds.fill(curMode.curColor);
+  //indicator_function();
     hornState = "OFF ";
     indStatus = OFF;
 #endif 
-
-   leds.show(); 
+    leds.show(); 
 
     curSample = 1;
     curDRL = 0;
