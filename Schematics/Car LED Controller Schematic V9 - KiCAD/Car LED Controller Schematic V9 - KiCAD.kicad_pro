@@ -451,9 +451,9 @@
     "net_colors": null,
     "netclass_assignments": {
       "/DRL Signal": "Default",
-      "/Horn": "Default",
-      "/L_Ind": "Default",
-      "/R_Ind": "Default"
+      "/Horn_Inp": "Default",
+      "/L_Ind_Inp": "Default",
+      "/R_Ind_Inp": "Default"
     },
     "netclass_patterns": [
       {
