@@ -132,18 +132,9 @@
 //MatrixPanel_I2S_DMA dma_display;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
 //LED Martrix pin section
-  #define PCB_TYPE 2  
-                      /*-------------------------------------------------- 
-                      Set PCB_TYPE to the appropaite PCB version
-                      for LED Matrix Controller V8 use "1", 
-                      for LED Matrix Controller V9 or Yves Version use "2",
-                      for working pinout 2 use "3"
-                      for waveguide standard pinout use "4",
-                      ---------------------------------------------------*/
 
-  #if PCB_TYPE==1
 //This is configured using a P2 64x64 LED Matrix, which has an E pin.
-//Pinout for LED Matrix Controller V8
+//Pinout for LED Matrix Controller V8, V9 or Yves Version
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  33
@@ -158,62 +149,7 @@
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
-  #endif
- 
-// Pinout for LED Matrix Controller V9 or Yves Version
-  #if PCB_TYPE==2
-  #define R1_PIN  25
-  #define G1_PIN  26
-  #define B1_PIN  33
-  #define R2_PIN  14
-  #define G2_PIN  12
-  #define B2_PIN  13
-  #define A_PIN   27
-  #define B_PIN   2 
-  #define C_PIN   5
-  #define D_PIN   17
-  #define E_PIN   32  
-  #define LAT_PIN 4
-  #define OE_PIN  15
-  #define CLK_PIN 16
-  #endif
-  
-//working pinout 2  
-  #if PCB_TYPE==3
-  #define R1_PIN  32
-  #define G1_PIN  33
-  #define B1_PIN  25
-  #define R2_PIN  26
-  #define G2_PIN  27
-  #define B2_PIN  14
-  #define A_PIN   13
-  #define B_PIN   15 
-  #define C_PIN   2
-  #define D_PIN   4
-  #define E_PIN   12  
-  #define LAT_PIN 17
-  #define OE_PIN  5
-  #define CLK_PIN 16
-  #endif
-
-//wave share pinout
-  #if PCB_TYPE==4
-  #define R1_PIN  25
-  #define G1_PIN  26
-  #define B1_PIN  27
-  #define R2_PIN  14
-  #define G2_PIN  12
-  #define B2_PIN  13
-  #define A_PIN   23
-  #define B_PIN   22 
-  #define C_PIN   5
-  #define D_PIN   17
-  #define E_PIN   32  
-  #define LAT_PIN 4
-  #define OE_PIN  15
-  #define CLK_PIN 16
-  #endif
-  
+    
   //LED Matrix Initialization
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
