@@ -17,7 +17,6 @@
   #define LEFT_IND false    //enable left indicator code for testing
   #define RIGHT_IND false   //enable right indicator code for testing
   #define PCB_V9 true       //enble if you are using V9 LED Controller PCB
-  #define BTN_INTERRUPTS  false  //enable init buttons as interrupts - causes crashing
 
 //Arduino Standard
   #include <driver/adc.h>
@@ -483,16 +482,8 @@ void setup()
 #if PCB_V9 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
-#if BTN_INTERRUPTS == false 
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
-#endif
-#endif
-
-#if BTN_INTERRUPTS  
-  //simplebutton inturrupt setup
-  attachInterrupt(IND_L_PIN, left_indicator, FALLING);
-  attachInterrupt(IND_R_PIN, right_indicator, FALLING);
 #endif  
 
   // Configure ADC
@@ -581,10 +572,6 @@ void loop()
 #if PCB_V9 
   Horn_Button->update();
   //Mode_Button->update();
-#if BTN_INTERRUPTS == false   
-  Ind_L_Button->update();
-  Ind_R_Button->update();
-#endif
 #endif
 
   if (firstLoop) {
@@ -652,17 +639,13 @@ void loop()
 #endif
 #if PCB_V9 
   bool currentHornButtonState = Horn_Button->getState();
-#if BTN_INTERRUPTS == false   
   bool currentInd_LButtonState = Ind_L_Button->getState();
   bool currentInd_RButtonState = Ind_R_Button->getState();
-#endif
 
     if (!currentHornButtonState) {
       leds.fill(ANGRY_COLOR);
       hornState = "BEEP";
-    }
-   
-#if BTN_INTERRUPTS == false    
+    }   
     else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
       indStatus = HAZARD;
       }
@@ -671,8 +654,7 @@ void loop()
       } 
     else if (!currentInd_LButtonState && currentInd_RButtonState) { 
       indStatus = LEFT; 
-      }
-#endif    
+      }  
     else {
     leds.fill(curMode.curColor);
     hornState = "OFF ";
