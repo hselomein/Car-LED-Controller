@@ -17,6 +17,7 @@
   #define LEFT_IND false    //enable left indicator code for testing
   #define RIGHT_IND false   //enable right indicator code for testing
   #define PCB_V9 true       //enble if you are using V9 LED Controller PCB
+  #define BTN_INTERRUPTS  false  //enable init buttons as interrupts - causes crashing
 
 //Arduino Standard
   #include <driver/adc.h>
@@ -437,14 +438,36 @@ void indicator_function(){
 }
 
 void drl_mon(){
+  static bool   RelayPin1State = false;
   if (curDRL > LO_VOLT && curDRL < (HI_VOLT - VOLT_BUF)){
+      if (!RelayPin1State) { //turn on Relay 1
+        RelayPin1State = true;
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      } 
       drlState = "LOW ";
+      leds.setBrightness(MIN_BRIGHTNESS);
+      if(LED_MATRIX) dma_display->setBrightness8(MIN_BRIGHTNESS);
   } else if (curDRL > (HI_VOLT - VOLT_BUF)){
+      if (!RelayPin1State) { //turn on Relay 1
+        RelayPin1State = true;
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      }
       drlState = "HIGH";
+      leds.setBrightness(MAX_BRIGHTNESS);
+      if(LED_MATRIX) dma_display->setBrightness8(MAX_BRIGHTNESS);
   } else if (curDRL < VOLT_BUF){
-      drlState = "OFF ";
-  }
+      if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)) {leds.setBrightness(MAX_BRIGHTNESS);} //Keep strip on when DRL are off in UBER/LYFT modes
+      else {
+        if (!RelayPin1State) { //turn off Relay 1
+          RelayPin1State = false;
+          digitalWrite(RELAY_PIN_1, RELAY_OFF);
+        }
+        drlState = "OFF ";
+        leds.setBrightness(0); 
+        }
+    }
 }
+
 
 //-----------main program-----------------
 
@@ -482,8 +505,16 @@ void setup()
 #if PCB_V9 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
+#if BTN_INTERRUPTS == false 
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
+#endif
+#endif
+
+#if BTN_INTERRUPTS  
+  //simplebutton inturrupt setup
+  attachInterrupt(IND_L_PIN, left_indicator, FALLING);
+  attachInterrupt(IND_R_PIN, right_indicator, FALLING);
 #endif  
 
   // Configure ADC
@@ -572,6 +603,10 @@ void loop()
 #if PCB_V9 
   Horn_Button->update();
   //Mode_Button->update();
+#if BTN_INTERRUPTS == false   
+  Ind_L_Button->update();
+  Ind_R_Button->update();
+#endif
 #endif
 
   if (firstLoop) {
@@ -592,46 +627,6 @@ void loop()
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 #endif
 
-  if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
-    if (!RelayPin1State) {
-        RelayPin1State = true;
-        //turn on relay1
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-    }
-  leds.setBrightness(0);
-  leds.show();  
-  leds.setBrightness(MIN_BRIGHTNESS);
-#if LED_MATRIX      
-      dma_display->setBrightness8(MIN_BRIGHTNESS);
-#endif
-      if (DEBUG) Serial.println("DRL Brightness level LOW");
-    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
-      if (!RelayPin1State) {
-        RelayPin1State = true;
-        //turn on relay1
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-      }
-      leds.setBrightness(MAX_BRIGHTNESS);
-#if LED_MATRIX
-      dma_display->setBrightness8(MAX_BRIGHTNESS);
-#endif
-      if (DEBUG) Serial.println("DRL Brightness level MAX");
-    } else if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)){ //Keep strip on when DRL are off in UBER/LYFT modes
-        leds.setBrightness(MAX_BRIGHTNESS);
-    } else if (curDRL < VOLT_BUF) {
-      leds.setBrightness(0);  //change back to 0 after solving left indicator / drl off issue
-      if (RelayPin1State) {
-        RelayPin1State = false; //change back to false after solving left indicator / drl off issue
-        //turn off relay1
-        digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
-
-#if LED_MATRIX
-        dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
-#endif
-      }
-      if (DEBUG) Serial.println("DRL Brightness level OFF");
-    }
-    
   drl_mon();
 
 #if PCB_V9 == false
@@ -639,13 +634,17 @@ void loop()
 #endif
 #if PCB_V9 
   bool currentHornButtonState = Horn_Button->getState();
+#if BTN_INTERRUPTS == false   
   bool currentInd_LButtonState = Ind_L_Button->getState();
   bool currentInd_RButtonState = Ind_R_Button->getState();
+#endif
 
     if (!currentHornButtonState) {
       leds.fill(ANGRY_COLOR);
       hornState = "BEEP";
-    }   
+    }
+   
+#if BTN_INTERRUPTS == false    
     else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
       indStatus = HAZARD;
       }
@@ -654,7 +653,8 @@ void loop()
       } 
     else if (!currentInd_LButtonState && currentInd_RButtonState) { 
       indStatus = LEFT; 
-      }  
+      }
+#endif    
     else {
     leds.fill(curMode.curColor);
     hornState = "OFF ";
