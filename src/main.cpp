@@ -403,6 +403,35 @@ void drl_mon(){
     }
 }
 
+void button_function(){
+  // MUST call the update() function first
+  Horn_Button->update();
+  //Mode_Button->update();
+  Ind_L_Button->update();
+  Ind_R_Button->update();
+  bool currentHornButtonState = Horn_Button->getState();
+  bool currentInd_LButtonState = Ind_L_Button->getState();
+  bool currentInd_RButtonState = Ind_R_Button->getState();
+
+    if (!currentHornButtonState) {
+      leds.fill(ANGRY_COLOR);
+      hornState = "BEEP";
+    }
+    else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
+      indStatus = HAZARD;
+      }
+    else if (!currentInd_RButtonState && currentInd_LButtonState) { 
+      indStatus = RIGHT;
+      } 
+    else if (!currentInd_LButtonState && currentInd_RButtonState) { 
+      indStatus = LEFT; 
+      }
+    else {
+    leds.fill(curMode.curColor);
+    hornState = "OFF ";
+    indStatus = OFF;
+    }
+}
 
 //-----------main program-----------------
 
@@ -525,15 +554,6 @@ void loop()
     Serial.print("Current Sample Number:"); Serial.println(curSample);
   }
 
-  // MUST call the update() function first
-  if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
-#if PCB_V9 
-  Horn_Button->update();
-  //Mode_Button->update();
-  Ind_L_Button->update();
-  Ind_R_Button->update();
-#endif
-
   if (firstLoop) {
     curMode.Init();
     firstLoop = false;
@@ -557,29 +577,9 @@ void loop()
 #if PCB_V9 == false
     if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
 #endif
+if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
 #if PCB_V9 
-  bool currentHornButtonState = Horn_Button->getState();
-  bool currentInd_LButtonState = Ind_L_Button->getState();
-  bool currentInd_RButtonState = Ind_R_Button->getState();
-
-    if (!currentHornButtonState) {
-      leds.fill(ANGRY_COLOR);
-      hornState = "BEEP";
-    }
-    else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
-      indStatus = HAZARD;
-      }
-    else if (!currentInd_RButtonState && currentInd_LButtonState) { 
-      indStatus = RIGHT;
-      } 
-    else if (!currentInd_LButtonState && currentInd_RButtonState) { 
-      indStatus = LEFT; 
-      }
-    else {
-    leds.fill(curMode.curColor);
-    hornState = "OFF ";
-    indStatus = OFF;
-    }
+    button_function();
 #endif 
 
     leds.show(); 
