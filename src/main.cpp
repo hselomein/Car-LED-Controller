@@ -17,6 +17,7 @@
   #define LEFT_IND false    //enable left indicator code for testing
   #define RIGHT_IND false   //enable right indicator code for testing
   #define PCB_V9 true       //enble if you are using V9 LED Controller PCB
+  #define BTN_INTERRUPTS  false  //enable init buttons as interrupts - causes crashing
 
 //Arduino Standard
   #include <driver/adc.h>
@@ -132,9 +133,18 @@
 //MatrixPanel_I2S_DMA dma_display;
   MatrixPanel_I2S_DMA *dma_display = nullptr;
 //LED Martrix pin section
+  #define PCB_TYPE 2  
+                      /*-------------------------------------------------- 
+                      Set PCB_TYPE to the appropaite PCB version
+                      for LED Matrix Controller V8 use "1", 
+                      for LED Matrix Controller V9 or Yves Version use "2",
+                      for working pinout 2 use "3"
+                      for waveguide standard pinout use "4",
+                      ---------------------------------------------------*/
 
+  #if PCB_TYPE==1
 //This is configured using a P2 64x64 LED Matrix, which has an E pin.
-//Pinout for LED Matrix Controller V8, V9, or Yves Version
+//Pinout for LED Matrix Controller V8
   #define R1_PIN  25
   #define G1_PIN  26
   #define B1_PIN  33
@@ -149,7 +159,62 @@
   #define LAT_PIN 4
   #define OE_PIN  15
   #define CLK_PIN 16
+  #endif
  
+// Pinout for LED Matrix Controller V9 or Yves Version
+  #if PCB_TYPE==2
+  #define R1_PIN  25
+  #define G1_PIN  26
+  #define B1_PIN  33
+  #define R2_PIN  14
+  #define G2_PIN  12
+  #define B2_PIN  13
+  #define A_PIN   27
+  #define B_PIN   2 
+  #define C_PIN   5
+  #define D_PIN   17
+  #define E_PIN   32  
+  #define LAT_PIN 4
+  #define OE_PIN  15
+  #define CLK_PIN 16
+  #endif
+  
+//working pinout 2  
+  #if PCB_TYPE==3
+  #define R1_PIN  32
+  #define G1_PIN  33
+  #define B1_PIN  25
+  #define R2_PIN  26
+  #define G2_PIN  27
+  #define B2_PIN  14
+  #define A_PIN   13
+  #define B_PIN   15 
+  #define C_PIN   2
+  #define D_PIN   4
+  #define E_PIN   12  
+  #define LAT_PIN 17
+  #define OE_PIN  5
+  #define CLK_PIN 16
+  #endif
+
+//wave share pinout
+  #if PCB_TYPE==4
+  #define R1_PIN  25
+  #define G1_PIN  26
+  #define B1_PIN  27
+  #define R2_PIN  14
+  #define G2_PIN  12
+  #define B2_PIN  13
+  #define A_PIN   23
+  #define B_PIN   22 
+  #define C_PIN   5
+  #define D_PIN   17
+  #define E_PIN   32  
+  #define LAT_PIN 4
+  #define OE_PIN  15
+  #define CLK_PIN 16
+  #endif
+  
   //LED Matrix Initialization
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
@@ -157,6 +222,7 @@
 
 #include <logos.h>
 #endif
+
 
 //-------------functions-----------------
 class cModes {
@@ -372,34 +438,13 @@ void indicator_function(){
 }
 
 void drl_mon(){
-  static bool   RelayPin1State = false;
   if (curDRL > LO_VOLT && curDRL < (HI_VOLT - VOLT_BUF)){
-      if (!RelayPin1State) { //turn on Relay 1
-        RelayPin1State = true;
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-      } 
       drlState = "LOW ";
-      leds.setBrightness(MIN_BRIGHTNESS);
-      if(LED_MATRIX) dma_display->setBrightness8(MIN_BRIGHTNESS);
   } else if (curDRL > (HI_VOLT - VOLT_BUF)){
-      if (!RelayPin1State) { //turn on Relay 1
-        RelayPin1State = true;
-        digitalWrite(RELAY_PIN_1, RELAY_ON);
-      }
       drlState = "HIGH";
-      leds.setBrightness(MAX_BRIGHTNESS);
-      if(LED_MATRIX) dma_display->setBrightness8(MAX_BRIGHTNESS);
   } else if (curDRL < VOLT_BUF){
-      if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)) {leds.setBrightness(MAX_BRIGHTNESS);} //Keep strip on when DRL are off in UBER/LYFT modes
-      else {
-        if (!RelayPin1State) { //turn off Relay 1
-          RelayPin1State = false;
-          digitalWrite(RELAY_PIN_1, RELAY_OFF);
-        }
-        drlState = "OFF ";
-        leds.setBrightness(0); 
-        }
-    }
+      drlState = "OFF ";
+  }
 }
 
 //-----------main program-----------------
@@ -438,7 +483,17 @@ void setup()
 #if PCB_V9 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
+#if BTN_INTERRUPTS == false 
+  Ind_L_Button = new Button(IND_L_PIN, true);
+  Ind_R_Button = new Button(IND_R_PIN, true);
 #endif
+#endif
+
+#if BTN_INTERRUPTS  
+  //simplebutton inturrupt setup
+  attachInterrupt(IND_L_PIN, left_indicator, FALLING);
+  attachInterrupt(IND_R_PIN, right_indicator, FALLING);
+#endif  
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
@@ -505,6 +560,7 @@ void setup()
 void loop()
 {
   static int    curSample = 1;
+  static bool   RelayPin1State = false;
   
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
 #if PCB_V9 == false
@@ -525,7 +581,10 @@ void loop()
 #if PCB_V9 
   Horn_Button->update();
   //Mode_Button->update();
-
+#if BTN_INTERRUPTS == false   
+  Ind_L_Button->update();
+  Ind_R_Button->update();
+#endif
 #endif
 
   if (firstLoop) {
@@ -545,7 +604,47 @@ void loop()
   if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
   if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
 #endif
-  
+
+  if (Abs(curDRL - LO_VOLT) < VOLT_BUF) {
+    if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+    }
+  leds.setBrightness(0);
+  leds.show();  
+  leds.setBrightness(MIN_BRIGHTNESS);
+#if LED_MATRIX      
+      dma_display->setBrightness8(MIN_BRIGHTNESS);
+#endif
+      if (DEBUG) Serial.println("DRL Brightness level LOW");
+    } else if (curDRL > (HI_VOLT - VOLT_BUF)) {
+      if (!RelayPin1State) {
+        RelayPin1State = true;
+        //turn on relay1
+        digitalWrite(RELAY_PIN_1, RELAY_ON);
+      }
+      leds.setBrightness(MAX_BRIGHTNESS);
+#if LED_MATRIX
+      dma_display->setBrightness8(MAX_BRIGHTNESS);
+#endif
+      if (DEBUG) Serial.println("DRL Brightness level MAX");
+    } else if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)){ //Keep strip on when DRL are off in UBER/LYFT modes
+        leds.setBrightness(MAX_BRIGHTNESS);
+    } else if (curDRL < VOLT_BUF) {
+      leds.setBrightness(0);  //change back to 0 after solving left indicator / drl off issue
+      if (RelayPin1State) {
+        RelayPin1State = false; //change back to false after solving left indicator / drl off issue
+        //turn off relay1
+        digitalWrite(RELAY_PIN_1, RELAY_OFF); //change back to RELAY_OFF after solving left indicator / drl off issue
+
+#if LED_MATRIX
+        dma_display->setBrightness8(MAX_BRIGHTNESS); //change back to 0 after solving left indicator / drl off issue
+#endif
+      }
+      if (DEBUG) Serial.println("DRL Brightness level OFF");
+    }
+    
   drl_mon();
 
 #if PCB_V9 == false
@@ -553,14 +652,17 @@ void loop()
 #endif
 #if PCB_V9 
   bool currentHornButtonState = Horn_Button->getState();
+#if BTN_INTERRUPTS == false   
   bool currentInd_LButtonState = Ind_L_Button->getState();
   bool currentInd_RButtonState = Ind_R_Button->getState();
+#endif
 
-  if (!currentHornButtonState) {
-    leds.fill(ANGRY_COLOR);
-    hornState = "BEEP";
+    if (!currentHornButtonState) {
+      leds.fill(ANGRY_COLOR);
+      hornState = "BEEP";
     }
    
+#if BTN_INTERRUPTS == false    
     else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
       indStatus = HAZARD;
       }
@@ -569,7 +671,8 @@ void loop()
       } 
     else if (!currentInd_LButtonState && currentInd_RButtonState) { 
       indStatus = LEFT; 
-      } 
+      }
+#endif    
     else {
     leds.fill(curMode.curColor);
     hornState = "OFF ";
