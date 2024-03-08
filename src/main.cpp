@@ -155,7 +155,7 @@ class cModes {
 
     void Increment () {
       Mode_Button->update();
-			if (Mode_Button->clicked(DEBOUNCE_TIME)){	btnPress++;}
+      if (Mode_Button->clicked(DEBOUNCE_TIME)){	btnPress++;}
 			if (btnPress > NUM_MODES) { btnPress = 0; }
 		
       switch (btnPress) {
