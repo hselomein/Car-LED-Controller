@@ -56,7 +56,7 @@
   
 // Startup Configuration (Constants)
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
-  #define numLOOPS      4   //Humber of passes over entire LED strip
+  #define numLOOPS      4   //Number of passes over entire LED strip
 
   static float curDRL   = 0.0f;
   static float curHorn  = 0.0f;
@@ -90,7 +90,7 @@
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgbw format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
-  #define DEFAULT_COLOR   leds.Color( 255, 197, 143, 255 )     //White (Adjusted to match vehicle oem light color)
+  #define DEFAULT_COLOR   leds.Color( 251, 255, 141, 255 )     //White (Adjusted to match vehicle oem light color)
   #define LYFT_COLOR      leds.Color( 255,  0, 191,  0 )     //Magenta
   #define UBER_COLOR      leds.Color( 0,  255,  92,  0 )     //Seafoam Green
   #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
@@ -102,11 +102,11 @@
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGB_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgb format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
-  #define DEFAULT_COLOR   leds.Color( 241, 255, 131 )     //White (Adjusted to match vehicle oem light color)
+  #define DEFAULT_COLOR   leds.Color( 251, 255, 141 )     //White (Adjusted to match vehicle oem light color)
   #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
   #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
-  #define BRIGHTCOLOR   leds.Color( 241,  255,  131 )     //Full White
-  #define DIMCOLOR      leds.Color(  48,  51,   27  )     //Dim White
+  #define BRIGHTCOLOR   leds.Color( 251,  255,  141 )     //Full White
+  #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
   #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
   #endif
 
