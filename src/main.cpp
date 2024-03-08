@@ -14,10 +14,7 @@
   #define LED_MATRIX true   //Set to false if you want to use a 64x64 LED Matrix
 //#define LED_STRIP         //for future development (turns off the led strip)
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
-  #define LEFT_IND false    //enable left indicator code for testing
-  #define RIGHT_IND false   //enable right indicator code for testing
-  #define PCB_V9 true       //enble if you are using V9 LED Controller PCB
-
+  
 //Arduino Standard
   #include <driver/adc.h>
   #include <esp_adc_cal.h>
@@ -27,13 +24,6 @@
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
   #define DRL_PIN     ADC1_CHANNEL_0    // Pin 39 => DRL Sense
 
-  #if PCB_V9 == false
-  #define HORN_PIN    ADC1_CHANNEL_3  // Pin 39 => Horn Sense
-  #define IND_L_PIN   ADC1_CHANNEL_6  // Pin 34 => Left Indicator 
-  #define IND_R_PIN   ADC1_CHANNEL_7  // Pin 35 => Right Indicator Sense (Reserved)
-  #endif
-  
-  #if PCB_V9 
   #include <SimpleButton.h>
   using namespace simplebutton;
   #define MODE_PIN	  19  // Pin 19 +> Mode selection
@@ -44,8 +34,6 @@
   Button* Ind_L_Button = NULL;
   Button* Ind_R_Button = NULL;
   Button* Mode_Button = NULL;
-  #endif
-
   #define DEBOUNCE_TIME 100
 
 //Define lcd and led brightness
@@ -74,13 +62,10 @@
   static float curHorn  = 0.0f;
   static float curInd_L = 0.0f;
   static float curInd_R = 0.0f;
-#if PCB_V9 
   String drlState;
   String hornState;
   bool uberDisp;
   bool lyftDisp;
-
-#endif
 
 //LED Strip
   #include <Adafruit_NeoPixel.h>
@@ -170,7 +155,6 @@ class cModes {
 
     void Increment () {
       Mode_Button->update();
-      //if (Mode_Button->getState()){	btnPress++;}
 			if (Mode_Button->clicked(DEBOUNCE_TIME)){	btnPress++;}
 			if (btnPress > NUM_MODES) { btnPress = 0; }
 		
@@ -225,18 +209,7 @@ class cModes {
 };
 cModes curMode;
 
-#if PCB_V9 == false
-#include <TaskLCD.h>
-#endif
-
-#if PCB_V9 
 #include <TaskLCD_V9.h>
-#endif
-
-#if PCB_V9 == false //V8 Boards require a different order of variables
-String drlState;
-String hornState;
-#endif
 
 bool firstLoop = true;
 
@@ -373,7 +346,7 @@ void indicator_function(){
 }
 
 void drl_mon(){
-  static bool   RelayPin1State = false;
+  static bool RelayPin1State = false;
   if (curDRL > LO_VOLT && curDRL < (HI_VOLT - VOLT_BUF)){
       if (!RelayPin1State) { //turn on Relay 1
         RelayPin1State = true;
@@ -406,7 +379,6 @@ void drl_mon(){
 void button_function(){
   // MUST call the update() function first
   Horn_Button->update();
-  //Mode_Button->update();
   Ind_L_Button->update();
   Ind_R_Button->update();
   bool currentHornButtonState = Horn_Button->getState();
@@ -459,19 +431,15 @@ void setup()
   pinMode(RELAY_PIN_1, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
-  if (PCB_V9) pinMode(HORN_PIN, INPUT);
-  if (PCB_V9) pinMode(IND_L_PIN, INPUT);
-  if (PCB_V9) pinMode(IND_R_PIN, INPUT);
-  if (LEFT_IND) pinMode(IND_L_PIN, INPUT);
-  if (RIGHT_IND) pinMode(IND_R_PIN, INPUT);
+  pinMode(HORN_PIN, INPUT);
+  pinMode(IND_L_PIN, INPUT);
+  pinMode(IND_R_PIN, INPUT);
 
   //setup the buttons
-#if PCB_V9 
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
   Ind_L_Button = new Button(IND_L_PIN, true);
   Ind_R_Button = new Button(IND_R_PIN, true);
-#endif
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
@@ -479,27 +447,6 @@ void setup()
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
   if (DEBUG) {Serial.println("Init ADC 1");}
   ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
-#if PCB_V9 == false
-  if (DEBUG) {Serial.println("Init ADC 2");}
-  ESP_ERROR_CHECK(adc1_config_channel_atten(HORN_PIN, ADC_ATTEN_DB_11));
-  //delay(150); // see if timing has effect on crashing
-#endif
-
-#if PCB_V9 == false
-  if (RIGHT_IND) {
-    if (DEBUG) {Serial.println("Init ADC 3");} 
-    ESP_ERROR_CHECK(adc1_config_channel_atten(IND_R_PIN, ADC_ATTEN_DB_11));
-    //delay(150); // see if timing has effect on crashing
-  }
-#endif
-
-#if PCB_V9 == false
-  if (LEFT_IND) {
-    if (DEBUG) {Serial.println("Init ADC 4");}
-    ESP_ERROR_CHECK(adc1_config_channel_atten(IND_L_PIN, ADC_ATTEN_DB_11));
-    //delay(150); // see if timing has effect on crashing
-  }
-#endif
 
 #if LED_MATRIX 
   // LED MATRIX Module configuration
@@ -526,7 +473,7 @@ void setup()
   String hornState;
 
   // Initiate startup lighting sequence
-    startupSequence(); 
+  startupSequence(); 
 
 #if LED_MATRIX 
   if (SCREENTEST) screentest();
@@ -538,14 +485,7 @@ void setup()
 void loop()
 {
   static int    curSample = 1;
-  static bool   RelayPin1State = false;
-  
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
-#if PCB_V9 == false
-  curHorn += esp_adc_cal_raw_to_voltage(adc1_get_raw(HORN_PIN), &ADC1_Characteristics);
-  if (LEFT_IND) curInd_L += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_L_PIN), &ADC1_Characteristics);
-  if (RIGHT_IND) curInd_R += esp_adc_cal_raw_to_voltage(adc1_get_raw(IND_R_PIN), &ADC1_Characteristics);
-#endif
   curSample++;
 
   if (DEBUG) {
@@ -558,36 +498,20 @@ void loop()
     curMode.Init();
     firstLoop = false;
   } else {
-
     curMode.Increment();
   }
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-    curHorn *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-
-#if PCB_V9 == false
-  if (LEFT_IND) curInd_L *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-  if (RIGHT_IND) curInd_R *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
-#endif
-
-  drl_mon();
-
-#if PCB_V9 == false
-    if (curHorn > VOLT_BUF) leds.fill(ANGRY_COLOR); 
-#endif
+  
+    drl_mon();
 if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
-#if PCB_V9 
     button_function();
-#endif 
-
     leds.show(); 
     indicator_function();
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
-    if (LEFT_IND) curInd_L = 0;
-    if (RIGHT_IND) curInd_R = 0;
-  }
+    }
 }
