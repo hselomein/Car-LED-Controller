@@ -10,9 +10,9 @@
 -----------------------------------------------------------------*/
 //Build Configuration Options
   #define DEBUG false       //Enable serial output for debug, change to "false" to disable
-  #define SCREENTEST false  //To enable the boot up screen test, change to, to disable change to "false"
-  #define LED_MATRIX true   //Set to false if you want to use a 64x64 LED Matrix
-//#define LED_STRIP         //for future development (turns off the led strip)
+  #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
+  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
   
 //Arduino Standard
@@ -67,6 +67,7 @@
   bool uberDisp;
   bool lyftDisp;
 
+#if LED_STRIP
 //LED Strip
   #include <Adafruit_NeoPixel.h>
 
@@ -109,6 +110,7 @@
   #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
   #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
   #endif
+#endif
 
 #if LED_MATRIX    
 //LED Matrix Panel
@@ -161,7 +163,9 @@ class cModes {
       switch (btnPress) {
         case 1:
             if (isLyftDisplayed == true) {isLyftDisplayed == false;}
+#if LED_STRIP
             curColor = UBER_COLOR;
+#endif
             txtColor = "UBER"; 
             if (DEBUG) Serial.println("LED color set to Uber Mode color (Seafoam Green)");         
             if (txtColor == "UBER" && isUberDisplayed == false){
@@ -174,7 +178,9 @@ class cModes {
             break;
         case 2:
             if (isUberDisplayed == true) {isUberDisplayed == false;}
+#if LED_STRIP
             curColor = LYFT_COLOR;
+#endif
             txtColor = "LYFT";
             if (DEBUG) Serial.println("LED color set to Lyft Mode color (Magenta)");
             if (txtColor == "LYFT" && isLyftDisplayed == false){
@@ -186,7 +192,9 @@ class cModes {
             }
             break;
         default:
+#if LED_STRIP        
             curColor = DEFAULT_COLOR;
+#endif
             txtColor = "WHIT";
             if (DEBUG) Serial.println("LED color set to Default Mode color (White)");
 #if LED_MATRIX            
@@ -201,7 +209,9 @@ class cModes {
     }
 
     void Init() {
+#if LED_STRIP
       curColor = DEFAULT_COLOR;
+#endif
       txtColor = "WHIT";
       delay(50);
       //Mode_Button->update();
@@ -213,6 +223,7 @@ cModes curMode;
 
 bool firstLoop = true;
 
+#if LED_STRIP
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   int ledLeft = 0; int ledRight = 0;
   int offset;
@@ -232,7 +243,9 @@ void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirecti
     leds.show();
   }
 }
+#endif
 
+#if LED_STRIP
 void startupSequence() {
  // Loop 4 times
  //  1 - Towards center clear trail
@@ -259,6 +272,7 @@ void startupSequence() {
   leds.fill(DEFAULT_COLOR);
   leds.show();
 }
+#endif
 
 float Abs(float val) {
   if (val > 0) return val;
@@ -287,7 +301,7 @@ void screentest() {
   dma_display->fillScreen(dma_display->color444(0, 0, 0));
 }
 #endif
-
+#if LED_STRIP
 void right_indicator(){
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
@@ -317,7 +331,9 @@ void hazard_indicator(){
         leds.show();
       }
 }
+#endif
 
+#if LED_STRIP
 enum indState {
 	OFF = 0,
   RIGHT,
@@ -344,6 +360,7 @@ void indicator_function(){
     break;
   }
 }
+#endif
 
 void drl_mon(){
   static bool RelayPin1State = false;
@@ -353,29 +370,44 @@ void drl_mon(){
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       } 
       drlState = "LOW ";
+#if LED_STRIP
       leds.setBrightness(MIN_BRIGHTNESS);
-      if(LED_MATRIX) dma_display->setBrightness8(MIN_BRIGHTNESS);
+#endif
+#if LED_MATIRX
+      dma_display->setBrightness8(MIN_BRIGHTNESS);
+#endif
   } else if (curDRL > (HI_VOLT - VOLT_BUF)){
       if (!RelayPin1State) { //turn on Relay 1
         RelayPin1State = true;
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
       drlState = "HIGH";
+#if LED_STRIP
       leds.setBrightness(MAX_BRIGHTNESS);
-      if(LED_MATRIX) dma_display->setBrightness8(MAX_BRIGHTNESS);
+#endif
+#if LED_MATRIX
+      dma_display->setBrightness8(MAX_BRIGHTNESS);
+#endif
   } else if (curDRL < VOLT_BUF){
-      if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)) {leds.setBrightness(MAX_BRIGHTNESS);} //Keep strip on when DRL are off in UBER/LYFT modes
+      if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)) { //Keep strip on when DRL are off in UBER/LYFT modes
+#if LED_STRIP        
+        leds.setBrightness(MAX_BRIGHTNESS);
+#endif
+        } 
       else {
         if (!RelayPin1State) { //turn off Relay 1
           RelayPin1State = false;
           digitalWrite(RELAY_PIN_1, RELAY_OFF);
         }
         drlState = "OFF ";
-        leds.setBrightness(0); 
+#if LED_STRIP
+        if (LED_STRIP) leds.setBrightness(0); 
+#endif
         }
     }
 }
 
+#if LED_STRIP
 void button_function(){
   // MUST call the update() function first
   Horn_Button->update();
@@ -404,6 +436,7 @@ void button_function(){
     indStatus = OFF;
     }
 }
+#endif
 
 //-----------main program-----------------
 
@@ -411,9 +444,11 @@ void setup()
 {
   // Start LEDs
   digitalWrite(RELAY_PIN_1, RELAY_ON);    //Turn on relay to provide power for LEDs
+#if LED_STRIP
   leds.begin();
   leds.show();
   leds.setBrightness(MAX_BRIGHTNESS);
+#endif
 
   //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
 
@@ -429,7 +464,7 @@ void setup()
 
   // Set pins as an input or output pin
   pinMode(RELAY_PIN_1, OUTPUT);
-  pinMode(LED_PIN, OUTPUT);
+  if (LED_STRIP) pinMode(LED_PIN, OUTPUT);
   pinMode(DRL_PIN, INPUT);
   pinMode(HORN_PIN, INPUT);
   pinMode(IND_L_PIN, INPUT);
@@ -473,7 +508,9 @@ void setup()
   String hornState;
 
   // Initiate startup lighting sequence
+#if LED_STRIP
   startupSequence(); 
+#endif
 
 #if LED_MATRIX 
   if (SCREENTEST) screentest();
@@ -507,9 +544,11 @@ void loop()
   
     drl_mon();
 if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
+#if LED_STRIP
     button_function();
     leds.show(); 
     indicator_function();
+#endif    
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
