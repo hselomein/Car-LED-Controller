@@ -66,19 +66,19 @@ How to use with Arduino IDE
 
 This program is modular. You can enable or disable specific features by setting directives to true or false.
 
+Build Configuration Options - This program is modular in the sense that you can have everything (LED Strip, LED Matrix) work or just cartain parts.  
+See the Build Configuration Options to enable or disable certain features.
+
 Examples:
-  - //Build Configuration Options
-  -   #define DEBUG false       //Enable serial output for debug, change to "false" to disable
-  -   #define SCREENTEST false  //To enable the bootup screen test, change to, to disable change to "false"
-  -   #define LED_MATRIX true   //Set to false if you do not want to use a 64x64 LED Matrix
-  - //#define LED_STRIP         //for future development
-  -   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
-  -   #define LEFT_IND false    //enable left indicator code for testing
-  -   #define RIGHT_IND false   //enable right indicator code for testing
-  -   #define V9_PCB true       //enable if you are using V9 LED Controller PCB
+//Build Configuration Options
+  #define DEBUG false       //Enable serial output for debug, change to "false" to disable
+  #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
+  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
+  #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
 
 Code Notes:
-- Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix for the Arduino ide
+- Car_LED_Controller-LED_Matrix_64x64.ino - this is the program for the 64x64 P2 LED Matrix for the Arduino ide, this still needs to be completed
 - Part List - this is the shopping list of parts for this project
 
 
