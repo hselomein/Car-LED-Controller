@@ -39,7 +39,7 @@
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Number of passes over entire LED strip
 
-  #if LED_STRIP
+#if LED_STRIP
 //LED Strip
   #include <Adafruit_NeoPixel.h>
 
@@ -59,7 +59,7 @@
   #define msIND_DELAY  int(FLASH_RATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
 
   
-  #if RGBW_STRIP 
+#if RGBW_STRIP 
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgbw format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
@@ -71,7 +71,7 @@
   #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
   #endif
 
-  #if RGBW_STRIP == false
+#if RGBW_STRIP == false
   Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGB_COLOR_ORDER + NEO_KHZ800);
   //color definitions values, are expressed in rgb format
   #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber

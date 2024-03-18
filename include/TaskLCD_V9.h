@@ -1,6 +1,7 @@
 #ifndef _TASKLCD_V9_H_
 #define _TASKLCD_V9_H_
 
+
 #include <stdio.h>
 #include <Wire.h>
 #include <hd44780.h>                       // main hd44780 header
@@ -14,6 +15,8 @@ hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config ex
 
 
 //void taskLCDUpdates( void * pvParameters );
+//void initTaskLCD();
+
 void taskLCDUpdates( void * pvParameters) {
   unsigned long startTime = millis();
   char tmpMessage[16];
@@ -24,16 +27,7 @@ if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
   lcd.print(tmpMessage);
   }
   
-  //delay(50); 
-
   while(true){
-
-    //if ((startTime - millis()) > 1000) {
-    //  digitalWrite(2, !digitalRead(2));
-    //  startTime = millis();
-    //}
-
-
     bool currentHornButtonState = Horn_Button->getState();
     bool currentInd_LButtonState = Ind_L_Button->getState();
     bool currentInd_RButtonState = Ind_R_Button->getState();
@@ -52,24 +46,20 @@ if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
     }
-    //delay(LCD_UPDATE_INTERVAL);
-
-  if (DEBUG) Serial.println(String(millis() - startTime) + "ms");
+    if (DEBUG) Serial.println(String(millis() - startTime) + "ms");
     }
   }
 
-
-//void initTaskLCD();
 void initTaskLCD() {
     // Create task on Core 1 to Update LCD
   xTaskCreatePinnedToCore(
-    taskLCDUpdates,   /* Function to implement the task */
-    "taskLCDUpdates", /* Name of the task */
-    10000,            /* Stack size in words */
-    NULL,             /* Task input parameter */ 
-    0,                /* Priority of the task */
-    NULL,             /* Task handle. */
-    1);               /* Core where the task should run */
+    taskLCDUpdates,   // Function to implement the task 
+    "taskLCDUpdates", // Name of the task 
+    10000,            // Stack size in words 
+    NULL,             // Task input parameter 
+    0,                // Priority of the task 
+    NULL,             //Task handle. 
+    1);               //Core where the task should run 
 }
 
 #endif // _TASKLCD_V9_H_
