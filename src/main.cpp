@@ -8,55 +8,62 @@
     Authors:        Yves Avady
     Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
+
+#include "definitions.h"
+
+/*
 //Build Configuration Options
   #define DEBUG false       //Enable serial output for debug, change to "false" to disable
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
-  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_MATRIX false   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
   #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
-  
+*/
+
 //Arduino Standard
   #include <driver/adc.h>
   #include <esp_adc_cal.h>
-  
+
+ /*
 // Pins to device mapping
   #define RELAY_PIN_1 18                // Pin 18 => In1 Relay
   #define LED_PIN     23                // Pin 23 => LED Controller Signal
   #define DRL_PIN     ADC1_CHANNEL_0    // Pin 39 => DRL Sense
+*/
 
   #include <SimpleButton.h>
   using namespace simplebutton;
-  #define MODE_PIN	  19  // Pin 19 +> Mode selection
-  #define HORN_PIN    39  // Pin 39 => Horn Sense
-  #define IND_L_PIN   34  // Pin 34 => Left Indicator 
-  #define IND_R_PIN   35  // Pin 35 => Right Indicator 
+//  #define MODE_PIN	  19  // Pin 19 +> Mode selection
+//  #define HORN_PIN    39  // Pin 39 => Horn Sense
+//  #define IND_L_PIN   34  // Pin 34 => Left Indicator 
+//  #define IND_R_PIN   35  // Pin 35 => Right Indicator 
   Button* Horn_Button = NULL;
   Button* Ind_L_Button = NULL;
   Button* Ind_R_Button = NULL;
   Button* Mode_Button = NULL;
-  #define DEBOUNCE_TIME 100
+//  #define DEBOUNCE_TIME 100
 
 //Define lcd and led brightness
-  #define MAX_BRIGHTNESS  255
-  #define MIN_BRIGHTNESS  63
-  #define MED_BRIGHTNESS  127
-
-  #define RELAY_ON LOW
-  #define RELAY_OFF HIGH
-
-  #define NUM_SAMPLES     50              // number of analog samples to take per reading
-  #define R1              47.0            // Resistor 1 value of voltage divider
-  #define R2              10.0            // Resistor 2 value of voltage divider
-  #define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
+//  #define MAX_BRIGHTNESS  255
+//  #define MIN_BRIGHTNESS  63
+//  #define MED_BRIGHTNESS  127
+//
+//  #define RELAY_ON LOW
+//  #define RELAY_OFF HIGH
+//
+//  #define NUM_SAMPLES     50              // number of analog samples to take per reading
+//  #define R1              47.0            // Resistor 1 value of voltage divider
+//  #define R2              10.0            // Resistor 2 value of voltage divider
+//  #define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
   static esp_adc_cal_characteristics_t ADC1_Characteristics;
-
-  #define VOLT_BUF        1
-  #define HI_VOLT         12
-  #define LO_VOLT         2
+//
+//  #define VOLT_BUF        1
+//  #define HI_VOLT         12
+//  #define LO_VOLT         2
   
 // Startup Configuration (Constants)
-  #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
-  #define numLOOPS      4   //Number of passes over entire LED strip
+//  #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
+ // #define numLOOPS      4   //Number of passes over entire LED strip
 
   static float curDRL   = 0.0f;
   static float curHorn  = 0.0f;
@@ -67,6 +74,7 @@
   bool uberDisp;
   bool lyftDisp;
 
+/*
 #if LED_STRIP
 //LED Strip
   #include <Adafruit_NeoPixel.h>
@@ -111,6 +119,7 @@
   #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
   #endif
 #endif
+*/
 
 #if LED_MATRIX    
 //LED Matrix Panel
@@ -120,6 +129,7 @@
   MatrixPanel_I2S_DMA *dma_display = nullptr;
 //LED Martrix pin section
 
+/*
 //This is configured using a P2 64x64 LED Matrix, which has an E pin.
 //Pinout for LED Matrix Controller V8, V9 or Yves Version
   #define R1_PIN  25
@@ -141,6 +151,7 @@
   #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
+*/
 
 #include <logos.h>
 #endif
