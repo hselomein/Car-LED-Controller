@@ -35,6 +35,8 @@
   #include <logos.h>
 #endif
 
+
+
 // Startup Configuration (Constants)
   static float curDRL   = 0.0f;
   static float curHorn  = 0.0f;
@@ -113,7 +115,7 @@ class cModes {
       curColor = DEFAULT_COLOR;
 #endif
       txtColor = "WHIT";
-      delay(50);
+      //delay(50);
       //Mode_Button->update();
     }
 };
@@ -203,33 +205,42 @@ void screentest() {
 #endif
 #if LED_STRIP
 void right_indicator(){
+  unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
+        //if(startTime - millis() > msDELAY){
         leds.show();
+        //}
       }
 } 
 
 void left_indicator(){
+  unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
       for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
+      //if(startTime - millis() > msDELAY){
         leds.show();
+      //}
       }
 }
 
 void hazard_indicator(){
-    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
-    int ledLeft = 0; int ledRight = 0;
-      for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
-        ledLeft = NUM_PIXELS_QUARTER - p;
-        ledRight = NUM_PIXELS - NUM_PIXELS_QUARTER + p;
-        leds.setPixelColor(ledRight, ANGRY_COLOR);              leds.setPixelColor(ledLeft, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        leds.show();
-      }
+  unsigned long startTime = millis();
+  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+  int ledLeft = 0; int ledRight = 0;
+    for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
+      ledLeft = NUM_PIXELS_QUARTER - p;
+      ledRight = NUM_PIXELS - NUM_PIXELS_QUARTER + p;
+      leds.setPixelColor(ledRight, ANGRY_COLOR);              leds.setPixelColor(ledLeft, ANGRY_COLOR);
+      delay(msIND_DELAY);
+      //if(startTime - millis() > msDELAY){
+      leds.show();
+      //}
+    }
 }
 #endif
 
