@@ -1,7 +1,7 @@
 //Build Configuration Options
-  #define DEBUG false       //Enable serial output for debug, change to "false" to disable
+  #define DEBUG true      //Enable serial output for debug, change to "false" to disable
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
-  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_MATRIX false   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
   #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
 
@@ -108,3 +108,5 @@
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
 #endif
+
+  #include "driver/gpio.h"

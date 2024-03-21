@@ -13,24 +13,30 @@
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 
-
+unsigned long L1previousTime = 0;
+unsigned long L2previousTime = 0;
 //void taskLCDUpdates( void * pvParameters );
 //void initTaskLCD();
 
 void taskLCDUpdates( void * pvParameters) {
-  unsigned long startTime = millis();
+  if(DEBUG) Serial.println("Start of LCD Function");
+  unsigned long L1currentTime = millis();
   char tmpMessage[16];
-  lcd.clear();    //clear the display and home the cursor
-  sprintf(tmpMessage, "MODE DRL   Horn "); 
-  lcd.setCursor(0,0); //move cursor to 1st line on display
-if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
-  lcd.print(tmpMessage);
+  if ((L1currentTime - L1previousTime >= LCD_UPDATE_INTERVAL)) {  
+    L1previousTime = L1currentTime; // Remember the time  
+    lcd.clear();    //clear the display and home the cursor
+    sprintf(tmpMessage, "MODE DRL   Horn "); 
+    lcd.setCursor(0,0); //move cursor to 1st line on display
+    lcd.print(tmpMessage);
+    //delay(LCD_UPDATE_INTERVAL);
+    if(DEBUG) Serial.println(String(L1currentTime) + "ms Line 1 Time");
   }
   
   while(true){
     bool currentHornButtonState = Horn_Button->getState();
     bool currentInd_LButtonState = Ind_L_Button->getState();
     bool currentInd_RButtonState = Ind_R_Button->getState();
+    unsigned long L2currentTime = millis();
     if (!currentHornButtonState) {
       sprintf(tmpMessage, "HORN %s %s", drlState, hornState); 
     } else if (!currentInd_LButtonState && currentInd_RButtonState) {
@@ -42,12 +48,15 @@ if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
     } else {
       sprintf(tmpMessage, "%s %s %s", curMode.txtColor, drlState, hornState);
     }
-    if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
-    lcd.setCursor(0,1); //move cursor to 2nd line on display
-    lcd.print(tmpMessage);
+    if ((L2currentTime - L2previousTime > LCD_UPDATE_INTERVAL)) {
+      L2previousTime = L2currentTime; // Remember the time
+      lcd.setCursor(0,1); //move cursor to 2nd line on display
+      lcd.print(tmpMessage);
+      //delay(LCD_UPDATE_INTERVAL);
+      if(DEBUG) Serial.println(String(L2currentTime) + "ms Line 2 Time");
+      }
     }
-    if (DEBUG) Serial.println(String(millis() - startTime) + "ms");
-    }
+    if(DEBUG) Serial.println("End of LCD Function");
   }
 
 void initTaskLCD() {

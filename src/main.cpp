@@ -216,6 +216,18 @@ void right_indicator(){
       }
 } 
 
+void IRAM_ATTR right_indicator_isr(){
+  unsigned long startTime = millis();
+  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+      for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
+        leds.setPixelColor(i, ANGRY_COLOR);
+        //delay(msIND_DELAY);
+        //if(startTime - millis() > msDELAY){
+        leds.show();
+        //}
+      }
+} 
+
 void left_indicator(){
   unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
@@ -362,7 +374,7 @@ void setup()
 #endif
 
   //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
-
+  
   if (DEBUG) Serial.begin(115200);   // serial monitor for debugging
     
   // set up the LCD:
@@ -380,6 +392,8 @@ void setup()
   pinMode(HORN_PIN, INPUT);
   pinMode(IND_L_PIN, INPUT);
   pinMode(IND_R_PIN, INPUT);
+
+  //attachInterrupt(digitalPinToInterrupt(IND_R_PIN), right_indicator_isr, FALLING);
 
   //setup the buttons
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
@@ -427,7 +441,9 @@ void setup()
   if (SCREENTEST) screentest();
 #endif
 
-  initTaskLCD();
+ initTaskLCD();
+
+
 }
 
 void loop()
