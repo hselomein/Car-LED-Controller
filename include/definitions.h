@@ -1,8 +1,9 @@
 //Build Configuration Options
-  #define DEBUG true      //Enable serial output for debug, change to "false" to disable
+  #define DEBUG false      //Enable serial output for debug, change to "false" to disable
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
-  #define LED_MATRIX false   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
   #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
+  #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Character Display, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
 
 // Pins to device mapping
@@ -55,7 +56,7 @@
   #define RGBW_STRIP false //for RGB Strips change to false
   #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
   #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
-  #define FLASH_RATE int((70/120)*1000) //how many indicator flashes per minute as specifed by car manufacturer 
+  #define FLASH_RATE int((80/120)*1000) //how many indicator flashes per minute as specifed by car manufacturer 
   #define msIND_DELAY  int(FLASH_RATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
 
   
@@ -110,3 +111,7 @@
 #endif
 
   #include "driver/gpio.h"
+
+
+//#ifndef
+  //#define CONFIG_ESP_INT_WDT_TIMEOUT_MS 5000

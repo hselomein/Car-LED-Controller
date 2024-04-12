@@ -34,16 +34,16 @@ void taskLCDUpdates( void * pvParameters) {
   
   while(true){
     bool currentHornButtonState = Horn_Button->getState();
-    bool currentInd_LButtonState = Ind_L_Button->getState();
-    bool currentInd_RButtonState = Ind_R_Button->getState();
+    //bool currentInd_LButtonState = Ind_L_Button->getState();
+    //bool currentInd_RButtonState = Ind_R_Button->getState();
     unsigned long L2currentTime = millis();
     if (!currentHornButtonState) {
       sprintf(tmpMessage, "HORN %s %s", drlState, hornState); 
-    } else if (!currentInd_LButtonState && currentInd_RButtonState) {
+    } else if (l_ind_active) {
       sprintf(tmpMessage, "LEFT %s %s", drlState, hornState); 
-    } else if (!currentInd_RButtonState && currentInd_LButtonState) {
+    } else if (r_ind_active) {
       sprintf(tmpMessage, "RGHT %s %s", drlState, hornState); 
-    } else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
+    } else if (hazard_active) {
       sprintf(tmpMessage, "HZRD %s %s", drlState, hornState); 
     } else {
       sprintf(tmpMessage, "%s %s %s", curMode.txtColor, drlState, hornState);

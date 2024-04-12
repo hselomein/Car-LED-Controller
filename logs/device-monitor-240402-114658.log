@@ -1,0 +1,3239 @@
+11:47:01.490 > 0
+11:47:01.490 > DRL Voltage:2556.00
+11:47:01.490 > Current Sampets Jul 29 2019 12:21:46
+11:47:01.490 > 
+11:47:01.490 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+11:47:01.490 > configsip: 0, SPIWP:0xee
+11:47:01.490 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+11:47:01.490 > mode:DIO, clock div:2
+11:47:01.490 > load:0x3fff0030,len:1184
+11:47:01.490 > load:0x40078000,len:13232
+11:47:01.490 > load:0x40080400,len:3028
+11:47:01.490 > entry 0x400805e4
+11:47:01.490 > Start Init ADC
+11:47:01.490 > Init ADC 1
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:142.00
+11:47:01.490 > Current Sample Number:2
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:284.00
+11:47:01.490 > Current Sample Number:3
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:426.00
+11:47:01.490 > Current Sample Number:4
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:568.00
+11:47:01.490 > Current Sample Number:5
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:710.00
+11:47:01.490 > Current Sample Number:6
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:852.00
+11:47:01.490 > Current Sample Number:7
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:994.00
+11:47:01.490 > Current Sample Number:8
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1136.00
+11:47:01.490 > Current Sample Number:9
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1278.00
+11:47:01.490 > Current Sample Number:10
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1420.00
+11:47:01.490 > Current Sample Number:11
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1562.00
+11:47:01.490 > Current Sample Number:12
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1704.00
+11:47:01.490 > Current Sample Number:13
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1846.00
+11:47:01.490 > Current Sample Number:14
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1988.00
+11:47:01.490 > Current Sample Number:15
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2130.00
+11:47:01.490 > Current Sample Number:16
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2272.00
+11:47:01.490 > Current Sample Number:17
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2414.00
+11:47:01.490 > Current Sample Number:18
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2556.00
+11:47:01.490 > Current Sample Number:19
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2698.00
+11:47:01.490 > Current Sample Number:20
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2840.00
+11:47:01.490 > Current Sample Number:21
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2982.00
+11:47:01.490 > Current Sample Number:22
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3124.00
+11:47:01.490 > Current Sample Number:23
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3266.00
+11:47:01.490 > Current Sample Number:24
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3408.00
+11:47:01.490 > Current Sample Number:25
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3550.00
+11:47:01.490 > Current Sample Number:26
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3692.00
+11:47:01.490 > Current Sample Number:27
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3834.00
+11:47:01.490 > Current Sample Number:28
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3976.00
+11:47:01.490 > Current Sample Number:29
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4118.00
+11:47:01.490 > Current Sample Number:30
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4260.00
+11:47:01.490 > Current Sample Number:31
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4402.00
+11:47:01.490 > Current Sample Number:32
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4544.00
+11:47:01.490 > Current Sample Number:33
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4686.00
+11:47:01.490 > Current Sample Number:34
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4828.00
+11:47:01.490 > Current Sample Number:35
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4970.00
+11:47:01.490 > Current Sample Number:36
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5112.00
+11:47:01.490 > Current Sample Number:37
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5254.00
+11:47:01.490 > Current Sample Number:38
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5396.00
+11:47:01.490 > Current Sample Number:39
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5538.00
+11:47:01.490 > Current Sample Number:40
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5680.00
+11:47:01.490 > Current Sample Number:41
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5822.00
+11:47:01.490 > Current Sample Number:42
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5964.00
+11:47:01.490 > Current Sample Number:43
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6106.00
+11:47:01.490 > Current Sample Number:44
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6248.00
+11:47:01.490 > Current Sample Number:45
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6390.00
+11:47:01.490 > Current Sample Number:46
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6532.00
+11:47:01.490 > Current Sample Number:47
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6674.00
+11:47:01.490 > Current Sample Number:48
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6816.00
+11:47:01.490 > Current Sample Number:49
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6958.00
+11:47:01.490 > Current Sample Number:50
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:7100.00
+11:47:01.490 > Current Sample Number:51
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Mode Select Button State:0
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:142.00
+11:47:01.490 > Current Sample Number:2
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:284.00
+11:47:01.490 > Current Sample Number:3
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:426.00
+11:47:01.490 > Current Sample Number:4
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:568.00
+11:47:01.490 > Current Sample Number:5
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:710.00
+11:47:01.490 > Current Sample Number:6
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:852.00
+11:47:01.490 > Current Sample Number:7
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:994.00
+11:47:01.490 > Current Sample Number:8
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1136.00
+11:47:01.490 > Current Sample Number:9
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1278.00
+11:47:01.490 > Current Sample Number:10
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1420.00
+11:47:01.490 > Current Sample Number:11
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1562.00
+11:47:01.490 > Current Sample Number:12
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1704.00
+11:47:01.490 > Current Sample Number:13
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1846.00
+11:47:01.490 > Current Sample Number:14
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1988.00
+11:47:01.490 > Current Sample Number:15
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2130.00
+11:47:01.490 > Current Sample Number:16
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2272.00
+11:47:01.490 > Current Sample Number:17
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2414.00
+11:47:01.490 > Current Sample Number:18
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2556.00
+11:47:01.490 > Current Sample Number:19
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2698.00
+11:47:01.490 > Current Sample Number:20
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2840.00
+11:47:01.490 > Current Sample Number:21
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2982.00
+11:47:01.490 > Current Sample Number:22
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3124.00
+11:47:01.490 > Current Sample Number:23
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3266.00
+11:47:01.490 > Current Sample Number:24
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3408.00
+11:47:01.490 > Current Sample Number:25
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3550.00
+11:47:01.490 > Current Sample Number:26
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3692.00
+11:47:01.490 > Current Sample Number:27
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3834.00
+11:47:01.490 > Current Sample Number:28
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:3976.00
+11:47:01.490 > Current Sample Number:29
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4118.00
+11:47:01.490 > Current Sample Number:30
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4260.00
+11:47:01.490 > Current Sample Number:31
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4402.00
+11:47:01.490 > Current Sample Number:32
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4544.00
+11:47:01.490 > Current Sample Number:33
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4686.00
+11:47:01.490 > Current Sample Number:34
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4828.00
+11:47:01.490 > Current Sample Number:35
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:4970.00
+11:47:01.490 > Current Sample Number:36
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5112.00
+11:47:01.490 > Current Sample Number:37
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5254.00
+11:47:01.490 > Current Sample Number:38
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5396.00
+11:47:01.490 > Current Sample Number:39
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5538.00
+11:47:01.490 > Current Sample Number:40
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5680.00
+11:47:01.490 > Current Sample Number:41
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5822.00
+11:47:01.490 > Current Sample Number:42
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:5964.00
+11:47:01.490 > Current Sample Number:43
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6106.00
+11:47:01.490 > Current Sample Number:44
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6248.00
+11:47:01.490 > Current Sample Number:45
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6390.00
+11:47:01.490 > Current Sample Number:46
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6532.00
+11:47:01.490 > Current Sample Number:47
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6674.00
+11:47:01.490 > Current Sample Number:48
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6816.00
+11:47:01.490 > Current Sample Number:49
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:6958.00
+11:47:01.490 > Current Sample Number:50
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:7100.00
+11:47:01.490 > Current Sample Number:51
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Mode Select Button State:0
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:142.00
+11:47:01.490 > Current Sample Number:2
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:284.00
+11:47:01.490 > Current Sample Number:3
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:426.00
+11:47:01.490 > Current Sample Number:4
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:568.00
+11:47:01.490 > Current Sample Number:5
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:710.00
+11:47:01.490 > Current Sample Number:6
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:852.00
+11:47:01.490 > Current Sample Number:7
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:994.00
+11:47:01.490 > Current Sample Number:8
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1136.00
+11:47:01.490 > Current Sample Number:9
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1278.00
+11:47:01.490 > Current Sample Number:10
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1420.00
+11:47:01.490 > Current Sample Number:11
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1562.00
+11:47:01.490 > Current Sample Number:12
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1704.00
+11:47:01.490 > Current Sample Number:13
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1846.00
+11:47:01.490 > Current Sample Number:14
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:1988.00
+11:47:01.490 > Current Sample Number:15
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2130.00
+11:47:01.490 > Current Sample Number:16
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2272.00
+11:47:01.490 > Current Sample Number:17
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2414.00
+11:47:01.490 > Current Sample Number:18
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2556.00
+11:47:01.490 > Current Sample Number:19
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2698.00
+11:47:01.490 > Current Sample Number:20
+11:47:01.490 > LED color set to Default Mode color (White)
+11:47:01.490 > Horn Voltage:0.00
+11:47:01.490 > DRL Voltage:2840.00
+11:47:01.558 > Current Sample Number:21
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:2982.00
+11:47:01.558 > Current Sample Number:22
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3124.00
+11:47:01.558 > Current Sample Number:23
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3266.00
+11:47:01.558 > Current Sample Number:24
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3408.00
+11:47:01.558 > Current Sample Number:25
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3550.00
+11:47:01.558 > Current Sample Number:26
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3692.00
+11:47:01.558 > Current Sample Number:27
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.558 > Horn Voltage:0.00
+11:47:01.558 > DRL Voltage:3834.00
+11:47:01.558 > Current Sample Number:28
+11:47:01.558 > LED color set to Default Mode color (White)
+11:47:01.566 > Horn Voltage:0.00
+11:47:01.566 > DRL Voltage:3976.00
+11:47:01.568 > Current Sample Number:29
+11:47:01.572 > LED color set to Default Mode color (White)
+11:47:01.572 > Horn Voltage:0.00
+11:47:01.572 > DRL Voltage:4118.00
+11:47:01.572 > Current Sample Number:30
+11:47:01.581 > LED color set to Default Mode color (White)
+11:47:01.583 > Horn Voltage:0.00
+11:47:01.586 > DRL Voltage:4260.00
+11:47:01.589 > Current Sample Number:31
+11:47:01.590 > LED color set to Default Mode color (White)
+11:47:01.590 > Horn Voltage:0.00
+11:47:01.590 > DRL Voltage:4402.00
+11:47:01.590 > Current Sample Number:32
+11:47:01.600 > LED color set to Default Mode color (White)
+11:47:01.602 > Horn Voltage:0.00
+11:47:01.605 > DRL Voltage:4544.00
+11:47:01.606 > Current Sample Number:33
+11:47:01.606 > LED color set to Default Mode color (White)
+11:47:01.606 > Horn Voltage:0.00
+11:47:01.606 > DRL Voltage:4686.00
+11:47:01.616 > Current Sample Number:34
+11:47:01.618 > LED color set to Default Mode color (White)
+11:47:01.622 > Horn Voltage:0.00
+11:47:01.622 > DRL Voltage:4828.00
+11:47:01.622 > Current Sample Number:35
+11:47:01.622 > LED color set to Default Mode color (White)
+11:47:01.633 > Horn Voltage:0.00
+11:47:01.633 > DRL Voltage:4970.00
+11:47:01.635 > Current Sample Number:36
+11:47:01.638 > LED color set to Default Mode color (White)
+11:47:01.640 > Horn Voltage:0.00
+11:47:01.640 > DRL Voltage:5112.00
+11:47:01.640 > Current Sample Number:37
+11:47:01.640 > LED color set to Default Mode color (White)
+11:47:01.652 > Horn Voltage:0.00
+11:47:01.652 > DRL Voltage:5254.00
+11:47:01.655 > Current Sample Number:38
+11:47:01.655 > LED color set to Default Mode color (White)
+11:47:01.655 > Horn Voltage:0.00
+11:47:01.655 > DRL Voltage:5396.00
+11:47:01.655 > Current Sample Number:39
+11:47:01.666 > LED color set to Default Mode color (White)
+11:47:01.671 > Horn Voltage:0.00
+11:47:01.671 > DRL Voltage:5538.00
+11:47:01.674 > Current Sample Number:40
+11:47:01.676 > LED color set to Default Mode color (White)
+11:47:01.676 > Horn Voltage:0.00
+11:47:01.683 > DRL Voltage:5680.00
+11:47:01.683 > Current Sample Number:41
+11:47:01.685 > LED color set to Default Mode color (White)
+11:47:01.691 > Horn Voltage:0.00
+11:47:01.691 > DRL Voltage:5822.00
+11:47:01.692 > Current Sample Number:42
+11:47:01.692 > LED color set to Default Mode color (White)
+11:47:01.700 > Horn Voltage:0.00
+11:47:01.702 > DRL Voltage:5964.00
+11:47:01.702 > Current Sample Number:43
+11:47:01.705 > LED color set to Default Mode color (White)
+11:47:01.710 > Horn Voltage:0.00
+11:47:01.710 > DRL Voltage:6106.00
+11:47:01.710 > Current Sample Number:44
+11:47:01.716 > LED color set to Default Mode color (White)
+11:47:01.718 > Horn Voltage:0.00
+11:47:01.721 > DRL Voltage:6248.00
+11:47:01.721 > Current Sample Number:45
+11:47:01.725 > LED color set to Default Mode color (White)
+11:47:01.725 > Horn Voltage:0.00
+11:47:01.725 > DRL Voltage:6390.00
+11:47:01.733 > Current Sample Number:46
+11:47:01.736 > LED color set to Default Mode color (White)
+11:47:01.738 > Horn Voltage:0.00
+11:47:01.741 > DRL Voltage:6532.00
+11:47:01.741 > Current Sample Number:47
+11:47:01.742 > LED color set to Default Mode color (White)
+11:47:01.742 > Horn Voltage:0.00
+11:47:01.750 > DRL Voltage:6674.00
+11:47:01.752 > Current Sample Number:48
+11:47:01.755 > LED color set to Default Mode color (White)
+11:47:01.759 > Horn Voltage:0.00
+11:47:01.760 > DRL Voltage:6816.00
+11:47:01.761 > Current Sample Number:49
+11:47:01.761 > LED color set to Default Mode color (White)
+11:47:01.766 > Horn Voltage:0.00
+11:47:01.769 > DRL Voltage:6958.00
+11:47:01.772 > Current Sample Number:50
+11:47:01.772 > LED color set to Default Mode color (White)
+11:47:01.777 > Horn Voltage:0.00
+11:47:01.777 > DRL Voltage:7100.00
+11:47:01.778 > Current Sample Number:51
+11:47:01.783 > LED color set to Default Mode color (White)
+11:47:01.785 > Mode Select Button State:0
+11:47:01.788 > Horn Voltage:0.00
+11:47:01.791 > DRL Voltage:142.00
+11:47:01.791 > Current Sample Number:2
+11:47:01.793 > LED color set to Default Mode color (White)
+11:47:01.799 > Horn Voltage:0.00
+11:47:01.799 > DRL Voltage:284.00
+11:47:01.802 > Current Sample Number:3
+11:47:01.805 > LED color set to Default Mode color (White)
+11:47:01.808 > Horn Voltage:0.00
+11:47:01.809 > DRL Voltage:426.00
+11:47:01.809 > Current Sample Number:4
+11:47:01.809 > LED color set to Default Mode color (White)
+11:47:01.816 > Horn Voltage:0.00
+11:47:01.818 > DRL Voltage:568.00
+11:47:01.821 > Current Sample Number:5
+11:47:01.821 > LED color set to Default Mode color (White)
+11:47:01.825 > Horn Voltage:0.00
+11:47:01.825 > DRL Voltage:710.00
+11:47:01.825 > Current Sample Number:6
+11:47:01.833 > LED color set to Default Mode color (White)
+11:47:01.836 > Horn Voltage:0.00
+11:47:01.838 > DRL Voltage:852.00
+11:47:01.838 > Current Sample Number:7
+11:47:01.841 > LED color set to Default Mode color (White)
+11:47:01.844 > Horn Voltage:0.00
+11:47:01.844 > DRL Voltage:994.00
+11:47:01.850 > Current Sample Number:8
+11:47:01.852 > LED color set to Default Mode color (White)
+11:47:01.855 > Horn Voltage:0.00
+11:47:01.858 > DRL Voltage:1136.00
+11:47:01.858 > Current Sample Number:9
+11:47:01.859 > LED color set to Default Mode color (White)
+11:47:01.859 > Horn Voltage:0.00
+11:47:01.866 > DRL Voltage:1278.00
+11:47:01.868 > Current Sample Number:10
+11:47:01.871 > LED color set to Default Mode color (White)
+11:47:01.874 > Horn Voltage:0.00
+11:47:01.875 > DRL Voltage:1420.00
+11:47:01.875 > Current Sample Number:11
+11:47:01.875 > LED color set to Default Mode color (White)
+11:47:01.883 > Horn Voltage:0.00
+11:47:01.885 > DRL Voltage:1562.00
+11:47:01.888 > Current Sample Number:12
+11:47:01.888 > LED color set to Default Mode color (White)
+11:47:01.893 > Horn Voltage:0.00
+11:47:01.893 > DRL Voltage:1704.00
+11:47:01.893 > Current Sample Number:13
+11:47:01.900 > LED color set to Default Mode color (White)
+11:47:01.902 > Horn Voltage:0.00
+11:47:01.905 > DRL Voltage:1846.00
+11:47:01.908 > Current Sample Number:14
+11:47:01.908 > LED color set to Default Mode color (White)
+11:47:01.908 > Horn Voltage:0.00
+11:47:01.908 > DRL Voltage:1988.00
+11:47:01.916 > Current Sample Number:15
+11:47:01.918 > LED color set to Default Mode color (White)
+11:47:01.921 > Horn Voltage:0.00
+11:47:01.923 > DRL Voltage:2130.00
+11:47:01.923 > Current Sample Number:16
+11:47:01.923 > LED color set to Default Mode color (White)
+11:47:01.933 > Horn Voltage:0.00
+11:47:01.933 > DRL Voltage:2272.00
+11:47:01.935 > Current Sample Number:17
+11:47:01.938 > LED color set to Default Mode color (White)
+11:47:01.941 > Horn Voltage:0.00
+11:47:01.942 > DRL Voltage:2414.00
+11:47:01.942 > Current Sample Number:18
+11:47:01.942 > LED color set to Default Mode color (White)
+11:47:01.951 > Horn Voltage:0.00
+11:47:01.951 > DRL Voltage:2556.00
+11:47:01.954 > Current Sample Number:19
+11:47:01.957 > LED color set to Default Mode color (White)
+11:47:01.960 > Horn Voltage:0.00
+11:47:01.960 > DRL Voltage:2698.00
+11:47:01.960 > Current Sample Number:20
+11:47:01.966 > LED color set to Default Mode color (White)
+11:47:01.971 > Horn Voltage:0.00
+11:47:01.971 > DRL Voltage:2840.00
+11:47:01.974 > Current Sample Number:21
+11:47:01.977 > LED color set to Default Mode color (White)
+11:47:01.979 > Horn Voltage:0.00
+11:47:01.982 > DRL Voltage:2982.00
+11:47:01.982 > Current Sample Number:22
+11:47:01.985 > LED color set to Default Mode color (White)
+11:47:01.991 > Horn Voltage:0.00
+11:47:01.991 > DRL Voltage:3124.00
+11:47:01.991 > Current Sample Number:23
+11:47:01.991 > LED color set to Default Mode color (White)
+11:47:02.000 > Horn Voltage:0.00
+11:47:02.002 > DRL Voltage:3266.00
+11:47:02.002 > Current Sample Number:24
+11:47:02.005 > LED color set to Default Mode color (White)
+11:47:02.007 > Horn Voltage:0.00
+11:47:02.007 > DRL Voltage:3408.00
+11:47:02.007 > Current Sample Number:25
+11:47:02.016 > LED color set to Default Mode color (White)
+11:47:02.018 > Horn Voltage:0.00
+11:47:02.021 > DRL Voltage:3550.00
+11:47:02.021 > Current Sample Number:26
+11:47:02.023 > LED color set to Default Mode color (White)
+11:47:02.023 > Horn Voltage:0.00
+11:47:02.023 > DRL Voltage:3692.00
+11:47:02.033 > Current Sample Number:27
+11:47:02.035 > LED color set to Default Mode color (White)
+11:47:02.038 > Horn Voltage:0.00
+11:47:02.041 > DRL Voltage:3834.00
+11:47:02.041 > Current Sample Number:28
+11:47:02.041 > LED color set to Default Mode color (White)
+11:47:02.041 > Horn Voltage:0.00
+11:47:02.050 > DRL Voltage:3976.00
+11:47:02.052 > Current Sample Number:29
+11:47:02.052 > LED color set to Default Mode color (White)
+11:47:02.056 > Horn Voltage:0.00
+11:47:02.056 > DRL Voltage:4118.00
+11:47:02.056 > Current Sample Number:30
+11:47:02.056 > LED color set to Default Mode color (White)
+11:47:02.066 > Horn Voltage:0.00
+11:47:02.068 > DRL Voltage:4260.00
+11:47:02.071 > Current Sample Number:31
+11:47:02.071 > LED color set to Default Mode color (White)
+11:47:02.073 > Horn Voltage:0.00
+11:47:02.073 > DRL Voltage:4402.00
+11:47:02.073 > Current Sample Number:32
+11:47:02.083 > LED color set to Default Mode color (White)
+11:47:02.085 > Horn Voltage:0.00
+11:47:02.088 > DRL Voltage:4544.00
+11:47:02.091 > Current Sample Number:33
+11:47:02.091 > LED color set to Default Mode color (White)
+11:47:02.093 > Horn Voltage:0.00
+11:47:02.093 > DRL Voltage:4686.00
+11:47:02.100 > Current Sample Number:34
+11:47:02.102 > LED color set to Default Mode color (White)
+11:47:02.105 > Horn Voltage:0.00
+11:47:02.108 > DRL Voltage:4828.00
+11:47:02.108 > Current Sample Number:35
+11:47:02.108 > LED color set to Default Mode color (White)
+11:47:02.116 > Horn Voltage:0.00
+11:47:02.116 > DRL Voltage:4970.00
+11:47:02.119 > Current Sample Number:36
+11:47:02.121 > LED color set to Default Mode color (White)
+11:47:02.124 > Horn Voltage:0.00
+11:47:02.127 > DRL Voltage:5112.00
+11:47:02.127 > Current Sample Number:37
+11:47:02.127 > LED color set to Default Mode color (White)
+11:47:02.135 > Horn Voltage:0.00
+11:47:02.135 > DRL Voltage:5254.00
+11:47:02.138 > Current Sample Number:38
+11:47:02.140 > LED color set to Default Mode color (White)
+11:47:02.140 > Horn Voltage:0.00
+11:47:02.140 > DRL Voltage:5396.00
+11:47:02.140 > Current Sample Number:39
+11:47:02.150 > LED color set to Default Mode color (White)
+11:47:02.155 > Horn Voltage:0.00
+11:47:02.155 > DRL Voltage:5538.00
+11:47:02.158 > Current Sample Number:40
+11:47:02.161 > LED color set to Default Mode color (White)
+11:47:02.161 > Horn Voltage:0.00
+11:47:02.166 > DRL Voltage:5680.00
+11:47:02.166 > Current Sample Number:41
+11:47:02.168 > LED color set to Default Mode color (White)
+11:47:02.171 > Horn Voltage:0.00
+11:47:02.174 > DRL Voltage:5822.00
+11:47:02.175 > Current Sample Number:42
+11:47:02.175 > LED color set to Default Mode color (White)
+11:47:02.183 > Horn Voltage:0.00
+11:47:02.185 > DRL Voltage:5964.00
+11:47:02.185 > Current Sample Number:43
+11:47:02.188 > LED color set to Default Mode color (White)
+11:47:02.191 > Horn Voltage:0.00
+11:47:02.193 > DRL Voltage:6106.00
+11:47:02.193 > Current Sample Number:44
+11:47:02.193 > LED color set to Default Mode color (White)
+11:47:02.202 > Horn Voltage:0.00
+11:47:02.202 > DRL Voltage:6248.00
+11:47:02.205 > Current Sample Number:45
+11:47:02.206 > LED color set to Default Mode color (White)
+11:47:02.206 > Horn Voltage:0.00
+11:47:02.206 > DRL Voltage:6390.00
+11:47:02.216 > Current Sample Number:46
+11:47:02.216 > LED color set to Default Mode color (White)
+11:47:02.221 > Horn Voltage:0.00
+11:47:02.221 > DRL Voltage:6532.00
+11:47:02.224 > Current Sample Number:47
+11:47:02.226 > LED color set to Default Mode color (White)
+11:47:02.226 > Horn Voltage:0.00
+11:47:02.233 > DRL Voltage:6674.00
+11:47:02.236 > Current Sample Number:48
+11:47:02.236 > LED color set to Default Mode color (White)
+11:47:02.240 > Horn Voltage:0.00
+11:47:02.240 > DRL Voltage:6816.00
+11:47:02.240 > Current Sample Number:49
+11:47:02.240 > LED color set to Default Mode color (White)
+11:47:02.250 > Horn Voltage:0.00
+11:47:02.252 > DRL Voltage:6958.00
+11:47:02.252 > Current Sample Number:50
+11:47:02.255 > LED color set to Default Mode color (White)
+11:47:02.257 > Horn Voltage:0.00
+11:47:02.257 > DRL Voltage:7100.00
+11:47:02.257 > Current Sample Number:51
+11:47:02.266 > LED color set to Default Mode color (White)
+11:47:02.268 > Mode Select Button State:0
+11:47:02.271 > Horn Voltage:0.00
+11:47:02.274 > DRL Voltage:142.00
+11:47:02.274 > Current Sample Number:2
+11:47:02.277 > LED color set to Default Mode color (White)
+11:47:02.277 > Horn Voltage:0.00
+11:47:02.283 > DRL Voltage:284.00
+11:47:02.285 > Current Sample Number:3
+11:47:02.285 > LED color set to Default Mode color (White)
+11:47:02.291 > Horn Voltage:0.00
+11:47:02.291 > DRL Voltage:426.00
+11:47:02.294 > Current Sample Number:4
+11:47:02.298 > LED color set to Default Mode color (White)
+11:47:02.301 > Horn Voltage:0.00
+11:47:02.301 > DRL Voltage:568.00
+11:47:02.301 > Current Sample Number:5
+11:47:02.301 > LED color set to Default Mode color (White)
+11:47:02.301 > Horn Voltage:0.00
+11:47:02.301 > DRL Voltage:710.00
+11:47:02.301 > Current Sample Number:6
+11:47:02.317 > LED color set to Default Mode color (White)
+11:47:02.317 > Horn Voltage:0.00
+11:47:02.317 > DRL Voltage:852.00
+11:47:02.317 > Current Sample Number:7
+11:47:02.317 > LED color set to Default Mode color (White)
+11:47:02.317 > Horn Voltage:0.00
+11:47:02.317 > DRL Voltage:994.00
+11:47:02.333 > Current Sample Number:8
+11:47:02.333 > LED color set to Default Mode color (White)
+11:47:02.334 > Horn Voltage:0.00
+11:47:02.334 > DRL Voltage:1136.00
+11:47:02.334 > Current Sample Number:9
+11:47:02.334 > LED color set to Default Mode color (White)
+11:47:02.334 > Horn Voltage:0.00
+11:47:02.349 > DRL Voltage:1278.00
+11:47:02.349 > Current Sample Number:10
+11:47:02.349 > LED color set to Default Mode color (White)
+11:47:02.349 > Horn Voltage:0.00
+11:47:02.349 > DRL Voltage:1420.00
+11:47:02.349 > Current Sample Number:11
+11:47:02.349 > LED color set to Default Mode color (White)
+11:47:02.367 > Horn Voltage:0.00
+11:47:02.367 > DRL Voltage:1562.00
+11:47:02.367 > Current Sample Number:12
+11:47:02.367 > LED color set to Default Mode color (White)
+11:47:02.367 > Horn Voltage:0.00
+11:47:02.367 > DRL Voltage:1704.00
+11:47:02.367 > Current Sample Number:13
+11:47:02.382 > LED color set to Default Mode color (White)
+11:47:02.382 > Horn Voltage:0.00
+11:47:02.382 > DRL Voltage:1846.00
+11:47:02.382 > Current Sample Number:14
+11:47:02.382 > LED color set to Default Mode color (White)
+11:47:02.396 > Horn Voltage:0.00
+11:47:02.396 > DRL Voltage:1988.00
+11:47:02.400 > Current Sample Number:15
+11:47:02.400 > LED color set to Default Mode color (White)
+11:47:02.400 > Horn Voltage:0.00
+11:47:02.400 > DRL Voltage:2130.00
+11:47:02.400 > Current Sample Number:16
+11:47:02.400 > LED color set to Default Mode color (White)
+11:47:02.417 > Horn Voltage:0.00
+11:47:02.417 > DRL Voltage:2272.00
+11:47:02.417 > Current Sample Number:17
+11:47:02.417 > LED color set to Default Mode color (White)
+11:47:02.417 > Horn Voltage:0.00
+11:47:02.417 > DRL Voltage:2414.00
+11:47:02.417 > Current Sample Number:18
+11:47:02.417 > LED color set to Default Mode color (White)
+11:47:02.435 > Horn Voltage:0.00
+11:47:02.435 > DRL Voltage:2556.00
+11:47:02.435 > Current Sample Number:19
+11:47:02.435 > LED color set to Default Mode color (White)
+11:47:02.435 > Horn Voltage:0.00
+11:47:02.435 > DRL Voltage:2698.00
+11:47:02.435 > Current Sample Number:20
+11:47:02.449 > LED color set to Default Mode color (White)
+11:47:02.449 > Horn Voltage:0.00
+11:47:02.449 > DRL Voltage:2840.00
+11:47:02.449 > Current Sample Number:21
+11:47:02.449 > LED color set to Default Mode color (White)
+11:47:02.449 > Horn Voltage:0.00
+11:47:02.465 > DRL Voltage:2982.00
+11:47:02.465 > Current Sample Number:22
+11:47:02.465 > LED color set to Default Mode color (White)
+11:47:02.465 > Horn Voltage:0.00
+11:47:02.465 > DRL Voltage:3124.00
+11:47:02.465 > Current Sample Number:23
+11:47:02.465 > LED color set to Default Mode color (White)
+11:47:02.482 > Horn Voltage:0.00
+11:47:02.482 > DRL Voltage:3266.00
+11:47:02.482 > Current Sample Number:24
+11:47:02.482 > LED color set to Default Mode color (White)
+11:47:02.482 > Horn Voltage:0.00
+11:47:02.482 > DRL Voltage:3408.00
+11:47:02.482 > Current Sample Number:25
+11:47:02.482 > LED color set to Default Mode color (White)
+11:47:02.503 > Horn Voltage:0.00
+11:47:02.503 > DRL Voltage:3550.00
+11:47:02.504 > Current Sample Number:26
+11:47:02.504 > LED color set to Default Mode color (White)
+11:47:02.504 > Horn Voltage:0.00
+11:47:02.504 > DRL Voltage:3692.00
+11:47:02.515 > Current Sample Number:27
+11:47:02.515 > LED color set to Default Mode color (White)
+11:47:02.515 > Horn Voltage:0.00
+11:47:02.515 > DRL Voltage:3834.00
+11:47:02.515 > Current Sample Number:28
+11:47:02.515 > LED color set to Default Mode color (White)
+11:47:02.515 > Horn Voltage:0.00
+11:47:02.532 > DRL Voltage:3976.00
+11:47:02.532 > Current Sample Number:29
+11:47:02.532 > LED color set to Default Mode color (White)
+11:47:02.532 > Horn Voltage:0.00
+11:47:02.532 > DRL Voltage:4118.00
+11:47:02.532 > Current Sample Number:30
+11:47:02.532 > LED color set to Default Mode color (White)
+11:47:02.548 > Horn Voltage:0.00
+11:47:02.548 > DRL Voltage:4260.00
+11:47:02.548 > Current Sample Number:31
+11:47:02.548 > LED color set to Default Mode color (White)
+11:47:02.548 > Horn Voltage:0.00
+11:47:02.548 > DRL Voltage:4402.00
+11:47:02.564 > Current Sample Number:32
+11:47:02.565 > LED color set to Default Mode color (White)
+11:47:02.565 > Horn Voltage:0.00
+11:47:02.565 > DRL Voltage:4544.00
+11:47:02.565 > Current Sample Number:33
+11:47:02.565 > LED color set to Default Mode color (White)
+11:47:02.565 > Horn Voltage:0.00
+11:47:02.565 > DRL Voltage:4686.00
+11:47:02.582 > Current Sample Number:34
+11:47:02.582 > LED color set to Default Mode color (White)
+11:47:02.582 > Horn Voltage:0.00
+11:47:02.582 > DRL Voltage:4828.00
+11:47:02.582 > Current Sample Number:35
+11:47:02.582 > LED color set to Default Mode color (White)
+11:47:02.598 > Horn Voltage:0.00
+11:47:02.598 > DRL Voltage:4970.00
+11:47:02.598 > Current Sample Number:36
+11:47:02.598 > LED color set to Default Mode color (White)
+11:47:02.598 > Horn Voltage:0.00
+11:47:02.598 > DRL Voltage:5112.00
+11:47:02.598 > Current Sample Number:37
+11:47:02.613 > LED color set to Default Mode color (White)
+11:47:02.615 > Horn Voltage:0.00
+11:47:02.615 > DRL Voltage:5254.00
+11:47:02.615 > Current Sample Number:38
+11:47:02.615 > LED color set to Default Mode color (White)
+11:47:02.615 > Horn Voltage:0.00
+11:47:02.615 > DRL Voltage:5396.00
+11:47:02.630 > Current Sample Number:39
+11:47:02.632 > LED color set to Default Mode color (White)
+11:47:02.632 > Horn Voltage:0.00
+11:47:02.632 > DRL Voltage:5538.00
+11:47:02.632 > Current Sample Number:40
+11:47:02.632 > LED color set to Default Mode color (White)
+11:47:02.632 > Horn Voltage:0.00
+11:47:02.632 > DRL Voltage:5680.00
+11:47:02.649 > Current Sample Number:41
+11:47:02.649 > LED color set to Default Mode color (White)
+11:47:02.649 > Horn Voltage:0.00
+11:47:02.649 > DRL Voltage:5822.00
+11:47:02.649 > Current Sample Number:42
+11:47:02.649 > LED color set to Default Mode color (White)
+11:47:02.665 > Horn Voltage:0.00
+11:47:02.665 > DRL Voltage:5964.00
+11:47:02.665 > Current Sample Number:43
+11:47:02.665 > LED color set to Default Mode color (White)
+11:47:02.665 > Horn Voltage:0.00
+11:47:02.665 > DRL Voltage:6106.00
+11:47:02.665 > Current Sample Number:44
+11:47:02.665 > LED color set to Default Mode color (White)
+11:47:02.682 > Horn Voltage:0.00
+11:47:02.682 > DRL Voltage:6248.00
+11:47:02.682 > Current Sample Number:45
+11:47:02.682 > LED color set to Default Mode color (White)
+11:47:02.682 > Horn Voltage:0.00
+11:47:02.682 > DRL Voltage:6390.00
+11:47:02.682 > Current Sample Number:46
+11:47:02.700 > LED color set to Default Mode color (White)
+11:47:02.700 > Horn Voltage:0.00
+11:47:02.700 > DRL Voltage:6532.00
+11:47:02.700 > Current Sample Number:47
+11:47:02.700 > LED color set to Default Mode color (White)
+11:47:02.700 > Horn Voltage:0.00
+11:47:02.716 > DRL Voltage:6674.00
+11:47:02.716 > Current Sample Number:48
+11:47:02.718 > LED color set to Default Mode color (White)
+11:47:02.720 > Horn Voltage:0.00
+11:47:02.720 > DRL Voltage:6816.00
+11:47:02.720 > Current Sample Number:49
+11:47:02.720 > LED color set to Default Mode color (White)
+11:47:02.732 > Horn Voltage:0.00
+11:47:02.736 > DRL Voltage:6958.00
+11:47:02.736 > Current Sample Number:50
+11:47:02.738 > LED color set to Default Mode color (White)
+11:47:02.744 > Horn Voltage:0.00
+11:47:02.744 > DRL Voltage:7100.00
+11:47:02.744 > Current Sample Number:51
+11:47:02.749 > LED color set to Default Mode color (White)
+11:47:02.749 > Mode Select Button State:0
+11:47:02.749 > Horn Voltage:0.00
+11:47:02.749 > DRL Voltage:142.00
+11:47:02.749 > Current Sample Number:2
+11:47:02.749 > LED color set to Default Mode color (White)
+11:47:02.749 > Horn Voltage:0.00
+11:47:02.768 > DRL Voltage:284.00
+11:47:02.770 > Current Sample Number:3
+11:47:02.770 > LED color set to Default Mode color (White)
+11:47:02.770 > Horn Voltage:0.00
+11:47:02.770 > DRL VoltagGuru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1). 
+11:47:03.077 > 
+11:47:03.077 > Core  1 register dump:
+11:47:03.080 > PC      : 0x4008b43c  PS      : 0x00060d35  A0      : 0x8008a3ae  A1      : 0x3ffbf17c  
+11:47:03.085 > A2      : 0x3ffb8314  A3      : 0x3ffbcfb4  A4      : 0x00000004  A5      : 0x00060d23  
+11:47:03.093 > A6      : 0x00060d23  A7      : 0x00000001  A8      : 0x3ffbcfb4  A9      : 0x00000019  
+11:47:03.102 > A10     : 0x3ffbcfb4  A11     : 0x00000019  A12     : 0x3ffc265c  A13     : 0x00060d23  
+11:47:03.104 > A14     : 0x007bf328  A15     : 0x003fffff  SAR     : 0x0000001d  EXCCAUSE: 0x00000006  
+11:47:03.118 > EXCVADDR: 0x00000000  LBEG    : 0x40086cbd  LEND    : 0x40086ccd  LCOUNT  : 0xfffffff1  
+11:47:03.118 > Core  1 was running in ISR context:
+11:47:03.118 > EPC1    : 0x400e0d07  EPC2    : 0x00000000  EPC3    : 0x00000000  EPC4    : 0x00000000
+11:47:03.134 > 
+11:47:03.134 > 
+11:47:03.134 > Backtrace: 0x4008b439:0x3ffbf17c |<-CORRUPTED
+11:47:03.190 > 
+11:47:03.190 >   #0  0x4008b439:0x3ffbf17c in vListInsert at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/list.c:166 (discriminator 1)
+11:47:03.190 > 
+11:47:03.190 > 
+11:47:03.190 > Core  0 register dump:
+11:47:03.234 > PC      : 0x4008b5cb  PS      : 0x00060035  A0      : 0x80089fd7  A1      : 0x3ffbea4c  
+11:47:03.234 > A2      : 0x3ffbf328  A3      : 0xb33fffff  A4      : 0x0000abab  A5      : 0x00060023  
+11:47:03.234 > A6      : 0x00060021  A7      : 0x0000cdcd  A8      : 0x0000abab  A9      : 0xffffffff  
+11:47:03.234 > A10     : 0x3ffc2474  A11     : 0x00000000  A12     : 0x3ffc2470  A13     : 0x00000007  
+11:47:03.234 > A14     : 0x007bf328  A15     : 0x003fffff  SAR     : 0x0000001d  EXCCAUSE: 0x00000006  
+11:47:03.234 > EXCVADDR: 0x00000000  LBEG    : 0x00000000  LEND    : 0x00000000  LCOUNT  : 0x00000000  
+11:47:03.234 > 
+11:47:03.234 > 
+11:47:03.234 > Backtrace: 0x4008b5c8:0x3ffbea4c |<-CORRUPTED
+11:47:03.234 > 
+11:47:03.234 >   #0  0x4008b5c8:0x3ffbea4c in esp_ptr_external_ram at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/soc/include/soc/soc_memory_types.h:115
+11:47:03.234 >       (inlined by) spinlock_acquire at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_hw_support/include/soc/spinlock.h:99
+11:47:03.234 >       (inlined by) xPortEnterCriticalTimeout at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/port.c:301
+11:47:03.234 > 
+11:47:03.234 > 
+11:47:03.234 > 
+11:47:03.234 > 
+11:47:03.234 > ELF file SHA256: 6c70e8d0948e6f90
+11:47:03.234 > 
+11:47:03.234 > Rebooting...
+11:47:03.234 > ets Jul 29 2019 12:21:46
+11:47:03.234 > 
+11:47:03.234 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+11:47:03.234 > configsip: 0, SPIWP:0xee
+11:47:03.234 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+11:47:03.249 > mode:DIO, clock div:2
+11:47:03.251 > load:0x3fff0030,len:1184
+11:47:03.251 > load:0x40078000,len:13232
+11:47:03.251 > load:0x40080400,len:3028
+11:47:03.251 > entry 0x400805e4
+11:47:03.447 > Start Init ADC
+11:47:03.448 > Init ADC 1
+11:47:03.502 > Right Indicator Interrupt Launched!!!!!!!!!!!!!!!!!!!!!!!!
+11:47:03.502 > 
+11:47:03.502 > abort() was called at PC 0x40085207 on core 1
+11:47:03.518 > 
+11:47:03.518 > 
+11:47:03.518 > Backtrace: 0x40083ced:0x3ffbf0bc |<-CORRUPTED
+11:47:03.565 > 
+11:47:03.565 >   #0  0x40083ced:0x3ffbf0bc in panic_abort at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_system/panic.c:408
+11:47:03.566 > 
+11:47:03.566 > 
+11:47:03.566 > 
+11:47:03.566 > 
+11:47:03.566 > ELF file SHA256: 6c70e8d0948e6f90
+11:47:03.566 > 
+11:47:03.566 > Rebooting...
+11:47:03.566 > ets Jul 29 2019 12:21:46
+11:47:03.566 > 
+11:47:03.566 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+11:47:03.569 > configsip: 0, SPIWP:0xee
+11:47:03.572 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+11:47:03.573 > mode:DIO, clock div:2
+11:47:03.573 > load:0x3fff0030,len:1184
+11:47:03.583 > load:0x40078000,len:13232
+11:47:03.586 > load:0x40080400,len:3028
+11:47:03.586 > entry 0x400805e4
+11:47:03.776 > Start Init ADC
+11:47:03.776 > Init ADC 1
+11:47:03.898 > Right Indicator Interrupt Launched!!!!!!!!!!!!!!!!!!!!!!!!
+11:47:03.898 > 
+11:47:03.898 > abort() was called at PC 0x40085207 on core 1
+11:47:03.916 > 
+11:47:03.916 > 
+11:47:03.916 > Backtrace: 0x40083ced:0x3ffbf0bc |<-CORRUPTED
+11:47:03.968 > 
+11:47:03.968 >   #0  0x40083ced:0x3ffbf0bc in panic_abort at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_system/panic.c:408
+11:47:03.969 > 
+11:47:03.969 > 
+11:47:03.969 > 
+11:47:03.969 > 
+11:47:03.969 > ELF file SHA256: 6c70e8d0948e6f90
+11:47:03.969 > 
+11:47:03.969 > Rebooting...
+11:47:03.969 > ets Jul 29 2019 12:21:46
+11:47:03.969 > 
+11:47:03.969 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+11:47:03.969 > configsip: 0, SPIWP:0xee
+11:47:03.971 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+11:47:03.976 > mode:DIO, clock div:2
+11:47:03.976 > load:0x3fff0030,len:1184
+11:47:03.981 > load:0x40078000,len:13232
+11:47:03.984 > load:0x40080400,len:3028
+11:47:03.984 > entry 0x400805e4
+11:47:04.174 > Start Init ADC
+11:47:04.174 > Init ADC 1
+11:47:04.532 > Right Indicator Interrupt Launched!!!!!!!!!!!!!!!!!!!!!!!!
+11:47:04.547 > 
+11:47:04.547 > abort() was called at PC 0x40085207 on core 1
+11:47:04.547 > 
+11:47:04.547 > 
+11:47:04.547 > Backtrace: 0x40083ced:0x3ffbf0bc |<-CORRUPTED
+11:47:04.585 > 
+11:47:04.585 >   #0  0x40083ced:0x3ffbf0bc in panic_abort at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_system/panic.c:408
+11:47:04.585 > 
+11:47:04.585 > 
+11:47:04.585 > 
+11:47:04.585 > 
+11:47:04.585 > ELF file SHA256: 6c70e8d0948e6f90
+11:47:04.585 > 
+11:47:04.585 > Rebooting...
+11:47:04.585 > ets Jul 29 2019 12:21:46
+11:47:04.598 > 
+11:47:04.598 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+11:47:04.602 > configsip: 0, SPIWP:0xee
+11:47:04.602 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+11:47:04.602 > mode:DIO, clock div:2
+11:47:04.602 > load:0x3fff0030,len:1184
+11:47:04.616 > load:0x40078000,len:13232
+11:47:04.617 > load:0x40080400,len:3028
+11:47:04.617 > entry 0x400805e4
+11:47:04.804 > Start Init ADC
+11:47:04.804 > Init ADC 1
+11:47:06.399 > Horn Voltage:0.00
+11:47:06.399 > DRL Voltage:142.00
+11:47:06.415 > Current Sample Number:2
+11:47:06.415 > Horn Voltage:0.00
+11:47:06.415 > DRL Voltage:284.00
+11:47:06.415 > Current Sample Number:3
+11:47:06.415 > LED color set to Default Mode color (White)
+11:47:06.415 > Horn Voltage:0.00
+11:47:06.415 > DRL Voltage:426.00
+11:47:06.415 > Current Sample Number:4
+11:47:06.432 > LED color set to Default Mode color (White)
+11:47:06.432 > Horn Voltage:0.00
+11:47:06.432 > DRL Voltage:568.00
+11:47:06.432 > Current Sample Number:5
+11:47:06.432 > LED color set to Default Mode color (White)
+11:47:06.432 > Horn Voltage:0.00
+11:47:06.432 > DRL Voltage:710.00
+11:47:06.449 > Current Sample Number:6
+11:47:06.449 > LED color set to Default Mode color (White)
+11:47:06.449 > Horn Voltage:0.00
+11:47:06.449 > DRL Voltage:852.00
+11:47:06.449 > Current Sample Number:7
+11:47:06.449 > LED color set to Default Mode color (White)
+11:47:06.465 > Horn Voltage:0.00
+11:47:06.465 > DRL Voltage:994.00
+11:47:06.465 > Current Sample Number:8
+11:47:06.465 > LED color set to Default Mode color (White)
+11:47:06.465 > Horn Voltage:0.00
+11:47:06.465 > DRL Voltage:1136.00
+11:47:06.465 > Current Sample Number:9
+11:47:06.465 > LED color set to Default Mode color (White)
+11:47:06.482 > Horn Voltage:0.00
+11:47:06.482 > DRL Voltage:1278.00
+11:47:06.482 > Current Sample Number:10
+11:47:06.482 > LED color set to Default Mode color (White)
+11:47:06.482 > Horn Voltage:0.00
+11:47:06.482 > DRL Voltage:1420.00
+11:47:06.482 > Current Sample Number:11
+11:47:06.499 > LED color set to Default Mode color (White)
+11:47:06.502 > Horn Voltage:0.00
+11:47:06.503 > DRL Voltage:1562.00
+11:47:06.503 > Current Sample Number:12
+11:47:06.503 > LED color set to Default Mode color (White)
+11:47:06.503 > Horn Voltage:0.00
+11:47:06.503 > DRL Voltage:1704.00
+11:47:06.515 > Current Sample Number:13
+11:47:06.515 > LED color set to Default Mode color (White)
+11:47:06.515 > Horn Voltage:0.00
+11:47:06.515 > DRL Voltage:1846.00
+11:47:06.515 > Current Sample Number:14
+11:47:06.515 > LED color set to Default Mode color (White)
+11:47:06.532 > Horn Voltage:0.00
+11:47:06.532 > DRL Voltage:1988.00
+11:47:06.532 > Current Sample Number:15
+11:47:06.532 > LED color set to Default Mode color (White)
+11:47:06.532 > Horn Voltage:0.00
+11:47:06.532 > DRL Voltage:2130.00
+11:47:06.532 > Current Sample Number:16
+11:47:06.547 > LED color set to Default Mode color (White)
+11:47:06.549 > Horn Voltage:0.00
+11:47:06.549 > DRL Voltage:2272.00
+11:47:06.549 > Current Sample Number:17
+11:47:06.549 > LED color set to Default Mode color (White)
+11:47:06.549 > Horn Voltage:0.00
+11:47:06.564 > DRL Voltage:2414.00
+11:47:06.564 > Current Sample Number:18
+11:47:06.566 > LED color set to Default Mode color (White)
+11:47:06.566 > Horn Voltage:0.00
+11:47:06.566 > DRL Voltage:2556.00
+11:47:06.566 > Current Sample Number:19
+11:47:06.566 > LED color set to Default Mode color (White)
+11:47:06.566 > Horn Voltage:0.00
+11:47:06.582 > DRL Voltage:2698.00
+11:47:06.582 > Current Sample Number:20
+11:47:06.582 > LED color set to Default Mode color (White)
+11:47:06.582 > Horn Voltage:0.00
+11:47:06.582 > DRL Voltage:2840.00
+11:47:06.582 > Current Sample Number:21
+11:47:06.582 > LED color set to Default Mode color (White)
+11:47:06.599 > Horn Voltage:0.00
+11:47:06.599 > DRL Voltage:2982.00
+11:47:06.599 > Current Sample Number:22
+11:47:06.599 > LED color set to Default Mode color (White)
+11:47:06.599 > Horn Voltage:0.00
+11:47:06.599 > DRL Voltage:3124.00
+11:47:06.599 > Current Sample Number:23
+11:47:06.615 > LED color set to Default Mode color (White)
+11:47:06.615 > Horn Voltage:0.00
+11:47:06.615 > DRL Voltage:3266.00
+11:47:06.615 > Current Sample Number:24
+11:47:06.615 > LED color set to Default Mode color (White)
+11:47:06.615 > Horn Voltage:0.00
+11:47:06.615 > DRL Voltage:3408.00
+11:47:06.632 > Current Sample Number:25
+11:47:06.632 > LED color set to Default Mode color (White)
+11:47:06.632 > Horn Voltage:0.00
+11:47:06.632 > DRL Voltage:3550.00
+11:47:06.632 > Current Sample Number:26
+11:47:06.632 > LED color set to Default Mode color (White)
+11:47:06.647 > Horn Voltage:0.00
+11:47:06.649 > DRL Voltage:3692.00
+11:47:06.649 > Current Sample Number:27
+11:47:06.649 > LED color set to Default Mode color (White)
+11:47:06.649 > Horn Voltage:0.00
+11:47:06.649 > DRL Voltage:3834.00
+11:47:06.649 > Current Sample Number:28
+11:47:06.664 > LED color set to Default Mode color (White)
+11:47:06.665 > Horn Voltage:0.00
+11:47:06.665 > DRL Voltage:3976.00
+11:47:06.665 > Current Sample Number:29
+11:47:06.665 > LED color set to Default Mode color (White)
+11:47:06.665 > Horn Voltage:0.00
+11:47:06.665 > DRL Voltage:4118.00
+11:47:06.680 > Current Sample Number:30
+11:47:06.682 > LED color set to Default Mode color (White)
+11:47:06.682 > Horn Voltage:0.00
+11:47:06.682 > DRL Voltage:4260.00
+11:47:06.682 > Current Sample Number:31
+11:47:06.682 > LED color set to Default Mode color (White)
+11:47:06.682 > Horn Voltage:0.00
+11:47:06.682 > DRL Voltage:4402.00
+11:47:06.699 > Current Sample Number:32
+11:47:06.699 > LED color set to Default Mode color (White)
+11:47:06.699 > Horn Voltage:0.00
+11:47:06.699 > DRL Voltage:4544.00
+11:47:06.699 > Current Sample Number:33
+11:47:06.699 > LED color set to Default Mode color (White)
+11:47:06.716 > Horn Voltage:0.00
+11:47:06.716 > DRL Voltage:4686.00
+11:47:06.716 > Current Sample Number:34
+11:47:06.716 > LED color set to Default Mode color (White)
+11:47:06.716 > Horn Voltage:0.00
+11:47:06.716 > DRL Voltage:4828.00
+11:47:06.716 > Current Sample Number:35
+11:47:06.716 > LED color set to Default Mode color (White)
+11:47:06.736 > Horn Voltage:0.00
+11:47:06.736 > DRL Voltage:4970.00
+11:47:06.738 > Current Sample Number:36
+11:47:06.738 > LED color set to Default Mode color (White)
+11:47:06.738 > Horn Voltage:0.00
+11:47:06.738 > DRL Voltage:5112.00
+11:47:06.738 > Current Sample Number:37
+11:47:06.749 > LED color set to Default Mode color (White)
+11:47:06.749 > Horn Voltage:0.00
+11:47:06.749 > DRL Voltage:5254.00
+11:47:06.749 > Current Sample Number:38
+11:47:06.749 > LED color set to Default Mode color (White)
+11:47:06.749 > Horn Voltage:0.00
+11:47:06.766 > DRL Voltage:5396.00
+11:47:06.766 > Current Sample Number:39
+11:47:06.766 > LED color set to Default Mode color (White)
+11:47:06.766 > Horn Voltage:0.00
+11:47:06.766 > DRL Voltage:5538.00
+11:47:06.766 > Current Sample Number:40
+11:47:06.766 > LED color set to Default Mode color (White)
+11:47:06.782 > Horn Voltage:0.00
+11:47:06.782 > DRL Voltage:5680.00
+11:47:06.782 > Current Sample Number:41
+11:47:06.782 > LED color set to Default Mode color (White)
+11:47:06.782 > Horn Voltage:0.00
+11:47:06.782 > DRL Voltage:5822.00
+11:47:06.782 > Current Sample Number:42
+11:47:06.782 > LED color set to Default Mode color (White)
+11:47:06.800 > Horn Voltage:0.00
+11:47:06.800 > DRL Voltage:5964.00
+11:47:06.800 > Current Sample Number:43
+11:47:06.800 > LED color set to Default Mode color (White)
+11:47:06.800 > Horn Voltage:0.00
+11:47:06.800 > DRL Voltage:6106.00
+11:47:06.816 > Current Sample Number:44
+11:47:06.816 > LED color set to Default Mode color (White)
+11:47:06.816 > Horn Voltage:0.00
+11:47:06.816 > DRL Voltage:6248.00
+11:47:06.816 > Current Sample Number:45
+11:47:06.816 > LED color set to Default Mode color (White)
+11:47:06.816 > Horn Voltage:0.00
+11:47:06.832 > DRL Voltage:6390.00
+11:47:06.832 > Current Sample Number:46
+11:47:06.832 > LED color set to Default Mode color (White)
+11:47:06.832 > Horn Voltage:0.00
+11:47:06.832 > DRL Voltage:6532.00
+11:47:06.832 > Current Sample Number:47
+11:47:06.832 > LED color set to Default Mode color (White)
+11:47:06.849 > Horn Voltage:0.00
+11:47:06.849 > DRL Voltage:6674.00
+11:47:06.849 > Current Sample Number:48
+11:47:06.849 > LED color set to Default Mode color (White)
+11:47:06.849 > Horn Voltage:0.00
+11:47:06.849 > DRL Voltage:6816.00
+11:47:06.849 > Current Sample Number:49
+11:47:06.865 > LED color set to Default Mode color (White)
+11:47:06.865 > Horn Voltage:0.00
+11:47:06.865 > DRL Voltage:6958.00
+11:47:06.865 > Current Sample Number:50
+11:47:06.865 > LED color set to Default Mode color (White)
+11:47:06.865 > Horn Voltage:0.00
+11:47:06.865 > DRL Voltage:7100.00
+11:47:06.882 > Current Sample Number:51
+11:47:06.882 > LED color set to Default Mode color (White)
+11:47:06.882 > Mode Select Button State:0
+11:47:06.882 > Horn Voltage:0.00
+11:47:06.882 > DRL Voltage:142.00
+11:47:06.898 > Current Sample Number:2
+11:47:06.899 > LED color set to Default Mode color (White)
+11:47:06.899 > Horn Voltage:0.00
+11:47:06.899 > DRL Voltage:284.00
+11:47:06.899 > Current Sample Number:3
+11:47:06.899 > LED color set to Default Mode color (White)
+11:47:06.899 > Horn Voltage:0.00
+11:47:06.915 > DRL Voltage:426.00
+11:47:06.916 > Current Sample Number:4
+11:47:06.916 > LED color set to Default Mode color (White)
+11:47:06.916 > Horn Voltage:0.00
+11:47:06.916 > DRL Voltage:568.00
+11:47:06.916 > Current Sample Number:5
+11:47:06.916 > LED color set to Default Mode color (White)
+11:47:06.931 > Horn Voltage:0.00
+11:47:06.932 > DRL Voltage:710.00
+11:47:06.932 > Current Sample Number:6
+11:47:06.932 > LED color set to Default Mode color (White)
+11:47:06.932 > Horn Voltage:0.00
+11:47:06.932 > DRL Voltage:852.00
+11:47:06.932 > Current Sample Number:7
+11:47:06.948 > LED color set to Default Mode color (White)
+11:47:06.949 > Horn Voltage:0.00
+11:47:06.949 > DRL Voltage:994.00
+11:47:06.949 > Current Sample Number:8
+11:47:06.949 > LED color set to Default Mode color (White)
+11:47:06.949 > Horn Voltage:0.00
+11:47:06.949 > DRL Voltage:1136.00
+11:47:06.965 > Current Sample Number:9
+11:47:06.965 > LED color set to Default Mode color (White)
+11:47:06.970 > Horn Voltage:0.00
+11:47:06.970 > DRL Voltage:1278.00
+11:47:06.970 > Current Sample Number:10
+11:47:06.970 > LED color set to Default Mode color (White)
+11:47:06.970 > Horn Voltage:0.00
+11:47:06.981 > DRL Voltage:1420.00
+11:47:06.982 > Current Sample Number:11
+11:47:06.982 > LED color set to Default Mode color (White)
+11:47:06.982 > Horn Voltage:0.00
+11:47:06.982 > DRL Voltage:1562.00
+11:47:06.982 > Current Sample Number:12
+11:47:06.982 > LED color set to Default Mode color (White)
+11:47:06.998 > Horn Voltage:0.00
+11:47:06.999 > DRL Voltage:1704.00
+11:47:06.999 > Current Sample Number:13
+11:47:06.999 > LED color set to Default Mode color (White)
+11:47:06.999 > Horn Voltage:0.00
+11:47:06.999 > DRL Voltage:1846.00
+11:47:06.999 > Current Sample Number:14
+11:47:07.015 > LED color set to Default Mode color (White)
+11:47:07.016 > Horn Voltage:0.00
+11:47:07.016 > DRL Voltage:1988.00
+11:47:07.016 > Current Sample Number:15
+11:47:07.016 > LED color set to Default Mode color (White)
+11:47:07.016 > Horn Voltage:0.00
+11:47:07.016 > DRL Voltage:2130.00
+11:47:07.031 > Current Sample Number:16
+11:47:07.034 > LED color set to Default Mode color (White)
+11:47:07.037 > Horn Voltage:0.00
+11:47:07.040 > DRL Voltage:2272.00
+11:47:07.040 > Current Sample Number:17
+11:47:07.042 > LED color set to Default Mode color (White)
+11:47:07.048 > Horn Voltage:0.00
+11:47:07.048 > DRL Voltage:2414.00
+11:47:07.051 > Current Sample Number:18
+11:47:07.054 > LED color set to Default Mode color (White)
+11:47:07.056 > Horn Voltage:0.00
+11:47:07.058 > DRL Voltage:2556.00
+11:47:07.058 > Current Sample Number:19
+11:47:07.062 > LED color set to Default Mode color (White)
+11:47:07.064 > Horn Voltage:0.00
+11:47:07.067 > DRL Voltage:2698.00
+11:47:07.070 > Current Sample Number:20
+11:47:07.073 > LED color set to Default Mode color (White)
+11:47:07.075 > Horn Voltage:0.00
+11:47:07.079 > DRL Voltage:2840.00
+11:47:07.079 > Current Sample Number:21
+11:47:07.081 > LED color set to Default Mode color (White)
+11:47:07.084 > Horn Voltage:0.00
+11:47:07.087 > DRL Voltage:2982.00
+11:47:07.090 > Current Sample Number:22
+11:47:07.090 > LED color set to Default Mode color (White)
+11:47:07.095 > Horn Voltage:0.00
+11:47:07.095 > DRL Voltage:3124.00
+11:47:07.098 > Current Sample Number:23
+11:47:07.101 > LED color set to Default Mode color (White)
+11:47:07.103 > Horn Voltage:0.00
+11:47:07.106 > DRL Voltage:3266.00
+11:47:07.109 > Current Sample Number:24
+11:47:07.109 > LED color set to Default Mode color (White)
+11:47:07.113 > Horn Voltage:0.00
+11:47:07.113 > DRL Voltage:3408.00
+11:47:07.113 > Current Sample Number:25
+11:47:07.113 > LED color set to Default Mode color (White)
+11:47:07.113 > Horn Voltage:0.00
+11:47:07.113 > DRL Voltage:3550.00
+11:47:07.128 > Current Sample Number:26
+11:47:07.128 > LED color set to Default Mode color (White)
+11:47:07.135 > Horn Voltage:0.00
+11:47:07.135 > DRL Voltage:3692.00
+11:47:07.137 > Current Sample Number:27
+11:47:07.139 > LED color set to Default Mode color (White)
+11:47:07.142 > Horn Voltage:0.00
+11:47:07.143 > DRL Voltage:3834.00
+11:47:07.143 > Current Sample Number:28
+11:47:07.148 > LED color set to Default Mode color (White)
+11:47:07.153 > Horn Voltage:0.00
+11:47:07.153 > DRL Voltage:3976.00
+11:47:07.154 > Current Sample Number:29
+11:47:07.154 > LED color set to Default Mode color (White)
+11:47:07.154 > Horn Voltage:0.00
+11:47:07.154 > DRL Voltage:4118.00
+11:47:07.154 > Current Sample Number:30
+11:47:07.168 > LED color set to Default Mode color (White)
+11:47:07.172 > Horn Voltage:0.00
+11:47:07.172 > DRL Voltage:4260.00
+11:47:07.175 > Current Sample Number:31
+11:47:07.175 > LED color set to Default Mode color (White)
+11:47:07.175 > Horn Voltage:0.00
+11:47:07.185 > DRL Voltage:4402.00
+11:47:07.185 > Current Sample Number:32
+11:47:07.187 > LED color set to Default Mode color (White)
+11:47:07.192 > Horn Voltage:0.00
+11:47:07.192 > DRL Voltage:4544.00
+11:47:07.193 > Current Sample Number:33
+11:47:07.193 > LED color set to Default Mode color (White)
+11:47:07.200 > Horn Voltage:0.00
+11:47:07.203 > DRL Voltage:4686.00
+11:47:07.203 > Current Sample Number:34
+11:47:07.205 > LED color set to Default Mode color (White)
+11:47:07.205 > Horn Voltage:0.00
+11:47:07.205 > DRL Voltage:4828.00
+11:47:07.205 > Current Sample Number:35
+11:47:07.216 > LED color set to Default Mode color (White)
+11:47:07.216 > Horn Voltage:0.00
+11:47:07.216 > DRL Voltage:4970.00
+11:47:07.216 > Current Sample Number:36
+11:47:07.216 > LED color set to Default Mode color (White)
+11:47:07.216 > Horn Voltage:0.00
+11:47:07.216 > DRL Voltage:5112.00
+11:47:07.234 > Current Sample Number:37
+11:47:07.235 > LED color set to Default Mode color (White)
+11:47:07.235 > Horn Voltage:0.00
+11:47:07.235 > DRL Voltage:5254.00
+11:47:07.235 > Current Sample Number:38
+11:47:07.235 > LED color set to Default Mode color (White)
+11:47:07.235 > Horn Voltage:0.00
+11:47:07.250 > DRL Voltage:5396.00
+11:47:07.251 > Current Sample Number:39
+11:47:07.251 > LED color set to Default Mode color (White)
+11:47:07.251 > Horn Voltage:0.00
+11:47:07.251 > DRL Voltage:5538.00
+11:47:07.251 > Current Sample Number:40
+11:47:07.251 > LED color set to Default Mode color (White)
+11:47:07.267 > Horn Voltage:0.00
+11:47:07.268 > DRL Voltage:5680.00
+11:47:07.268 > Current Sample Number:41
+11:47:07.268 > LED color set to Default Mode color (White)
+11:47:07.268 > Horn Voltage:0.00
+11:47:07.268 > DRL Voltage:5822.00
+11:47:07.268 > Current Sample Number:42
+11:47:07.284 > LED color set to Default Mode color (White)
+11:47:07.284 > Horn Voltage:0.00
+11:47:07.284 > DRL Voltage:5964.00
+11:47:07.284 > Current Sample Number:43
+11:47:07.284 > LED color set to Default Mode color (White)
+11:47:07.284 > Horn Voltage:0.00
+11:47:07.284 > DRL Voltage:6106.00
+11:47:07.299 > Current Sample Number:44
+11:47:07.299 > LED color set to Default Mode color (White)
+11:47:07.299 > Horn Voltage:0.00
+11:47:07.299 > DRL Voltage:6248.00
+11:47:07.299 > Current Sample Number:45
+11:47:07.299 > LED color set to Default Mode color (White)
+11:47:07.317 > Horn Voltage:0.00
+11:47:07.317 > DRL Voltage:6390.00
+11:47:07.318 > Current Sample Number:46
+11:47:07.318 > LED color set to Default Mode color (White)
+11:47:07.318 > Horn Voltage:0.00
+11:47:07.318 > DRL Voltage:6532.00
+11:47:07.318 > Current Sample Number:47
+11:47:07.318 > LED color set to Default Mode color (White)
+11:47:07.335 > Horn Voltage:0.00
+11:47:07.335 > DRL Voltage:6674.00
+11:47:07.335 > Current Sample Number:48
+11:47:07.335 > LED color set to Default Mode color (White)
+11:47:07.335 > Horn Voltage:0.00
+11:47:07.335 > DRL Voltage:6816.00
+11:47:07.335 > Current Sample Number:49
+11:47:07.351 > LED color set to Default Mode color (White)
+11:47:07.351 > Horn Voltage:0.00
+11:47:07.351 > DRL Voltage:6958.00
+11:47:07.351 > Current Sample Number:50
+11:47:07.351 > LED color set to Default Mode color (White)
+11:47:07.351 > Horn Voltage:0.00
+11:47:07.367 > DRL Voltage:7100.00
+11:47:07.367 > Current Sample Number:51
+11:47:07.370 > LED color set to Default Mode color (White)
+11:47:07.373 > Mode Select Button State:0
+11:47:07.373 > Horn Voltage:0.00
+11:47:07.373 > DRL Voltage:142.00
+11:47:07.382 > Current Sample Number:2
+11:47:07.382 > LED color set to Default Mode color (White)
+11:47:07.384 > Horn Voltage:0.00
+11:47:07.384 > DRL Voltage:284.00
+11:47:07.384 > Current Sample Number:3
+11:47:07.384 > LED color set to Default Mode color (White)
+11:47:07.384 > Horn Voltage:0.00
+11:47:07.398 > DRL Voltage:426.00
+11:47:07.398 > Current Sample Number:4
+11:47:07.400 > LED color set to Default Mode color (White)
+11:47:07.401 > Horn Voltage:0.00
+11:47:07.401 > DRL Voltage:568.00
+11:47:07.401 > Current Sample Number:5
+11:47:07.401 > LED color set to Default Mode color (White)
+11:47:07.415 > Horn Voltage:0.00
+11:47:07.418 > DRL Voltage:710.00
+11:47:07.418 > Current Sample Number:6
+11:47:07.418 > LED color set to Default Mode color (White)
+11:47:07.418 > Horn Voltage:0.00
+11:47:07.418 > DRL Voltage:852.00
+11:47:07.418 > Current Sample Number:7
+11:47:07.418 > LED color set to Default Mode color (White)
+11:47:07.434 > Horn Voltage:0.00
+11:47:07.434 > DRL Voltage:994.00
+11:47:07.434 > Current Sample Number:8
+11:47:07.434 > LED color set to Default Mode color (White)
+11:47:07.434 > Horn Voltage:0.00
+11:47:07.434 > DRL Voltage:1136.00
+11:47:07.434 > Current Sample Number:9
+11:47:07.448 > LED color set to Default Mode color (White)
+11:47:07.451 > Horn Voltage:0.00
+11:47:07.451 > DRL Voltage:1278.00
+11:47:07.451 > Current Sample Number:10
+11:47:07.451 > LED color set to Default Mode color (White)
+11:47:07.451 > Horn Voltage:0.00
+11:47:07.465 > DRL Voltage:1420.00
+11:47:07.465 > Current Sample Number:11
+11:47:07.465 > LED color set to Default Mode color (White)
+11:47:07.465 > Horn Voltage:0.00
+11:47:07.465 > DRL Voltage:1562.00
+11:47:07.465 > Current Sample Number:12
+11:47:07.465 > LED color set to Default Mode color (White)
+11:47:07.482 > Horn Voltage:0.00
+11:47:07.484 > DRL Voltage:1704.00
+11:47:07.484 > Current Sample Number:13
+11:47:07.487 > LED color set to Default Mode color (White)
+11:47:07.488 > Horn Voltage:0.00
+11:47:07.488 > DRL Voltage:1846.00
+11:47:07.488 > Current Sample Number:14
+11:47:07.498 > LED color set to Default Mode color (White)
+11:47:07.499 > Horn Voltage:0.00
+11:47:07.499 > DRL Voltage:1988.00
+11:47:07.499 > Current Sample Number:15
+11:47:07.499 > LED color set to Default Mode color (White)
+11:47:07.499 > Horn Voltage:0.00
+11:47:07.499 > DRL Voltage:2130.00
+11:47:07.515 > Current Sample Number:16
+11:47:07.516 > LED color set to Default Mode color (White)
+11:47:07.516 > Horn Voltage:0.00
+11:47:07.516 > DRL Voltage:2272.00
+11:47:07.516 > Current Sample Number:17
+11:47:07.516 > LED color set to Default Mode color (White)
+11:47:07.516 > Horn Voltage:0.00
+11:47:07.531 > DRL Voltage:2414.00
+11:47:07.532 > Current Sample Number:18
+11:47:07.532 > LED color set to Default Mode color (White)
+11:47:07.532 > Horn Voltage:0.00
+11:47:07.532 > DRL Voltage:2556.00
+11:47:07.532 > Current Sample Number:19
+11:47:07.532 > LED color set to Default Mode color (White)
+11:47:07.548 > Horn Voltage:0.00
+11:47:07.550 > DRL Voltage:2698.00
+11:47:07.550 > Current Sample Number:20
+11:47:07.550 > LED color set to Default Mode color (White)
+11:47:07.550 > Horn Voltage:0.00
+11:47:07.550 > DRL Voltage:2840.00
+11:47:07.550 > Current Sample Number:21
+11:47:07.565 > LED color set to Default Mode color (White)
+11:47:07.566 > Horn Voltage:0.00
+11:47:07.566 > DRL Voltage:2982.00
+11:47:07.566 > Current Sample Number:22
+11:47:07.566 > LED color set to Default Mode color (White)
+11:47:07.566 > Horn Voltage:0.00
+11:47:07.566 > DRL Voltage:3124.00
+11:47:07.581 > Current Sample Number:23
+11:47:07.583 > LED color set to Default Mode color (White)
+11:47:07.584 > Horn Voltage:0.00
+11:47:07.584 > DRL Voltage:3266.00
+11:47:07.584 > Current Sample Number:24
+11:47:07.584 > LED color set to Default Mode color (White)
+11:47:07.598 > Horn Voltage:0.00
+11:47:07.598 > DRL Voltage:3408.00
+11:47:07.600 > Current Sample Number:25
+11:47:07.601 > LED color set to Default Mode color (White)
+11:47:07.601 > Horn Voltage:0.00
+11:47:07.601 > DRL Voltage:3550.00
+11:47:07.601 > Current Sample Number:26
+11:47:07.601 > LED color set to Default Mode color (White)
+11:47:07.615 > Horn Voltage:0.00
+11:47:07.615 > DRL Voltage:3692.00
+11:47:07.615 > Current Sample Number:27
+11:47:07.615 > LED color set to Default Mode color (White)
+11:47:07.615 > Horn Voltage:0.00
+11:47:07.615 > DRL Voltage:3834.00
+11:47:07.615 > Current Sample Number:28
+11:47:07.631 > LED color set to Default Mode color (White)
+11:47:07.637 > Horn Voltage:0.00
+11:47:07.637 > DRL Voltage:3976.00
+11:47:07.639 > Current Sample Number:29
+11:47:07.643 > LED color set to Default Mode color (White)
+11:47:07.643 > Horn Voltage:0.00
+11:47:07.643 > DRL Voltage:4118.00
+11:47:07.643 > Current Sample Number:30
+11:47:07.649 > LED color set to Default Mode color (White)
+11:47:07.649 > Horn Voltage:0.00
+11:47:07.649 > DRL Voltage:4260.00
+11:47:07.649 > Current Sample Number:31
+11:47:07.649 > LED color set to Default Mode color (White)
+11:47:07.665 > Horn Voltage:0.00
+11:47:07.666 > DRL Voltage:4402.00
+11:47:07.666 > Current Sample Number:32
+11:47:07.666 > LED color set to Default Mode color (White)
+11:47:07.666 > Horn Voltage:0.00
+11:47:07.666 > DRL Voltage:4544.00
+11:47:07.666 > Current Sample Number:33
+11:47:07.666 > LED color set to Default Mode color (White)
+11:47:07.683 > Horn Voltage:0.00
+11:47:07.683 > DRL Voltage:4686.00
+11:47:07.686 > Current Sample Number:34
+11:47:07.689 > LED color set to Default Mode color (White)
+11:47:07.690 > Horn Voltage:0.00
+11:47:07.690 > DRL Voltage:4828.00
+11:47:07.698 > Current Sample Number:35
+11:47:07.698 > LED color set to Default Mode color (White)
+11:47:07.699 > Horn Voltage:0.00
+11:47:07.699 > DRL Voltage:4970.00
+11:47:07.699 > Current Sample Number:36
+11:47:07.699 > LED color set to Default Mode color (White)
+11:47:07.699 > Horn Voltage:0.00
+11:47:07.714 > DRL Voltage:5112.00
+11:47:07.718 > Current Sample Number:37
+11:47:07.718 > LED color set to Default Mode color (White)
+11:47:07.721 > Horn Voltage:0.00
+11:47:07.721 > DRL Voltage:5254.00
+11:47:07.721 > Current Sample Number:38
+11:47:07.721 > LED color set to Default Mode color (White)
+11:47:07.721 > Horn Voltage:0.00
+11:47:07.732 > DRL Voltage:5396.00
+11:47:07.732 > Current Sample Number:39
+11:47:07.732 > LED color set to Default Mode color (White)
+11:47:07.732 > Horn Voltage:0.00
+11:47:07.732 > DRL Voltage:5538.00
+11:47:07.732 > Current Sample Number:40
+11:47:07.748 > LED color set to Default Mode color (White)
+11:47:07.750 > Horn Voltage:0.00
+11:47:07.750 > DRL Voltage:5680.00
+11:47:07.750 > Current Sample Number:41
+11:47:07.750 > LED color set to Default Mode color (White)
+11:47:07.750 > Horn Voltage:0.00
+11:47:07.750 > DRL Voltage:5822.00
+11:47:07.765 > Current Sample Number:42
+11:47:07.767 > LED color set to Default Mode color (White)
+11:47:07.770 > Horn Voltage:0.00
+11:47:07.773 > DRL Voltage:5964.00
+11:47:07.773 > Current Sample Number:43
+11:47:07.776 > LED color set to Default Mode color (White)
+11:47:07.780 > Horn Voltage:0.00
+11:47:07.780 > DRL Voltage:6106.00
+11:47:07.784 > Current Sample Number:44
+11:47:07.787 > LED color set to Default Mode color (White)
+11:47:07.790 > Horn Voltage:0.00
+11:47:07.792 > DRL Voltage:6248.00
+11:47:07.792 > Current Sample Number:45
+11:47:07.795 > LED color set to Default Mode color (White)
+11:47:07.800 > Horn Voltage:0.00
+11:47:07.800 > DRL Voltage:6390.00
+11:47:07.803 > Current Sample Number:46
+11:47:07.806 > LED color set to Default Mode color (White)
+11:47:07.808 > Horn Voltage:0.00
+11:47:07.808 > DRL Voltage:6532.00
+11:47:07.808 > Current Sample Number:47
+11:47:07.815 > LED color set to Default Mode color (White)
+11:47:07.817 > Horn Voltage:0.00
+11:47:07.817 > DRL Voltage:6674.00
+11:47:07.817 > Current Sample Number:48
+11:47:07.817 > LED color set to Default Mode color (White)
+11:47:07.817 > Horn Voltage:0.00
+11:47:07.817 > DRL Voltage:6816.00
+11:47:07.831 > Current Sample Number:49
+11:47:07.834 > LED color set to Default Mode color (White)
+11:47:07.834 > Horn Voltage:0.00
+11:47:07.834 > DRL Voltage:6958.00
+11:47:07.834 > Current Sample Number:50
+11:47:07.834 > LED color set to Default Mode color (White)
+11:47:07.834 > Horn Voltage:0.00
+11:47:07.834 > DRL Voltage:7100.00
+11:47:07.851 > Current Sample Number:51
+11:47:07.853 > LED color set to Default Mode color (White)
+11:47:07.856 > Mode Select Button State:0
+11:47:07.858 > Horn Voltage:0.00
+11:47:07.861 > DRL Voltage:142.00
+11:47:07.861 > Current Sample Number:2
+11:47:07.865 > LED color set to Default Mode color (White)
+11:47:07.870 > Horn Voltage:0.00
+11:47:07.870 > DRL Voltage:284.00
+11:47:07.873 > Current Sample Number:3
+11:47:07.876 > LED color set to Default Mode color (White)
+11:47:07.879 > Horn Voltage:0.00
+11:47:07.882 > DRL Voltage:426.00
+11:47:07.882 > Current Sample Number:4
+11:47:07.884 > LED color set to Default Mode color (White)
+11:47:07.887 > Horn Voltage:0.00
+11:47:07.890 > DRL Voltage:568.00
+11:47:07.892 > Current Sample Number:5
+11:47:07.892 > LED color set to Default Mode color (White)
+11:47:07.898 > Horn Voltage:0.00
+11:47:07.898 > DRL Voltage:710.00
+11:47:07.901 > Current Sample Number:6
+11:47:07.903 > LED color set to Default Mode color (White)
+11:47:07.906 > Horn Voltage:0.00
+11:47:07.909 > DRL Voltage:852.00
+11:47:07.909 > Current Sample Number:7
+11:47:07.912 > LED color set to Default Mode color (White)
+11:47:07.917 > Horn Voltage:0.00
+11:47:07.917 > DRL Voltage:994.00
+11:47:07.917 > Current Sample Number:8
+11:47:07.917 > LED color set to Default Mode color (White)
+11:47:07.917 > Horn Voltage:0.00
+11:47:07.917 > DRL Voltage:1136.00
+11:47:07.917 > Current Sample Number:9
+11:47:07.931 > LED color set to Default Mode color (White)
+11:47:07.935 > Horn Voltage:0.00
+11:47:07.938 > DRL Voltage:1278.00
+11:47:07.939 > Current Sample Number:10
+11:47:07.942 > LED color set to Default Mode color (White)
+11:47:07.944 > Horn Voltage:0.00
+11:47:07.946 > DRL Voltage:1420.00
+11:47:07.946 > Current Sample Number:11
+11:47:07.951 > LED color set to Default Mode color (White)
+11:47:07.953 > Horn Voltage:0.00
+11:47:07.956 > DRL Voltage:1562.00
+11:47:07.959 > Current Sample Number:12
+11:47:07.959 > LED color set to Default Mode color (White)
+11:47:07.965 > Horn Voltage:0.00
+11:47:07.965 > DRL Voltage:1704.00
+11:47:07.968 > Current Sample Number:13
+11:47:07.970 > LED color set to Default Mode color (White)
+11:47:07.973 > Horn Voltage:0.00
+11:47:07.975 > DRL Voltage:1846.00
+11:47:07.978 > Current Sample Number:14
+11:47:07.978 > LED color set to Default Mode color (White)
+11:47:07.984 > Horn Voltage:0.00
+11:47:07.984 > DRL Voltage:1988.00
+11:47:07.987 > Current Sample Number:15
+11:47:07.989 > LED color set to Default Mode color (White)
+11:47:07.992 > Horn Voltage:0.00
+11:47:07.994 > DRL Voltage:2130.00
+11:47:07.998 > Current Sample Number:16
+11:47:07.998 > LED color set to Default Mode color (White)
+11:47:08.003 > Horn Voltage:0.00
+11:47:08.003 > DRL Voltage:2272.00
+11:47:08.006 > Current Sample Number:17
+11:47:08.008 > LED color set to Default Mode color (White)
+11:47:08.011 > Horn Voltage:0.00
+11:47:08.017 > DRL Voltage:2414.00
+11:47:08.017 > Current Sample Number:18
+11:47:08.017 > LED color set to Default Mode color (White)
+11:47:08.022 > Horn Voltage:0.00
+11:47:08.022 > DRL Voltage:2556.00
+11:47:08.025 > Current Sample Number:19
+11:47:08.027 > LED color set to Default Mode color (White)
+11:47:08.032 > Horn Voltage:0.00
+11:47:08.034 > DRL Voltage:2698.00
+11:47:08.034 > Current Sample Number:20
+11:47:08.037 > LED color set to Default Mode color (White)
+11:47:08.044 > Horn Voltage:0.00
+11:47:08.044 > DRL Voltage:2840.00
+11:47:08.046 > Current Sample Number:21
+11:47:08.048 > LED color set to Default Mode color (White)
+11:47:08.052 > Horn Voltage:0.00
+11:47:08.054 > DRL Voltage:2982.00
+11:47:08.054 > Current Sample Number:22
+11:47:08.056 > LED color set to Default Mode color (White)
+11:47:08.062 > Horn Voltage:0.00
+11:47:08.062 > DRL Voltage:3124.00
+11:47:08.065 > Current Sample Number:23
+11:47:08.065 > LED color set to Default Mode color (White)
+11:47:08.065 > Horn Voltage:0.00
+11:47:08.065 > DRL Voltage:3266.00
+11:47:08.065 > Current Sample Number:24
+11:47:08.065 > LED color set to Default Mode color (White)
+11:47:08.081 > Horn Voltage:0.00
+11:47:08.081 > DRL Voltage:3408.00
+11:47:08.083 > Current Sample Number:25
+11:47:08.086 > LED color set to Default Mode color (White)
+11:47:08.089 > Horn Voltage:0.00
+11:47:08.092 > DRL Voltage:3550.00
+11:47:08.092 > Current Sample Number:26
+11:47:08.095 > LED color set to Default Mode color (White)
+11:47:08.098 > Horn Voltage:0.00
+11:47:08.101 > DRL Voltage:3692.00
+11:47:08.104 > Current Sample Number:27
+11:47:08.106 > LED color set to Default Mode color (White)
+11:47:08.109 > Horn Voltage:0.00
+11:47:08.110 > DRL Voltage:3834.00
+11:47:08.110 > Current Sample Number:28
+11:47:08.117 > LED color set to Default Mode color (White)
+11:47:08.118 > Horn Voltage:0.00
+11:47:08.120 > DRL Voltage:3976.00
+11:47:08.123 > Current Sample Number:29
+11:47:08.123 > LED color set to Default Mode color (White)
+11:47:08.128 > Horn Voltage:0.00
+11:47:08.128 > DRL Voltage:4118.00
+11:47:08.131 > Current Sample Number:30
+11:47:08.135 > LED color set to Default Mode color (White)
+11:47:08.137 > Horn Voltage:0.00
+11:47:08.139 > DRL Voltage:4260.00
+11:47:08.141 > Current Sample Number:31
+11:47:08.141 > LED color set to Default Mode color (White)
+11:47:08.148 > Horn Voltage:0.00
+11:47:08.148 > DRL Voltage:4402.00
+11:47:08.149 > Current Sample Number:32
+11:47:08.149 > LED color set to Default Mode color (White)
+11:47:08.149 > Horn Voltage:0.00
+11:47:08.149 > DRL Voltage:4544.00
+11:47:08.149 > Current Sample Number:33
+11:47:08.149 > LED color set to Default Mode color (White)
+11:47:08.168 > Horn Voltage:0.00
+11:47:08.168 > DRL Voltage:4686.00
+11:47:08.168 > Current Sample Number:34
+11:47:08.168 > LED color set to Default Mode color (White)
+11:47:08.168 > Horn Voltage:0.00
+11:47:08.168 > DRL Voltage:4828.00
+11:47:08.168 > Current Sample Number:35
+11:47:08.168 > LED color set to Default Mode color (White)
+11:47:08.183 > Horn Voltage:0.00
+11:47:08.183 > DRL Voltage:4970.00
+11:47:08.183 > Current Sample Number:36
+11:47:08.183 > LED color set to Default Mode color (White)
+11:47:08.183 > Horn Voltage:0.00
+11:47:08.183 > DRL Voltage:5112.00
+11:47:08.183 > Current Sample Number:37
+11:47:08.200 > LED color set to Default Mode color (White)
+11:47:08.205 > Horn Voltage:0.00
+11:47:08.205 > DRL Voltage:5254.00
+11:47:08.205 > Current Sample Number:38
+11:47:08.205 > LED color set to Default Mode color (White)
+11:47:08.215 > Horn Voltage:0.00
+11:47:08.217 > DRL Voltage:5396.00
+11:47:08.217 > Current Sample Number:39
+11:47:08.220 > LED color set to Default Mode color (White)
+11:47:08.226 > Horn Voltage:0.00
+11:47:08.226 > DRL Voltage:5538.00
+11:47:08.228 > Current Sample Number:40
+11:47:08.231 > LED color set to Default Mode color (White)
+11:47:08.234 > Horn Voltage:0.00
+11:47:08.237 > DRL Voltage:5680.00
+11:47:08.237 > Current Sample Number:41
+11:47:08.240 > LED color set to Default Mode color (White)
+11:47:08.242 > Horn Voltage:0.00
+11:47:08.245 > DRL Voltage:5822.00
+11:47:08.248 > Current Sample Number:42
+11:47:08.250 > LED color set to Default Mode color (White)
+11:47:08.253 > Horn Voltage:0.00
+11:47:08.256 > DRL Voltage:5964.00
+11:47:08.256 > Current Sample Number:43
+11:47:08.258 > LED color set to Default Mode color (White)
+11:47:08.260 > Horn Voltage:0.00
+11:47:08.260 > DRL Voltage:6106.00
+11:47:08.267 > Current Sample Number:44
+11:47:08.267 > LED color set to Default Mode color (White)
+11:47:08.272 > Horn Voltage:0.00
+11:47:08.272 > DRL Voltage:6248.00
+11:47:08.275 > Current Sample Number:45
+11:47:08.278 > LED color set to Default Mode color (White)
+11:47:08.281 > Horn Voltage:0.00
+11:47:08.283 > DRL Voltage:6390.00
+11:47:08.286 > Current Sample Number:46
+11:47:08.286 > LED color set to Default Mode color (White)
+11:47:08.291 > Horn Voltage:0.00
+11:47:08.291 > DRL Voltage:6532.00
+11:47:08.294 > Current Sample Number:47
+11:47:08.297 > LED color set to Default Mode color (White)
+11:47:08.300 > Horn Voltage:0.00
+11:47:08.303 > DRL Voltage:6674.00
+11:47:08.304 > Current Sample Number:48
+11:47:08.304 > LED color set to Default Mode color (White)
+11:47:08.304 > Horn Voltage:0.00
+11:47:08.304 > DRL Voltage:6816.00
+11:47:08.304 > Current Sample Number:49
+11:47:08.316 > LED color set to Default Mode color (White)
+11:47:08.316 > Horn Voltage:0.00
+11:47:08.316 > DRL Voltage:6958.00
+11:47:08.316 > Current Sample Number:50
+11:47:08.316 > LED color set to Default Mode color (White)
+11:47:08.316 > Horn Voltage:0.00
+11:47:08.316 > DRL Voltage:7100.00
+11:47:08.332 > Current Sample Number:51
+11:47:08.332 > LED color set to Default Mode color (White)
+11:47:08.332 > Mode Select Button State:0
+11:47:08.332 > Horn Voltage:0.00
+11:47:08.332 > DRL Voltage:142.00
+11:47:08.332 > Current Sample Number:2
+11:47:08.347 > LED color set to Default Mode color (White)
+11:47:08.349 > Horn Voltage:0.00
+11:47:08.349 > DRL Voltage:284.00
+11:47:08.349 > Current Sample Number:3
+11:47:08.349 > LED color set to Default Mode color (White)
+11:47:08.349 > Horn Voltage:0.00
+11:47:08.349 > DRL Voltage:426.00
+11:47:08.365 > Current Sample Number:4
+11:47:08.365 > LED color set to Default Mode color (White)
+11:47:08.365 > Horn Voltage:0.00
+11:47:08.365 > DRL Voltage:568.00
+11:47:08.365 > Current Sample Number:5
+11:47:08.365 > LED color set to Default Mode color (White)
+11:47:08.381 > Horn Voltage:0.00
+11:47:08.381 > DRL Voltage:710.00
+11:47:08.383 > Current Sample Number:6
+11:47:08.383 > LED color set to Default Mode color (White)
+11:47:08.383 > Horn Voltage:0.00
+11:47:08.383 > DRL Voltage:852.00
+11:47:08.383 > Current Sample Number:7
+11:47:08.395 > LED color set to Default Mode color (White)
+11:47:08.397 > Horn Voltage:0.00
+11:47:08.400 > DRL Voltage:994.00
+11:47:08.403 > Current Sample Number:8
+11:47:08.403 > LED color set to Default Mode color (White)
+11:47:08.406 > Horn Voltage:0.00
+11:47:08.406 > DRL Voltage:1136.00
+11:47:08.406 > Current Sample Number:9
+11:47:08.406 > LED color set to Default Mode color (White)
+11:47:08.418 > Horn Voltage:0.00
+11:47:08.420 > DRL Voltage:1278.00
+11:47:08.420 > Current Sample Number:10
+11:47:08.420 > LED color set to Default Mode color (White)
+11:47:08.420 > Horn Voltage:0.00
+11:47:08.420 > DRL Voltage:1420.00
+11:47:08.431 > Current Sample Number:11
+11:47:08.432 > LED color set to Default Mode color (White)
+11:47:08.432 > Horn Voltage:0.00
+11:47:08.432 > DRL Voltage:1562.00
+11:47:08.432 > Current Sample Number:12
+11:47:08.432 > LED color set to Default Mode color (White)
+11:47:08.448 > Horn Voltage:0.00
+11:47:08.448 > DRL Voltage:1704.00
+11:47:08.449 > Current Sample Number:13
+11:47:08.449 > LED color set to Default Mode color (White)
+11:47:08.449 > Horn Voltage:0.00
+11:47:08.449 > DRL Voltage:1846.00
+11:47:08.449 > Current Sample Number:14
+11:47:08.449 > LED color set to Default Mode color (White)
+11:47:08.467 > Horn Voltage:0.00
+11:47:08.467 > DRL Voltage:1988.00
+11:47:08.470 > Current Sample Number:15
+11:47:08.471 > LED color set to Default Mode color (White)
+11:47:08.471 > Horn Voltage:0.00
+11:47:08.471 > DRL Voltage:2130.00
+11:47:08.471 > Current Sample Number:16
+11:47:08.471 > LED color set to Default Mode color (White)
+11:47:08.482 > Horn Voltage:0.00
+11:47:08.482 > DRL Voltage:2272.00
+11:47:08.482 > Current Sample Number:17
+11:47:08.482 > LED color set to Default Mode color (White)
+11:47:08.482 > Horn Voltage:0.00
+11:47:08.498 > DRL Voltage:2414.00
+11:47:08.498 > Current Sample Number:18
+11:47:08.499 > LED color set to Default Mode color (White)
+11:47:08.499 > Horn Voltage:0.00
+11:47:08.499 > DRL Voltage:2556.00
+11:47:08.499 > Current Sample Number:19
+11:47:08.499 > LED color set to Default Mode color (White)
+11:47:08.515 > Horn Voltage:0.00
+11:47:08.515 > DRL Voltage:2698.00
+11:47:08.515 > Current Sample Number:20
+11:47:08.515 > LED color set to Default Mode color (White)
+11:47:08.515 > Horn Voltage:0.00
+11:47:08.515 > DRL Voltage:2840.00
+11:47:08.515 > Current Sample Number:21
+11:47:08.531 > LED color set to Default Mode color (White)
+11:47:08.533 > Horn Voltage:0.00
+11:47:08.533 > DRL Voltage:2982.00
+11:47:08.533 > Current Sample Number:22
+11:47:08.533 > LED color set to Default Mode color (White)
+11:47:08.533 > Horn Voltage:0.00
+11:47:08.545 > DRL Voltage:3124.00
+11:47:08.548 > Current Sample Number:23
+11:47:08.548 > LED color set to Default Mode color (White)
+11:47:08.554 > Horn Voltage:0.00
+11:47:08.554 > DRL Voltage:3266.00
+11:47:08.555 > Current Sample Number:24
+11:47:08.555 > LED color set to Default Mode color (White)
+11:47:08.555 > Horn Voltage:0.00
+11:47:08.565 > DRL Voltage:3408.00
+11:47:08.568 > Current Sample Number:25
+11:47:08.568 > LED color set to Default Mode color (White)
+11:47:08.571 > Horn Voltage:0.00
+11:47:08.571 > DRL Voltage:3550.00
+11:47:08.571 > Current Sample Number:26
+11:47:08.571 > LED color set to Default Mode color (White)
+11:47:08.571 > Horn Voltage:0.00
+11:47:08.582 > DRL Voltage:3692.00
+11:47:08.582 > Current Sample Number:27
+11:47:08.582 > LED color set to Default Mode color (White)
+11:47:08.582 > Horn Voltage:0.00
+11:47:08.582 > DRL Voltage:3834.00
+11:47:08.582 > Current Sample Number:28
+11:47:08.598 > LED color set to Default Mode color (White)
+11:47:08.599 > Horn Voltage:0.00
+11:47:08.599 > DRL Voltage:3976.00
+11:47:08.599 > Current Sample Number:29
+11:47:08.599 > LED color set to Default Mode color (White)
+11:47:08.599 > Horn Voltage:0.00
+11:47:08.599 > DRL Voltage:4118.00
+11:47:08.615 > Current Sample Number:30
+11:47:08.615 > LED color set to Default Mode color (White)
+11:47:08.615 > Horn Voltage:0.00
+11:47:08.615 > DRL Voltage:4260.00
+11:47:08.615 > Current Sample Number:31
+11:47:08.615 > LED color set to Default Mode color (White)
+11:47:08.630 > Horn Voltage:0.00
+11:47:08.630 > DRL Voltage:4402.00
+11:47:08.632 > Current Sample Number:32
+11:47:08.632 > LED color set to Default Mode color (White)
+11:47:08.632 > Horn Voltage:0.00
+11:47:08.632 > DRL Voltage:4544.00
+11:47:08.632 > Current Sample Number:33
+11:47:08.632 > LED color set to Default Mode color (White)
+11:47:08.649 > Horn Voltage:0.00
+11:47:08.649 > DRL Voltage:4686.00
+11:47:08.649 > Current Sample Number:34
+11:47:08.649 > LED color set to Default Mode color (White)
+11:47:08.649 > Horn Voltage:0.00
+11:47:08.649 > DRL Voltage:4828.00
+11:47:08.649 > Current Sample Number:35
+11:47:08.665 > LED color set to Default Mode color (White)
+11:47:08.665 > Horn Voltage:0.00
+11:47:08.665 > DRL Voltage:4970.00
+11:47:08.665 > Current Sample Number:36
+11:47:08.665 > LED color set to Default Mode color (White)
+11:47:08.665 > Horn Voltage:0.00
+11:47:08.681 > DRL Voltage:5112.00
+11:47:08.681 > Current Sample Number:37
+11:47:08.683 > LED color set to Default Mode color (White)
+11:47:08.683 > Horn Voltage:0.00
+11:47:08.683 > DRL Voltage:5254.00
+11:47:08.683 > Current Sample Number:38
+11:47:08.683 > LED color set to Default Mode color (White)
+11:47:08.698 > Horn Voltage:0.00
+11:47:08.700 > DRL Voltage:5396.00
+11:47:08.700 > Current Sample Number:39
+11:47:08.703 > LED color set to Default Mode color (White)
+11:47:08.706 > Horn Voltage:0.00
+11:47:08.709 > DRL Voltage:5538.00
+11:47:08.711 > Current Sample Number:40
+11:47:08.711 > LED color set to Default Mode color (White)
+11:47:08.717 > Horn Voltage:0.00
+11:47:08.717 > DRL Voltage:5680.00
+11:47:08.720 > Current Sample Number:41
+11:47:08.722 > LED color set to Default Mode color (White)
+11:47:08.725 > Horn Voltage:0.00
+11:47:08.727 > DRL Voltage:5822.00
+11:47:08.727 > Current Sample Number:42
+11:47:08.727 > LED color set to Default Mode color (White)
+11:47:08.727 > Horn Voltage:0.00
+11:47:08.727 > DRL Voltage:5964.00
+11:47:08.727 > Current Sample Number:43
+11:47:08.742 > LED color set to Default Mode color (White)
+11:47:08.742 > Horn Voltage:0.00
+11:47:08.742 > DRL Voltage:6106.00
+11:47:08.751 > Current Sample Number:44
+11:47:08.752 > LED color set to Default Mode color (White)
+11:47:08.756 > Horn Voltage:0.00
+11:47:08.756 > DRL Voltage:6248.00
+11:47:08.759 > Current Sample Number:45
+11:47:08.761 > LED color set to Default Mode color (White)
+11:47:08.761 > Horn Voltage:0.00
+11:47:08.761 > DRL Voltage:6390.00
+11:47:08.761 > Current Sample Number:46
+11:47:08.761 > LED color set to Default Mode color (White)
+11:47:08.761 > Horn Voltage:0.00
+11:47:08.761 > DRL Voltage:6532.00
+11:47:08.777 > Current Sample Number:47
+11:47:08.777 > LED color set to Default Mode color (White)
+11:47:08.777 > Horn Voltage:0.00
+11:47:08.777 > DRL Voltage:6674.00
+11:47:08.777 > Current Sample Number:48
+11:47:08.777 > LED color set to Default Mode color (White)
+11:47:08.792 > Horn Voltage:0.00
+11:47:08.792 > DRL Voltage:6816.00
+11:47:08.792 > Current Sample Number:49
+11:47:08.792 > LED color set to Default Mode color (White)
+11:47:08.792 > Horn Voltage:0.00
+11:47:08.792 > DRL Voltage:6958.00
+11:47:08.792 > Current Sample Number:50
+11:47:08.808 > LED color set to Default Mode color (White)
+11:47:08.808 > Horn Voltage:0.00
+11:47:08.808 > DRL Voltage:7100.00
+11:47:08.808 > Current Sample Number:51
+11:47:08.808 > LED color set to Default Mode color (White)
+11:47:08.808 > Mode Select Button State:0
+11:47:08.824 > Horn Voltage:0.00
+11:47:08.824 > DRL Voltage:142.00
+11:47:08.824 > Current Sample Number:2
+11:47:08.824 > LED color set to Default Mode color (White)
+11:47:08.824 > Horn Voltage:0.00
+11:47:08.824 > DRL Voltage:284.00
+11:47:08.839 > Current Sample Number:3
+11:47:08.839 > LED color set to Default Mode color (White)
+11:47:08.839 > Horn Voltage:0.00
+11:47:08.839 > DRL Voltage:426.00
+11:47:08.839 > Current Sample Number:4
+11:47:08.850 > LED color set to Default Mode color (White)
+11:47:08.853 > Horn Voltage:0.00
+11:47:08.856 > DRL Voltage:568.00
+11:47:08.856 > Current Sample Number:5
+11:47:08.858 > LED color set to Default Mode color (White)
+11:47:08.860 > Horn Voltage:0.00
+11:47:08.860 > DRL Voltage:710.00
+11:47:08.868 > Current Sample Number:6
+11:47:08.869 > LED color set to Default Mode color (White)
+11:47:08.870 > Horn Voltage:0.00
+11:47:08.870 > DRL Voltage:852.00
+11:47:08.870 > Current Sample Number:7
+11:47:08.870 > LED color set to Default Mode color (White)
+11:47:08.870 > Horn Voltage:0.00
+11:47:08.870 > DRL Voltage:994.00
+11:47:08.886 > Current Sample Number:8
+11:47:08.886 > LED color set to Default Mode color (White)
+11:47:08.886 > Horn Voltage:0.00
+11:47:08.886 > DRL Voltage:1136.00
+11:47:08.886 > Current Sample Number:9
+11:47:08.886 > LED color set to Default Mode color (White)
+11:47:08.886 > Horn Voltage:0.00
+11:47:08.902 > DRL Voltage:1278.00
+11:47:08.902 > Current Sample Number:10
+11:47:08.902 > LED color set to Default Mode color (White)
+11:47:08.902 > Horn Voltage:0.00
+11:47:08.902 > DRL Voltage:1420.00
+11:47:08.902 > Current Sample Number:11
+11:47:08.917 > LED color set to Default Mode color (White)
+11:47:08.917 > Horn Voltage:0.00
+11:47:08.917 > DRL Voltage:1562.00
+11:47:08.917 > Current Sample Number:12
+11:47:08.917 > LED color set to Default Mode color (White)
+11:47:08.917 > Horn Voltage:0.00
+11:47:08.917 > DRL Voltage:1704.00
+11:47:08.933 > Current Sample Number:13
+11:47:08.933 > LED color set to Default Mode color (White)
+11:47:08.933 > Horn Voltage:0.00
+11:47:08.933 > DRL Voltage:1846.00
+11:47:08.933 > Current Sample Number:14
+11:47:08.933 > LED color set to Default Mode color (White)
+11:47:08.949 > Horn Voltage:0.00
+11:47:08.949 > DRL Voltage:1988.00
+11:47:08.949 > Current Sample Number:15
+11:47:08.949 > LED color set to Default Mode color (White)
+11:47:08.949 > Horn Voltage:0.00
+11:47:08.949 > DRL Voltage:2130.00
+11:47:08.949 > Current Sample Number:16
+11:47:08.965 > LED color set to Default Mode color (White)
+11:47:08.965 > Horn Voltage:0.00
+11:47:08.965 > DRL Voltage:2272.00
+11:47:08.965 > Current Sample Number:17
+11:47:08.965 > LED color set to Default Mode color (White)
+11:47:08.965 > Horn Voltage:0.00
+11:47:08.980 > DRL Voltage:2414.00
+11:47:08.980 > Current Sample Number:18
+11:47:08.980 > LED color set to Default Mode color (White)
+11:47:08.980 > Horn Voltage:0.00
+11:47:08.980 > DRL Voltage:2556.00
+11:47:08.992 > Current Sample Number:19
+11:47:08.992 > LED color set to Default Mode color (White)
+11:47:08.999 > Horn Voltage:0.00
+11:47:08.999 > DRL Voltage:2698.00
+11:47:09.001 > Current Sample Number:20
+11:47:09.004 > LED color set to Default Mode color (White)
+11:47:09.005 > Horn Voltage:0.00
+11:47:09.005 > DRL Voltage:2840.00
+11:47:09.005 > Current Sample Number:21
+11:47:09.005 > LED color set to Default Mode color (White)
+11:47:09.018 > Horn Voltage:0.00
+11:47:09.018 > DRL Voltage:2982.00
+11:47:09.020 > Current Sample Number:22
+11:47:09.021 > LED color set to Default Mode color (White)
+11:47:09.021 > Horn Voltage:0.00
+11:47:09.021 > DRL Voltage:3124.00
+11:47:09.021 > Current Sample Number:23
+11:47:09.021 > LED color set to Default Mode color (White)
+11:47:09.037 > Horn Voltage:0.00
+11:47:09.037 > DRL Voltage:3266.00
+11:47:09.037 > Current Sample Number:24
+11:47:09.037 > LED color set to Default Mode color (White)
+11:47:09.037 > Horn Voltage:0.00
+11:47:09.037 > DRL Voltage:3408.00
+11:47:09.037 > Current Sample Number:25
+11:47:09.037 > LED color set to Default Mode color (White)
+11:47:09.053 > Horn Voltage:0.00
+11:47:09.053 > DRL Voltage:3550.00
+11:47:09.053 > Current Sample Number:26
+11:47:09.053 > LED color set to Default Mode color (White)
+11:47:09.053 > Horn Voltage:0.00
+11:47:09.066 > DRL Voltage:3692.00
+11:47:09.066 > Current Sample Number:27
+11:47:09.066 > LED color set to Default Mode color (White)
+11:47:09.066 > Horn Voltage:0.00
+11:47:09.066 > DRL Voltage:3834.00
+11:47:09.066 > Current Sample Number:28
+11:47:09.082 > LED color set to Default Mode color (White)
+11:47:09.083 > Horn Voltage:0.00
+11:47:09.083 > DRL Voltage:3976.00
+11:47:09.083 > Current Sample Number:29
+11:47:09.083 > LED color set to Default Mode color (White)
+11:47:09.083 > Horn Voltage:0.00
+11:47:09.083 > DRL Voltage:4118.00
+11:47:09.099 > Current Sample Number:30
+11:47:09.100 > LED color set to Default Mode color (White)
+11:47:09.103 > Horn Voltage:0.00
+11:47:09.103 > DRL Voltage:4260.00
+11:47:09.103 > Current Sample Number:31
+11:47:09.103 > LED color set to Default Mode color (White)
+11:47:09.103 > Horn Voltage:0.00
+11:47:09.115 > DRL Voltage:4402.00
+11:47:09.117 > Current Sample Number:32
+11:47:09.120 > LED color set to Default Mode color (White)
+11:47:09.123 > Horn Voltage:0.00
+11:47:09.126 > DRL Voltage:4544.00
+11:47:09.126 > Current Sample Number:33
+11:47:09.129 > LED color set to Default Mode color (White)
+11:47:09.132 > Horn Voltage:0.00
+11:47:09.134 > DRL Voltage:4686.00
+11:47:09.137 > Current Sample Number:34
+11:47:09.137 > LED color set to Default Mode color (White)
+11:47:09.139 > Horn Voltage:0.00
+11:47:09.139 > DRL Voltage:4828.00
+11:47:09.139 > Current Sample Number:35
+11:47:09.139 > LED color set to Default Mode color (White)
+11:47:09.150 > Horn Voltage:0.00
+11:47:09.153 > DRL Voltage:4970.00
+11:47:09.153 > Current Sample Number:36
+11:47:09.153 > LED color set to Default Mode color (White)
+11:47:09.153 > Horn Voltage:0.00
+11:47:09.153 > DRL Voltage:5112.00
+11:47:09.153 > Current Sample Number:37
+11:47:09.167 > LED color set to Default Mode color (White)
+11:47:09.171 > Horn Voltage:0.00
+11:47:09.173 > DRL Voltage:5254.00
+11:47:09.176 > Current Sample Number:38
+11:47:09.176 > LED color set to Default Mode color (White)
+11:47:09.182 > Horn Voltage:0.00
+11:47:09.182 > DRL Voltage:5396.00
+11:47:09.184 > Current Sample Number:39
+11:47:09.187 > LED color set to Default Mode color (White)
+11:47:09.190 > Horn Voltage:0.00
+11:47:09.193 > DRL Voltage:5538.00
+11:47:09.193 > Current Sample Number:40
+11:47:09.196 > LED color set to Default Mode color (White)
+11:47:09.200 > Horn Voltage:0.00
+11:47:09.200 > DRL Voltage:5680.00
+11:47:09.200 > Current Sample Number:41
+11:47:09.200 > LED color set to Default Mode color (White)
+11:47:09.200 > Horn Voltage:0.00
+11:47:09.200 > DRL Voltage:5822.00
+11:47:09.200 > Current Sample Number:42
+11:47:09.215 > LED color set to Default Mode color (White)
+11:47:09.220 > Horn Voltage:0.00
+11:47:09.220 > DRL Voltage:5964.00
+11:47:09.222 > Current Sample Number:43
+11:47:09.222 > LED color set to Default Mode color (White)
+11:47:09.222 > Horn Voltage:0.00
+11:47:09.222 > DRL Voltage:6106.00
+11:47:09.222 > Current Sample Number:44
+11:47:09.222 > LED color set to Default Mode color (White)
+11:47:09.237 > Horn Voltage:0.00
+11:47:09.237 > DRL Voltage:6248.00
+11:47:09.237 > Current Sample Number:45
+11:47:09.237 > LED color set to Default Mode color (White)
+11:47:09.237 > Horn Voltage:0.00
+11:47:09.237 > DRL Voltage:6390.00
+11:47:09.237 > Current Sample Number:46
+11:47:09.253 > LED color set to Default Mode color (White)
+11:47:09.253 > Horn Voltage:0.00
+11:47:09.253 > DRL Voltage:6532.00
+11:47:09.253 > Current Sample Number:47
+11:47:09.253 > LED color set to Default Mode color (White)
+11:47:09.253 > Horn Voltage:0.00
+11:47:09.269 > DRL Voltage:6674.00
+11:47:09.269 > Current Sample Number:48
+11:47:09.269 > LED color set to Default Mode color (White)
+11:47:09.269 > Horn Voltage:0.00
+11:47:09.278 > DRL Voltage:6816.00
+11:47:09.281 > Current Sample Number:49
+11:47:09.283 > LED color set to Default Mode color (White)
+11:47:09.287 > Horn Voltage:0.00
+11:47:09.290 > DRL Voltage:6958.00
+11:47:09.290 > Current Sample Number:50
+11:47:09.290 > LED color set to Default Mode color (White)
+11:47:09.290 > Horn Voltage:0.00
+11:47:09.299 > DRL Voltage:7100.00
+11:47:09.301 > Current Sample Number:51
+11:47:09.301 > LED color set to Default Mode color (White)
+11:47:09.302 > Mode Select Button State:0
+11:47:09.302 > Horn Voltage:0.00
+11:47:09.302 > DRL Voltage:142.00
+11:47:09.302 > Current Sample Number:2
+11:47:09.315 > LED color set to Default Mode color (White)
+11:47:09.317 > Horn Voltage:0.00
+11:47:09.321 > DRL Voltage:284.00
+11:47:09.321 > Current Sample Number:3
+11:47:09.323 > LED color set to Default Mode color (White)
+11:47:09.329 > Horn Voltage:0.00
+11:47:09.329 > DRL Voltage:426.00
+11:47:09.332 > Current Sample Number:4
+11:47:09.335 > LED color set to Default Mode color (White)
+11:47:09.337 > Horn Voltage:0.00
+11:47:09.340 > DRL Voltage:568.00
+11:47:09.340 > Current Sample Number:5
+11:47:09.343 > LED color set to Default Mode color (White)
+11:47:09.346 > Horn Voltage:0.00
+11:47:09.348 > DRL Voltage:710.00
+11:47:09.349 > Current Sample Number:6
+11:47:09.349 > LED color set to Default Mode color (White)
+11:47:09.349 > Horn Voltage:0.00
+11:47:09.349 > DRL Voltage:852.00
+11:47:09.349 > Current Sample Number:7
+11:47:09.349 > LED color set to Default Mode color (White)
+11:47:09.365 > Horn Voltage:0.00
+11:47:09.365 > DRL Voltage:994.00
+11:47:09.365 > Current Sample Number:8
+11:47:09.365 > LED color set to Default Mode color (White)
+11:47:09.365 > Horn Voltage:0.00
+11:47:09.365 > DRL Voltage:1136.00
+11:47:09.365 > Current Sample Number:9
+11:47:09.381 > LED color set to Default Mode color (White)
+11:47:09.381 > Horn Voltage:0.00
+11:47:09.381 > DRL Voltage:1278.00
+11:47:09.381 > Current Sample Number:10
+11:47:09.381 > LED color set to Default Mode color (White)
+11:47:09.381 > Horn Voltage:0.00
+11:47:09.381 > DRL Voltage:1420.00
+11:47:09.398 > Current Sample Number:11
+11:47:09.398 > LED color set to Default Mode color (White)
+11:47:09.398 > Horn Voltage:0.00
+11:47:09.398 > DRL Voltage:1562.00
+11:47:09.398 > Current Sample Number:12
+11:47:09.398 > LED color set to Default Mode color (White)
+11:47:09.398 > Horn Voltage:0.00
+11:47:09.413 > DRL Voltage:1704.00
+11:47:09.413 > Current Sample Number:13
+11:47:09.413 > LED color set to Default Mode color (White)
+11:47:09.413 > Horn Voltage:0.00
+11:47:09.413 > DRL Voltage:1846.00
+11:47:09.425 > Current Sample Number:14
+11:47:09.428 > LED color set to Default Mode color (White)
+11:47:09.431 > Horn Voltage:0.00
+11:47:09.434 > DRL Voltage:1988.00
+11:47:09.436 > Current Sample Number:15
+11:47:09.436 > LED color set to Default Mode color (White)
+11:47:09.442 > Horn Voltage:0.00
+11:47:09.442 > DRL Voltage:2130.00
+11:47:09.443 > Current Sample Number:16
+11:47:09.449 > LED color set to Default Mode color (White)
+11:47:09.450 > Horn Voltage:0.00
+11:47:09.453 > DRL Voltage:2272.00
+11:47:09.457 > Current Sample Number:17
+11:47:09.457 > LED color set to Default Mode color (White)
+11:47:09.462 > Horn Voltage:0.00
+11:47:09.462 > DRL Voltage:2414.00
+11:47:09.464 > Current Sample Number:18
+11:47:09.468 > LED color set to Default Mode color (White)
+11:47:09.471 > Horn Voltage:0.00
+11:47:09.473 > DRL Voltage:2556.00
+11:47:09.473 > Current Sample Number:19
+11:47:09.476 > LED color set to Default Mode color (White)
+11:47:09.482 > Horn Voltage:0.00
+11:47:09.482 > DRL Voltage:2698.00
+11:47:09.482 > Current Sample Number:20
+11:47:09.482 > LED color set to Default Mode color (White)
+11:47:09.482 > Horn Voltage:0.00
+11:47:09.482 > DRL Voltage:2840.00
+11:47:09.482 > Current Sample Number:21
+11:47:09.482 > LED color set to Default Mode color (White)
+11:47:09.498 > Horn Voltage:0.00
+11:47:09.498 > DRL Voltage:2982.00
+11:47:09.498 > Current Sample Number:22
+11:47:09.498 > LED color set to Default Mode color (White)
+11:47:09.498 > Horn Voltage:0.00
+11:47:09.498 > DRL Voltage:3124.00
+11:47:09.498 > Current Sample Number:23
+11:47:09.515 > LED color set to Default Mode color (White)
+11:47:09.515 > Horn Voltage:0.00
+11:47:09.515 > DRL Voltage:3266.00
+11:47:09.515 > Current Sample Number:24
+11:47:09.515 > LED color set to Default Mode color (White)
+11:47:09.515 > Horn Voltage:0.00
+11:47:09.531 > DRL Voltage:3408.00
+11:47:09.531 > Current Sample Number:25
+11:47:09.531 > LED color set to Default Mode color (White)
+11:47:09.531 > Horn Voltage:0.00
+11:47:09.531 > DRL Voltage:3550.00
+11:47:09.531 > Current Sample Number:26
+11:47:09.531 > LED color set to Default Mode color (White)
+11:47:09.546 > Horn Voltage:0.00
+11:47:09.546 > DRL Voltage:3692.00
+11:47:09.546 > Current Sample Number:27
+11:47:09.546 > LED color set to Default Mode color (White)
+11:47:09.546 > Horn Voltage:0.00
+11:47:09.546 > DRL Voltage:3834.00
+11:47:09.570 > Current Sample Number:28
+11:47:09.570 > LED color set to Default Mode color (White)
+11:47:09.570 > Horn Voltage:0.00
+11:47:09.570 > DRL Voltage:3976.00
+11:47:09.570 > Current Sample Number:29
+11:47:09.570 > LED color set to Default Mode color (White)
+11:47:09.570 > Horn Voltage:0.00
+11:47:09.578 > DRL Voltage:4118.00
+11:47:09.581 > Current Sample Number:30
+11:47:09.581 > LED color set to Default Mode color (White)
+11:47:09.587 > Horn Voltage:0.00
+11:47:09.587 > DRL Voltage:4260.00
+11:47:09.590 > Current Sample Number:31
+11:47:09.591 > LED color set to Default Mode color (White)
+11:47:09.591 > Horn Voltage:0.00
+11:47:09.599 > DRL Voltage:4402.00
+11:47:09.601 > Current Sample Number:32
+11:47:09.601 > LED color set to Default Mode color (White)
+11:47:09.604 > Horn Voltage:0.00
+11:47:09.604 > DRL Voltage:4544.00
+11:47:09.604 > Current Sample Number:33
+11:47:09.604 > LED color set to Default Mode color (White)
+11:47:09.615 > Horn Voltage:0.00
+11:47:09.617 > DRL Voltage:4686.00
+11:47:09.619 > Current Sample Number:34
+11:47:09.620 > LED color set to Default Mode color (White)
+11:47:09.626 > Horn Voltage:0.00
+11:47:09.626 > DRL Voltage:4828.00
+11:47:09.629 > Current Sample Number:35
+11:47:09.632 > LED color set to Default Mode color (White)
+11:47:09.635 > Horn Voltage:0.00
+11:47:09.637 > DRL Voltage:4970.00
+11:47:09.637 > Current Sample Number:36
+11:47:09.640 > LED color set to Default Mode color (White)
+11:47:09.645 > Horn Voltage:0.00
+11:47:09.645 > DRL Voltage:5112.00
+11:47:09.649 > Current Sample Number:37
+11:47:09.650 > LED color set to Default Mode color (White)
+11:47:09.650 > Horn Voltage:0.00
+11:47:09.650 > DRL Voltage:5254.00
+11:47:09.650 > Current Sample Number:38
+11:47:09.650 > LED color set to Default Mode color (White)
+11:47:09.665 > Horn Voltage:0.00
+11:47:09.665 > DRL Voltage:5396.00
+11:47:09.665 > Current Sample Number:39
+11:47:09.665 > LED color set to Default Mode color (White)
+11:47:09.665 > Horn Voltage:0.00
+11:47:09.665 > DRL Voltage:5538.00
+11:47:09.665 > Current Sample Number:40
+11:47:09.665 > LED color set to Default Mode color (White)
+11:47:09.682 > Horn Voltage:0.00
+11:47:09.682 > DRL Voltage:5680.00
+11:47:09.682 > Current Sample Number:41
+11:47:09.682 > LED color set to Default Mode color (White)
+11:47:09.682 > Horn Voltage:0.00
+11:47:09.682 > DRL Voltage:5822.00
+11:47:09.682 > Current Sample Number:42
+11:47:09.698 > LED color set to Default Mode color (White)
+11:47:09.698 > Horn Voltage:0.00
+11:47:09.698 > DRL Voltage:5964.00
+11:47:09.698 > Current Sample Number:43
+11:47:09.698 > LED color set to Default Mode color (White)
+11:47:09.698 > Horn Voltage:0.00
+11:47:09.714 > DRL Voltage:6106.00
+11:47:09.714 > Current Sample Number:44
+11:47:09.714 > LED color set to Default Mode color (White)
+11:47:09.714 > Horn Voltage:0.00
+11:47:09.714 > DRL Voltage:6248.00
+11:47:09.726 > Current Sample Number:45
+11:47:09.726 > LED color set to Default Mode color (White)
+11:47:09.731 > Horn Voltage:0.00
+11:47:09.731 > DRL Voltage:6390.00
+11:47:09.734 > Current Sample Number:46
+11:47:09.737 > LED color set to Default Mode color (White)
+11:47:09.739 > Horn Voltage:0.00
+11:47:09.742 > DRL Voltage:6532.00
+11:47:09.744 > Current Sample Number:47
+11:47:09.744 > LED color set to Default Mode color (White)
+11:47:09.750 > Horn Voltage:0.00
+11:47:09.750 > DRL Voltage:6674.00
+11:47:09.754 > Current Sample Number:48
+11:47:09.757 > LED color set to Default Mode color (White)
+11:47:09.759 > Horn Voltage:0.00
+11:47:09.762 > DRL Voltage:6816.00
+11:47:09.766 > Current Sample Number:49
+11:47:09.766 > LED color set to Default Mode color (White)
+11:47:09.771 > Horn Voltage:0.00
+11:47:09.771 > DRL Voltage:6958.00
+11:47:09.773 > Current Sample Number:50
+11:47:09.776 > LED color set to Default Mode color (White)
+11:47:09.779 > Horn Voltage:0.00
+11:47:09.782 > DRL Voltage:7100.00
+11:47:09.782 > Current Sample Number:51
+11:47:09.783 > LED color set to Default Mode color (White)
+11:47:09.790 > Mode Select Button State:0
+11:47:09.793 > Horn Voltage:0.00
+11:47:09.793 > DRL Voltage:142.00
+11:47:09.796 > Current Sample Number:2
+11:47:09.798 > LED color set to Default Mode color (White)
+11:47:09.800 > Horn Voltage:0.00
+11:47:09.800 > DRL Voltage:284.00
+11:47:09.800 > Current Sample Number:3
+11:47:09.800 > LED color set to Default Mode color (White)
+11:47:09.800 > Horn Voltage:0.00
+11:47:09.800 > DRL Voltage:426.00
+11:47:09.800 > Current Sample Number:4
+11:47:09.800 > LED color set to Default Mode color (White)
+11:47:09.816 > Horn Voltage:0.00
+11:47:09.816 > DRL Voltage:568.00
+11:47:09.816 > Current Sample Number:5
+11:47:09.816 > LED color set to Default Mode color (White)
+11:47:09.816 > Horn Voltage:0.00
+11:47:09.832 > DRL Voltage:710.00
+11:47:09.832 > Current Sample Number:6
+11:47:09.832 > LED color set to Default Mode color (White)
+11:47:09.832 > Horn Voltage:0.00
+11:47:09.832 > DRL Voltage:852.00
+11:47:09.832 > Current Sample Number:7
+11:47:09.832 > LED color set to Default Mode color (White)
+11:47:09.847 > Horn Voltage:0.00
+11:47:09.847 > DRL Voltage:994.00
+11:47:09.847 > Current Sample Number:8
+11:47:09.847 > LED color set to Default Mode color (White)
+11:47:09.847 > Horn Voltage:0.00
+11:47:09.847 > DRL Voltage:1136.00
+11:47:09.847 > Current Sample Number:9
+11:47:09.847 > LED color set to Default Mode color (White)
+11:47:09.863 > Horn Voltage:0.00
+11:47:09.863 > DRL Voltage:1278.00
+11:47:09.863 > Current Sample Number:10
+11:47:09.863 > LED color set to Default Mode color (White)
+11:47:09.863 > Horn Voltage:0.00
+11:47:09.879 > DRL Voltage:1420.00
+11:47:09.879 > Current Sample Number:11
+11:47:09.879 > LED color set to Default Mode color (White)
+11:47:09.879 > Horn Voltage:0.00
+11:47:09.879 > DRL Voltage:1562.00
+11:47:09.879 > Current Sample Number:12
+11:47:09.879 > LED color set to Default Mode color (White)
+11:47:09.894 > Horn Voltage:0.00
+11:47:09.894 > DRL Voltage:1704.00
+11:47:09.894 > Current Sample Number:13
+11:47:09.894 > LED color set to Default Mode color (White)
+11:47:09.906 > Horn Voltage:0.00
+11:47:09.906 > DRL Voltage:1846.00
+11:47:09.909 > Current Sample Number:14
+11:47:09.912 > LED color set to Default Mode color (White)
+11:47:09.915 > Horn Voltage:0.00
+11:47:09.917 > DRL Voltage:1988.00
+11:47:09.917 > Current Sample Number:15
+11:47:09.920 > LED color set to Default Mode color (White)
+11:47:09.925 > Horn Voltage:0.00
+11:47:09.925 > DRL Voltage:2130.00
+11:47:09.925 > Current Sample Number:16
+11:47:09.925 > LED color set to Default Mode color (White)
+11:47:09.934 > Horn Voltage:0.00
+11:47:09.937 > DRL Voltage:2272.00
+11:47:09.937 > Current Sample Number:17
+11:47:09.940 > LED color set to Default Mode color (White)
+11:47:09.945 > Horn Voltage:0.00
+11:47:09.945 > DRL Voltage:2414.00
+11:47:09.948 > Current Sample Number:18
+11:47:09.951 > LED color set to Default Mode color (White)
+11:47:09.954 > Horn Voltage:0.00
+11:47:09.957 > DRL Voltage:2556.00
+11:47:09.957 > Current Sample Number:19
+11:47:09.959 > LED color set to Default Mode color (White)
+11:47:09.964 > Horn Voltage:0.00
+11:47:09.964 > DRL Voltage:2698.00
+11:47:09.965 > Current Sample Number:20
+11:47:09.965 > LED color set to Default Mode color (White)
+11:47:09.965 > Horn Voltage:0.00
+11:47:09.965 > DRL Voltage:2840.00
+11:47:09.965 > Current Sample Number:21
+11:47:09.965 > LED color set to Default Mode color (White)
+11:47:09.981 > Horn Voltage:0.00
+11:47:09.981 > DRL Voltage:2982.00
+11:47:09.981 > Current Sample Number:22
+11:47:09.981 > LED color set to Default Mode color (White)
+11:47:09.981 > Horn Voltage:0.00
+11:47:09.981 > DRL Voltage:3124.00
+11:47:09.981 > Current Sample Number:23
+11:47:09.997 > LED color set to Default Mode color (White)
+11:47:09.997 > Horn Voltage:0.00
+11:47:09.997 > DRL Voltage:3266.00
+11:47:09.997 > Current Sample Number:24
+11:47:09.997 > LED color set to Default Mode color (White)
+11:47:10.012 > Horn Voltage:0.00
+11:47:10.012 > DRL Voltage:3408.00
+11:47:10.012 > Current Sample Number:25
+11:47:10.012 > LED color set to Default Mode color (White)
+11:47:10.012 > Horn Voltage:0.00
+11:47:10.012 > DRL Voltage:3550.00
+11:47:10.012 > Current Sample Number:26
+11:47:10.012 > LED color set to Default Mode color (White)
+11:47:10.028 > Horn Voltage:0.00
+11:47:10.028 > DRL Voltage:3692.00
+11:47:10.028 > Current Sample Number:27
+11:47:10.028 > LED color set to Default Mode color (White)
+11:47:10.028 > Horn Voltage:0.00
+11:47:10.028 > DRL Voltage:3834.00
+11:47:10.044 > Current Sample Number:28
+11:47:10.044 > LED color set to Default Mode color (White)
+11:47:10.044 > Horn Voltage:0.00
+11:47:10.044 > DRL Voltage:3976.00
+11:47:10.044 > Current Sample Number:29
+11:47:10.044 > LED color set to Default Mode color (White)
+11:47:10.044 > Horn Voltage:0.00
+11:47:10.060 > DRL Voltage:4118.00
+11:47:10.060 > Current Sample Number:30
+11:47:10.060 > LED color set to Default Mode color (White)
+11:47:10.060 > Horn Voltage:0.00
+11:47:10.060 > DRL Voltage:4260.00
+11:47:10.060 > Current Sample Number:31
+11:47:10.076 > LED color set to Default Mode color (White)
+11:47:10.076 > Horn Voltage:0.00
+11:47:10.076 > DRL Voltage:4402.00
+11:47:10.076 > Current Sample Number:32
+11:47:10.076 > LED color set to Default Mode color (White)
+11:47:10.076 > Horn Voltage:0.00
+11:47:10.076 > DRL Voltage:4544.00
+11:47:10.091 > Current Sample Number:33
+11:47:10.091 > LED color set to Default Mode color (White)
+11:47:10.091 > Horn Voltage:0.00
+11:47:10.091 > DRL Voltage:4686.00
+11:47:10.091 > Current Sample Number:34
+11:47:10.103 > LED color set to Default Mode color (White)
+11:47:10.108 > Horn Voltage:0.00
+11:47:10.108 > DRL Voltage:4828.00
+11:47:10.111 > Current Sample Number:35
+11:47:10.114 > LED color set to Default Mode color (White)
+11:47:10.117 > Horn Voltage:0.00
+11:47:10.119 > DRL Voltage:4970.00
+11:47:10.119 > Current Sample Number:36
+11:47:10.122 > LED color set to Default Mode color (White)
+11:47:10.128 > Horn Voltage:0.00
+11:47:10.128 > DRL Voltage:5112.00
+11:47:10.131 > Current Sample Number:37
+11:47:10.133 > LED color set to Default Mode color (White)
+11:47:10.137 > Horn Voltage:0.00
+11:47:10.137 > DRL Voltage:5254.00
+11:47:10.137 > Current Sample Number:38
+11:47:10.137 > LED color set to Default Mode color (White)
+11:47:10.137 > Horn Voltage:0.00
+11:47:10.137 > DRL Voltage:5396.00
+11:47:10.150 > Current Sample Number:39
+11:47:10.153 > LED color set to Default Mode color (White)
+11:47:10.156 > Horn Voltage:0.00
+11:47:10.158 > DRL Voltage:5538.00
+11:47:10.159 > Current Sample Number:40
+11:47:10.161 > LED color set to Default Mode color (White)
+11:47:10.164 > Horn Voltage:0.00
+11:47:10.167 > DRL Voltage:5680.00
+11:47:10.169 > Current Sample Number:41
+11:47:10.169 > LED color set to Default Mode color (White)
+11:47:10.175 > Horn Voltage:0.00
+11:47:10.175 > DRL Voltage:5822.00
+11:47:10.179 > Current Sample Number:42
+11:47:10.181 > LED color set to Default Mode color (White)
+11:47:10.184 > Horn Voltage:0.00
+11:47:10.184 > DRL Voltage:5964.00
+11:47:10.184 > Current Sample Number:43
+11:47:10.184 > LED color set to Default Mode color (White)
+11:47:10.184 > Horn Voltage:0.00
+11:47:10.184 > DRL Voltage:6106.00
+11:47:10.184 > Current Sample Number:44
+11:47:10.199 > LED color set to Default Mode color (White)
+11:47:10.199 > Horn Voltage:0.00
+11:47:10.199 > DRL Voltage:6248.00
+11:47:10.199 > Current Sample Number:45
+11:47:10.209 > LED color set to Default Mode color (White)
+11:47:10.214 > Horn Voltage:0.00
+11:47:10.214 > DRL Voltage:6390.00
+11:47:10.217 > Current Sample Number:46
+11:47:10.220 > LED color set to Default Mode color (White)
+11:47:10.223 > Horn Voltage:0.00
+11:47:10.226 > DRL Voltage:6532.00
+11:47:10.226 > Current Sample Number:47
+11:47:10.229 > LED color set to Default Mode color (White)
+11:47:10.234 > Horn Voltage:0.00
+11:47:10.234 > DRL Voltage:6674.00
+11:47:10.236 > Current Sample Number:48
+11:47:10.239 > LED color set to Default Mode color (White)
+11:47:10.242 > Horn Voltage:0.00
+11:47:10.244 > DRL Voltage:6816.00
+11:47:10.244 > Current Sample Number:49
+11:47:10.247 > LED color set to Default Mode color (White)
+11:47:10.253 > Horn Voltage:0.00
+11:47:10.253 > DRL Voltage:6958.00
+11:47:10.256 > Current Sample Number:50
+11:47:10.258 > LED color set to Default Mode color (White)
+11:47:10.258 > Horn Voltage:0.00
+11:47:10.258 > DRL Voltage:7100.00
+11:47:10.258 > Current Sample Number:51
+11:47:10.268 > LED color set to Default Mode color (White)
+11:47:10.273 > Mode Select Button State:0
+11:47:10.273 > Horn Voltage:0.00
+11:47:10.275 > DRL Voltage:142.00
+11:47:10.278 > Current Sample Number:2
+11:47:10.278 > LED color set to Default Mode color (White)
+11:47:10.284 > Horn Voltage:0.00
+11:47:10.284 > DRL Voltage:284.00
+11:47:10.285 > Current Sample Number:3
+11:47:10.285 > LED color set to Default Mode color (White)
+11:47:10.285 > Horn Voltage:0.00
+11:47:10.285 > DRL Voltage:426.00
+11:47:10.285 > Current Sample Number:4
+11:47:10.285 > LED color set to Default Mode color (White)
+11:47:10.303 > Horn Voltage:0.00
+11:47:10.303 > DRL Voltage:568.00
+11:47:10.306 > Current Sample Number:5
+11:47:10.306 > LED color set to Default Mode color (White)
+11:47:10.306 > Horn Voltage:0.00
+11:47:10.306 > DRL Voltage:710.00
+11:47:10.306 > Current Sample Number:6
+11:47:10.317 > LED color set to Default Mode color (White)
+11:47:10.320 > Horn Voltage:0.00
+11:47:10.323 > DRL Voltage:852.00
+11:47:10.326 > Current Sample Number:7
+11:47:10.326 > LED color set to Default Mode color (White)
+11:47:10.331 > Horn Voltage:0.00
+11:47:10.331 > DRL Voltage:994.00
+11:47:10.334 > Current Sample Number:8
+11:47:10.337 > LED color set to Default Mode color (White)
+11:47:10.340 > Horn Voltage:0.00
+11:47:10.342 > DRL Voltage:1136.00
+11:47:10.345 > Current Sample Number:9
+11:47:10.345 > LED color set to Default Mode color (White)
+11:47:10.351 > Horn Voltage:0.00
+11:47:10.351 > DRL Voltage:1278.00
+11:47:10.353 > Current Sample Number:10
+11:47:10.353 > LED color set to Default Mode color (White)
+11:47:10.353 > Horn Voltage:0.00
+11:47:10.353 > DRL Voltage:1420.00
+11:47:10.353 > Current Sample Number:11
+11:47:10.353 > LED color set to Default Mode color (White)
+11:47:10.370 > Horn Voltage:0.00
+11:47:10.370 > DRL Voltage:1562.00
+11:47:10.373 > Current Sample Number:12
+11:47:10.376 > LED color set to Default Mode color (White)
+11:47:10.378 > Horn Voltage:0.00
+11:47:10.381 > DRL Voltage:1704.00
+11:47:10.381 > Current Sample Number:13
+11:47:10.384 > LED color set to Default Mode color (White)
+11:47:10.387 > Horn Voltage:0.00
+11:47:10.387 > DRL Voltage:1846.00
+11:47:10.387 > Current Sample Number:14
+11:47:10.387 > LED color set to Default Mode color (White)
+11:47:10.387 > Horn Voltage:0.00
+11:47:10.400 > DRL Voltage:1988.00
+11:47:10.400 > Current Sample Number:15
+11:47:10.403 > LED color set to Default Mode color (White)
+11:47:10.408 > Horn Voltage:0.00
+11:47:10.408 > DRL Voltage:2130.00
+11:47:10.410 > Current Sample Number:16
+11:47:10.416 > LED color set to Default Mode color (White)
+11:47:10.417 > Horn Voltage:0.00
+11:47:10.420 > DRL Voltage:2272.00
+11:47:10.420 > Current Sample Number:17
+11:47:10.422 > LED color set to Default Mode color (White)
+11:47:10.422 > Horn Voltage:0.00
+11:47:10.422 > DRL Voltage:2414.00
+11:47:10.422 > Current Sample Number:18
+11:47:10.434 > LED color set to Default Mode color (White)
+11:47:10.437 > Horn Voltage:0.00
+11:47:10.439 > DRL Voltage:2556.00
+11:47:10.440 > Current Sample Number:19
+11:47:10.440 > LED color set to Default Mode color (White)
+11:47:10.440 > Horn Voltage:0.00
+11:47:10.448 > DRL Voltage:2698.00
+11:47:10.451 > Current Sample Number:20
+11:47:10.451 > LED color set to Default Mode color (White)
+11:47:10.456 > Horn Voltage:0.00
+11:47:10.456 > DRL Voltage:2840.00
+11:47:10.456 > Current Sample Number:21
+11:47:10.456 > LED color set to Default Mode color (White)
+11:47:10.465 > Horn Voltage:0.00
+11:47:10.468 > DRL Voltage:2982.00
+11:47:10.470 > Current Sample Number:22
+11:47:10.470 > LED color set to Default Mode color (White)
+11:47:10.472 > Horn Voltage:0.00
+11:47:10.472 > DRL Voltage:3124.00
+11:47:10.472 > Current Sample Number:23
+11:47:10.472 > LED color set to Default Mode color (White)
+11:47:10.485 > Horn Voltage:0.00
+11:47:10.487 > DRL Voltage:3266.00
+11:47:10.488 > Current Sample Number:24
+11:47:10.488 > LED color set to Default Mode color (White)
+11:47:10.488 > Horn Voltage:0.00
+11:47:10.488 > DRL Voltage:3408.00
+11:47:10.498 > Current Sample Number:25
+11:47:10.500 > LED color set to Default Mode color (White)
+11:47:10.503 > Horn Voltage:0.00
+11:47:10.506 > DRL Voltage:3550.00
+11:47:10.506 > Current Sample Number:26
+11:47:10.507 > LED color set to Default Mode color (White)
+11:47:10.515 > Horn Voltage:0.00
+11:47:10.515 > DRL Voltage:3692.00
+11:47:10.518 > Current Sample Number:27
+11:47:10.520 > LED color set to Default Mode color (White)
+11:47:10.523 > Horn Voltage:0.00
+11:47:10.526 > DRL Voltage:3834.00
+11:47:10.526 > Current Sample Number:28
+11:47:10.528 > LED color set to Default Mode color (White)
+11:47:10.534 > Horn Voltage:0.00
+11:47:10.534 > DRL Voltage:3976.00
+11:47:10.537 > Current Sample Number:29
+11:47:10.540 > LED color set to Default Mode color (White)
+11:47:10.543 > Horn Voltage:0.00
+11:47:10.545 > DRL Voltage:4118.00
+11:47:10.545 > Current Sample Number:30
+11:47:10.548 > LED color set to Default Mode color (White)
+11:47:10.554 > Horn Voltage:0.00
+11:47:10.554 > DRL Voltage:4260.00
+11:47:10.557 > Current Sample Number:31
+11:47:10.559 > LED color set to Default Mode color (White)
+11:47:10.561 > Horn Voltage:0.00
+11:47:10.564 > DRL Voltage:4402.00
+11:47:10.564 > Current Sample Number:32
+11:47:10.567 > LED color set to Default Mode color (White)
+11:47:10.570 > Horn Voltage:0.00
+11:47:10.572 > DRL Voltage:4544.00
+11:47:10.576 > Current Sample Number:33
+11:47:10.579 > LED color set to Default Mode color (White)
+11:47:10.581 > Horn Voltage:0.00
+11:47:10.584 > DRL Voltage:4686.00
+11:47:10.584 > Current Sample Number:34
+11:47:10.586 > LED color set to Default Mode color (White)
+11:47:10.589 > Horn Voltage:0.00
+11:47:10.592 > DRL Voltage:4828.00
+11:47:10.594 > Current Sample Number:35
+11:47:10.594 > LED color set to Default Mode color (White)
+11:47:10.601 > Horn Voltage:0.00
+11:47:10.601 > DRL Voltage:4970.00
+11:47:10.604 > Current Sample Number:36
+11:47:10.606 > LED color set to Default Mode color (White)
+11:47:10.609 > Horn Voltage:0.00
+11:47:10.612 > DRL Voltage:5112.00
+11:47:10.612 > Current Sample Number:37
+11:47:10.612 > LED color set to Default Mode color (White)
+11:47:10.620 > Horn Voltage:0.00
+11:47:10.620 > DRL Voltage:5254.00
+11:47:10.622 > Current Sample Number:38
+11:47:10.625 > LED color set to Default Mode color (White)
+11:47:10.628 > Horn Voltage:0.00
+11:47:10.631 > DRL Voltage:5396.00
+11:47:10.634 > Current Sample Number:39
+11:47:10.634 > LED color set to Default Mode color (White)
+11:47:10.637 > Horn Voltage:0.00
+11:47:10.637 > DRL Voltage:5538.00
+11:47:10.637 > Current Sample Number:40
+11:47:10.637 > LED color set to Default Mode color (White)
+11:47:10.648 > Horn Voltage:0.00
+11:47:10.650 > DRL Voltage:5680.00
+11:47:10.650 > Current Sample Number:41
+11:47:10.653 > LED color set to Default Mode color (White)
+11:47:10.659 > Horn Voltage:0.00
+11:47:10.659 > DRL Voltage:5822.00
+11:47:10.662 > Current Sample Number:42
+11:47:10.665 > LED color set to Default Mode color (White)
+11:47:10.667 > Horn Voltage:0.00
+11:47:10.670 > DRL Voltage:5964.00
+11:47:10.670 > Current Sample Number:43
+11:47:10.673 > LED color set to Default Mode color (White)
+11:47:10.678 > Horn Voltage:0.00
+11:47:10.678 > DRL Voltage:6106.00
+11:47:10.681 > Current Sample Number:44
+11:47:10.684 > LED color set to Default Mode color (White)
+11:47:10.686 > Horn Voltage:0.00
+11:47:10.689 > DRL Voltage:6248.00
+11:47:10.689 > Current Sample Number:45
+11:47:10.693 > LED color set to Default Mode color (White)
+11:47:10.698 > Horn Voltage:0.00
+11:47:10.698 > DRL Voltage:6390.00
+11:47:10.701 > Current Sample Number:46
+11:47:10.703 > LED color set to Default Mode color (White)
+11:47:10.706 > Horn Voltage:0.00
+11:47:10.709 > DRL Voltage:6532.00
+11:47:10.709 > Current Sample Number:47
+11:47:10.711 > LED color set to Default Mode color (White)
+11:47:10.717 > Horn Voltage:0.00
+11:47:10.718 > DRL Voltage:6674.00
+11:47:10.720 > Current Sample Number:48
+11:47:10.723 > LED color set to Default Mode color (White)
+11:47:10.726 > Horn Voltage:0.00
+11:47:10.729 > DRL Voltage:6816.00
+11:47:10.729 > Current Sample Number:49
+11:47:10.731 > LED color set to Default Mode color (White)
+11:47:10.734 > Horn Voltage:0.00
+11:47:10.737 > DRL Voltage:6958.00
+11:47:10.739 > Current Sample Number:50
+11:47:10.742 > LED color set to Default Mode color (White)
+11:47:10.745 > Horn Voltage:0.00
+11:47:10.747 > DRL Voltage:7100.00
+11:47:10.748 > Current Sample Number:51
+11:47:10.751 > LED color set to Default Mode color (White)
+11:47:10.753 > Mode Select Button State:0
+11:47:10.756 > Horn Voltage:0.00
+11:47:10.758 > DRL Voltage:142.00
+11:47:10.758 > Current Sample Number:2
+11:47:10.758 > LED color set to Default Mode color (White)
+11:47:10.767 > Horn Voltage:0.00
+11:47:10.767 > DRL Voltage:284.00
+11:47:10.770 > Current Sample Number:3
+11:47:10.770 > LED color set to Default Mode color (White)
+11:47:10.770 > Horn Voltage:0.00
+11:47:10.770 > DRL Voltage:426.00
+11:47:10.770 > Current Sample Number:4
+11:47:10.770 > LED color set to Default Mode color (White)
+11:47:10.784 > Horn Voltage:0.00
+11:47:10.787 > DRL Voltage:568.00
+11:47:10.790 > Current Sample Number:5
+11:47:10.790 > LED color set to Default Mode color (White)
+11:47:10.795 > Horn Voltage:0.00
+11:47:10.795 > DRL Voltage:710.00
+11:47:10.798 > Current Sample Number:6
+11:47:10.801 > LED color set to Default Mode color (White)
+11:47:10.804 > Horn Voltage:0.00
+11:47:10.806 > DRL Voltage:852.00
+11:47:10.809 > Current Sample Number:7
+11:47:10.809 > LED color set to Default Mode color (White)
+11:47:10.815 > Horn Voltage:0.00
+11:47:10.815 > DRL Voltage:994.00
+11:47:10.816 > Current Sample Number:8
+11:47:10.816 > LED color set to Default Mode color (White)
+11:47:10.816 > Horn Voltage:0.00
+11:47:10.816 > DRL Voltage:1136.00
+11:47:10.816 > Current Sample Number:9
+11:47:10.816 > LED color set to Default Mode color (White)
+11:47:10.831 > Horn Voltage:0.00
+11:47:10.831 > DRL Voltage:1278.00
+11:47:10.831 > Current Sample Number:10
+11:47:10.831 > LED color set to Default Mode color (White)
+11:47:10.831 > Horn Voltage:0.00
+11:47:10.831 > DRL Voltage:1420.00
+11:47:10.831 > Current Sample Number:11
+11:47:10.847 > LED color set to Default Mode color (White)
+11:47:10.847 > Horn Voltage:0.00
+11:47:10.847 > DRL Voltage:1562.00
+11:47:10.847 > Current Sample Number:12
+11:47:10.847 > LED color set to Default Mode color (White)
+11:47:10.847 > Horn Voltage:0.00
+11:47:10.863 > DRL Voltage:1704.00
+11:47:10.863 > Current Sample Number:13
+11:47:10.863 > LED color set to Default Mode color (White)
+11:47:10.863 > Horn Voltage:0.00
+11:47:10.863 > DRL Voltage:1846.00
+11:47:10.863 > Current Sample Number:14
+11:47:10.863 > LED color set to Default Mode color (White)
+11:47:10.878 > Horn Voltage:0.00
+11:47:10.878 > DRL Voltage:1988.00
+11:47:10.878 > Current Sample Number:15
+11:47:10.878 > LED color set to Default Mode color (White)
+11:47:10.878 > Horn Voltage:0.00
+11:47:10.878 > DRL Voltage:2130.00
+11:47:10.894 > Current Sample Number:16
+11:47:10.894 > LED color set to Default Mode color (White)
+11:47:10.901 > Horn Voltage:0.00
+11:47:10.901 > DRL Voltage:2272.00
+11:47:10.903 > Current Sample Number:17
+11:47:10.907 > LED color set to Default Mode color (White)
+11:47:10.909 > Horn Voltage:0.00
+11:47:10.912 > DRL Voltage:2414.00
+11:47:10.915 > Current Sample Number:18
+11:47:10.915 > LED color set to Default Mode color (White)
+11:47:10.916 > Horn Voltage:0.00
+11:47:10.916 > DRL Voltage:2556.00
+11:47:10.916 > Current Sample Number:19
+11:47:10.916 > LED color set to Default Mode color (White)
+11:47:10.916 > Horn Voltage:0.00
+11:47:10.932 > DRL Voltage:2698.00
+11:47:10.932 > Current Sample Number:20
+11:47:10.935 > LED color set to Default Mode color (White)
+11:47:10.937 > Horn Voltage:0.00
+11:47:10.937 > DRL Voltage:2840.00
+11:47:10.937 > Current Sample Number:21
+11:47:10.937 > LED color set to Default Mode color (White)
+11:47:10.937 > Horn Voltage:0.00
+11:47:10.951 > DRL Voltage:2982.00
+11:47:10.951 > Current Sample Number:22
+11:47:10.953 > LED color set to Default Mode color (White)
+11:47:10.959 > Horn Voltage:0.00
+11:47:10.959 > DRL Voltage:3124.00
+11:47:10.961 > Current Sample Number:23
+11:47:10.964 > LED color set to Default Mode color (White)
+11:47:10.968 > Horn Voltage:0.00
+11:47:10.970 > DRL Voltage:3266.00
+11:47:10.970 > Current Sample Number:24
+11:47:10.972 > LED color set to Default Mode color (White)
+11:47:10.978 > Horn Voltage:0.00
+11:47:10.978 > DRL Voltage:3408.00
+11:47:10.981 > Current Sample Number:25
+11:47:10.983 > LED color set to Default Mode color (White)
+11:47:10.983 > Horn Voltage:0.00
+11:47:10.983 > DRL Voltage:3550.00
+11:47:10.983 > Current Sample Number:26
+11:47:10.983 > LED color set to Default Mode color (White)
+11:47:10.983 > Horn Voltage:0.00
+11:47:10.983 > DRL Voltage:3692.00
+11:47:11.001 > Current Sample Number:27
+11:47:11.003 > LED color set to Default Mode color (White)
+11:47:11.005 > Horn Voltage:0.00
+11:47:11.005 > DRL Voltage:3834.00
+11:47:11.005 > Current Sample Number:28
+11:47:11.005 > LED color set to Default Mode color (White)
+11:47:11.005 > Horn Voltage:0.00
+11:47:11.005 > DRL Voltage:3976.00
+11:47:11.005 > Current Sample Number:29
+11:47:11.021 > LED color set to Default Mode color (White)
+11:47:11.021 > Horn Voltage:0.00
+11:47:11.021 > DRL Voltage:4118.00
+11:47:11.021 > Current Sample Number:30
+11:47:11.021 > LED color set to Default Mode color (White)
+11:47:11.021 > Horn Voltage:0.00
+11:47:11.036 > DRL Voltage:4260.00
+11:47:11.036 > Current Sample Number:31
+11:47:11.036 > LED color set to Default Mode color (White)
+11:47:11.036 > Horn Voltage:0.00
+11:47:11.036 > DRL Voltage:4402.00
+11:47:11.036 > Current Sample Number:32
+11:47:11.036 > LED color set to Default Mode color (White)
+11:47:11.052 > Horn Voltage:0.00
+11:47:11.052 > DRL Voltage:4544.00
+11:47:11.052 > Current Sample Number:33
+11:47:11.052 > LED color set to Default Mode color (White)
+11:47:11.052 > Horn Voltage:0.00
+11:47:11.052 > DRL Voltage:4686.00
+11:47:11.068 > Current Sample Number:34
+11:47:11.068 > LED color set to Default Mode color (White)
+11:47:11.068 > Horn Voltage:0.00
+11:47:11.068 > DRL Voltage:4828.00
+11:47:11.068 > Current Sample Number:35
+11:47:11.068 > LED color set to Default Mode color (White)
+11:47:11.083 > Horn Voltage:0.00
+11:47:11.083 > DRL Voltage:4970.00
+11:47:11.083 > Current Sample Number:36
+11:47:11.083 > LED color set to Default Mode color (White)
+11:47:11.083 > Horn Voltage:0.00
+11:47:11.083 > DRL Voltage:5112.00
+11:47:11.083 > Current Sample Number:37
+11:47:11.098 > LED color set to Default Mode color (White)
+11:47:11.103 > Horn Voltage:0.00
+11:47:11.103 > DRL Voltage:5254.00
+11:47:11.107 > Current Sample Number:38
+11:47:11.109 > LED color set to Default Mode color (White)
+11:47:11.110 > Horn Voltage:0.00
+11:47:11.110 > DRL Voltage:5396.00
+11:47:11.110 > Current Sample Number:39
+11:47:11.117 > LED color set to Default Mode color (White)
+11:47:11.120 > Horn Voltage:0.00
+11:47:11.120 > DRL Voltage:5538.00
+11:47:11.120 > Current Sample Number:40
+11:47:11.120 > LED color set to Default Mode color (White)
+11:47:11.132 > Horn Voltage:0.00
+11:47:11.134 > DRL Voltage:5680.00
+11:47:11.134 > Current Sample Number:41
+11:47:11.137 > LED color set to Default Mode color (White)
+11:47:11.142 > Horn Voltage:0.00
+11:47:11.142 > DRL Voltage:5822.00
+11:47:11.145 > Current Sample Number:42
+11:47:11.148 > LED color set to Default Mode color (White)
+11:47:11.150 > Horn Voltage:0.00
+11:47:11.153 > DRL Voltage:5964.00
+11:47:11.153 > Current Sample Number:43
+11:47:11.157 > LED color set to Default Mode color (White)
+11:47:11.159 > Horn Voltage:0.00
+11:47:11.162 > DRL Voltage:6106.00
+11:47:11.165 > Current Sample Number:44
+11:47:11.166 > LED color set to Default Mode color (White)
+11:47:11.166 > Horn Voltage:0.00
+11:47:11.166 > DRL Voltage:6248.00
+11:47:11.166 > Current Sample Number:45
+11:47:11.166 > LED color set to Default Mode color (White)
+11:47:11.166 > Horn Voltage:0.00
+11:47:11.166 > DRL Voltage:6390.00
+11:47:11.182 > Current Sample Number:46
+11:47:11.182 > LED color set to Default Mode color (White)
+11:47:11.182 > Horn Voltage:0.00
+11:47:11.182 > DRL Voltage:6532.00
+11:47:11.182 > Current Sample Number:47
+11:47:11.182 > LED color set to Default Mode color (White)
+11:47:11.197 > Horn Voltage:0.00
+11:47:11.197 > DRL Voltage:6674.00
+11:47:11.197 > Current Sample Number:48
+11:47:11.197 > LED color set to Default Mode color (White)
+11:47:11.197 > Horn Voltage:0.00
+11:47:11.197 > DRL Voltage:6816.00
+11:47:11.197 > Current Sample Number:49
+11:47:11.213 > LED color set to Default Mode color (White)
+11:47:11.213 > Horn Voltage:0.00
+11:47:11.213 > DRL Voltage:6958.00
+11:47:11.213 > Current Sample Number:50
+11:47:11.213 > LED color set to Default Mode color (White)
+11:47:11.228 > Horn Voltage:0.00
+11:47:11.228 > DRL Voltage:7100.00
+11:47:11.228 > Current Sample Number:51
+11:47:11.228 > LED color set to Default Mode color (White)
+11:47:11.228 > Mode Select Button State:0
+11:47:11.228 > Horn Voltage:0.00
+11:47:11.228 > DRL Voltage:142.00
+11:47:11.228 > Current Sample Number:2
+11:47:11.244 > LED color set to Default Mode color (White)
+11:47:11.244 > Horn Voltage:0.00
+11:47:11.244 > DRL Voltage:284.00
+11:47:11.244 > Current Sample Number:3
+11:47:11.244 > LED color set to Default Mode color (White)
+11:47:11.244 > Horn Voltage:0.00
+11:47:11.260 > DRL Voltage:426.00
+11:47:11.260 > Current Sample Number:4
+11:47:11.260 > LED color set to Default Mode color (White)
+11:47:11.260 > Horn Voltage:0.00
+11:47:11.260 > DRL Voltage:568.00
+11:47:11.260 > Current Sample Number:5
+11:47:11.260 > LED color set to Default Mode color (White)
+11:47:11.275 > Horn Voltage:0.00
+11:47:11.275 > DRL Voltage:710.00
+11:47:11.275 > Current Sample Number:6
+11:47:11.275 > LED color set to Default Mode color (White)
+11:47:11.275 > Horn Voltage:0.00
+11:47:11.289 > DRL Voltage:852.00
+11:47:11.289 > Current Sample Number:7
+11:47:11.292 > LED color set to Default Mode color (White)
+11:47:11.298 > Horn Voltage:0.00
+11:47:11.298 > DRL Voltage:994.00
+11:47:11.300 > Current Sample Number:8
+11:47:11.303 > LED color set to Default Mode color (White)
+11:47:11.306 > Horn Voltage:0.00
+11:47:11.309 > DRL Voltage:1136.00
+11:47:11.309 > Current Sample Number:9
+11:47:11.312 > LED color set to Default Mode color (White)
+11:47:11.312 > Horn Voltage:0.00
+11:47:11.317 > DRL Voltage:1278.00
+11:47:11.319 > Current Sample Number:10
+11:47:11.319 > LED color set to Default Mode color (White)
+11:47:11.325 > Horn Voltage:0.00
+11:47:11.325 > DRL Voltage:1420.00
+11:47:11.328 > Current Sample Number:11
+11:47:11.331 > LED color set to Default Mode color (White)
+11:47:11.334 > Horn Voltage:0.00
+11:47:11.336 > DRL Voltage:1562.00
+11:47:11.339 > Current Sample Number:12
+11:47:11.339 > LED color set to Default Mode color (White)
+11:47:11.345 > Horn Voltage:0.00
+11:47:11.345 > DRL Voltage:1704.00
+11:47:11.348 > Current Sample Number:13
+11:47:11.349 > LED color set to Default Mode color (White)
+11:47:11.349 > Horn Voltage:0.00
+11:47:11.349 > DRL Voltage:1846.00
+11:47:11.349 > Current Sample Number:14
+11:47:11.349 > LED color set to Default Mode color (White)
+11:47:11.364 > Horn Voltage:0.00
+11:47:11.364 > DRL Voltage:1988.00
+11:47:11.364 > Current Sample Number:15
+11:47:11.364 > LED color set to Default Mode color (White)
+11:47:11.364 > Horn Voltage:0.00
+11:47:11.364 > DRL Voltage:2130.00
+11:47:11.364 > Current Sample Number:16
+11:47:11.364 > LED color set to Default Mode color (White)
+11:47:11.380 > Horn Voltage:0.00
+11:47:11.380 > DRL Voltage:2272.00
+11:47:11.380 > Current Sample Number:17
+11:47:11.380 > LED color set to Default Mode color (White)
+11:47:11.380 > Horn Voltage:0.00
+11:47:11.380 > DRL Voltage:2414.00
+11:47:11.380 > Current Sample Number:18
+11:47:11.396 > LED color set to Default Mode color (White)
+11:47:11.396 > Horn Voltage:0.00
+11:47:11.396 > DRL Voltage:2556.00
+11:47:11.396 > Current Sample Number

@@ -1,0 +1,72 @@
+15:24:03.880 > ets Jul 29 2019 12:21:46
+15:24:03.880 > 
+15:24:03.880 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+15:24:03.880 > configsip: 0, SPIWP:0xee
+15:24:03.880 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+15:24:03.880 > mode:DIO, clock div:2
+15:24:03.880 > load:0x3fff0030,len:1184
+15:24:03.880 > load:0x40078000,len:13232
+15:24:03.880 > load:0x40080400,len:3028
+15:24:03.880 > entry 0x400805e4
+15:24:03.880 > Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+15:24:03.880 > 
+15:24:03.880 > Core  1 register dump:
+15:24:03.880 > PC      : 0x400d1ae1  PS      : 0x00060330  A0      : 0x00000000  A1      : 0x3ffca7e0  
+15:24:03.880 > A2      : 0x3ffc1f4c  A3      : 0x00000001  A4      : 0x00000000  A5      : 0x00000000  
+15:24:03.880 > A6      : 0x00000000  A7      : 0x00000000  A8      : 0x800d1ad9  A9      : 0x3ffca7c0  
+15:24:03.880 > A10     : 0x00000000  A11     : 0x3ffca80c  A12     : 0xfffffffc  A13     : 0x00000004  
+15:24:03.880 > A14     : 0x3ffafd08  A15     : 0x80000001  SAR     : 0x0000000a  EXCCAUSE: 0x0000001c  
+15:24:03.880 > EXCVADDR: 0x00000000  LBEG    : 0x40085039  LEND    : 0x40085041  LCOUNT  : 0x00000027  
+15:24:03.880 > 
+15:24:03.880 > 
+15:24:03.880 > Backtrace: 0x400d1ade:0x3ffca7e0
+15:24:03.880 > 
+15:24:03.880 >   #0  0x400d1ade:0x3ffca7e0 in taskLCDUpdates(void*) at include/TaskLCD_V9.h:37
+15:24:03.880 > 
+15:24:03.880 > 
+15:24:03.880 > 
+15:24:03.880 > 
+15:24:03.880 > ELF file SHA256: c2743a77bc36bccd
+15:24:03.880 > 
+15:24:03.880 > Rebooting...
+15:24:03.880 > ets Jul 29 2019 12:21:46
+15:24:03.880 > 
+15:24:03.880 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+15:24:03.880 > configsip: 0, SPIWP:0xee
+15:24:03.880 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+15:24:03.880 > mode:DIO, clock div:2
+15:24:03.880 > load:0x3fff0030,len:1184
+15:24:03.880 > load:0x40078000,len:13232
+15:24:03.880 > load:0x40080400,len:3028
+15:24:03.880 > entry 0x400805e4
+15:24:04.398 > Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+15:24:04.402 > 
+15:24:04.402 > Core  1 register dump:
+15:24:04.402 > PC      : 0x400d1ae1  PS      : 0x00060330  A0      : 0x00000000  A1      : 0x3ffca7e0  
+15:24:04.402 > A2      : 0x3ffc1f4c  A3      : 0x00000001  A4      : 0x00000000  A5      : 0x00000000  
+15:24:04.423 > A6      : 0x00000000  A7      : 0x00000000  A8      : 0x800d1ad9  A9      : 0x3ffca7c0  
+15:24:04.427 > A10     : 0x00000000  A11     : 0x3ffca80c  A12     : 0xfffffffc  A13     : 0x00000004  
+15:24:04.437 > A14     : 0x3ffafd08  A15     : 0x80000001  SAR     : 0x0000000a  EXCCAUSE: 0x0000001c  
+15:24:04.445 > EXCVADDR: 0x00000000  LBEG    : 0x40085039  LEND    : 0x40085041  LCOUNT  : 0x00000027  
+15:24:04.454 > 
+15:24:04.454 > 
+15:24:04.454 > Backtrace: 0x400d1ade:0x3ffca7e0
+15:24:04.493 > 
+15:24:04.493 >   #0  0x400d1ade:0x3ffca7e0 in taskLCDUpdates(void*) at include/TaskLCD_V9.h:37
+15:24:04.493 > 
+15:24:04.493 > 
+15:24:04.493 > 
+15:24:04.493 > 
+15:24:04.493 > ELF file SHA256: c2743a77bc36bccd
+15:24:04.494 > 
+15:24:04.494 > Rebooting...
+15:24:04.494 > ets Jul 29 2019 12:21:46
+15:24:04.494 > 
+15:24:04.494 > rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+15:24:04.503 > configsip: 0, SPIWP:0xee
+15:24:04.506 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+15:24:04.511 > mode:DIO, clock div:2
+15:24:04.511 > load:0x3fff0030,len:1184
+15:24:04.511 > load:0x40078000,len:13232
+15:24:04.520 > load:0x40080400,len:3028
+15:24:04.520 > entry 0x400805e4

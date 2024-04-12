@@ -21,7 +21,7 @@
   using namespace simplebutton;
   Button* Horn_Button = NULL;
   Button* Ind_L_Button = NULL;
-  Button* Ind_R_Button = NULL;
+  //Button* Ind_R_Button = NULL;
   Button* Mode_Button = NULL;
 
   static esp_adc_cal_characteristics_t ADC1_Characteristics;
@@ -46,6 +46,9 @@
   String hornState;
   bool uberDisp;
   bool lyftDisp;
+  bool volatile l_ind_active = false;
+  bool volatile r_ind_active = false;
+  bool volatile hazard_active = false;
 
 
 //-------------functions-----------------
@@ -121,7 +124,10 @@ class cModes {
 };
 cModes curMode;
 
+#if LCD_DISPLAY
 #include <TaskLCD_V9.h>
+#endif
+
 
 bool firstLoop = true;
 
@@ -205,39 +211,26 @@ void screentest() {
 #endif
 #if LED_STRIP
 void right_indicator(){
-  unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-      for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
-        leds.setPixelColor(i, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        //if(startTime - millis() > msDELAY){
-        leds.show();
-        //}
-      }
+  for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
+      leds.setPixelColor(i, ANGRY_COLOR);
+      delay(msIND_DELAY);
+      leds.show();
+    }
+  r_ind_active = false;
 } 
 
-void IRAM_ATTR right_indicator_isr(){
-  unsigned long startTime = millis();
-  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-      for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
-        leds.setPixelColor(i, ANGRY_COLOR);
-        //delay(msIND_DELAY);
-        //if(startTime - millis() > msDELAY){
-        leds.show();
-        //}
-      }
-} 
 
 void left_indicator(){
-  unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-      for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
-        leds.setPixelColor(o, ANGRY_COLOR);
-        delay(msIND_DELAY);
+  for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
+      leds.setPixelColor(o, ANGRY_COLOR);
+      delay(msIND_DELAY);
       //if(startTime - millis() > msDELAY){
-        leds.show();
+      leds.show();
       //}
       }
+  l_ind_active = false;
 }
 
 void hazard_indicator(){
@@ -271,12 +264,15 @@ void indicator_function(){
   {
   case 1:
     right_indicator();
+    //r_ind_active = false;
     break;
   case 2:
     left_indicator();
+    //l_ind_active = false;
     break;
   case 3:
     hazard_indicator();
+    hazard_active = false;
     break;  
   default:
     indStatus = OFF;
@@ -284,6 +280,16 @@ void indicator_function(){
   }
 }
 #endif
+
+void IRAM_ATTR right_indicator_isr(){
+  r_ind_active = true;
+  indStatus = RIGHT;
+} 
+
+void IRAM_ATTR left_indicator_isr(){
+  l_ind_active = true;
+  indStatus = LEFT;
+} 
 
 void drl_mon(){
   static bool RelayPin1State = false;
@@ -334,32 +340,32 @@ void drl_mon(){
 void button_function(){
   // MUST call the update() function first
   Horn_Button->update();
-  Ind_L_Button->update();
-  Ind_R_Button->update();
+  //Ind_L_Button->update();
+  //Ind_R_Button->update();
   bool currentHornButtonState = Horn_Button->getState();
-  bool currentInd_LButtonState = Ind_L_Button->getState();
-  bool currentInd_RButtonState = Ind_R_Button->getState();
+  //bool currentInd_LButtonState = Ind_L_Button->getState();
+  //bool currentInd_RButtonState = Ind_R_Button->getState();
 
     if (!currentHornButtonState) {
       leds.fill(ANGRY_COLOR);
       hornState = "BEEP";
-    }
-    else if (!currentInd_RButtonState && !currentInd_LButtonState) { 
+    } else if(l_ind_active && r_ind_active){
+      hazard_active = true;
       indStatus = HAZARD;
-      }
-    else if (!currentInd_RButtonState && currentInd_LButtonState) { 
-      indStatus = RIGHT;
-      } 
-    else if (!currentInd_LButtonState && currentInd_RButtonState) { 
-      indStatus = LEFT; 
-      }
-    else {
+    }// else if (r_ind_active) {
+      //r_ind_active = true;
+    //} else if (l_ind_active) {
+      //l_ind_active = true;
+    //}
+     else {
     leds.fill(curMode.curColor);
     hornState = "OFF ";
     indStatus = OFF;
     }
 }
 #endif
+
+//void gpioHandler(void* arg);
 
 //-----------main program-----------------
 
@@ -376,7 +382,8 @@ void setup()
   //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
   
   if (DEBUG) Serial.begin(115200);   // serial monitor for debugging
-    
+
+#if LCD_DISPLAY    
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
   lcd.clear();            //clear the display  
@@ -384,6 +391,8 @@ void setup()
   lcd.print("LOADING");   
   lcd.setCursor(0,1);     //move cursor to 2nd line on display
   lcd.print("PLEASE WAIT");   
+#endif  
+
 
   // Set pins as an input or output pin
   pinMode(RELAY_PIN_1, OUTPUT);
@@ -393,13 +402,14 @@ void setup()
   pinMode(IND_L_PIN, INPUT);
   pinMode(IND_R_PIN, INPUT);
 
-  //attachInterrupt(digitalPinToInterrupt(IND_R_PIN), right_indicator_isr, FALLING);
+  attachInterrupt(digitalPinToInterrupt(IND_R_PIN), right_indicator_isr, RISING);
+  attachInterrupt(digitalPinToInterrupt(IND_L_PIN), left_indicator_isr, RISING);
 
   //setup the buttons
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
-  Ind_L_Button = new Button(IND_L_PIN, true);
-  Ind_R_Button = new Button(IND_R_PIN, true);
+  //Ind_L_Button = new Button(IND_L_PIN, true);
+  //Ind_R_Button = new Button(IND_R_PIN, true);
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
@@ -441,7 +451,9 @@ void setup()
   if (SCREENTEST) screentest();
 #endif
 
+#if LCD_DISPLAY
  initTaskLCD();
+#endif
 
 
 }
@@ -451,6 +463,19 @@ void loop()
   static int    curSample = 1;
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curSample++;
+  /*   
+  //This is more responsive when using interrupts
+    if(r_ind_active && l_ind_active){
+      hazard_indicator();
+      hazard_active = false;
+  } else if (r_ind_active) {
+      right_indicator();
+      r_ind_active = false;
+  }else if (l_ind_active) {
+      left_indicator();
+      l_ind_active = false;
+  }
+  */
 
   if (DEBUG) {
     Serial.print("Horn Voltage:"); Serial.println(curHorn);
@@ -474,7 +499,8 @@ if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Butto
 #if LED_STRIP
     button_function();
     leds.show(); 
-    indicator_function();
+    indicator_function();    
+   
 #endif    
     curSample = 1;
     curDRL = 0;
