@@ -1,4 +1,4 @@
-#include <TaskLCD_V9.h>
+#include "TaskLCD_V9.h"
 
 
 #include <stdio.h>
@@ -7,11 +7,16 @@
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
 
-//// LCD column and row settings
-//#define LCD_COLS  16
-//#define LCD_ROWS  2 
-//hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
-//#define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
+// LCD column and row settings
+#define LCD_COLS  16
+#define LCD_ROWS  2 
+hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
+#define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
+
+
+// Global variable definitions
+unsigned long L1previousTime = 0;
+unsigned long L2previousTime = 0;
 
 
 //void taskLCDUpdates( void * pvParameters );
@@ -27,8 +32,8 @@ if ((startTime - millis() > LCD_UPDATE_INTERVAL)) {
   
   while(true){
     bool currentHornButtonState = Horn_Button->getState();
-    bool currentInd_LButtonState = Ind_L_Button->getState();
-    bool currentInd_RButtonState = Ind_R_Button->getState();
+    //bool currentInd_LButtonState = Ind_L_Button->getState();
+    //bool currentInd_RButtonState = Ind_R_Button->getState();
     if (!currentHornButtonState) {
       sprintf(tmpMessage, "HORN %s %s", drlState, hornState); 
     } else if (!currentInd_LButtonState && currentInd_RButtonState) {

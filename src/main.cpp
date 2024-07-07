@@ -26,6 +26,8 @@
 
   static esp_adc_cal_characteristics_t ADC1_Characteristics;
   
+
+
 #if LED_MATRIX    
 //LED Matrix Panel
   #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
@@ -127,7 +129,6 @@ cModes curMode;
 #if LCD_DISPLAY
 #include <TaskLCD_V9.h>
 #endif
-
 
 bool firstLoop = true;
 
@@ -263,15 +264,15 @@ void indicator_function(){
   switch (indStatus)
   {
   case 1:
-    right_indicator();
-    //r_ind_active = false;
+    //right_indicator();
+    r_ind_active = false;
     break;
   case 2:
-    left_indicator();
-    //l_ind_active = false;
+    //left_indicator();
+    l_ind_active = false;
     break;
   case 3:
-    hazard_indicator();
+    //hazard_indicator();
     hazard_active = false;
     break;  
   default:
@@ -463,19 +464,19 @@ void loop()
   static int    curSample = 1;
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   curSample++;
-  /*   
+     
   //This is more responsive when using interrupts
-    if(r_ind_active && l_ind_active){
+  if(r_ind_active && l_ind_active){
       hazard_indicator();
       hazard_active = false;
   } else if (r_ind_active) {
       right_indicator();
       r_ind_active = false;
-  }else if (l_ind_active) {
+  } else if (l_ind_active) {
       left_indicator();
       l_ind_active = false;
   }
-  */
+  
 
   if (DEBUG) {
     Serial.print("Horn Voltage:"); Serial.println(curHorn);

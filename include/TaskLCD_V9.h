@@ -7,16 +7,26 @@
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+//void taskLCDUpdates( void * pvParameters );
+//void initTaskLCD();
+
+
 // LCD column and row settings
 #define LCD_COLS  16
 #define LCD_ROWS  2 
 hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config exapander chip
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 
-unsigned long L1previousTime = 0;
-unsigned long L2previousTime = 0;
-//void taskLCDUpdates( void * pvParameters );
-//void initTaskLCD();
+
+extern unsigned long L1previousTime = 0;
+extern unsigned long L2previousTime = 0;
+
+
+
 
 void taskLCDUpdates( void * pvParameters) {
   if(DEBUG) Serial.println("Start of LCD Function");
@@ -25,7 +35,7 @@ void taskLCDUpdates( void * pvParameters) {
   if ((L1currentTime - L1previousTime >= LCD_UPDATE_INTERVAL)) {  
     L1previousTime = L1currentTime; // Remember the time  
     lcd.clear();    //clear the display and home the cursor
-    sprintf(tmpMessage, "MODE DRL   Horn "); 
+    sprintf(tmpMessage, "MODE  DRL  Horn "); 
     lcd.setCursor(0,0); //move cursor to 1st line on display
     lcd.print(tmpMessage);
     //delay(LCD_UPDATE_INTERVAL);
@@ -38,15 +48,15 @@ void taskLCDUpdates( void * pvParameters) {
     //bool currentInd_RButtonState = Ind_R_Button->getState();
     unsigned long L2currentTime = millis();
     if (!currentHornButtonState) {
-      sprintf(tmpMessage, "HORN %s %s", drlState, hornState); 
+      sprintf(tmpMessage, "HORN  %s  %s ", drlState, hornState); 
     } else if (l_ind_active) {
-      sprintf(tmpMessage, "LEFT %s %s", drlState, hornState); 
+      sprintf(tmpMessage, "LEFT  %s  %s ", drlState, hornState); 
     } else if (r_ind_active) {
-      sprintf(tmpMessage, "RGHT %s %s", drlState, hornState); 
+      sprintf(tmpMessage, "RGHT  %s  %s ", drlState, hornState); 
     } else if (hazard_active) {
-      sprintf(tmpMessage, "HZRD %s %s", drlState, hornState); 
+      sprintf(tmpMessage, "HZRD  %s  %s ", drlState, hornState); 
     } else {
-      sprintf(tmpMessage, "%s %s %s", curMode.txtColor, drlState, hornState);
+      sprintf(tmpMessage, "%s  %s  %s", curMode.txtColor, drlState, hornState);
     }
     if ((L2currentTime - L2previousTime > LCD_UPDATE_INTERVAL)) {
       L2previousTime = L2currentTime; // Remember the time
@@ -71,4 +81,8 @@ void initTaskLCD() {
     1);               //Core where the task should run 
 }
 
+
+#ifdef __cplusplus
+}
+#endif
 #endif // _TASKLCD_V9_H_
