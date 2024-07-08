@@ -5,8 +5,8 @@
 		                activity. This is for the esp32 38pin device
     Date:           2/27/2024  
     Version:        .95b
-    Authors:        Yves Avady
-    Contriburtors:   Corey Davis, Jim Edmonds 
+    Author(s):        Yves Avady
+    Contriburtor(s):   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 
 //Build Configuration Options
@@ -20,7 +20,7 @@
   #include <SimpleButton.h>
   using namespace simplebutton;
   Button* Horn_Button = NULL;
-  Button* Ind_L_Button = NULL;
+  //Button* Ind_L_Button = NULL;
   //Button* Ind_R_Button = NULL;
   Button* Mode_Button = NULL;
 
@@ -212,30 +212,30 @@ void screentest() {
 #endif
 #if LED_STRIP
 void right_indicator(){
+  if(!hazard_active) return; //return if hazard lights are not active
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-  for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
-      leds.setPixelColor(i, ANGRY_COLOR);
-      delay(msIND_DELAY);
-      leds.show();
-    }
+    for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
+        leds.setPixelColor(i, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
+      }
   r_ind_active = false;
-} 
-
+  }
 
 void left_indicator(){
+  if(!hazard_active) return; //Return if hazard lights are not active
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-  for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
-      leds.setPixelColor(o, ANGRY_COLOR);
-      delay(msIND_DELAY);
-      //if(startTime - millis() > msDELAY){
-      leds.show();
-      //}
+    for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
+        leds.setPixelColor(o, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
       }
   l_ind_active = false;
-}
+  }
+
 
 void hazard_indicator(){
-  unsigned long startTime = millis();
+  //unsigned long startTime = millis();
   if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
   int ledLeft = 0; int ledRight = 0;
     for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
@@ -247,6 +247,7 @@ void hazard_indicator(){
       leds.show();
       //}
     }
+  hazard_active = false;
 }
 #endif
 
@@ -265,15 +266,15 @@ void indicator_function(){
   {
   case 1:
     //right_indicator();
-    r_ind_active = false;
+    r_ind_active = true;
     break;
   case 2:
     //left_indicator();
-    l_ind_active = false;
+    l_ind_active = true;
     break;
   case 3:
     //hazard_indicator();
-    hazard_active = false;
+    hazard_active = true;
     break;  
   default:
     indStatus = OFF;
@@ -469,6 +470,8 @@ void loop()
   if(r_ind_active && l_ind_active){
       hazard_indicator();
       hazard_active = false;
+      l_ind_active = false;
+      r_ind_active = false;
   } else if (r_ind_active) {
       right_indicator();
       r_ind_active = false;
