@@ -1,0 +1,36 @@
+10:23:52.995 > ets Jul 29 2019 12:21:46
+10:23:52.995 > 
+10:23:52.995 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+10:23:52.995 > configsip: 0, SPIWP:0xee
+10:23:52.995 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+10:23:52.995 > mode:DOUT, clock div:2
+10:23:52.995 > load:0x3fff0018,len:4
+10:23:52.995 > load:0x3fff001c,len:1084
+10:23:52.995 > load:0x40078000,len:11220
+10:23:52.995 > load:0x40080400,len:5360
+10:23:52.995 > entry 0x4008067c
+10:23:52.995 > �Ada
+10:24:04.547 > ets Jul 29 2019 12:21:46
+10:24:04.557 > 
+10:24:04.557 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+10:24:04.557 > configsip: 0, SPIWP:0xee
+10:24:04.557 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+10:24:04.563 > mode:DOUT, clock div:2
+10:24:04.566 > load:0x3fff0018,len:4
+10:24:04.568 > load:0x3fff001c,len:1084
+10:24:04.569 > load:0x40078000,len:11220
+10:24:04.571 > load:0x40080400,len:5360
+10:24:04.574 > entry 0x4008067c
+10:24:05.106 > �Ada
+10:24:06.854 > ets Jul 29 2019 12:21:46
+10:24:06.856 > 
+10:24:06.856 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+10:24:06.862 > configsip: 0, SPIWP:0xee
+10:24:06.864 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+10:24:06.870 > mode:DOUT, clock div:2
+10:24:06.873 > load:0x3fff0018,len:4
+10:24:06.875 > load:0x3fff001c,len:1084
+10:24:06.877 > load:0x40078000,len:11220
+10:24:06.879 > load:0x40080400,len:5360
+10:24:06.881 > entry 0x4008067c
+10:24:07.413 > �Ada

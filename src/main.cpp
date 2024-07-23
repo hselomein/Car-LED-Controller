@@ -5,8 +5,8 @@
 		                activity. This is for the esp32 38pin device
     Date:           2/27/2024  
     Version:        .95b
-    Author(s):        Yves Avady
-    Contriburtor(s):   Corey Davis, Jim Edmonds 
+    Authors:        Yves Avady
+    Contriburtors:   Corey Davis, Jim Edmonds 
 -----------------------------------------------------------------*/
 
 //Build Configuration Options
@@ -20,14 +20,12 @@
   #include <SimpleButton.h>
   using namespace simplebutton;
   Button* Horn_Button = NULL;
-  //Button* Ind_L_Button = NULL;
-  //Button* Ind_R_Button = NULL;
+  Button* Ind_L_Button = NULL;
+  Button* Ind_R_Button = NULL;
   Button* Mode_Button = NULL;
 
   static esp_adc_cal_characteristics_t ADC1_Characteristics;
   
-
-
 #if LED_MATRIX    
 //LED Matrix Panel
   #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
@@ -48,10 +46,7 @@
   String hornState;
   bool uberDisp;
   bool lyftDisp;
-  bool volatile l_ind_active = false;
-  bool volatile r_ind_active = false;
-  bool volatile hazard_active = false;
-
+  bool isHazardRunning = false; // Global variable to track hazard function state
 
 //-------------functions-----------------
 class cModes {
@@ -126,9 +121,7 @@ class cModes {
 };
 cModes curMode;
 
-#if LCD_DISPLAY
-#include <TaskLCD_V9.h>
-#endif
+
 
 bool firstLoop = true;
 
@@ -211,47 +204,6 @@ void screentest() {
 }
 #endif
 #if LED_STRIP
-void right_indicator(){
-  if(!hazard_active) return; //return if hazard lights are not active
-  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-    for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
-        leds.setPixelColor(i, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        leds.show();
-      }
-  r_ind_active = false;
-  }
-
-void left_indicator(){
-  if(!hazard_active) return; //Return if hazard lights are not active
-  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
-    for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
-        leds.setPixelColor(o, ANGRY_COLOR);
-        delay(msIND_DELAY);
-        leds.show();
-      }
-  l_ind_active = false;
-  }
-
-
-void hazard_indicator(){
-  //unsigned long startTime = millis();
-  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
-  int ledLeft = 0; int ledRight = 0;
-    for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
-      ledLeft = NUM_PIXELS_QUARTER - p;
-      ledRight = NUM_PIXELS - NUM_PIXELS_QUARTER + p;
-      leds.setPixelColor(ledRight, ANGRY_COLOR);              leds.setPixelColor(ledLeft, ANGRY_COLOR);
-      delay(msIND_DELAY);
-      //if(startTime - millis() > msDELAY){
-      leds.show();
-      //}
-    }
-  hazard_active = false;
-}
-#endif
-
-#if LED_STRIP
 enum indState {
 	OFF = 0,
   RIGHT,
@@ -260,42 +212,68 @@ enum indState {
 	};
 
 enum indState indStatus = OFF;
+indState currentIndicatorState = OFF; // Initialize with OFF or any default state
+
+void right_indicator(){
+    if(isHazardRunning) return; // Do not execute if hazard is running
+    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+    for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
+        leds.setPixelColor(i, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
+      }
+    } 
+
+void left_indicator(){
+    if(isHazardRunning) return; // Do not execute if hazard is running
+    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+    for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
+        leds.setPixelColor(o, ANGRY_COLOR);
+        delay(msIND_DELAY);
+        leds.show();
+      }
+    }
+  
+void hazard_indicator(){
+  isHazardRunning = true; // Set isHazardRunning to true when hazard starts
+  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+  int ledLeft = 0; int ledRight = 0;
+    for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
+      ledLeft = NUM_PIXELS_QUARTER - p;
+      ledRight = NUM_PIXELS - NUM_PIXELS_QUARTER + p;
+      leds.setPixelColor(ledRight, ANGRY_COLOR);              leds.setPixelColor(ledLeft, ANGRY_COLOR);
+      delay(msIND_DELAY);
+      leds.show();
+    }
+  isHazardRunning = false;  // After completing the hazard function, set isHazardRunning to false
+  }
 
 void indicator_function(){
   switch (indStatus)
   {
   case 1:
-    //right_indicator();
-    r_ind_active = true;
+    currentIndicatorState = RIGHT;
+    right_indicator();
     break;
   case 2:
-    //left_indicator();
-    l_ind_active = true;
+    currentIndicatorState = LEFT;
+    left_indicator();
     break;
   case 3:
-    //hazard_indicator();
-    hazard_active = true;
+    currentIndicatorState = HAZARD;
+    hazard_indicator();
     break;  
   default:
+    currentIndicatorState = OFF;
     indStatus = OFF;
     break;
   }
 }
 #endif
 
-void IRAM_ATTR right_indicator_isr(){
-  r_ind_active = true;
-  indStatus = RIGHT;
-} 
-
-void IRAM_ATTR left_indicator_isr(){
-  l_ind_active = true;
-  indStatus = LEFT;
-} 
-
 void drl_mon(){
   static bool RelayPin1State = false;
-  if (curDRL > LO_VOLT && curDRL < (HI_VOLT - VOLT_BUF)){
+  if (curDRL > (LO_VOLT- VOLT_BUF) && curDRL < (HI_VOLT - VOLT_BUF)){
       if (!RelayPin1State) { //turn on Relay 1
         RelayPin1State = true;
         digitalWrite(RELAY_PIN_1, RELAY_ON);
@@ -320,7 +298,7 @@ void drl_mon(){
       dma_display->setBrightness8(MAX_BRIGHTNESS);
 #endif
   } else if (curDRL < VOLT_BUF){
-      if ((uberDisp && curDRL < VOLT_BUF) || (lyftDisp && curDRL < VOLT_BUF)) { //Keep strip on when DRL are off in UBER/LYFT modes
+      if ((uberDisp && curDRL <  (LO_VOLT-VOLT_BUF)) || (lyftDisp && curDRL <  (LO_VOLT-VOLT_BUF))) { //Keep strip on when DRL are off in UBER/LYFT modes
 #if LED_STRIP        
         leds.setBrightness(MAX_BRIGHTNESS);
 #endif
@@ -342,24 +320,30 @@ void drl_mon(){
 void button_function(){
   // MUST call the update() function first
   Horn_Button->update();
-  //Ind_L_Button->update();
-  //Ind_R_Button->update();
+  Ind_L_Button->update();
+  Ind_R_Button->update();
   bool currentHornButtonState = Horn_Button->getState();
-  //bool currentInd_LButtonState = Ind_L_Button->getState();
-  //bool currentInd_RButtonState = Ind_R_Button->getState();
+  bool currentInd_LButtonState = !Ind_L_Button->getState();
+  bool currentInd_RButtonState = !Ind_R_Button->getState();
+
+  //bool currentInd_LButtonState = Ind_L_Button->clicked(DEBOUNCE_TIME);
+  //bool currentInd_RButtonState = Ind_R_Button->clicked(DEBOUNCE_TIME);
+  
 
     if (!currentHornButtonState) {
       leds.fill(ANGRY_COLOR);
       hornState = "BEEP";
-    } else if(l_ind_active && r_ind_active){
-      hazard_active = true;
+    }
+    else if (currentInd_RButtonState && currentInd_LButtonState) { 
       indStatus = HAZARD;
-    }// else if (r_ind_active) {
-      //r_ind_active = true;
-    //} else if (l_ind_active) {
-      //l_ind_active = true;
-    //}
-     else {
+      }
+    else if (currentInd_LButtonState && !currentInd_RButtonState) { 
+      indStatus = LEFT;
+      } 
+    else  if (currentInd_RButtonState && !currentInd_LButtonState) { 
+      indStatus = RIGHT;
+      }
+    else {
     leds.fill(curMode.curColor);
     hornState = "OFF ";
     indStatus = OFF;
@@ -367,7 +351,9 @@ void button_function(){
 }
 #endif
 
-//void gpioHandler(void* arg);
+#if LCD_DISPLAY
+#include <TaskLCD_V9.h>
+#endif
 
 //-----------main program-----------------
 
@@ -382,9 +368,10 @@ void setup()
 #endif
 
   //delay(250); // power-up safety delay use for bad powersupplies, enable only if needed
-  
+
   if (DEBUG) Serial.begin(115200);   // serial monitor for debugging
 
+    
 #if LCD_DISPLAY    
   // set up the LCD:
   lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
@@ -404,14 +391,11 @@ void setup()
   pinMode(IND_L_PIN, INPUT);
   pinMode(IND_R_PIN, INPUT);
 
-  attachInterrupt(digitalPinToInterrupt(IND_R_PIN), right_indicator_isr, RISING);
-  attachInterrupt(digitalPinToInterrupt(IND_L_PIN), left_indicator_isr, RISING);
-
   //setup the buttons
   Horn_Button = new Button(HORN_PIN, true); //this is for an inverted setup where HIGH is the idle state of the buttons
   Mode_Button = new ButtonPullup(MODE_PIN);
-  //Ind_L_Button = new Button(IND_L_PIN, true);
-  //Ind_R_Button = new Button(IND_R_PIN, true);
+  Ind_L_Button = new Button(IND_L_PIN, true);
+  Ind_R_Button = new Button(IND_R_PIN, true);
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
@@ -454,7 +438,7 @@ void setup()
 #endif
 
 #if LCD_DISPLAY
- initTaskLCD();
+  initTaskLCD();
 #endif
 
 
@@ -464,22 +448,8 @@ void loop()
 {
   static int    curSample = 1;
   curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
+  //curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics) + (RESISTOR_DIODE_OFFSET * 2);
   curSample++;
-     
-  //This is more responsive when using interrupts
-  if(r_ind_active && l_ind_active){
-      hazard_indicator();
-      hazard_active = false;
-      l_ind_active = false;
-      r_ind_active = false;
-  } else if (r_ind_active) {
-      right_indicator();
-      r_ind_active = false;
-  } else if (l_ind_active) {
-      left_indicator();
-      l_ind_active = false;
-  }
-  
 
   if (DEBUG) {
     Serial.print("Horn Voltage:"); Serial.println(curHorn);
@@ -497,17 +467,21 @@ void loop()
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
     curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    //curDRL += curDRL* (RESISTOR_DIODE_OFFSET/12);
+    //curDRL += (curDRL - GRND_OFFSET) * (RESISTOR_DIODE_OFFSET + GRND_OFFSET) / HI_VOLT - GRND_OFFSET;
+    curDRL = -1.0 * GRND_OFFSET * curDRL * curDRL / (GRND_OFFSET + HI_VOLT) + (RESISTOR_DIODE_OFFSET * HI_VOLT + GRND_OFFSET) * curDRL - (RESISTOR_DIODE_OFFSET + GRND_OFFSET) * (RESISTOR_DIODE_OFFSET + GRND_OFFSET) - GRND_OFFSET;
   
     drl_mon();
 if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
 #if LED_STRIP
     button_function();
     leds.show(); 
-    indicator_function();    
-   
+    indicator_function();
+    
 #endif    
     curSample = 1;
     curDRL = 0;
     curHorn = 0;
+
     }
 }
