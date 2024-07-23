@@ -42,22 +42,38 @@ void taskLCDUpdates( void * pvParameters) {
     if(DEBUG) Serial.println(String(L1currentTime) + "ms Line 1 Time");
   }
   
-  while(true){
-    bool currentHornButtonState = Horn_Button->getState();
+
+   while(true){
+    //bool currentHornButtonState = Horn_Button->getState();
     //bool currentInd_LButtonState = Ind_L_Button->getState();
     //bool currentInd_RButtonState = Ind_R_Button->getState();
     unsigned long L2currentTime = millis();
-    if (!currentHornButtonState) {
+#if SHOW_VOLTAGES_LCD    
+    if (hornState == "BEEP") {
+      sprintf(tmpMessage, "HORN  %04.1fV  %s", curDRL, hornState); 
+    } else if (indStatus == LEFT) {
+      sprintf(tmpMessage, "LEFT  %04.1fV  %s", curDRL, hornState); 
+    } else if (indStatus == RIGHT) {
+      sprintf(tmpMessage, "RGHT  %04.1fV  %s", curDRL, hornState); 
+    } else if (indStatus == HAZARD) {
+      sprintf(tmpMessage, "HZRD  %04.1fV  %s", curDRL, hornState); 
+    } else {
+      sprintf(tmpMessage, "%s  %04.1fV  %s", curMode.txtColor, curDRL, hornState);
+    }
+#endif  
+#if SHOW_VOLTAGES_LCD == false
+    if (hornState == "BEEP") {
       sprintf(tmpMessage, "HORN  %s  %s ", drlState, hornState); 
-    } else if (l_ind_active) {
+    } else if (indStatus == LEFT) {
       sprintf(tmpMessage, "LEFT  %s  %s ", drlState, hornState); 
-    } else if (r_ind_active) {
+    } else if (indStatus == RIGHT) {
       sprintf(tmpMessage, "RGHT  %s  %s ", drlState, hornState); 
-    } else if (hazard_active) {
+    } else if (indStatus == HAZARD) {
       sprintf(tmpMessage, "HZRD  %s  %s ", drlState, hornState); 
     } else {
       sprintf(tmpMessage, "%s  %s  %s", curMode.txtColor, drlState, hornState);
     }
+#endif  
     if ((L2currentTime - L2previousTime > LCD_UPDATE_INTERVAL)) {
       L2previousTime = L2currentTime; // Remember the time
       lcd.setCursor(0,1); //move cursor to 2nd line on display

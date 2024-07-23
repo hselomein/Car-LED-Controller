@@ -5,6 +5,7 @@
   #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
   #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Character Display, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
+  #define SHOW_VOLTAGES_LCD true //Set to "true" to display voltages on the LCD, "false" to disable
 
 // Pins to device mapping
   #define RELAY_PIN_1 18                // Pin 18 => In1 Relay
@@ -30,10 +31,12 @@
   #define R1              47.0            // Resistor 1 value of voltage divider
   #define R2              10.0            // Resistor 2 value of voltage divider
   #define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
+  #define RESISTOR_DIODE_OFFSET 0.3       //voltage drop across the diode
+  #define GRND_OFFSET 0.8
   //static esp_adc_cal_characteristics_t ADC1_Characteristics;
 
   #define VOLT_BUF        1
-  #define HI_VOLT         12
+  #define HI_VOLT         6
   #define LO_VOLT         2
   
 // Startup Configuration (Constants)
