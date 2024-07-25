@@ -10,7 +10,6 @@
 -----------------------------------------------------------------*/
 
 //Build Configuration Options
-#include <definitions.h>
 #include <main.h>
 
 //Declarations
