@@ -27,7 +27,7 @@
   #define RELAY_ON LOW
   #define RELAY_OFF HIGH
 
-  #define NUM_SAMPLES     50              // number of analog samples to take per reading
+  #define NUM_SAMPLES     750             // number of analog samples to take per reading
   #define R1              47.0            // Resistor 1 value of voltage divider
   #define R2              10.0            // Resistor 2 value of voltage divider
   #define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
