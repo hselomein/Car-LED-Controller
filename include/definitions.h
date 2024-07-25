@@ -43,11 +43,9 @@
   #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
   #define numLOOPS      4   //Number of passes over entire LED strip
 
+
 #if LED_STRIP
 //LED Strip
-  #include <Adafruit_NeoPixel.h>
-
-//LED Controller Section
   #define NUM_LEDS  134   //161 leds is the lenght of the hood weather strip, 36 for the COB strip
   #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
   #define LEDS_PER_PIXEL 1
@@ -62,31 +60,37 @@
   #define FLASH_RATE int((80/120)*1000) //how many indicator flashes per minute as specifed by car manufacturer 
   #define msIND_DELAY  int(FLASH_RATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
 
-  
-#if RGBW_STRIP 
-  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGBW_COLOR_ORDER + NEO_KHZ800);
-  //color definitions values, are expressed in rgbw format
-  #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
-  #define DEFAULT_COLOR   leds.Color( 251, 255, 141, 255 )     //White (Adjusted to match vehicle oem light color)
-  #define LYFT_COLOR      leds.Color( 255,  0, 191,  0 )     //Magenta
-  #define UBER_COLOR      leds.Color( 0,  255,  92,  0 )     //Seafoam Green
-  #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
-  #define DIMCOLOR      leds.Color(  50,  50,  50,  50 )     //Dim White
-  #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
+  #include <Adafruit_NeoPixel.h>
+
+  #if RGBW_STRIP 
+    #define cur_COLOR_ORDER RGBW_COLOR_ORDER
+  #else
+    #define cur_COLOR_ORDER RGB_COLOR_ORDER
   #endif
 
-#if RGBW_STRIP == false
-  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, RGB_COLOR_ORDER + NEO_KHZ800);
-  //color definitions values, are expressed in rgb format
-  #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
-  #define DEFAULT_COLOR   leds.Color( 251, 255, 141 )     //White (Adjusted to match vehicle oem light color)
-  #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
-  #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
-  #define BRIGHTCOLOR   leds.Color( 251,  255,  141 )     //Full White
-  #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
-  #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
+  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, cur_COLOR_ORDER + NEO_KHZ800);
+
+  #if RGBW_STRIP 
+    //color definitions values, are expressed in rgbw format
+    #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
+    #define DEFAULT_COLOR   leds.Color( 251, 255, 141, 255 )     //White (Adjusted to match vehicle oem light color)
+    #define LYFT_COLOR      leds.Color( 255,  0, 191,  0 )     //Magenta
+    #define UBER_COLOR      leds.Color( 0,  255,  92,  0 )     //Seafoam Green
+    #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
+    #define DIMCOLOR      leds.Color(  50,  50,  50,  50 )     //Dim White
+    #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
+  #else
+    //color definitions values, are expressed in rgb format
+    #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
+    #define DEFAULT_COLOR   leds.Color( 251, 255, 141 )     //White (Adjusted to match vehicle oem light color)
+    #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
+    #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
+    #define BRIGHTCOLOR   leds.Color( 251,  255,  141 )     //Full White
+    #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
+    #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
   #endif
 #endif
+
 
 #if LED_MATRIX 
 //LED Martrix pin section
@@ -112,9 +116,9 @@
   #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
   #define PANEL_CHAIN 1   // Total number of panels chained one to another
 #endif
-
-  #include "driver/gpio.h"
-
-
+  
 //#ifndef
   //#define CONFIG_ESP_INT_WDT_TIMEOUT_MS 5000
+
+
+

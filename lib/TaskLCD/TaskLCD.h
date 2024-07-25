@@ -5,6 +5,7 @@
 #include <Wire.h>
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
+#include <main.h>
 
 // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define LCD_COLS  16
@@ -31,28 +32,28 @@ void taskLCDUpdates( void * pvParameters) {
      bool currentInd_RButtonState = Ind_R_Button->getState();
 #endif
 #endif
-    if (curHorn > VOLT_BUF) {
-      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curDRL, curHorn); 
+    if (curVehicle.curHorn > VOLT_BUF) {
+      sprintf(tmpMessage, "HORN %04.1fV %04.1fV", curVehicle.curDRL, curVehicle.curHorn); 
     }
 #if BTN_INTERRUPTS    
 #if LEFT_IND    
      else if (LEFT_IND && !currentInd_LButtonState && currentInd_RButtonState) {
-      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", curDRL, curHorn); 
+      sprintf(tmpMessage, "LEFT %04.1fV %04.1fV", curVehicle.curDRL, curVehicle.curHorn); 
     } 
 #endif
 #if RIGHT_IND    
     else if (RIGHT_IND && !currentInd_RButtonState && currentInd_LButtonState) {
-      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", curDRL, curHorn);      
+      sprintf(tmpMessage, "RGHT %04.1fV %04.1fV", curVehicle.curDRL, curVehicle.curHorn);      
     } 
 #endif
 #if RIGHT_IND    
     else if (!currentInd_RButtonState && !currentInd_LButtonState ) {
-      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", curDRL, curHorn); 
+      sprintf(tmpMessage, "HZRD %04.1fV %04.1fV", curVehicle.curDRL, curVehicle.curHorn); 
     } 
 #endif  
 #endif 
     else {
-      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curDRL, curHorn);
+      sprintf(tmpMessage, "%s %04.1fV %04.1fV", curMode.txtColor, curVehicle.curDRL, curVehicle.curHorn);
     }
     lcd.setCursor(0,1); //move cursor to 2nd line on display
     lcd.print(tmpMessage);
