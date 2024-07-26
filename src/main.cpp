@@ -131,10 +131,10 @@ void loop()
   }
 
   if (firstLoop) {
-    //curMode.Init();
+    curMode.Init();
     firstLoop = false;
   } else {
-    //curMode.Increment();
+    curMode.Increment();
   }
 
   if (curSample > NUM_SAMPLES){
@@ -146,7 +146,7 @@ void loop()
   
     drl_mon();
     
-    //if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
+    if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(curMode.Mode_Button->getState());
 
     //Perform LED Strip Tasks
 
