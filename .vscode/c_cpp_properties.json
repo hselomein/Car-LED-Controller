@@ -288,11 +288,13 @@
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "C:/Users/hselo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
+
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
+
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/include",
                     "C:/Users/hselo/OneDrive/Documents/GitHub Repo/Car LED Controller Project/src",
                     "C:/Users/hselo/OneDrive/Documents/Arduino/libraries/Adafruit_NeoPixel",
@@ -598,7 +600,7 @@
             ],
             "cStandard": "gnu99",
             "cppStandard": "gnu++11",
-            "compilerPath": "C:/Users/hselo/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
+            "compilerPath": "/home/yves/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc",
             "compilerArgs": [
                 "-mlongcalls",
                 ""
