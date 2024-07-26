@@ -8,7 +8,7 @@
 extern unsigned long L1previousTime = 0;
 extern unsigned long L2previousTime = 0;
 
-void taskLCDUpdates( void * pvParameters) {
+ void *TaskLCD::taskLCDUpdates( void * pvParameters) {
   //if(DEBUG) Serial.println("Start of LCD Function");
   unsigned long L1currentTime = millis();
   char tmpMessage[16];
@@ -65,10 +65,16 @@ void taskLCDUpdates( void * pvParameters) {
     //if(DEBUG) Serial.println("End of LCD Function");
   }
 
-void initTaskLCD() {
+static void taskLCDUpdatesWrapper(void *pvParameters) {
+  // Cast pvParameters to TaskLCD instance and call the member function
+  TaskLCD *instance = static_cast<TaskLCD *>(pvParameters);
+  instance->taskLCDUpdates(pvParameters);
+}
+
+void TaskLCD::initTaskLCD() {
     // Create task on Core 1 to Update LCD
   xTaskCreatePinnedToCore(
-    taskLCDUpdates,   // Function to implement the task 
+    taskLCDUpdatesWrapper,   // Function to implement the task 
     "taskLCDUpdates", // Name of the task 
     10000,            // Stack size in words 
     NULL,             // Task input parameter 

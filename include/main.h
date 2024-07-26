@@ -1,3 +1,6 @@
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
 #include <WString.h>
 
 #include "definitions.h"
@@ -125,3 +128,4 @@ class cModes {
 };
 cModes curMode;
 
+#endif

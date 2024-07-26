@@ -1,5 +1,5 @@
 #ifndef _LOGOS_H_
-	#define _LOGOS_H_
+#define _LOGOS_H_
 
 #ifndef _ESP32_HUB75_MATRIXPANEL_I2S_DMA_H
     #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>

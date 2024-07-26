@@ -1,3 +1,7 @@
+#ifndef _DEFINITIONS_H_
+#define _DEFINITIONS_H_
+
+
 //Build Configuration Options
   #define DEBUG false      //Enable serial output for debug, change to "false" to disable
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
@@ -121,4 +125,4 @@
   //#define CONFIG_ESP_INT_WDT_TIMEOUT_MS 5000
 
 
-
+#endif //_DEFINITIONS_H

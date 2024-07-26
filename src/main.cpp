@@ -255,12 +255,12 @@ void setup()
     
 #if LCD_DISPLAY    
   // set up the LCD:
-  lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
-  lcd.clear();            //clear the display  
-  lcd.home();             //move cursor to 1st line on display
-  lcd.print("LOADING");   
-  lcd.setCursor(0,1);     //move cursor to 2nd line on display
-  lcd.print("PLEASE WAIT");   
+  curLCD.lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
+  curLCD.lcd.clear();            //clear the display  
+  curLCD.lcd.home();             //move cursor to 1st line on display
+  curLCD.lcd.print("LOADING");   
+  curLCD.lcd.setCursor(0,1);     //move cursor to 2nd line on display
+  curLCD.lcd.print("PLEASE WAIT");   
 #endif  
 
 
@@ -316,7 +316,7 @@ void setup()
 #endif
 
 #if LCD_DISPLAY
-  initTaskLCD();
+  curLCD.initTaskLCD();
 #endif
 
 
