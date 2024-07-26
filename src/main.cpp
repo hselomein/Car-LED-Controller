@@ -399,10 +399,10 @@ void setup()
 
   // Configure ADC
   if (DEBUG) {Serial.println("Start Init ADC");}
-  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
+  esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_12, ADC_WIDTH_BIT_12, 0, &ADC1_Characteristics);
   ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
   if (DEBUG) {Serial.println("Init ADC 1");}
-  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_11));
+  ESP_ERROR_CHECK(adc1_config_channel_atten(DRL_PIN, ADC_ATTEN_DB_12));
 
 #if LED_MATRIX 
   // LED MATRIX Module configuration
