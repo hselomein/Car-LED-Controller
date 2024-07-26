@@ -3,8 +3,6 @@
 
 #include <WString.h>
 
-//#include "definitions.h"
-
 //Arduino Standard
 #include <driver/adc.h>
 #include <esp_adc_cal.h>
