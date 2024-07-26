@@ -10,121 +10,12 @@
 -----------------------------------------------------------------*/
 
 //Build Configuration Options
-#include <definitions.h>
+#include <main.h>
 
-//Arduino Standard
-  #include <driver/adc.h>
-  #include <esp_adc_cal.h>
-
-//Simple Button config
-  #include <SimpleButton.h>
-  using namespace simplebutton;
-  Button* Horn_Button = NULL;
-  Button* Ind_L_Button = NULL;
-  Button* Ind_R_Button = NULL;
-  Button* Mode_Button = NULL;
-
-  static esp_adc_cal_characteristics_t ADC1_Characteristics;
-  
-#if LED_MATRIX    
-//LED Matrix Panel
-  #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
-
-//MatrixPanel_I2S_DMA dma_display;
-  MatrixPanel_I2S_DMA *dma_display = nullptr;
-  #include <logos.h>
-#endif
-
-
-
-// Startup Configuration (Constants)
-  static float curDRL   = 0.0f;
-  static float curHorn  = 0.0f;
-  static float curInd_L = 0.0f;
-  static float curInd_R = 0.0f;
-  String drlState;
-  String hornState;
-  bool uberDisp;
-  bool lyftDisp;
-  bool isHazardRunning = false; // Global variable to track hazard function state
-
-//-------------functions-----------------
-class cModes {
-  public:
-    int curColor;
-    String txtColor;
-    bool isUberDisplayed;
-    bool isLyftDisplayed;
-	  int btnPress = 0;
-
-    void Increment () {
-      Mode_Button->update();
-      if (Mode_Button->clicked(DEBOUNCE_TIME)){	btnPress++;}
-			if (btnPress > NUM_MODES) { btnPress = 0; }
-		
-      switch (btnPress) {
-        case 1:
-            if (isLyftDisplayed == true) {isLyftDisplayed == false;}
-#if LED_STRIP
-            curColor = UBER_COLOR;
-#endif
-            txtColor = "UBER"; 
-            if (DEBUG) Serial.println("LED color set to Uber Mode color (Seafoam Green)");         
-            if (txtColor == "UBER" && isUberDisplayed == false){
-#if LED_MATRIX            
-              drawUberLogo(dma_display);
-#endif              
-              isUberDisplayed = true;
-              uberDisp = true;
-            } 
-            break;
-        case 2:
-            if (isUberDisplayed == true) {isUberDisplayed == false;}
-#if LED_STRIP
-            curColor = LYFT_COLOR;
-#endif
-            txtColor = "LYFT";
-            if (DEBUG) Serial.println("LED color set to Lyft Mode color (Magenta)");
-            if (txtColor == "LYFT" && isLyftDisplayed == false){
-#if LED_MATRIX            
-              drawLyftLogo(dma_display);
-#endif            
-              isLyftDisplayed = true;
-              lyftDisp = true;
-            }
-            break;
-        default:
-#if LED_STRIP        
-            curColor = DEFAULT_COLOR;
-#endif
-            txtColor = "WHIT";
-            if (DEBUG) Serial.println("LED color set to Default Mode color (White)");
-#if LED_MATRIX            
-            dma_display->fillScreen(dma_display->color565(0, 0, 0));
-#endif            
-            isLyftDisplayed = false;
-            isUberDisplayed = false;
-            uberDisp = false;
-            lyftDisp = false;
-            break;
-      }
-    }
-
-    void Init() {
-#if LED_STRIP
-      curColor = DEFAULT_COLOR;
-#endif
-      txtColor = "WHIT";
-      //delay(50);
-      //Mode_Button->update();
-    }
-};
-cModes curMode;
-
-
-
+//Declarations
 bool firstLoop = true;
 
+//-------------functions-----------------
 #if LED_STRIP
 void ledWave(uint32_t maxColor, uint32_t minColor, int msDelay, bool boolDirection) {
   int ledLeft = 0; int ledRight = 0;
@@ -204,19 +95,9 @@ void screentest() {
 }
 #endif
 #if LED_STRIP
-enum indState {
-	OFF = 0,
-  RIGHT,
-	LEFT,
-	HAZARD
-	};
-
-enum indState indStatus = OFF;
-indState currentIndicatorState = OFF; // Initialize with OFF or any default state
-
 void right_indicator(){
-    if(isHazardRunning) return; // Do not execute if hazard is running
-    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+    if(curVehicle.isHazardRunning) return; // Do not execute if hazard is running
+    if (curVehicle.drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
     for (int i = NUM_PIXELS_THIRD; i >= 0; i--){
         leds.setPixelColor(i, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -225,8 +106,8 @@ void right_indicator(){
     } 
 
 void left_indicator(){
-    if(isHazardRunning) return; // Do not execute if hazard is running
-    if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
+    if(curVehicle.isHazardRunning) return; // Do not execute if hazard is running
+    if (curVehicle.drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow indicators to work
     for (int o = NUM_PIXELS - NUM_PIXELS_THIRD ; o <= NUM_PIXELS; o++){
         leds.setPixelColor(o, ANGRY_COLOR);
         delay(msIND_DELAY);
@@ -235,8 +116,8 @@ void left_indicator(){
     }
   
 void hazard_indicator(){
-  isHazardRunning = true; // Set isHazardRunning to true when hazard starts
-  if (drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
+  curVehicle.isHazardRunning = true; // Set isHazardRunning to true when hazard starts
+  if (curVehicle.drlState == "OFF ") leds.setBrightness(MAX_BRIGHTNESS); //if DRLs are off then allow hazard lights to work
   int ledLeft = 0; int ledRight = 0;
     for (int p = 1; p <= NUM_PIXELS_QUARTER; p++) {
       ledLeft = NUM_PIXELS_QUARTER - p;
@@ -245,27 +126,27 @@ void hazard_indicator(){
       delay(msIND_DELAY);
       leds.show();
     }
-  isHazardRunning = false;  // After completing the hazard function, set isHazardRunning to false
+  curVehicle.isHazardRunning = false;  // After completing the hazard function, set isHazardRunning to false
   }
 
 void indicator_function(){
-  switch (indStatus)
+  switch (curVehicle.indStatus)
   {
   case 1:
-    currentIndicatorState = RIGHT;
+    curVehicle.currentIndicatorState = curVehicle.RIGHT;
     right_indicator();
     break;
   case 2:
-    currentIndicatorState = LEFT;
+    curVehicle.currentIndicatorState = curVehicle.LEFT;
     left_indicator();
     break;
   case 3:
-    currentIndicatorState = HAZARD;
+    curVehicle.currentIndicatorState = curVehicle.HAZARD;
     hazard_indicator();
     break;  
   default:
-    currentIndicatorState = OFF;
-    indStatus = OFF;
+    curVehicle.currentIndicatorState = curVehicle.OFF;
+    curVehicle.indStatus = curVehicle.OFF;
     break;
   }
 }
@@ -273,32 +154,32 @@ void indicator_function(){
 
 void drl_mon(){
   static bool RelayPin1State = false;
-  if (curDRL > (LO_VOLT- VOLT_BUF) && curDRL < (HI_VOLT - VOLT_BUF)){
+  if (curVehicle.curDRL > (LO_VOLT- VOLT_BUF) && curVehicle.curDRL < (HI_VOLT - VOLT_BUF)){
       if (!RelayPin1State) { //turn on Relay 1
         RelayPin1State = true;
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       } 
-      drlState = "LOW ";
+      curVehicle.drlState = "LOW ";
 #if LED_STRIP
       leds.setBrightness(MIN_BRIGHTNESS);
 #endif
 #if LED_MATIRX
       dma_display->setBrightness8(MIN_BRIGHTNESS);
 #endif
-  } else if (curDRL > (HI_VOLT - VOLT_BUF)){
+  } else if (curVehicle.curDRL > (HI_VOLT - VOLT_BUF)){
       if (!RelayPin1State) { //turn on Relay 1
         RelayPin1State = true;
         digitalWrite(RELAY_PIN_1, RELAY_ON);
       }
-      drlState = "HIGH";
+      curVehicle.drlState = "HIGH";
 #if LED_STRIP
       leds.setBrightness(MAX_BRIGHTNESS);
 #endif
 #if LED_MATRIX
       dma_display->setBrightness8(MAX_BRIGHTNESS);
 #endif
-  } else if (curDRL < VOLT_BUF){
-      if ((uberDisp && curDRL <  (LO_VOLT-VOLT_BUF)) || (lyftDisp && curDRL <  (LO_VOLT-VOLT_BUF))) { //Keep strip on when DRL are off in UBER/LYFT modes
+  } else if (curVehicle.curDRL < VOLT_BUF){
+      if ((curVehicle.uberDisp && curVehicle.curDRL <  (LO_VOLT-VOLT_BUF)) || (curVehicle.lyftDisp && curVehicle.curDRL <  (LO_VOLT-VOLT_BUF))) { //Keep strip on when DRL are off in UBER/LYFT modes
 #if LED_STRIP        
         leds.setBrightness(MAX_BRIGHTNESS);
 #endif
@@ -308,7 +189,7 @@ void drl_mon(){
           RelayPin1State = false;
           digitalWrite(RELAY_PIN_1, RELAY_OFF);
         }
-        drlState = "OFF ";
+        curVehicle.drlState = "OFF ";
 #if LED_STRIP
         if (LED_STRIP) leds.setBrightness(0); 
 #endif
@@ -332,21 +213,21 @@ void button_function(){
 
     if (!currentHornButtonState) {
       leds.fill(ANGRY_COLOR);
-      hornState = "BEEP";
+      curVehicle.hornState = "BEEP";
     }
     else if (currentInd_RButtonState && currentInd_LButtonState) { 
-      indStatus = HAZARD;
+      curVehicle.indStatus = curVehicle.HAZARD;
       }
     else if (currentInd_LButtonState && !currentInd_RButtonState) { 
-      indStatus = LEFT;
+      curVehicle.indStatus = curVehicle.LEFT;
       } 
     else  if (currentInd_RButtonState && !currentInd_LButtonState) { 
-      indStatus = RIGHT;
+      curVehicle.indStatus = curVehicle.RIGHT;
       }
     else {
     leds.fill(curMode.curColor);
-    hornState = "OFF ";
-    indStatus = OFF;
+    curVehicle.hornState = "OFF ";
+    curVehicle.indStatus = curVehicle.OFF;
     }
 }
 #endif
@@ -425,9 +306,6 @@ void setup()
     dma_display->fillScreen(dma_display->color565(255, 255, 255));
 #endif
 
-  String drlState;
-  String hornState;
-
   // Initiate startup lighting sequence
 #if LED_STRIP
   startupSequence(); 
@@ -447,13 +325,13 @@ void setup()
 void loop()
 {
   static int    curSample = 1;
-  curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
+  curVehicle.curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics);
   //curDRL += esp_adc_cal_raw_to_voltage(adc1_get_raw(DRL_PIN), &ADC1_Characteristics) + (RESISTOR_DIODE_OFFSET * 2);
   curSample++;
 
   if (DEBUG) {
-    Serial.print("Horn Voltage:"); Serial.println(curHorn);
-    Serial.print("DRL Voltage:"); Serial.println(curDRL);
+    Serial.print("Horn Voltage:"); Serial.println(curVehicle.curHorn);
+    Serial.print("DRL Voltage:"); Serial.println(curVehicle.curDRL);
     Serial.print("Current Sample Number:"); Serial.println(curSample);
   }
 
@@ -466,11 +344,12 @@ void loop()
 
   if (curSample > NUM_SAMPLES){
     // Adjust voltages
-    curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
+    curVehicle.curDRL *= VOLT_DIV_FACTOR / NUM_SAMPLES / 1000;
     //curDRL += curDRL* (RESISTOR_DIODE_OFFSET/12);
     //curDRL += (curDRL - GRND_OFFSET) * (RESISTOR_DIODE_OFFSET + GRND_OFFSET) / HI_VOLT - GRND_OFFSET;
+
     curDRL = -1.0 * GRND_OFFSET * curDRL * curDRL / (GRND_OFFSET + HI_VOLT) + (RESISTOR_DIODE_OFFSET * HI_VOLT + GRND_OFFSET) * curDRL - (RESISTOR_DIODE_OFFSET + GRND_OFFSET) * (RESISTOR_DIODE_OFFSET + GRND_OFFSET);
-  
+
     drl_mon();
 if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Button->getState());
 #if LED_STRIP
@@ -480,8 +359,8 @@ if (DEBUG) Serial.print("Mode Select Button State:");  Serial.println(Mode_Butto
     
 #endif    
     curSample = 1;
-    curDRL = 0;
-    curHorn = 0;
+    curVehicle.curDRL = 0;
+    curVehicle.curHorn = 0;
 
     }
 }

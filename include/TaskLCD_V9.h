@@ -7,9 +7,13 @@
 #include <hd44780.h>                       // main hd44780 header
 #include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
+#include <stdio.h>
+#include <Wire.h>
+#include <hd44780.h>                       // main hd44780 header
+#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
 //void taskLCDUpdates( void * pvParameters );
 //void initTaskLCD();
@@ -22,10 +26,10 @@ hd44780_I2Cexp lcd;               // Declare lcd object: auto locate & config ex
 #define LCD_UPDATE_INTERVAL 150   // How fast to update LCD in ms
 
 
-extern unsigned long L1previousTime = 0;
-extern unsigned long L2previousTime = 0;
+void taskLCDUpdates( void * pvParameters );
+void initTaskLCD();
 
-
+/*
 
 
 void taskLCDUpdates( void * pvParameters) {
@@ -97,8 +101,10 @@ void initTaskLCD() {
     1);               //Core where the task should run 
 }
 
+*/
+//#ifdef __cplusplus
+//}
 
-#ifdef __cplusplus
-}
-#endif
+
+//#endif
 #endif // _TASKLCD_V9_H_
