@@ -23,4 +23,6 @@ static esp_adc_cal_characteristics_t ADC1_Characteristics;
     extern MatrixPanel_I2S_DMA *dma_display;
 #endif
 
+float Abs(float val);
+
 #endif

@@ -26,7 +26,10 @@ cModes curMode;
 
 
 
-
+float Abs(float val) {
+  if (val > 0) return val;
+  else return -val;
+}
 
 void drl_mon(){
   static bool RelayPin1State = false;
