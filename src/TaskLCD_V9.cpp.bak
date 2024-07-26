@@ -88,3 +88,19 @@ void TaskLCD::initTaskLCD() {
 //}
 //#endif
 //#endif // _TASKLCD_V9_H_
+
+
+// #if LCD_DISPLAY    
+//   // set up the LCD:
+//   curLCD.lcd.begin(LCD_COLS, LCD_ROWS); //begin() will automatically turn on the backlight
+//   curLCD.lcd.clear();            //clear the display  
+//   curLCD.lcd.home();             //move cursor to 1st line on display
+//   curLCD.lcd.print("LOADING");   
+//   curLCD.lcd.setCursor(0,1);     //move cursor to 2nd line on display
+//   curLCD.lcd.print("PLEASE WAIT");   
+// #endif  
+
+
+// #if LCD_DISPLAY
+//   curLCD.initTaskLCD();
+// #endif

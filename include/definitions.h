@@ -1,12 +1,11 @@
 #ifndef _DEFINITIONS_H_
 #define _DEFINITIONS_H_
 
-
 //Build Configuration Options
   #define DEBUG false      //Enable serial output for debug, change to "false" to disable
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
-  #define LED_MATRIX true   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
-  #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
+  #define LED_MATRIX false   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
+  #define LED_STRIP false   //Set to "true" if you want to use the led strip, "false" to disable
   #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Character Display, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
   #define SHOW_VOLTAGES_LCD true //Set to "true" to display voltages on the LCD, "false" to disable
@@ -43,86 +42,7 @@
   #define HI_VOLT         6
   #define LO_VOLT         2
   
-// Startup Configuration (Constants)
-  #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
-  #define numLOOPS      4   //Number of passes over entire LED strip
-
-
-#if LED_STRIP
-//LED Strip
-  #define NUM_LEDS  134   //161 leds is the lenght of the hood weather strip, 36 for the COB strip
-  #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
-  #define LEDS_PER_PIXEL 1
-  #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
-  #define NUM_PIXELS_HALF (NUM_PIXELS / 2)
-  #define NUM_PIXELS_THIRD (NUM_PIXELS / 3)
-  #define NUM_PIXELS_QUARTER (NUM_PIXELS / 4)
-  #define NUM_PIXELS_FIFTH (NUM_PIXELS / 5)
-  #define RGBW_STRIP false //for RGB Strips change to false
-  #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
-  #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
-  #define FLASH_RATE int((80/120)*1000) //how many indicator flashes per minute as specifed by car manufacturer 
-  #define msIND_DELAY  int(FLASH_RATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
-
-  #include <Adafruit_NeoPixel.h>
-
-  #if RGBW_STRIP 
-    #define cur_COLOR_ORDER RGBW_COLOR_ORDER
-  #else
-    #define cur_COLOR_ORDER RGB_COLOR_ORDER
-  #endif
-
-  Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, cur_COLOR_ORDER + NEO_KHZ800);
-
-  #if RGBW_STRIP 
-    //color definitions values, are expressed in rgbw format
-    #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
-    #define DEFAULT_COLOR   leds.Color( 251, 255, 141, 255 )     //White (Adjusted to match vehicle oem light color)
-    #define LYFT_COLOR      leds.Color( 255,  0, 191,  0 )     //Magenta
-    #define UBER_COLOR      leds.Color( 0,  255,  92,  0 )     //Seafoam Green
-    #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
-    #define DIMCOLOR      leds.Color(  50,  50,  50,  50 )     //Dim White
-    #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
-  #else
-    //color definitions values, are expressed in rgb format
-    #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
-    #define DEFAULT_COLOR   leds.Color( 251, 255, 141 )     //White (Adjusted to match vehicle oem light color)
-    #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
-    #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
-    #define BRIGHTCOLOR   leds.Color( 251,  255,  141 )     //Full White
-    #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
-    #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
-  #endif
-#endif
-
-
-#if LED_MATRIX 
-//LED Martrix pin section
-//This is configured using a P2 64x64 LED Matrix, which has an E pin.
-//Pinout for LED Matrix Controller V8, V9 or Yves Version
-  #define R1_PIN  25
-  #define G1_PIN  26
-  #define B1_PIN  33
-  #define R2_PIN  14
-  #define G2_PIN  12
-  #define B2_PIN  13
-  #define A_PIN   27
-  #define B_PIN   2 
-  #define C_PIN   5
-  #define D_PIN   17
-  #define E_PIN   32  
-  #define LAT_PIN 4
-  #define OE_PIN  15
-  #define CLK_PIN 16
-    
-  //LED Matrix Initialization
-  #define PANEL_RES_X 64  // Number of pixels wide of each INDIVIDUAL panel module.
-  #define PANEL_RES_Y 64  // Number of pixels tall of each INDIVIDUAL panel module.
-  #define PANEL_CHAIN 1   // Total number of panels chained one to another
-#endif
-  
 //#ifndef
   //#define CONFIG_ESP_INT_WDT_TIMEOUT_MS 5000
-
 
 #endif //_DEFINITIONS_H

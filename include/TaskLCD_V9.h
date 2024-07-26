@@ -29,84 +29,60 @@ class TaskLCD {
 
 };
 
-TaskLCD curLCD;
-
-/*
+extern TaskLCD curLCD;
 
 
-void taskLCDUpdates( void * pvParameters) {
-  if(DEBUG) Serial.println("Start of LCD Function");
-  unsigned long L1currentTime = millis();
-  char tmpMessage[16];
-  if ((L1currentTime - L1previousTime >= LCD_UPDATE_INTERVAL)) {  
-    L1previousTime = L1currentTime; // Remember the time  
-    lcd.clear();    //clear the display and home the cursor
-    sprintf(tmpMessage, "MODE  DRL  Horn "); 
-    lcd.setCursor(0,0); //move cursor to 1st line on display
-    lcd.print(tmpMessage);
-    //delay(LCD_UPDATE_INTERVAL);
-    if(DEBUG) Serial.println(String(L1currentTime) + "ms Line 1 Time");
-  }
-  
-
-   while(true){
-    //bool currentHornButtonState = Horn_Button->getState();
-    //bool currentInd_LButtonState = Ind_L_Button->getState();
-    //bool currentInd_RButtonState = Ind_R_Button->getState();
-    unsigned long L2currentTime = millis();
-#if SHOW_VOLTAGES_LCD    
-    if (hornState == "BEEP") {
-      sprintf(tmpMessage, "HORN  %04.1fV  %s", curDRL, hornState); 
-    } else if (indStatus == LEFT) {
-      sprintf(tmpMessage, "LEFT  %04.1fV  %s", curDRL, hornState); 
-    } else if (indStatus == RIGHT) {
-      sprintf(tmpMessage, "RGHT  %04.1fV  %s", curDRL, hornState); 
-    } else if (indStatus == HAZARD) {
-      sprintf(tmpMessage, "HZRD  %04.1fV  %s", curDRL, hornState); 
-    } else {
-      sprintf(tmpMessage, "%s  %04.1fV  %s", curMode.txtColor, curDRL, hornState);
-    }
-#endif  
-#if SHOW_VOLTAGES_LCD == false
-    if (hornState == "BEEP") {
-      sprintf(tmpMessage, "HORN  %s  %s ", drlState, hornState); 
-    } else if (indStatus == LEFT) {
-      sprintf(tmpMessage, "LEFT  %s  %s ", drlState, hornState); 
-    } else if (indStatus == RIGHT) {
-      sprintf(tmpMessage, "RGHT  %s  %s ", drlState, hornState); 
-    } else if (indStatus == HAZARD) {
-      sprintf(tmpMessage, "HZRD  %s  %s ", drlState, hornState); 
-    } else {
-      sprintf(tmpMessage, "%s  %s  %s", curMode.txtColor, drlState, hornState);
-    }
-#endif  
-    if ((L2currentTime - L2previousTime > LCD_UPDATE_INTERVAL)) {
-      L2previousTime = L2currentTime; // Remember the time
-      lcd.setCursor(0,1); //move cursor to 2nd line on display
-      lcd.print(tmpMessage);
-      //delay(LCD_UPDATE_INTERVAL);
-      if(DEBUG) Serial.println(String(L2currentTime) + "ms Line 2 Time");
-      }
-    }
-    if(DEBUG) Serial.println("End of LCD Function");
-  }
-
-void initTaskLCD() {
-    // Create task on Core 1 to Update LCD
-  xTaskCreatePinnedToCore(
-    taskLCDUpdates,   // Function to implement the task 
-    "taskLCDUpdates", // Name of the task 
-    10000,            // Stack size in words 
-    NULL,             // Task input parameter 
-    0,                // Priority of the task 
-    NULL,             //Task handle. 
-    1);               //Core where the task should run 
-}
-
-*/
-//#ifdef __cplusplus
-//}
 
 
-//#endif
+
+#if LED_STRIP
+//LED Strip
+  #define NUM_LEDS  134   //161 leds is the lenght of the hood weather strip, 36 for the COB strip
+  #define NUM_LEDS_HALF   (NUM_LEDS - 1) / 2    //Subtract 1 to calculate indexes
+  #define LEDS_PER_PIXEL 1
+  #define NUM_PIXELS (NUM_LEDS / LEDS_PER_PIXEL)
+  #define NUM_PIXELS_HALF (NUM_PIXELS / 2)
+  #define NUM_PIXELS_THIRD (NUM_PIXELS / 3)
+  #define NUM_PIXELS_QUARTER (NUM_PIXELS / 4)
+  #define NUM_PIXELS_FIFTH (NUM_PIXELS / 5)
+  #define RGBW_STRIP false //for RGB Strips change to false
+  #define RGBW_COLOR_ORDER NEO_GRBW //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
+  #define RGB_COLOR_ORDER NEO_RGB //Change this to match the order of color for the LED Strip see NeoPixel library for definitions
+  #define FLASH_RATE int((80/120)*1000) //how many indicator flashes per minute as specifed by car manufacturer 
+  #define msIND_DELAY  int(FLASH_RATE / NUM_PIXELS_HALF * 2 + 0.5) //Number of ms Indicator LED stays on for.
+  #define msDELAY  int(400 / NUM_PIXELS + 0.5)   //Number of ms LED stays on for.
+  #define numLOOPS      4   //Number of passes over entire LED strip
+
+  #include <Adafruit_NeoPixel.h>
+
+  #if RGBW_STRIP 
+    #define cur_COLOR_ORDER RGBW_COLOR_ORDER
+  #else
+    #define cur_COLOR_ORDER RGB_COLOR_ORDER
+  #endif
+
+  extern Adafruit_NeoPixel leds(NUM_LEDS, LED_PIN, cur_COLOR_ORDER + NEO_KHZ800);
+
+  #if RGBW_STRIP 
+    //color definitions values, are expressed in rgbw format
+    #define ANGRY_COLOR     leds.Color( 255, 60,  0,   0 )     //Amber
+    #define DEFAULT_COLOR   leds.Color( 251, 255, 141, 255 )     //White (Adjusted to match vehicle oem light color)
+    #define LYFT_COLOR      leds.Color( 255,  0, 191,  0 )     //Magenta
+    #define UBER_COLOR      leds.Color( 0,  255,  92,  0 )     //Seafoam Green
+    #define BRIGHTCOLOR   leds.Color( 255, 255, 255, 255 )     //Full White
+    #define DIMCOLOR      leds.Color(  50,  50,  50,  50 )     //Dim White
+    #define OFFCOLOR      leds.Color(   0,   0,   0,   0 )     //Off
+  #else
+    //color definitions values, are expressed in rgb format
+    #define ANGRY_COLOR     leds.Color( 255, 60,  0   )     //Amber
+    #define DEFAULT_COLOR   leds.Color( 251, 255, 141 )     //White (Adjusted to match vehicle oem light color)
+    #define LYFT_COLOR      leds.Color( 255, 0,   191 )     //Magenta
+    #define UBER_COLOR      leds.Color( 0,  255,  92  )     //Seafoam Green
+    #define BRIGHTCOLOR   leds.Color( 251,  255,  141 )     //Full White
+    #define DIMCOLOR      leds.Color( 125,  127,  70  )     //Dim White
+    #define OFFCOLOR      leds.Color(   0,   0,   0   )     //Off
+  #endif
+#endif
+
+
 #endif // _TASKLCD_V9_H_
