@@ -5,7 +5,7 @@
   #define LED_STRIP true    //Set to "true" if you want to use the led strip, "false" to disable
   #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Character Display, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
-  #define SHOW_VOLTAGES_LCD true //Set to "true" to display voltages on the LCD, "false" to disable
+  #define SHOW_VOLTAGES_LCD false //Set to "true" to display voltages on the LCD, "false" to disable
 
 // Pins to device mapping
   #define RELAY_PIN_1 18                // Pin 18 => In1 Relay
@@ -27,7 +27,7 @@
   #define RELAY_ON LOW
   #define RELAY_OFF HIGH
 
-  #define NUM_SAMPLES     50             // number of analog samples to take per reading
+  #define NUM_SAMPLES     100             // number of analog samples to take per reading
   #define R1              47.0            // Resistor 1 value of voltage divider
   #define R2              10.0            // Resistor 2 value of voltage divider
   #define VOLT_DIV_FACTOR (R1+R2)/R2      //voltage divider factor
