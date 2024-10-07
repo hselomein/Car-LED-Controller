@@ -14,10 +14,9 @@ def parse_lin_frame(data):
         #print(f"Binary Data: {binaryString}")
         
         # Sync Break: At least 13 dominant bits (0x00)
-        if binaryString[:14] == '00000000000001':
+        if binaryString[:14] == '10000000000000':
             syncBreak = '00000000000001'
-            binaryString = binaryString[-(len(binaryString)-12):] # Shift data by 12 Bits
-            #^^^^^This may be wrong!!!^^^^
+            binaryString = binaryString[-(len(binaryString)-14):] # Shift data by 12 Bits
             print(f"Break: {syncBreak}")
 
             # Sync Field: 0x55
