@@ -1,25 +1,29 @@
 def parse_lin_frame(data):
     # Assuming data is a bytearray containing the LIN frame
     index = 0
-    dataLength = len(data) -1
+    dataCpy = int.from_bytes(data, byteorder='big') # create a copy of data to prevent altering the original
+    #print(f"Data: {dataCpy}")
+    dataLength = len(data) -1 # prevent calculating length every time
     frames = []
 
-    while index < dataLength:
+    while dataCpy.bit_length() > 32: #skip last 4 bytes
         # Sync Break: At least 13 dominant bits (0x00)
-        if data[index] == 0x00:
-            sync_break = data[index]
-            index += 1
-            while index < dataLength and data[index] == 0x00:
-                index += 1
+        msb13 = getMSB(dataCpy, 13)
+        print(f"13 MSB: {msb13}")
+        #print(f"Data: {dataCpy}")
+        if getMSB(dataCpy, 13) == 0:
+            print(f"Data: {dataCpy}")
+            sync_break = dataCpy[index]
+            dataCpy = removeMSB(dataCpy) # Shift data by 1 Bit
 
             # Sync Field: 0x55
-            if index < dataLength and data[index] == 0x55:
-                sync_field = data[index]
+            if index < dataLength and dataCpy[index] == 0x55:
+                sync_field = dataCpy[index]
                 index += 1
 
                 # Identifier: 1 byte
                 if index < dataLength:
-                    identifier = data[index]
+                    identifier = dataCpy[index]
                     index += 1
 
                     # Data Bytes: 0 to 8 bytes
@@ -27,7 +31,7 @@ def parse_lin_frame(data):
                     sum_bytes = 0
                     while index < dataLength and len(data_bytes) < 8:
                         data_bytes.append(data[index])
-                        sum_bytes += data[index]
+                        sum_bytes += dataCpy[index]
                         index += 1
 
                     sum_bytes &= 0xFF
@@ -35,7 +39,7 @@ def parse_lin_frame(data):
 
                     # Checksum: 1 byte
                     if index < dataLength:
-                        checksum = data[index]
+                        checksum = dataCpy[index]
                         index += 1
 
                         # check checksum
@@ -52,9 +56,17 @@ def parse_lin_frame(data):
                         }
                         frames.append(frame)
         else:
-            index += 1
+            dataCpy = removeMSB(dataCpy) # Shift data by 1 Bit
 
     return frames
+
+def getMSB(val, numBits):   # Get most significant bits
+    #intVal = int.from_bytes(val[0:numBits//8+1], byteorder='big')
+    return val >> (val.bit_length() - numBits)
+
+def removeMSB(val): # remove most significant bit using mask and bitwise and operator
+    mask = ~(1 << (val.bit_length() - 1))  # create a mask with all bits set except MSB
+    return val & mask
 
 def verify_checksum(frame, enhanced=True):
     if enhanced:
