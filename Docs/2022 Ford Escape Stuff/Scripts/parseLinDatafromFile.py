@@ -14,22 +14,20 @@ def parse_lin_frame(data):
         #print(f"Binary Data: {binaryString}")
         
         # Sync Break: At least 13 dominant bits (0x00)
-        if binaryString[:13] == '0000000000000':
-            syncBreak = ''
-            while binaryString[:1] == '0':
-                binaryString = binaryString[-(len(binaryString)-1):] # Shift data by 1 Bit
-                syncBreak += '0'
-            syncBreakLength = len(syncBreak)
-            print(f"Break: {syncBreak}     Length: {syncBreakLength}")
+        if binaryString[:14] == '00000000000001':
+            syncBreak = '00000000000001'
+            binaryString = binaryString[-(len(binaryString)-12):] # Shift data by 12 Bits
+            #^^^^^This may be wrong!!!^^^^
+            print(f"Break: {syncBreak}")
 
             # Sync Field: 0x55
-            syncField = binaryString[:7] # get only seven bits as the leading 0 has been already removed
+            syncField = hex(int(binaryString[:8], 2)) # get hex value for sync
             print(f"Sync: {syncField}")
-            if syncField == '1010101':
-                binaryString = binaryString[7:] # remove syncfield from data
+            if syncField == '0x55' :
+                binaryString = binaryString[8:] # remove syncfield from data
 
                 # Identifier: 1 byte
-                identifier = binaryString[:8]
+                identifier = int(binaryString[:8], 2)
                 print(f"ID: {identifier}")
                 binaryString = binaryString[8:]
 
