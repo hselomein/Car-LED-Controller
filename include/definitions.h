@@ -6,7 +6,7 @@
   #define SCREENTEST false  //To enable the boot up screen test, change to "true", to disable change to "false"
   #define LED_MATRIX false   //Set to "true" if you want to use a 64x64 LED Matrix, "false" to disable
   #define LED_STRIP false   //Set to "true" if you want to use the led strip, "false" to disable
-  #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Character Display, "false" to disable
+  #define LCD_DISPLAY true   //Set to "true" if you want to use the LCD Charcxv acter Display, "false" to disable
   #define NUM_MODES 2       //How many modes will the mode button handle (2 for Uber and Lyft signs)
   #define SHOW_VOLTAGES_LCD true //Set to "true" to display voltages on the LCD, "false" to disable
 

@@ -1,4 +1,4 @@
-#include <logos.h>>
+#include <logos.h>
 
 //UBER and LYFT LOGOS
 const bool LYFT_LOGO[] PROGMEM   =  {
