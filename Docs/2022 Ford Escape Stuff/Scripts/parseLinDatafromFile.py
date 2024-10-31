@@ -17,18 +17,19 @@ def parse_lin_frame(data):
         if binaryString[:14] == '10000000000000':
             syncBreak = '10000000000000'
             binaryString = binaryString[-(len(binaryString)-14):] # Shift data by 12 Bits
-            print(f"Break: {syncBreak}")
 
             # Sync Field: 0x55
             syncField = hex(int(binaryString[:8], 2)) # get hex value for sync
-            print(f"Sync: {syncField}")
             if syncField == '0x55' :
                 binaryString = binaryString[8:] # remove syncfield from data
 
                 # Identifier: 1 byte
                 identifier = int(binaryString[:8], 2)
-                print(f"ID: {identifier}")
                 binaryString = binaryString[8:]
+
+                print(f"Break: {syncBreak}")
+                print(f"Sync: {syncField}")
+                print(f"ID: {identifier}")
 
                 continue
 
