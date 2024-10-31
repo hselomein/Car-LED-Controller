@@ -1,0 +1,18 @@
+12:50:47.276 > ets Jul 29 2019 12:21:46
+12:50:47.276 > 
+12:50:47.276 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+12:50:47.276 > configsip: 0, SPIWP:0xee
+12:50:47.276 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+12:50:47.276 > mode:DIO, clock div:2
+12:50:47.276 > load:0x3fff0030,len:1184
+12:50:47.276 > load:0x40078000,len:13232
+12:50:47.276 > load:0x40080400,len:3028
+12:50:47.276 > entry 0x400805e4
+12:50:47.276 > ����������������������������������������������������������������0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+12:50:47.276 > configsip: 0, SPIWP:0xee
+12:50:47.276 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+12:50:47.276 > mode:DIO, clock div:2
+12:50:47.276 > load:0x3fff0030,len:1184
+12:50:47.276 > load:0x40078000,len:13232
+12:50:47.276 > load:0x40080400,len:3028
+12:50:47.276 > entry 0x400805e4
